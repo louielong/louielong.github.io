@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="yardstick OPNFV opstack," />
+  <meta name="keywords" content="yardstick, OPNFV, openstack," />
 
 
 
@@ -102,23 +102,23 @@
 
 
 
-<meta name="description" content="OPNFV 测试项目 – Yardstick[TOC] 1.使用 Docker 安装 Yardstick官方推荐 Docker 运行 Yardstick 测试 1.1安装 Docker1wget -qO- https://get.docker.com/ | sh 拉取 Yardstick 最新版 1docker pull opnfv/yardstick:latest 查看下载的 Docker 镜像">
-<meta name="keywords" content="yardstick OPNFV opstack">
+<meta name="description" content="1.使用 Docker 安装 Yardstick官方推荐 Docker 运行 Yardstick 测试 1.1安装 Docker1wget -qO- https://get.docker.com/ | sh 拉取 Yardstick 最新版 1docker pull opnfv/yardstick:latest 查看下载的 Docker 镜像 1docker images 2.准备 Yardsti">
+<meta name="keywords" content="yardstick, OPNFV, openstack">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OPNFV 测试项目 -- Yardstick">
 <meta property="og:url" content="https://louielong.github.io/2017/06/09/OPNFV测试项目-yardstick/index.html">
 <meta property="og:site_name" content="Louie&#39;s Blog">
-<meta property="og:description" content="OPNFV 测试项目 – Yardstick[TOC] 1.使用 Docker 安装 Yardstick官方推荐 Docker 运行 Yardstick 测试 1.1安装 Docker1wget -qO- https://get.docker.com/ | sh 拉取 Yardstick 最新版 1docker pull opnfv/yardstick:latest 查看下载的 Docker 镜像">
+<meta property="og:description" content="1.使用 Docker 安装 Yardstick官方推荐 Docker 运行 Yardstick 测试 1.1安装 Docker1wget -qO- https://get.docker.com/ | sh 拉取 Yardstick 最新版 1docker pull opnfv/yardstick:latest 查看下载的 Docker 镜像 1docker images 2.准备 Yardsti">
 <meta property="og:image" content="http://i.imgur.com/EhW1nuk.jpg">
 <meta property="og:image" content="http://i.imgur.com/rvEEYJv.jpg">
 <meta property="og:image" content="http://i.imgur.com/ataU1pE.jpg">
 <meta property="og:image" content="http://i.imgur.com/OKtO9SO.jpg">
 <meta property="og:image" content="http://i.imgur.com/13WSHjN.jpg">
 <meta property="og:image" content="http://i.imgur.com/teplLiT.jpg">
-<meta property="og:updated_time" content="2017-06-11T12:01:59.989Z">
+<meta property="og:updated_time" content="2017-06-11T12:15:28.862Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OPNFV 测试项目 -- Yardstick">
-<meta name="twitter:description" content="OPNFV 测试项目 – Yardstick[TOC] 1.使用 Docker 安装 Yardstick官方推荐 Docker 运行 Yardstick 测试 1.1安装 Docker1wget -qO- https://get.docker.com/ | sh 拉取 Yardstick 最新版 1docker pull opnfv/yardstick:latest 查看下载的 Docker 镜像">
+<meta name="twitter:description" content="1.使用 Docker 安装 Yardstick官方推荐 Docker 运行 Yardstick 测试 1.1安装 Docker1wget -qO- https://get.docker.com/ | sh 拉取 Yardstick 最新版 1docker pull opnfv/yardstick:latest 查看下载的 Docker 镜像 1docker images 2.准备 Yardsti">
 <meta name="twitter:image" content="http://i.imgur.com/EhW1nuk.jpg">
 
 
@@ -299,8 +299,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/OPNFV/" itemprop="url" rel="index">
-                    <span itemprop="name">OPNFV</span>
+                  <a href="/categories/yardstick/" itemprop="url" rel="index">
+                    <span itemprop="name">yardstick</span>
                   </a>
                 </span>
 
@@ -339,8 +339,7 @@
       
 
       
-        <h1 id="OPNFV-测试项目-–-Yardstick"><a href="#OPNFV-测试项目-–-Yardstick" class="headerlink" title="OPNFV 测试项目 – Yardstick"></a>OPNFV 测试项目 – Yardstick</h1><p><del>[TOC]</del></p>
-<h2 id="1-使用-Docker-安装-Yardstick"><a href="#1-使用-Docker-安装-Yardstick" class="headerlink" title="1.使用 Docker 安装 Yardstick"></a>1.使用 Docker 安装 Yardstick</h2><p><strong>官方推荐 Docker 运行 Yardstick 测试</strong></p>
+        <h2 id="1-使用-Docker-安装-Yardstick"><a href="#1-使用-Docker-安装-Yardstick" class="headerlink" title="1.使用 Docker 安装 Yardstick"></a>1.使用 Docker 安装 Yardstick</h2><p><strong>官方推荐 Docker 运行 Yardstick 测试</strong></p>
 <h3 id="1-1安装-Docker"><a href="#1-1安装-Docker" class="headerlink" title="1.1安装 Docker"></a>1.1安装 Docker</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget -qO- https://get.docker.com/ | sh</div></pre></td></tr></table></figure>
 <p>拉取 Yardstick 最新版</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull opnfv/yardstick:latest</div></pre></td></tr></table></figure>
@@ -493,7 +492,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/yardstick-OPNFV-opstack/" rel="tag">#yardstick OPNFV opstack</a>
+            <a href="/tags/yardstick-OPNFV-openstack/" rel="tag">#yardstick, OPNFV, openstack</a>
           
         </div>
       
@@ -665,7 +664,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#OPNFV-测试项目-–-Yardstick"><span class="nav-number">1.</span> <span class="nav-text">OPNFV 测试项目 – Yardstick</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-使用-Docker-安装-Yardstick"><span class="nav-number">1.1.</span> <span class="nav-text">1.使用 Docker 安装 Yardstick</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1安装-Docker"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1安装 Docker</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-准备-Yardstick-测试所需要的磁盘和镜像"><span class="nav-number">1.2.</span> <span class="nav-text">2.准备 Yardstick 测试所需要的磁盘和镜像</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1手动创建-Yardstick-falvor-和-guest-images"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1手动创建 Yardstick falvor 和 guest images</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2创建用于-Yardstick-测试的访客镜像"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2创建用于 Yardstick 测试的访客镜像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-运行-Yardstick"><span class="nav-number">1.3.</span> <span class="nav-text">3.运行 Yardstick</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1启动-Yardstick-镜像"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1启动 Yardstick 镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2配置-Yardstick-容器环境"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2配置 Yardstick 容器环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3运行一个简单的测试例"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3运行一个简单的测试例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-安装-InfluxDB-和-Grafana"><span class="nav-number">1.4.</span> <span class="nav-text">4.安装 InfluxDB 和 Grafana</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1配置-InfluxDB-环境"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1配置 InfluxDB 环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2配置-Grafana-环境"><span class="nav-number">1.4.2.</span> <span class="nav-text">4.2配置 Grafana 环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4在-Grafana-的web页面查看"><span class="nav-number">1.4.3.</span> <span class="nav-text">4.4在 Grafana 的web页面查看</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-删除-Yardstick-容器"><span class="nav-number">1.5.</span> <span class="nav-text">5.删除 Yardstick 容器</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-使用-Docker-安装-Yardstick"><span class="nav-number">1.</span> <span class="nav-text">1.使用 Docker 安装 Yardstick</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1安装-Docker"><span class="nav-number">1.1.</span> <span class="nav-text">1.1安装 Docker</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-准备-Yardstick-测试所需要的磁盘和镜像"><span class="nav-number">2.</span> <span class="nav-text">2.准备 Yardstick 测试所需要的磁盘和镜像</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1手动创建-Yardstick-falvor-和-guest-images"><span class="nav-number">2.1.</span> <span class="nav-text">2.1手动创建 Yardstick falvor 和 guest images</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2创建用于-Yardstick-测试的访客镜像"><span class="nav-number">2.2.</span> <span class="nav-text">2.2创建用于 Yardstick 测试的访客镜像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-运行-Yardstick"><span class="nav-number">3.</span> <span class="nav-text">3.运行 Yardstick</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1启动-Yardstick-镜像"><span class="nav-number">3.1.</span> <span class="nav-text">3.1启动 Yardstick 镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2配置-Yardstick-容器环境"><span class="nav-number">3.2.</span> <span class="nav-text">3.2配置 Yardstick 容器环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3运行一个简单的测试例"><span class="nav-number">3.3.</span> <span class="nav-text">3.3运行一个简单的测试例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-安装-InfluxDB-和-Grafana"><span class="nav-number">4.</span> <span class="nav-text">4.安装 InfluxDB 和 Grafana</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1配置-InfluxDB-环境"><span class="nav-number">4.1.</span> <span class="nav-text">4.1配置 InfluxDB 环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2配置-Grafana-环境"><span class="nav-number">4.2.</span> <span class="nav-text">4.2配置 Grafana 环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4在-Grafana-的web页面查看"><span class="nav-number">4.3.</span> <span class="nav-text">4.4在 Grafana 的web页面查看</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-删除-Yardstick-容器"><span class="nav-number">5.</span> <span class="nav-text">5.删除 Yardstick 容器</span></a></li></ol></div>
             
           </div>
         </section>
