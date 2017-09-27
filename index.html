@@ -94,7 +94,6 @@
 
 
 
-
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
 
 
@@ -102,15 +101,15 @@
 
 
 
-<meta name="description" content="O ever youthful, O ever powerful.">
+<meta name="description" content="一只会说666666的程序媛鼓励师">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Louie&#39;s Blog">
 <meta property="og:url" content="https://louielong.github.io/index.html">
 <meta property="og:site_name" content="Louie&#39;s Blog">
-<meta property="og:description" content="O ever youthful, O ever powerful.">
+<meta property="og:description" content="一只会说666666的程序媛鼓励师">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Louie&#39;s Blog">
-<meta name="twitter:description" content="O ever youthful, O ever powerful.">
+<meta name="twitter:description" content="一只会说666666的程序媛鼓励师">
 
 
 
@@ -134,7 +133,7 @@
   <link rel="canonical" href="https://louielong.github.io/"/>
 
 
-  <title> Louie's Blog </title>
+  <title>  Louie's Blog - 一只会说666666的程序媛鼓励师  </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -267,155 +266,7 @@
             
               
                 
-                <a class="post-title-link" href="/2017/06/11/hexo_blog_build/" itemprop="url">
-                  未命名
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-06-11T20:18:01+08:00" content="2017-06-11">
-              2017-06-11
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/06/11/hexo_blog_build/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/11/hexo_blog_build/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="hexo-博客站点搭建"><a href="#hexo-博客站点搭建" class="headerlink" title="hexo 博客站点搭建"></a>hexo 博客站点搭建</h2><p>1.安装node.js</p>
-<pre><code>wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh
-</code></pre><p>安装完成后执行：<code>nvm install stable</code>, 即可安装node.js。</p>
-<p>使用npm命令安装hexo</p>
-<pre><code>npm install -g hexo-cli
-</code></pre><p>安装完成之后，使用<code>hexo --version</code>查看hexo是否正确安装。</p>
-<p><img src="http://i.imgur.com/OsK3uSC.jpg" alt="hexo 安装"></p>
-<p>【PS】目前npm官方源在国内访问并不稳定，如果无法直接安装，请更换国内npm源。执行以下命令更换淘宝npm源</p>
-<pre><code>npm config set registry https://registry.npm.taobao.org
-</code></pre><p>2.安装git</p>
-<p>已经安装过git跳过此步骤</p>
-<p>debian/ubuntu使用：</p>
-<pre><code>sudo apt-get install git-core
-</code></pre><p>3.hexo使用</p>
-<p>3.1 初始化一个站点</p>
-<pre><code>hexo init louie_blog
-</code></pre><p>此命令用于执行站点的初始化。执行后，folder文件夹会成为一个Hexo站点文件夹，执行过程中涉及安装多个nodejs模块包以及git clone操作。</p>
-<p><img src="http://i.imgur.com/zzPkjDZ.jpg" alt="hexo初始化站点"></p>
-<p>在初始化一个hexo站点文件夹之后，该文件夹的目录结构如下：</p>
-<p><img src="http://i.imgur.com/72R8bGc.jpg" alt="hexo目录结构"></p>
-<p>详细说明如下：</p>
-<pre><code>1、_config.yml是YAML格式文件，也是Hexo的站点配置文件（敲黑板！重点重点！）
-2、node_modules包含使用Hexo需要的其他node.js模块，以后安装的hexo相关模块也放在这里
-3、package.json配置hexo运行需要的node.js包，不用手动更改（PS：通常不需要干预它，不过其中有一条&quot;name&quot;: &quot;hexo-site&quot;起着告诉hexo该文件夹是hexo站点的作用，因此更加不要修改该文件内容，安装hexo其他模块也依赖该文件）
-4、scaffolds是模板文件夹，不过这里的“模板”概念没有那么高端。这个“模板”就是指新建的markdown文件的模板，每新建一个markdown文件（由于Hexo使用markdown语法，在渲染生成静态HTML页面之前，源文件都是markdown文件），就会包含对应模板的内容。
-该文件夹内有三个模板：draft.md，草稿的模板page.md，页面的模板post.md，文章的模板
-5、source是源文件文件夹，此处存有渲染生成静态页面需要的所有源文件，包括markdown文件、图片文件。默认此文件夹下只有一个_post文件夹，存放文章的markdown源文件。每个页面有一个以该页面命名的文件夹，也存放在source文件夹下。该文件夹下除了_post外，所有以下划线开头的或以.开头的文件夹都会被忽略。
-6、themes是主题文件夹，Hexo的主题作用与WordPress相同。
-7、public文件夹，默认没有，存放生成的静态文件。
-</code></pre><p>打开 _config.yml 修改配置：</p>
-<pre><code>title: Hexo #站点的标题
-subtitle: #站点的副标题
-description: #站点的描述，写一段话来介绍你的博客吧:)，主要为SEO使用
-author: John Doe #显示的文章作者名字，例如我配置的是fourstring
-language: #语言。简体中文是zh-Hans
-timezone: #时区，可以不配置，默认以本地时区为准
-url: http://yoursite.com #你的站点地址，如果是全站HTTPS记得写成https://domain.com
-root: / #如果您的网站存放在子目录中，例如 http://yoursite.com/blog，则请将您的 url 设为 http://yoursite.com/blog 并把 root 设为 /blog/。（引用自官方文档）
-permalink: :year/:month/:day/:title/ #固定链接格式。这项配置的格式为：变量1/变量2/变量3...，其中合法的变量格式为“:变量名”（注意，:是变量的组成部分！）这样生成的效果为/2016/08/10/文章标题。默认的固定链接格式存在一些问题，下文讲解
-per_page: 10 #设置每页文章篇数，设为0可以关闭分页功能
-theme: #使用的主题。下文讲解
-deploy: #部署配置，其值是一个杂凑表，注意缩进，下文详细讲解
-</code></pre><p>3.2 更换主题</p>
-<p>Hexo的主题存储在<code>louie_blog/themes</code>目录下</p>
-<p>hexo主题星级排名<a href="https://www.zhihu.com/question/24422335" target="_blank" rel="external">https://www.zhihu.com/question/24422335</a></p>
-<p>推荐n4l.pw使用的Hexo主题：Next，功能极其强大，是目前github上star第一的Hexo主题：<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">https://github.com/iissnan/hexo-theme-next</a>。官方文档讲解非常详细，鉴于篇幅，这里只提一个小技巧，在文章中加入
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/06/11/hexo_blog_build/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/06/11/hello-world/" itemprop="url">
+                <a class="post-title-link" href="/hello-world.html" itemprop="url">
                   Hello World
                 </a>
               
@@ -440,8 +291,8 @@ deploy: #部署配置，其值是一个杂凑表，注意缩进，下文详细�
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/06/11/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/11/hello-world/" itemprop="commentsCount"></span>
+                <a href="/hello-world.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="hello-world.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -524,7 +375,7 @@ deploy: #部署配置，其值是一个杂凑表，注意缩进，下文详细�
             
               
                 
-                <a class="post-title-link" href="/2017/06/09/OPNFV测试项目-yardstick/" itemprop="url">
+                <a class="post-title-link" href="/OPNFV测试项目-yardstick.html" itemprop="url">
                   OPNFV 测试项目 -- Yardstick
                 </a>
               
@@ -552,8 +403,8 @@ deploy: #部署配置，其值是一个杂凑表，注意缩进，下文详细�
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/yardstick/" itemprop="url" rel="index">
-                    <span itemprop="name">yardstick</span>
+                  <a href="/categories/OPNFV/" itemprop="url" rel="index">
+                    <span itemprop="name">OPNFV</span>
                   </a>
                 </span>
 
@@ -568,8 +419,8 @@ deploy: #部署配置，其值是一个杂凑表，注意缩进，下文详细�
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/06/09/OPNFV测试项目-yardstick/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/09/OPNFV测试项目-yardstick/" itemprop="commentsCount"></span>
+                <a href="/OPNFV测试项目-yardstick.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="OPNFV测试项目-yardstick.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -593,140 +444,146 @@ deploy: #部署配置，其值是一个杂凑表，注意缩进，下文详细�
 
       
         
-          
-            <h2 id="1-使用-Docker-安装-Yardstick"><a href="#1-使用-Docker-安装-Yardstick" class="headerlink" title="1.使用 Docker 安装 Yardstick"></a>1.使用 Docker 安装 Yardstick</h2><p><strong>官方推荐 Docker 运行 Yardstick 测试</strong></p>
+          <h2 id="1-使用-Docker-安装-Yardstick"><a href="#1-使用-Docker-安装-Yardstick" class="headerlink" title="1.使用 Docker 安装 Yardstick"></a>1.使用 Docker 安装 Yardstick</h2><p><strong>官方推荐 Docker 运行 Yardstick 测试</strong></p>
 <h3 id="1-1安装-Docker"><a href="#1-1安装-Docker" class="headerlink" title="1.1安装 Docker"></a>1.1安装 Docker</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget -qO- https://get.docker.com/ | sh</div></pre></td></tr></table></figure>
 <p>拉取 Yardstick 最新版</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull opnfv/yardstick:latest</div></pre></td></tr></table></figure>
 <p>查看下载的 Docker 镜像</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker images</div></pre></td></tr></table></figure>
-<h2 id="2-准备-Yardstick-测试所需要的磁盘和镜像"><a href="#2-准备-Yardstick-测试所需要的磁盘和镜像" class="headerlink" title="2.准备 Yardstick 测试所需要的磁盘和镜像"></a>2.准备 Yardstick 测试所需要的磁盘和镜像</h2><p><em>NOTE</em>:当需要使用 openstack 的接口时必须先导入环境变量</p>
-<p>将下列配置将保存到 openrc 文本中</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">export OS_PROJECT_DOMAIN_NAME=Default</div><div class="line">export OS_USER_DOMAIN_NAME=Default</div><div class="line">export OS_PROJECT_NAME=admin</div><div class="line">export OS_USERNAME=admin</div><div class="line">export OS_PASSWORD=admin</div><div class="line">export OS_AUTH_URL=http://192.168.20.11:5000     #yardstick API接口的IP</div><div class="line">export OS_IDENTITY_API_VERSION=3</div><div class="line">export OS_IMAGE_API_VERSION=2</div><div class="line">export EXTERNAL_NETWORK=admin_floating_net       #外网的网络名</div></pre></td></tr></table></figure>
-<p>使用 <code>source openrc</code>导入环境变量</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source openrc</div></pre></td></tr></table></figure>
-<p>在 Yardstick 容器中，Yardstick 存储库位于 /home/opnfv/repos 目录中。Yardstick 提供了一个 CLI 来准备 OpenStack 环境变量并自动创建 Yardstick 风格和访客镜像：</p>
-<h3 id="2-1手动创建-Yardstick-falvor-和-guest-images"><a href="#2-1手动创建-Yardstick-falvor-和-guest-images" class="headerlink" title="2.1手动创建 Yardstick falvor 和 guest images"></a>2.1手动创建 Yardstick falvor 和 guest images</h3><p>在执行 Yardstick 测试用例之前，请确保在 OpenStack 中提供了 Yardstick falvor 和 guest images。有关创建 Yardstick falvor 和 guest images 的详细步骤，如下。</p>
-<p>使用如下命令创建一个名称为 yardstick-flavor ，编号为100，内存为512M，3G磁盘，1个cpu的主机配置。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nova flavor-create yardstick-flavor 100 512 3 1</div></pre></td></tr></table></figure>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">参数</th>
-<th style="text-align:center">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">100</td>
-<td style="text-align:center">创建镜像的ID</td>
-</tr>
-<tr>
-<td style="text-align:center">512</td>
-<td style="text-align:center">内存大小</td>
-</tr>
-<tr>
-<td style="text-align:center">3</td>
-<td style="text-align:center">磁盘大小 (G)</td>
-</tr>
-<tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">CPU数量</td>
-</tr>
-</tbody>
-</table>
-<p><img src="http://i.imgur.com/EhW1nuk.jpg" alt=""></p>
-<h3 id="2-2创建用于-Yardstick-测试的访客镜像"><a href="#2-2创建用于-Yardstick-测试的访客镜像" class="headerlink" title="2.2创建用于 Yardstick 测试的访客镜像"></a>2.2创建用于 Yardstick 测试的访客镜像</h3><p>首先安装额外的工具包</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update &amp;&amp; sudo apt-get install -y qemu-utils kpartx</div></pre></td></tr></table></figure>
-<p>使用 Git 拉取 Yardstick 源码</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone https://gerrit.opnfv.org/gerrit/yardstick</div></pre></td></tr></table></figure>
-<p>使用 Yardstick 工具生成镜像</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd yardstick</div><div class="line">sudo ./tools/yardstick-img-modify tools/ubuntu-server-cloudimg-modify.sh</div></pre></td></tr></table></figure>
-<p>生成的镜像也加入到 Openstack 环境中</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">glance --os-image-api-version 1 image-create \</div><div class="line">--name yardstick-image --is-public true \</div><div class="line">--disk-format qcow2 --container-format bare \</div><div class="line">--file /tmp/workspace/yardstick/yardstick-image.img</div></pre></td></tr></table></figure>
-<p>一些 Yardstick 的测试用例使用 Cirros 0.3.5 或者 Ubuntu 16.04 的镜像，也可以将这些镜像加入到 Openstack 环境中</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">openstack image create \</div><div class="line">--disk-format qcow2 \</div><div class="line">--container-format bare \</div><div class="line">--file $cirros_image_file \</div><div class="line">cirros-0.3.5</div><div class="line"></div><div class="line">openstack image create \</div><div class="line">--disk-format qcow2 \</div><div class="line">--container-format bare \</div><div class="line">--file $ubuntu_image_file \</div><div class="line">Ubuntu-16.04</div></pre></td></tr></table></figure>
-<h2 id="3-运行-Yardstick"><a href="#3-运行-Yardstick" class="headerlink" title="3.运行 Yardstick"></a>3.运行 Yardstick</h2><h3 id="3-1启动-Yardstick-镜像"><a href="#3-1启动-Yardstick-镜像" class="headerlink" title="3.1启动 Yardstick 镜像"></a>3.1启动 Yardstick 镜像</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -itd --privileged -v /var/run/docker.sock:/var/run/docker.sock -p 8888:5000 -e INSTALLER_IP=192.168.20.5 -e INSTALLER_TYPE=fuel --name yardstick opnfv/yardstick:latest</div></pre></td></tr></table></figure>
-<p><strong>参数说明</strong></p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">参数</th>
-<th style="text-align:center">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">-itd</td>
-<td style="text-align:center">-i：交互式，即使不附加STDIN也会打开。 -t：分配伪TTY。 -d：在分离模式下，在后台运行容器。</td>
-</tr>
-<tr>
-<td style="text-align:center">–privileged</td>
-<td style="text-align:center">在yardstick容器中创建yardstick-image</td>
-</tr>
-<tr>
-<td style="text-align:center">-e INSTALLER_IP=192.168.20.5 <br> -e INSTALLER_TYPE=fuel</td>
-<td style="text-align:center">INSTALLER_TYPE可选参数为Apex，Compass，Fuel和Joid。 如果使用其他安装程序（如devstack），则可以忽略这些参数。</td>
-</tr>
-<tr>
-<td style="text-align:center">-p 8888:5000</td>
-<td style="text-align:center">如果需要在yardstick外使用yardstick容器需要加入该参数，将yardstick容器内的5000端口映射到宿主机的8888端口，如果宿主机的8888端口被占用可以换一个端口</td>
-</tr>
-<tr>
-<td style="text-align:center">-v /var/run/docker.sock:/var/run/docker.sock</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td style="text-align:center">–name yardstick</td>
-<td style="text-align:center">创建的容器名称</td>
-</tr>
-</tbody>
-</table>
-<h3 id="3-2配置-Yardstick-容器环境"><a href="#3-2配置-Yardstick-容器环境" class="headerlink" title="3.2配置 Yardstick 容器环境"></a>3.2配置 Yardstick 容器环境</h3><p>首先需要先进入到 Yardstick 容器</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker exec -it yardstick /bin/bash</div></pre></td></tr></table></figure>
-<p>随后开始配置环境</p>
-<p>引入环境配置将一下内容保存到 openrc 文件中，然后使用 <code>source openrc</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">export OS_PROJECT_DOMAIN_NAME=Default</div><div class="line">export OS_USER_DOMAIN_NAME=Default</div><div class="line">export OS_PROJECT_NAME=admin</div><div class="line">export OS_USERNAME=admin</div><div class="line">export OS_PASSWORD=admin</div><div class="line">export OS_AUTH_URL=http://192.168.20.11:5000     #yardstick API接口的IP</div><div class="line">export OS_IDENTITY_API_VERSION=3</div><div class="line">export OS_IMAGE_API_VERSION=2</div><div class="line">export EXTERNAL_NETWORK=admin_floating_net       #外网的网络名</div></pre></td></tr></table></figure>
-<h3 id="3-3运行一个简单的测试例"><a href="#3-3运行一个简单的测试例" class="headerlink" title="3.3运行一个简单的测试例"></a>3.3运行一个简单的测试例</h3><p>修改 ping.ymal文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd ~/repos/yardstick</div><div class="line">vim samples/ping.yaml</div></pre></td></tr></table></figure>
-<p><img src="http://i.imgur.com/rvEEYJv.jpg" alt=""></p>
-<p>主要关注下图中绿色框内容，<em>image</em> 为测试的镜像名称，<em>flavor</em> 为生成的虚拟机配置，<em>user</em> 为虚拟机系统的登录用户名(cirros 镜像默认的用户名和密码为”user:cirros  pass:cubswin:)”，ubuntu 镜像用户名默认为”ubuntu”)，测试用的vm实例创建后会使用创建时的密匙登录，因此也是不需要密码的，但是系统用户名必须一致。<em>network</em> 指生成的虚拟机所在的网段，即内网的网络。<br><img src="http://i.imgur.com/ataU1pE.jpg" alt="ping 配置文件"></p>
-<p>配置完 <code>ping.ymal</code>文件后，使用命令启动测试</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yardstick -d task start samples/ping.yaml</div></pre></td></tr></table></figure>
-<p>测试结果会输出在<code>/tmp/yardstick.out</code>中，为了方便的查看测试结果，使用 influxdb 数据库和 Grafana 工具。</p>
-<h2 id="4-安装-InfluxDB-和-Grafana"><a href="#4-安装-InfluxDB-和-Grafana" class="headerlink" title="4.安装 InfluxDB 和 Grafana"></a>4.安装 InfluxDB 和 Grafana</h2><p>官方给出的 <code>yardstick env influxdb</code> 和 <code>yardstick env grafana</code> 使用版本较低，建议手动安装和启动这两项服务</p>
-<p>完整的操作过程为:</p>
-<h3 id="4-1配置-InfluxDB-环境"><a href="#4-1配置-InfluxDB-环境" class="headerlink" title="4.1配置 InfluxDB 环境"></a>4.1配置 InfluxDB 环境</h3><p>使用 docker 安装并使用最新的 influxdb 版本</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull tutum/influxdb</div></pre></td></tr></table></figure>
-<p>启动 influxdb 的 docker 环境</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -d --name influxdb -p 8083:8083 -p 8086:8086 --expose 8090 --expose 8099 tutum/influxdb</div><div class="line">docker exec -it influxdb bash  #进入 influxdb 的 docker 环境</div></pre></td></tr></table></figure>
-<p>配置 influxdb 数据库，增加 yardstick 表，便于后续存储 yardstick 测试结果</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">influx</div><div class="line"><span class="meta">&gt;</span>CREATE USER root WITH PASSWORD 'root' WITH ALL PRIVILEGES</div><div class="line"><span class="meta">&gt;</span>CREATE DATABASE yardstick;</div><div class="line"><span class="meta">&gt;</span>use yardstick;</div><div class="line"><span class="meta">&gt;</span>show MEASUREMENTS;</div></pre></td></tr></table></figure>
-<p>在 Yardstick 的docker容器中使用如下命令测试 influxdb 数据库是否可用</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -i -X POST  http://192.168.20.14:8086/query --data-urlencode "q=CREATE DATABASE mydb"</div></pre></td></tr></table></figure>
-<p><code>192.168.20.14</code>为 influxdb 运行所在的宿主机 IP 地址，上述命令的功能是使用 influxdb 的 http API 在数据库中创建一个数据库</p>
-<p><strong>NOTE</strong>如果上述命令执行失败，则需要查看宿主机的 防火墙规则，使用<code>iptables -L -nv</code>查看 <code>Chain INPUT</code>规则，如果是 drop 则使用<code>iptables -P INPUT ACCEPT</code>将其改为accept</p>
-<h3 id="4-2配置-Grafana-环境"><a href="#4-2配置-Grafana-环境" class="headerlink" title="4.2配置 Grafana 环境"></a>4.2配置 Grafana 环境</h3><p>拉取 Grafana 在 docker 上的最新版</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull grafana/grafana</div></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -d --name grafana -p 3000:3000 grafana/grafana</div></pre></td></tr></table></figure>
-<p>之后就可以在 <a href="http://host_ip:3000" target="_blank" rel="external">http://host_ip:3000</a> (admin/admin) 查看</p>
-<p>如下图所示为三个环境容器都已经启动，因8888端口冲突所以将 Yardstick 的宿主机端口改为45678<br><img src="http://i.imgur.com/OKtO9SO.jpg" alt=""></p>
-<p>4.3配置 Yardstick 测试结果输出到 influxdb 数据库</p>
-<p>进入到 Yardstick 容器的环境</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker exec -it yardstick bash</div></pre></td></tr></table></figure>
-<p>拷贝并修改 Yardstick 的配置</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cp yardstick/etc/yardstick/yardstick.conf.sample /etc/yardstick/yardstick.conf</div><div class="line">vim /etc/yardstick/yardstick.conf</div></pre></td></tr></table></figure>
-<p><img src="http://i.imgur.com/13WSHjN.jpg" alt=""></p>
-<p>修改<em>dispatcher</em>为<em>influxdb</em>，同时修改<em>influxdb</em>的IP地址，数据库名已经账号密码皆为4.1节所创建的。</p>
-<p>配置完成后运行<code>yardstick -d task start samples/ping.yaml</code></p>
-<h3 id="4-4在-Grafana-的web页面查看"><a href="#4-4在-Grafana-的web页面查看" class="headerlink" title="4.4在 Grafana 的web页面查看"></a>4.4在 Grafana 的web页面查看</h3><p>在浏览器输入 <a href="http://192.168.20.14:3000" target="_blank" rel="external">http://192.168.20.14:3000</a> (admin/admin)(本例中的 Grafana 宿主机地址是 192.168.20.14)</p>
-<p>点击左上角图标配置 data source，随后创建 dashboard 查看数据即可。</p>
-<p><img src="http://i.imgur.com/teplLiT.jpg" alt=""></p>
-<h2 id="5-删除-Yardstick-容器"><a href="#5-删除-Yardstick-容器" class="headerlink" title="5.删除 Yardstick 容器"></a>5.删除 Yardstick 容器</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker stop yardstick &amp;&amp; docker rm yardstick</div></pre></td></tr></table></figure>
-<p>参考链接：</p>
-<p>1)<a href="https://docs.opnfv.org/en/stable-danube/submodules/yardstick/docs/testing/user/userguide/index.html" target="_blank" rel="external">https://docs.opnfv.org/en/stable-danube/submodules/yardstick/docs/testing/user/userguide/index.html</a></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/OPNFV测试项目-yardstick.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/hexo_blog_build.html" itemprop="url">
+                  如何搭建 hexo 博客
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-06-09T15:20:08+08:00" content="2017-06-09">
+              2017-06-09
+            </time>
+          </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">hexo</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/hexo_blog_build.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="hexo_blog_build.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="1-安装node-js"><a href="#1-安装node-js" class="headerlink" title="1 安装node.js"></a>1 安装node.js</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh</div></pre></td></tr></table></figure>
+<p>安装完成后执行：<code>nvm install stable</code>, 即可安装node.js。</p>
+<p>使用npm命令安装hexo</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g hexo-cli</div></pre></td></tr></table></figure>
+<p>安装完成之后，使用<code>hexo --version</code>查看hexo是否正确安装。</p>
+<p><img src="http://i.imgur.com/OsK3uSC.jpg" alt="hexo 安装"></p>
+<p>【PS】目前npm官方源在国内访问并不稳定，如果无法直接安装，请更换国内npm源。执行以下命令更换淘宝npm源</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm config set registry https://registry.npm.taobao.org</div></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/hexo_blog_build.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -789,7 +646,7 @@ deploy: #部署配置，其值是一个杂凑表，注意缩进，下文详细�
                src="/uploads/shadian.png"
                alt="Louie Long" />
           <p class="site-author-name" itemprop="name">Louie Long</p>
-          <p class="site-description motion-element" itemprop="description">O ever youthful, O ever powerful.</p>
+          <p class="site-description motion-element" itemprop="description">一只会说666666的程序媛鼓励师</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
@@ -802,7 +659,7 @@ deploy: #部署配置，其值是一个杂凑表，注意缩进，下文详细�
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -811,7 +668,7 @@ deploy: #部署配置，其值是一个杂凑表，注意缩进，下文详细�
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -825,7 +682,7 @@ deploy: #部署配置，其值是一个杂凑表，注意缩进，下文详细�
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/Louie-LongCode/Config_Linux" target="_blank" title="GitHub">
+                <a rel="external nofollow" href="https://github.com/Louie-LongCode/Config_Linux" target="_blank" title="GitHub">
                   
                     <i class="fa fa-fw fa-github"></i>
                   
@@ -834,7 +691,7 @@ deploy: #部署配置，其值是一个杂凑表，注意缩进，下文详细�
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/u/2210983905" target="_blank" title="Weibo">
+                <a rel="external nofollow" href="http://weibo.com/u/2210983905" target="_blank" title="Weibo">
                   
                     <i class="fa fa-fw fa-weibo"></i>
                   
@@ -876,12 +733,12 @@ deploy: #部署配置，其值是一个杂凑表，注意缩进，下文详细�
 </div>
 
 <div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  由 <a rel="external nofollow" class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
   主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+  <a rel="external nofollow" class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT.Mist
   </a>
 </div>
