@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="hexo,blog," />
+  <meta name="keywords" content="blog," />
 
 
 
@@ -101,13 +101,13 @@
 
 
 
-<meta name="description" content="1 安装node.js1wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh 安装完成后执行：nvm install stable, 即可安装node.js。 使用npm命令安装hexo 1npm install -g hexo-cli 安装完成之后，使用hexo --version查看hexo是否正确安装。">
-<meta name="keywords" content="hexo,blog">
+<meta name="description" content="hexo 建立博客">
+<meta name="keywords" content="blog">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何搭建 hexo 博客">
 <meta property="og:url" content="https://louielong.github.io/hexo_blog_build.html">
 <meta property="og:site_name" content="Louie&#39;s Blog">
-<meta property="og:description" content="1 安装node.js1wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh 安装完成后执行：nvm install stable, 即可安装node.js。 使用npm命令安装hexo 1npm install -g hexo-cli 安装完成之后，使用hexo --version查看hexo是否正确安装。">
+<meta property="og:description" content="hexo 建立博客">
 <meta property="og:image" content="http://i.imgur.com/OsK3uSC.jpg">
 <meta property="og:image" content="http://i.imgur.com/zzPkjDZ.jpg">
 <meta property="og:image" content="http://i.imgur.com/72R8bGc.jpg">
@@ -118,10 +118,10 @@
 <meta property="og:image" content="http://i.imgur.com/lEEJxHH.jpg">
 <meta property="og:image" content="http://i.imgur.com/E9XzzzZ.jpg">
 <meta property="og:image" content="http://i.imgur.com/0UwN6HX.jpg">
-<meta property="og:updated_time" content="2017-09-27T08:27:59.630Z">
+<meta property="og:updated_time" content="2017-09-27T09:20:54.494Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何搭建 hexo 博客">
-<meta name="twitter:description" content="1 安装node.js1wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh 安装完成后执行：nvm install stable, 即可安装node.js。 使用npm命令安装hexo 1npm install -g hexo-cli 安装完成之后，使用hexo --version查看hexo是否正确安装。">
+<meta name="twitter:description" content="hexo 建立博客">
 <meta name="twitter:image" content="http://i.imgur.com/OsK3uSC.jpg">
 
 
@@ -342,7 +342,9 @@
       
 
       
-        <h2 id="1-安装node-js"><a href="#1-安装node-js" class="headerlink" title="1 安装node.js"></a>1 安装node.js</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh</div></pre></td></tr></table></figure>
+        <p><strong>摘要</strong>:本文主要介绍如何使用hexo建立自己的博客。</p>
+<a id="more"></a>
+<h2 id="1-安装node-js"><a href="#1-安装node-js" class="headerlink" title="1 安装node.js"></a>1 安装node.js</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh</div></pre></td></tr></table></figure>
 <p>安装完成后执行：<code>nvm install stable</code>, 即可安装node.js。</p>
 <p>使用npm命令安装hexo</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g hexo-cli</div></pre></td></tr></table></figure>
@@ -350,7 +352,6 @@
 <p><img src="http://i.imgur.com/OsK3uSC.jpg" alt="hexo 安装"></p>
 <p>【PS】目前npm官方源在国内访问并不稳定，如果无法直接安装，请更换国内npm源。执行以下命令更换淘宝npm源</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm config set registry https://registry.npm.taobao.org</div></pre></td></tr></table></figure>
-<a id="more"></a>
 <h2 id="2-安装git"><a href="#2-安装git" class="headerlink" title="2 安装git"></a>2 安装git</h2><p>已经安装过git跳过此步骤</p>
 <p>debian/ubuntu使用：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install git-core</div></pre></td></tr></table></figure>
@@ -441,7 +442,7 @@ GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWdD6xhMNLGVpbP2M5SN6bnxn2kSE
 需要关注的是post-receive的钩子，当push操作完成之后这个钩子就会被调用。
 </code></pre><p>进入到hooks目录</p>
 <p>建立<code>post-receive</code>文件，输入</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></div><div class="line">git --work-tree=/web/blog/hexo --git-dir=/web/blog/hexo.git checkout -f</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>!/bin/sh</div><div class="line">git --work-tree=/web/blog/hexo --git-dir=/web/blog/hexo.git checkout -f</div></pre></td></tr></table></figure>
 <p>赋予可执行权限：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod +x post-receive</div></pre></td></tr></table></figure>
 <p><img src="http://i.imgur.com/0UwN6HX.jpg" alt="git hooks"></p>
@@ -462,6 +463,28 @@ GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWdD6xhMNLGVpbP2M5SN6bnxn2kSE
     <div>
       
         
+
+      
+    </div>
+
+    <div>
+      
+        
+<div style="text-align:center;color: #ccc;font-size:14px;">
+------ 本文结束 ------</div>
+<br/>
+<div style="border: 1px solid black">
+<div style="margin-left:10px">
+<span style="font-weight:blod">版权声明</span>
+<img src="/uploads/cc.png" >
+<br/>
+<p style="font-size: 10px;line-height: 30px"><a href="http://ylong.net.cn" style="color:#258FC6">Louie's Blog</a> by <a href="http://ylong.net.cn" style="color:#258FC6">louie long</a> is licensed under a <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" style="color:#258FC6">Creative Commons BY-NC-ND 4.0 International License</a>.<br/>
+由<a href="http://ylong.net.cn" style="color:#258FC6">龙雨</a>创作并维护的<a href="ylong.net.cn" style="color:#258FC6">Louie's Blog</a>博客采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" style="color:#258FC6">创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。<br/>
+本文首发于<a href="http://ylong.net.cn" style="color:#258FC6">Louie's Blog</a> 博客（ <a href="http://ylong.net.cn" style="color:#258FC6">http://ylong.net.cn</a> ），版权所有，侵权必究。<br/>
+转载请注明作者和链接地址<a href="http://ylong.net.cn" style="color:#258FC6">longyu805@163.com</a>, 如对文章内容有疑问请联系邮箱（ <a style="color:#258FC6">longyu805@163.com</a> ）。</p>
+</div>
+</div>
+
 
       
     </div>
@@ -595,7 +618,7 @@ GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWdD6xhMNLGVpbP2M5SN6bnxn2kSE
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
