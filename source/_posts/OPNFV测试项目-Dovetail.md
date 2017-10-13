@@ -11,6 +11,7 @@ keywords:
   - Dovetail
 description:
   - OPNFV Dovetail 使用
+top: 100
 ---
 
 ***NOTE***：本文以dovetail CVP 的0.6版本为例来讲解dovetail项目的使用，随着dovetail版本的升级使用的命令和配置会有所改变。（2017年9月8日13:37:05）
