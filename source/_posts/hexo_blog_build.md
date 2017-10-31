@@ -10,6 +10,7 @@ keywords:
   - blog
 description:
   - hexo 建立博客
+top:
 ---
 
 **摘要**:本文主要介绍如何使用hexo建立自己的博客。
@@ -121,7 +122,7 @@ hexo new post "Test"
 
 	邮箱：
 	Soar360@live.com
-	
+
 	授权秘钥：
 	GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWdD6xhMNLGVpbP2M5SN6bnxn2kSE8qHqNY5QaaRxmO3YSMHxlv2EYpjdwLcPwfeTG7kUdnhKE0vVy4RidP6Y2wZ0q74f47fzsZo45JE2hfQBFi2O9Jldjp1mW8HUpTtLA2a5/sQytXJUQl/QKO0jUQY4pa5CCx20sV1ClOTZtAGngSOJtIOFXK599sBr5aIEFyH0K7H4BoNMiiDMnxt1rD8Vb/ikJdhGMMQr0R4B+L3nWU97eaVPTRKfWGDE8/eAgKzpGwrQQoDh+nzX1xoVQ8NAuH+s4UcSeQ==
 
@@ -222,14 +223,14 @@ comment: false
 选择合适的路径，建立文件夹：
 
 这里选择根目录下的`/web`
-​	
+​
 ```shell
 sudo mkdir /web
 ```
 
 并更改所有者为自己
 ```shell
-sudo chown -R louie:louie /web	
+sudo chown -R louie:louie /web
 ```
 
 建立目录
