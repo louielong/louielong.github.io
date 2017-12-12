@@ -17,7 +17,7 @@ top: 100
 
 ## 1 Euphrates新特性介绍
 
-OPNFV社区于2017年10月24发布的第五个版本Euphrates（幼发拉底河，位于亚洲），新版本增加了对***Kubernetes***容器技术的支持，也就是说OPNFV的底层VIM不再仅仅是Openstack架构了，同时社区采用了***XCI***（cross community continuous integration）跨社区（交叉）持续集成技术，能够更快更好的使用上游社区最新的版本和代码，在MANO管理层集成了ETSI NFV的***Open Baton***项目。E版本的详细新特性如下[1][2]：
+OPNFV社区于2017年10月24发布的第五个版本Euphrates（幼发拉底河，位于亚洲），新版本增加了对***Kubernetes***容器技术的支持，也就是说OPNFV的底层VIM不再仅仅是Openstack架构了，同时社区采用了***[XCI](http://docs.opnfv.org/en/latest/submodules/releng-xci/docs/xci-overview.html#xci-overview)***（cross community continuous integration）跨社区持续集成技术，能够更快更好的使用上游社区最新的版本和代码，在MANO管理层集成了ETSI NFV的***Open Baton***项目。E版本的详细新特性如下[1][2]：
 
 - 底层架构增加：OPNFV即将开启容器之旅。Euphrates将Kubernetes和容器集成到端到端堆栈的多个组件，以及通过Kolla部署容器化OpenStack的能力，Kolla提供生产就绪的容器和部署工具，用于运行可扩展、快速、可靠的OpenStack云，并使用社区最佳实践升级。这些增强功能可以更轻松地管理基础设施、支持NFV中的原生云网络应用，以及轻权重控制平面功能，为运营商支持5G和IoT奠定基础。
 - XCI持续集成：能够与最新的上游开源项目集成。在OPNFV第四个版本Danube中持续集成/持续部署（CI/CD）集成工作的基础上，Euphrates在OPNFV、OpenStack、OpenDaylight和FD.io中引入了XCI集成CI/CD管道的实现。OPNFVC CI管道并不需要官方的稳定版本，而是集成了上游项目的最新代码，以更快地解决错误并验证功能。这减少了新功能反馈和错误修复的时间，大大提升了创新的速度。XCI还可实现多分布式支持，促进开发人员之间的联系。
@@ -58,6 +58,8 @@ OPNFV社区于2017年10月24发布的第五个版本Euphrates（幼发拉底河�
 sudo apt-get -y install libvirt-bin
 ```
 
+*2017年12月12日更新*：社区最新的代码中已经添加了libvirt的安装，将安装过程调整为先安装libvirt后做`virsh list`的检查，因此该步骤安装可以省略。
+
 *可选步骤*：修改host上软件源以加快部署进度，将软件源替换为[清华源](https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/ " 清华源")
 
 修改`/etc/apt/source.list`文件内容全部替换为
@@ -85,19 +87,21 @@ git clone https://git.opnfv.org/fuel
 git checkout opnfv-5.0.2
 ```
 
+*2017年12月12日更新*：由于XCI的特性，社区的代码实时更新，使用`git fetch origin stable/euphrates && git checkout stable/euphrates`切换至Euphrates的最新稳定版代码，然后再部署。
+
 *Note*：最开始尝试部署时由于内存只有8G出现过未部署成功，因此需要适当削减部署时的配置，修改`fuel/mcp/config/scenario/defaults-x86_64.yaml`中ram的大小，以及`mcp/config/scenario/virtual/os-nosdn-nofeature-noha.yaml`中ram的大小，甚至可以减少一个计算节点`cmp02`。
 
 最简单的虚拟部署方式命令如下
 
 ```shell
-ci/deploy.sh -d -p virtual_kvm -l localhost -s os-nosdn-nofeature-noha
+ci/deploy.sh -D -p virtual_kvm -l localhost -s os-nosdn-nofeature-noha
 ```
 
 使用`deploy -h`可以常看使用帮助，常用的参数说明如下
 
 | -b   | 指定部署配置的目录可以使用本地文件和远程链接，配置文件的路径格式为`<base-uri>/labs/<lab-name>/<pod-name>.yaml`,默认路径为`./mcp/config` |
 | ---- | ---------------------------------------- |
-| -l   | 指明使用配置目录下哪个实验室的配置文件，如`-l lf`为使用linux基金会实验室的配置文件。当使用虚拟部署时`-l`参数可以不使用 |
+| -l   | 指明使用配置目录下哪个实验室的配置文件，如`-l lf`为使用linux基金会实验室的配置文件。当使用虚拟部署时甚至`-l`参数都可以不使用 |
 | -p   | 指明使用实验室下的哪一个POD，如`-p pod2`               |
 | -s   | 指明使用哪种部署场景，如`-s os-nosdn-nofeature-noha`指使用openstack作为VIM，不采用sdn控制器，无其他特性，不使用ha。其他场景可以在`fuel/mcp/config/scenario/`下看到 |
 

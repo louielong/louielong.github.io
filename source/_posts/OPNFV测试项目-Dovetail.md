@@ -1,5 +1,5 @@
 ---
-title: Dovetail 项目说明
+title: CVP 项目说明
 date: 2017-09-27 17:10:13
 categories:
   - OPNFV
@@ -7,18 +7,23 @@ tags:
   - Dovetail
   - OPNFV
   - NFV
+  - CVP
 keywords:
-  - Dovetail
+  - OPNFV CVP
 description:
   - OPNFV Dovetail 使用
 top: 100
 ---
 
-***NOTE***：本文以dovetail CVP 的0.6版本为例来讲解dovetail项目的使用，随着dovetail版本的升级使用的命令和配置会有所改变。（2017年9月8日13:37:05）
+***NOTE***：本文以 CVP  dovetail的0.6版本为例来讲解dovetail项目的使用，随着dovetail版本的升级使用的命令和配置会有所改变。（2017年9月8日）
+
+修改1：0.6版本升级到0.9，部分内容作出更新（2017年11月13日）
 
 **摘要**:本文主要介绍如何使用OPNFV的Dovetail项目进行NFV基础设施NFVI&VIM的测试。
 
 <!--more-->
+
+OPNFV的CVP（Compliance Verification Program）一致性认证项目
 
 ## 1.Dovetail 安装
 
