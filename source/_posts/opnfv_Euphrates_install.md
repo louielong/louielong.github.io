@@ -60,7 +60,7 @@ sudo apt-get -y install libvirt-bin
 
 *2017年12月12日更新*：社区最新的代码中已经添加了libvirt的安装，将安装过程调整为先安装libvirt后做`virsh list`的检查，因此该步骤安装可以省略。
 
-*可选步骤*：修改host上软件源以加快部署进度，将软件源替换为[清华源](https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/ " 清华源")
+*可选步骤*：在国内为了加快部署进度，可以修改host上软件源将软件源替换为[清华源](https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/ " 清华源")
 
 修改`/etc/apt/source.list`文件内容全部替换为
 
@@ -123,9 +123,9 @@ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /var/lib/opnf
 
 登录到ctl01节点上查看文件`/etc/apache2/conf-available/openstack-dashboard.conf`可以得知dashboard页面的监听端口为8078。
 
-访问dashboard的方式有两种，第一种是在host上做端口映射，第二种是通过putty、xshell等终端登录工具做隧道。不管哪种方式由于fuel在部署时防火墙的配置中多了一些选项需要先对iptables做一些修改。
+访问dashboard的方式有**两种**，第一种是在host上做端口映射；第二种是通过putty、xshell等终端登录工具做隧道。不管哪种方式由于fuel在部署时防火墙的配置中多了一些选项需要先对iptables做一些修改。
 
-首先在host上备份防火墙规则`ipatables-save > rule.v4`,然后打开rule.v4修改`-A FORWARD -d 10.20.0.0/24 -o mcpcontrol -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT`为`-A FORWARD -d 10.20.0.0/24 -o mcpcontrol -j ACCEPT`，随后重新加载防火墙规则`iptables-restore rule.v4`。
+首先在host上备份防火墙规则`iptables-save > rule.v4`,然后打开rule.v4修改`-A FORWARD -d 10.20.0.0/24 -o mcpcontrol -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT`为`-A FORWARD -d 10.20.0.0/24 -o mcpcontrol -j ACCEPT`，随后重新加载防火墙规则`iptables-restore rule.v4`。
 
 #### 2.3.1 隧道方式访问
 
@@ -135,7 +135,7 @@ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /var/lib/opnf
 
 随后在本机的浏览器输入`127.0.0.1:8000`即可访问dashboard，**账户/密码：admin/opnfv_secret**。密码存放在控制节点的`/etc/keystone/keystone.conf`文件中，为`admin_token`参数的值。
 
-#### 2.3.2 host端口映射
+#### 2.3.2 host端口映射方式访问
 
 在host上的防火墙规则中添加一个端口映射，`iptables -t nat -A PREROUTING -d 192.168.2.235 -p tcp --dport 8000 -j DNAT --to-destination 10.20.0.118:8078`，随后直接访问host主机的8000端口即可登录dashboard。
 
