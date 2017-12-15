@@ -33,7 +33,9 @@ Fuel安装代码仓库：https://git.opnfv.org/fuel
 
 ### 2.1 POD配置文件-PDF 
 
-官方给的参考POD文件是Fuel仓库里的LF(Linux Foundation)的pod1在`fuel/mcp/config/labs/local`目录下，接下来笔者以自己部署的baremetal POD来讲解PDF的内容。PDF采用Yaml格式，包含两部分文件，一部分是IDF用来描述部署工具节点也叫jumpmaster的网络描述，内容相对简单；另一部分是描述整个OPNFV各节点的详细网络、硬件资源等配置信息内容相对多。不熟悉Yaml格式的可以先预习一下Yaml格式：http://www.ruanyifeng.com/blog/2016/07/yaml.html
+官方给的参考POD文件是Fuel仓库里的LF(Linux Foundation)的pod1在`fuel/mcp/config/labs/local`目录下，接下来笔者以自己部署的baremetal POD来讲解PDF的内容。PDF采用Yaml格式，包含两部分文件，一部分是IDF用来描述部署工具节点也叫jumphost的网络描述，内容相对简单；另一部分是描述整个OPNFV各节点的详细网络、硬件资源等配置信息内容相对多。不熟悉Yaml格式的可以先预习一下Yaml格式：http://www.ruanyifeng.com/blog/2016/07/yaml.html
+
+本次安装的PDF文件下载链接为：[idf-pod.yaml](https://wiki.opnfv.org/download/attachments/10296292/idf-pod1.yaml?api=v2)，[pdf.yaml](https://wiki.opnfv.org/download/attachments/10296292/pod1.yaml?api=v2)
 
 `fuel/mcp/config/labs/bii/idf-pod1.yaml`的内容如下，网桥的配置与后续安装执行的命令相关，名字可以任取但是需要与安装时的命令一致。
 
@@ -165,7 +167,7 @@ jumphost:
     versions:
       - 2.0
     user: root
-    pass: admin
+    pass: ******
   remote_management:
     <<: *remote_params
     address: 192.168.20.206
@@ -334,9 +336,11 @@ nodes:
 
 需要开启IPMI的LAN，另外还有一点关于密钥的，我的某一台服务器的不是`0000000000000000000000000000000000000000`，出现过maas无法连接节点的情况。
 
-拓扑图就先参照官方baremetal的wiki的图吧
+本次安装的拓扑图如下
 
-**TODO**：补一个本次PDF的拓扑图。
+![topo](https://wiki.opnfv.org/download/attachments/10296292/Pharos-topo.jpg?api=v2)
+
+
 
 ### 2.2 安装过程
 
