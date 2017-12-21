@@ -23,7 +23,7 @@ top: 100
 
 在Danube版本时Fuel还是可视化的界面安装对于新接触OPNFV的新手或多或少还能慢慢学习研究。但是E版本的Fuel完全使用脚本命令的方式，无疑是加大了新手的入门难度以及学习难度，在研究Fuel的安装过程中遇到了许多坑也确实也学到了许多东西。
 
-## 2 安装环境准备
+## 2 <span id="jump0">安装环境准备</span>
 
 社区在Fuel的安装指导[2]里介绍了如何使用Fuel安装Euphrates，但是这里不得不吐槽一下写这个wiki的人肯定认为阅读文档的人跟他一样是大神，文档写的太简单了，即使是一个环境配置的PDF（pod describe file）如果没有一定了解也是无从下手。
 
@@ -33,9 +33,9 @@ Fuel安装代码仓库：https://git.opnfv.org/fuel
 
 ### 2.1 POD配置文件-PDF 
 
-官方给的参考POD文件是Fuel仓库里的LF(Linux Foundation)的pod1在`fuel/mcp/config/labs/local`目录下，接下来笔者以自己部署的baremetal POD来讲解PDF的内容。PDF采用Yaml格式，包含两部分文件，一部分是IDF用来描述部署工具节点也叫jumphost的网络描述，内容相对简单；另一部分是描述整个OPNFV各节点的详细网络、硬件资源等配置信息内容相对多。不熟悉Yaml格式的可以先预习一下Yaml格式：http://www.ruanyifeng.com/blog/2016/07/yaml.html
+官方给的参考POD文件是Fuel仓库里的LF(Linux Foundation)的pod1在`fuel/mcp/config/labs/local`目录下，接下来笔者以自己部署的baremetal POD来讲解PDF的内容。PDF采用Yaml格式，包含两部分文件，一部分是IDF用来描述~~部署工具节点也叫jumphost~~（这个地方的理解错误导致我出现了文末的[部署问题2](#jump1)）节点的网络描述，内容相对简单，**需要注意**的是网卡名应与**节点**的网卡名称一致，一般是enoX或enpXs0，如果使用了DPDK则需要正确填写busaddr信息；另一部分是描述整个OPNFV各节点的详细网络、硬件资源等配置信息内容相对多。不熟悉Yaml格式的可以先预习一下Yaml格式：http://www.ruanyifeng.com/blog/2016/07/yaml.html
 
-本次安装的PDF文件下载链接为：[idf-pod.yaml](https://wiki.opnfv.org/download/attachments/10296292/idf-pod1.yaml?api=v2)，[pdf.yaml](https://wiki.opnfv.org/download/attachments/10296292/pod1.yaml?api=v2)
+本次安装的PDF文件下载链接为：[idf-pod1.yaml](https://wiki.opnfv.org/download/attachments/10296292/idf-pod1.yaml?api=v2)，[pod1.yaml](https://wiki.opnfv.org/download/attachments/10296292/pod1.yaml?api=v2)
 
 `fuel/mcp/config/labs/bii/idf-pod1.yaml`的内容如下，网桥的配置与后续安装执行的命令相关，名字可以任取但是需要与安装时的命令一致。
 
@@ -64,16 +64,16 @@ idf:
         # Ordered-list, index should be in sync with node index in PDF
         - interfaces: &interfaces
             # Ordered-list, index should be in sync with interface index in PDF
-            - 'eth0'
-            - 'eth1'
-            - 'eth2'
-            - 'eth3'
+            - 'eno1'
+            - 'eno2'
+            - 'eno3'
+            - 'eno4'
           busaddr: &busaddr
             # Bus-info reported by `ethtool -i ethX`
-            - '0000:03:00.0'
-            - '0000:0b:00.0'
-            - '0000:13:00.0'
-            - '0000:1b:00.0'
+            - '0000:01:00.0'
+            - '0000:01:00.1'
+            - '0000:02:00.0'
+            - '0000:02:00.1'
         - interfaces: *interfaces
           busaddr: *busaddr
         - interfaces: *interfaces
@@ -82,22 +82,21 @@ idf:
           busaddr: *busaddr
         - interfaces: *interfaces
           busaddr: *busaddr
-
 ```
 
-`fuel/mcp/config/labs/bii/pod1.yaml`的内容如下，*detail*部分的描述属于非必填内容，*net_config*中的内容为各节点的描述信息，非常重要。可以配合拓扑图一起查看。
+`fuel/mcp/config/labs/bii/pod1.yaml`的内容如下，*detail*部分的描述属于非必填内容，*net_config*中的内容为各节点的描述信息，非常重要。可以配合拓扑图一起查看，部分配置的可选参数参考官方的[示例文件](https://github.com/opnfv/pharos/blob/master/config/pdf/pod1.yaml)。
 
-- *oob*指的的服务器的电源管理IP地址，Fuel安装过程中使用了Maas服务需要通过该地址去对服务器进行裸机管理，包括重启、开关机管理的，Maas是[ubuntu社区](https://docs.ubuntu.com/maas/2.1/en/)开发的裸机管理工具支持IPMI、虚拟机管理等，有兴趣的可以研究一下。这里也提一点这是NFV架构中针对PIM（Physical Infrastructure Management）物理基础设施的管理与Openstack的VIM(Virtual Infrastructure Management)虚拟设施管理相对。本次安装的服务器使用的是IPMI的2.0版本，这里有一个坑①是注意查看服务器的IPMI LAN 是否启用，对于DELL服务器在`iDRAC config->networking->IPMI config`，如果未开启安装时将会出现mas01节点无法连接其他节点（Ps. 这个坑我爬了三天才发现）
+- *oob*指的的服务器的电源管理IP地址，Fuel安装过程中使用了Maas服务需要通过该地址去对服务器进行裸机管理，包括重启、开关机管理的，Maas是[ubuntu社区](https://docs.ubuntu.com/maas/2.1/en/)开发的裸机管理工具支持IPMI、虚拟机管理等，有兴趣的可以研究一下。这里也提一点这是NFV架构中针对PIM（Physical Infrastructure Management）物理基础设施的管理与Openstack的VIM(Virtual Infrastructure Management)虚拟设施管理相对。本次安装的服务器使用的是IPMI的2.0版本，这里有一个坑①是注意查看服务器的IPMI LAN 是否启用，对于DELL服务器在`iDRAC config->networking->IPMI config`，如果未开启安装时将会出现mas01节点无法连接其他节点（Ps. 这个坑我爬了三天才发现）；
 
-- *interface*参数指的的该段网络使用的是哪个网卡，与后面的网卡顺序以及mac地址匹配，但是oob的interface不受此参数控制
+- *interface*参数指的的该段网络使用的是哪个网卡，与后面的网卡顺序以及mac地址匹配，但是oob的interface不受此参数控制；
 
-- *vlan*标记该网络是否有vlan tag，如果没有则用'native'标记
+- *vlan*标记该网络是否有vlan tag，如果没有则用'native'标记；
 
-- *remote_params*是前面提到的IPMI管理，填入相应的IP、用户名、密码、mac地址，实际安装中该项的mac地址并没有使用到
+- *remote_params*是前面提到的IPMI管理，填入相应的IP、用户名、密码、mac地址，实际安装中该项的mac地址并没有使用到，该项的另一个参数是AMT，是因特尔的远端管理方式；
 
-- 网卡特征中支持的参数是sriov和dpdk，笔者使用的服务器较老因此没有这些特性就选择空着
+- 网卡特征中支持的参数是sriov和dpdk，笔者使用的服务器较老因此没有这些特性就选择空着；
 
-  剩下的一些服务器类型相关的信息，依据实际的服务器参数填写即可。
+  剩下的一些服务器类型相关的信息，依据实际的服务器参数填写即可。需要指明的是节点的角色并不是按照配置文件中的命名来的，是按照节点的顺序来分配的依次是kvm01~03，cmp01~02，同时目前的安装方式对于节点的IP都是在指定的CIDR内随机分配的参看脚本[pod_config.yml.j2](https://github.com/opnfv/pharos/blob/master/config/installers/fuel/pod_config.yml.j2)。
 
 ```yaml
 ---
@@ -105,36 +104,37 @@ idf:
 
 details:
   pod owner: ylong
-  contact: ylong@biigroup.cn
+  contact: ylong@biigroup.cn, zjtang@biigroup.cn
   lab: BII Pharos LAB
   location: BDA, Beijing, China
   type: development
   link: https://wiki.opnfv.org/display/pharos/BII
+###################################################
 net_config:
   oob:                     # IPMI management network
     interface: 0
     ip-range: 192.168.20.201-192.168.20.205
-    vlan: native           # no vlan tag
+    vlan: native
   admin:
     interface: 0
     vlan: native
-    network: 10.10.0.0
+    network: 10.20.0.0
     mask: 24
   mgmt:
     interface: 2
-    vlan: 101              # vlan tag
+    vlan: 101
     network: 192.168.101.0
     mask: 24
-  storage:
+  private:
     interface: 3
     vlan: 102
     network: 192.168.102.0
     mask: 24
-  private:
-    interface: 3
-    vlan: 103
-    network: 192.168.103.0
-    mask: 24
+#  storage:
+#    interface: 3
+#    vlan: 103
+#    network: 192.168.103.0
+#    mask: 24
   public:
     interface: 1
     vlan: native
@@ -144,53 +144,55 @@ net_config:
     dns:
       - 114.114.114.114
       - 8.8.8.8
+###################################################
 jumphost:
-  name: Euphrates
+  name: fuel
   node:
-    type: baremetal              # can be virtual or baremetal
+    type: baremetal               # can be virtual or baremetal
     vendor: Dell Inc.
     model: powerEdge 720
     arch: x86_64
     cpus: 2
-    cpu_cflags: hasewell         # add values based on CFLAGS in GCC
-    cores: 8                     # physical cores, not including hyper-threads
+    cpu_cflags: hasewell          # add values based on CFLAGS in GCC
+    cores: 8                      # physical cores, not including hyper-threads
     memory: 16G
-  disks:                                    # disk list
-    - name: 'disk1'                         # first disk
-      disk_capacity: 300G                   # volume
-      disk_type: hdd                        # several disk types possible
-      disk_interface: sas                   # several interface types possible
-      disk_rotation: 15000                  # define rotation speed of disk
-  os: centos-7.3                            #operation system installed
+  disks:                          # disk list
+    - name: 'disk1'               # first disk
+      disk_capacity: 1100G        # volume
+      disk_type: hdd              # several disk types possible
+      disk_interface: sas         # several interface types possible
+      disk_rotation: 15000        # define rotation speed of disk
+  os: ubuntu-16.04                #operation system installed
   remote_params: &remote_params
     type: ipmi
     versions:
       - 2.0
     user: root
-    pass: ******
+    pass: *****
   remote_management:
     <<: *remote_params
-    address: 192.168.20.206
+    address: 192.168.20.200
     mac_address: "44:A8:42:1A:68:78"
   interfaces:                               # physical interface list
-    - mac_address: "00:0c:29:89:3c:26"
-      speed: 1gb                            # 1gb 10gb 40gb
-      features: ''                          # 'sriov' 'dpdk' 'sriov|dpdk'
-    - mac_address: "00:0c:29:89:3c:30"
+    - mac_address: "44:a8:42:15:10:03"
       speed: 1gb
       features: ''
-    - mac_address: "00:0c:29:89:3c:3a"
+    - mac_address: "44:a8:42:15:10:04"
       speed: 1gb
       features: ''
-    - mac_address: "00:0c:29:89:3c:44"
+    - mac_address: "44:a8:42:15:10:05"
+      speed: 1gb
+      features: ''
+    - mac_address: "44:a8:42:15:10:06"
       speed: 1gb
       features: ''
   fixed_ips:
     admin: 10.10.0.2
     mgmt: 192.168.101.2
     public: 192.168.20.235
+###################################################
 nodes:
-  - name: compute1
+  - name: controller1
     node: &nodeparas
       type: baremetal
       vendor: Dell Inc.
@@ -200,65 +202,17 @@ nodes:
       cpu_cflags: hasewell        # add values based on CFLAGS in GCC
       cores: 8                    # physical cores, not including hyper-threads
       memory: 32G
-    disks: &disks_A                           # disk list
-      - name: 'disk1'                         # first disk
-        disk_capacity: 128G                   # volume
-        disk_type: ssd                        # several disk types possible
-        disk_interface: sas                   # several interface types possible
-        disk_rotation: 15000                  # define rotation speed of disk
-      - name: 'disk2'                         # second disk
+    disks: &disks_A               # disk list
+      - name: 'disk1'             # first disk
+        disk_capacity: 128G       # volume
+        disk_type: ssd            # several disk types possible
+        disk_interface: sas       # several interface types possible
+        disk_rotation: 15000      # define rotation speed of disk
+      - name: 'disk2'             # second disk
         disk_capacity: 2400G
         disk_type: hdd
         disk_interface: sas
         disk_rotation: 15000
-    remote_management:
-      <<: *remote_params
-      address: 192.168.20.201
-      mac_address: "44:A8:42:1A:70:BE"
-    interfaces:                               # physical interface list
-      - mac_address: "44:a8:42:14:ee:64"
-        speed: 1gb
-        features: ''
-      - mac_address: "44:a8:42:14:ee:65"
-        speed: 1gb
-        features: ''
-      - mac_address: "44:a8:42:14:ee:66"
-        speed: 1gb
-        features: ''
-      - mac_address: "44:a8:42:14:ee:67"
-        speed: 1gb
-        features: ''
-    fixed_ips:
-      admin: 10.10.0.4
-      mgmt: 192.168.101.4
-      public: 192.168.20.14
-  - name: compute2
-    node: *nodeparas
-    disks: *disks_A
-    remote_management:
-      <<: *remote_params
-      address: 192.168.20.202
-      mac_address: "44:A8:42:1A:76:26"
-    interfaces:
-      - mac_address: "44:a8:42:14:cb:31"
-        speed: 1gb
-        features: ''
-      - mac_address: "44:a8:42:14:cb:32"
-        speed: 1gb
-        features: ''
-      - mac_address: "44:a8:42:14:cb:33"
-        speed: 1gb
-        features: ''
-      - mac_address: "44:a8:42:14:cb:34"
-        speed: 1gb
-        features: ''
-    fixed_ips:
-      admin: 10.10.0.5
-      mgmt: 192.168.101.5
-      public: 192.168.20.15
-  - name: controller1
-    node: *nodeparas
-    disks: *disks_A
     remote_management:
       <<: *remote_params
       address: 192.168.20.203
@@ -277,9 +231,10 @@ nodes:
         speed: 1gb
         feature: ''
     fixed_ips:
-      admin: 10.10.0.6
-      mgmt: 192.168.101.6
+      admin: 10.20.0.16
+      mgmt: 192.168.101.16
       public: 192.168.20.16
+########################################
   - name: controller2
     node: *nodeparas
     disks: *disks_A
@@ -301,9 +256,10 @@ nodes:
         speed: 1gb
         feature: ''
     fixed_ips:
-      admin: 10.10.0.7
-      mgmt: 192.168.101.7
+      admin: 10.20.0.17
+      mgmt: 192.168.101.17
       public: 192.168.20.17
+########################################
   - name: controller3
     node: *nodeparas
     disks: *disks_A
@@ -325,9 +281,59 @@ nodes:
         speed: 1gb
         feature: ''
     fixed_ips:
-      admin: 10.10.0.8
-      mgmt: 192.168.101.8
+      admin: 10.20.0.18
+      mgmt: 192.168.101.18
       public: 192.168.20.18
+########################################
+  - name: compute1
+    node: *nodeparas
+    disks: *disks_A
+    remote_management:
+      <<: *remote_params
+      address: 192.168.20.201
+      mac_address: "44:A8:42:1A:70:BE"
+    interfaces:                           # physical interface list
+      - mac_address: "44:a8:42:14:ee:64"
+        speed: 1gb
+        features: ''
+      - mac_address: "44:a8:42:14:ee:65"
+        speed: 1gb
+        features: ''
+      - mac_address: "44:a8:42:14:ee:66"
+        speed: 1gb
+        features: ''
+      - mac_address: "44:a8:42:14:ee:67"
+        speed: 1gb
+        features: ''
+    fixed_ips:
+      admin: 10.10.0.14
+      mgmt: 192.168.101.14
+      public: 192.168.20.14
+########################################
+  - name: compute2
+    node: *nodeparas
+    disks: *disks_A
+    remote_management:
+      <<: *remote_params
+      address: 192.168.20.202
+      mac_address: "44:A8:42:1A:76:26"
+    interfaces:
+      - mac_address: "44:a8:42:14:cb:31"
+        speed: 1gb
+        features: ''
+      - mac_address: "44:a8:42:14:cb:32"
+        speed: 1gb
+        features: ''
+      - mac_address: "44:a8:42:14:cb:33"
+        speed: 1gb
+        features: ''
+      - mac_address: "44:a8:42:14:cb:34"
+        speed: 1gb
+        features: ''
+    fixed_ips:
+      admin: 10.20.0.15
+      mgmt: 192.168.101.15
+      public: 192.168.20.15
 ```
 
 *坑①*：如下图所示：
@@ -441,9 +447,108 @@ MAAS的dashboard会显示安装过程以及各节点的信息。
 
 ![安装过程](https://i.imgur.com/5U7FW5X.jpg)
 
+#### 2.2.3 修改虚拟机登录密码
 
+1）简单的修改密码
 
-#### 2.2.3 部署中出现的问题
+部署过程中生成的虚拟机只能使用ssh+key的方式登录，因此需要修改一下密码方便后续的登录，使用下面的命令修改密码
+
+```shell
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /var/lib/opnfv/mcp.rsa ubuntu@10.0.0.3 "sudo passwd root<<EOF
+r00tme
+r00tme
+EOF"
+```
+
+2）修改密码和运行ssh密码登录
+
+登录脚本准备`cat node_init.sh`
+
+```shell
+#########################################################################
+# File Name: ubuntu_init_conf.sh
+# Author: louie.long
+# Mail: ylong@biigroup.cn
+# Created Time: Thu 26 Oct 2017 11:09:05 AM CST
+# Description: 这个脚本用于修改新建ubuntu系统的配置，
+#              包括：root密码（r00tme），允许ssh密码登录
+#########################################################################
+#!/bin/sh -e
+
+sudo su
+
+########################################################################
+## Begin of check file exist and backup file
+#
+check_file_and_backup() {
+    if [ ! -f "$1" ]; then
+        echo "$1 is not exist"
+        return 0
+    else
+        cp $1 $1-backup`date +%y%m%d_%H%M`
+        return 1
+    fi
+}
+#
+## End of check file exist and backup file
+########################################################################
+
+########################################################################
+## Begin of modify ssh config
+#
+modify_ssh_conf() {
+    check_file_and_backup /etc/ssh/sshd_config
+    ret=$?
+    if [ $ret -eq 1 ]; then
+        sed -i 's/^.*PermitRootLogin.*$/PermitRootLogin yes/g' \
+            /etc/ssh/sshd_config
+        sed -i 's/^.*PasswordAuthentication.*$/PasswordAuthentication yes/g' \
+            /etc/ssh/sshd_config
+        service ssh restart
+    fi
+}
+#
+## End of modify ssh config
+########################################################################
+
+########################################################################
+## Begin of change root passwd to 'r00tme'
+#
+change_root_passwd()
+{
+passwd root<<EOF
+r00tme
+r00tme
+EOF
+}
+#
+## End of change root passwd to 'r00tme'
+########################################################################
+
+########################################################################
+## Begin of main
+#
+#set -x
+modify_ssh_conf
+change_root_passwd
+#
+## End of main
+########################################################################
+```
+
+然后运行以下命令后，即可直接使用密码进行ssh登录
+
+```shell
+ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /var/lib/opnfv/mcp.rsa ubuntu@10.0.0.2 < node_init.sh
+```
+
+各虚拟机的管理段（PXE/mgnt）IP目前只能在MAAS网页上查看，ctl段的IP可以在`fuel/mcp/deploy/images/pod_config.yml`中查看或在任意虚拟机的`/etc/hosts`中查看。
+
+#### 2.3 部署中出现的问题
+
+部署过程中如果发现不太正常的情况可以对比一下OPNFV官方[Jeklins](https://build.opnfv.org/ci/view/fuel/job/fuel-deploy-baremetal-daily-euphrates/)的构建历史日志，便于确认问题所在。
+
+![](https://i.imgur.com/pzsiLmn.jpg)
 
 1)部署超时
 
@@ -455,11 +560,28 @@ Dec 13 09:27:00 mas01 maas.node: [error] kvm01: Marking node failed: Node operat
 
 可以修改`mcp/patches/0010-maas-region-allow-timeout-override.patch`文件第46行适当延长deploy时间，如果延长时间仍然有问题这需要依据maas.log再次排查错误了。
 
+2)<span id="jump1">节点网卡名配置</span>
+
+*2017年12月21日更新*
+
+部署过程中脚本提示如下信息，经过对比官方的构建历史日志，如下信息输出是正常的，但是等待时间太长，就可能出现问题。
+
+```
+cmp002.baremetal-mcp-ocata-odl-ha.local:
+    Minion did not return. [Not connected]
+.kvm01.baremetal-mcp-ocata-odl-ha.local:
+    Minion did not return. [Not connected]
+kvm03.baremetal-mcp-ocata-odl-ha.local:
+    Minion did not return. [Not connected]
+```
+
+登录到相应节点（需要注意的是节点的登录与mas01的登录一样是使用密钥登录的，不能通过密码直接登录，因此需要在节点安装系统时就尝试登录进去修改密码，否则一旦出现上述错误可能没法通过ssh登录只能在终端输入用户密码登录）查看网卡信息，本次出现的问题是节点在自动配置网络后没有PXE/admin的IP，打开`/etc/network/interfaces`发现其配置的网卡名为`ethX`而节点的网卡名为`enoX`，因此需要修改部署PDF中idf-pod1.yaml中的网卡名称，
+
 
 
 ***未完待续***
 
-
+[返回文首](#jump0)
 
 参考文献：
 
