@@ -1,5 +1,5 @@
 ---
-title: openstack-images-password
+title: openstack中镜像的密码修改
 date: 2018-01-04 10:17:24
 tags: 
    - Openstack
