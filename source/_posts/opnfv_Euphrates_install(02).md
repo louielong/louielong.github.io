@@ -154,7 +154,7 @@ jumphost:
     arch: x86_64
     cpus: 2
     cpu_cflags: hasewell          # add values based on CFLAGS in GCC
-    cores: 8                      # physical cores, not including hyper-threads
+    cores: 4                      # physical cores, not including hyper-threads
     memory: 16G
   disks:                          # disk list
     - name: 'disk1'               # first disk
@@ -200,7 +200,7 @@ nodes:
       arch: x86_64
       cpus: 2
       cpu_cflags: hasewell        # add values based on CFLAGS in GCC
-      cores: 8                    # physical cores, not including hyper-threads
+      cores: 4                    # physical cores, not including hyper-threads
       memory: 32G
     disks: &disks_A               # disk list
       - name: 'disk1'             # first disk
@@ -425,7 +425,7 @@ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /var/lib/opnf
 
 可以查看安装过程的状态，尤其是mas01的裸机管理，如果相应的配置没有设置好需要在这里排错，在mas01的`/var/lib/maas`目录下（若无该目录说明Maas服务未安装，需要等待一段时间），当Maas服务安装后可以使用`tail -f /var/log/maas/maas.log`查看各节点的安装状态，同时可以登录Maas的web界面查看各节点的状态。登录方式有**两种**：
 
-1) jumphost中做NAT转发
+1) ~~jumphost中做NAT转发~~（此处配置有误未实现）
 
 ```shell
 iptables -t nat -A PREROUTING -d 192.168.20.5 -p tcp --dport 8000 -j DNAT --to-destination 10.20.0.3:80
@@ -544,7 +544,7 @@ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /var/lib/opnf
 
 各虚拟机的管理段（PXE/mgnt）IP目前只能在MAAS网页上查看，ctl段的IP可以在`fuel/mcp/deploy/images/pod_config.yml`中查看或在任意虚拟机的`/etc/hosts`中查看。
 
-#### 2.3 部署中出现的问题
+### 2.3 部署中出现的问题
 
 部署过程中如果发现不太正常的情况可以对比一下OPNFV官方[Jeklins](https://build.opnfv.org/ci/view/fuel/job/fuel-deploy-baremetal-daily-euphrates/)的构建历史日志，便于确认问题所在。
 
@@ -576,6 +576,10 @@ kvm03.baremetal-mcp-ocata-odl-ha.local:
 ```
 
 登录到相应节点（需要注意的是节点的登录与mas01的登录一样是使用密钥登录的，不能通过密码直接登录，因此需要在节点安装系统时就尝试登录进去修改密码，否则一旦出现上述错误可能没法通过ssh登录只能在终端输入用户密码登录）查看网卡信息，本次出现的问题是节点在自动配置网络后没有PXE/admin的IP，打开`/etc/network/interfaces`发现其配置的网卡名为`ethX`而节点的网卡名为`enoX`，因此需要修改部署PDF中idf-pod1.yaml中的网卡名称，
+
+3）openstack的dashboard无法访问
+
+部署完成后再访问dashboard时出现无法访问的情况，查找了一下发现是代理虚拟机prx不正常，尝试ssh登录prx，无法访问（原因是代理虚拟机内没有传入密钥）。登录到相应的控制节点上使用virsh list查看虚拟机名称，尝试通过`virsh reboot prx02.baremetal-mcp-ocata-odl-ha.local`后发现可以访问dashboard。至于prx的访问可以使用`virsh console prx02.baremetal-mcp-ocata-odl-ha.local`免密访问。
 
 
 
