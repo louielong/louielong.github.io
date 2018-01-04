@@ -12,7 +12,7 @@ description:
   - OPNFV Euphrates
 summary_img:
   - https://i.imgur.com/yNc6FFv.jpg
-top: 100
+top:
 ---
 
 ## 1 Euphrates新特性介绍
