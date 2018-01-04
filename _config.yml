@@ -73,5 +73,5 @@ deploy:
     type: git
     repo: https://github.com/louielong/louielong.github.io.git
     branch: master       #这里填写分支
-    message:  修改euphrates裸机安装 PDF中idf-pod1的描述，增加部署问题2 #自定义提交信息 (默认为 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }})
+    message: 增加openstack 镜像密码修改的文章 #自定义提交信息 (默认为 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }})
 
