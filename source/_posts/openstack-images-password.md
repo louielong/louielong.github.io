@@ -13,6 +13,8 @@ description:
 summary_img:
 ---
 
+<span id="jump0">开始</span>
+
 ## 1 前言
 
 本文主要讲解如何修改openstack中镜像的密码以及开启镜像的ssh登录。
@@ -131,6 +133,12 @@ centos官方的镜像地址为：http://cloud.centos.org/centos/7/images/
 
 centos的镜像默认用户是"centos"，处理方式和ubuntu一样，可以通过guestfish或者在创建实例时导入脚本。
 
+同样是使用guetsfish打开镜像然后修改`/etc/cloud/cloud.cfg`文件，如下图所示：
+
+![](https://i.imgur.com/mdfElHS.jpg)
+
+![](https://i.imgur.com/Hmlwt2w.jpg)
+
 
 
 【参考链接】
@@ -141,7 +149,7 @@ centos的镜像默认用户是"centos"，处理方式和ubuntu一样，可以通
 
 3）[openstack镜像密码修改](https://xiexianbin.cn/openstack/2017/03/23/OpenStack-image-password-modification)
 
-
+[返回文首](#jump0)
 
 
 
