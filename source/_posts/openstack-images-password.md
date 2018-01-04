@@ -123,7 +123,13 @@ service ssh restart
 
 ![openstack userdata](https://i.imgur.com/wQ0HrVd.jpg)
 
-此外还有修改openstack的nova.conf和dashboard配置的方式来加入修改密码选项[3]，由于openstack的版本修改该种方式不一定可行，试具体版本处理。
+此外还有修改openstack的nova.conf和dashboard配置的方式来加入修改密码选项[3]，由于openstack的版本修改该种方式不一定可行，视具体版本处理。
+
+## 2.3 centos镜像
+
+centos官方的镜像地址为：http://cloud.centos.org/centos/7/images/
+
+centos的镜像默认用户是"centos"，处理方式和ubuntu一样，可以通过guestfish或者在创建实例时导入脚本。
 
 
 
