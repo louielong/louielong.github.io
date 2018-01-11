@@ -542,7 +542,7 @@ change_root_passwd
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /var/lib/opnfv/mcp.rsa ubuntu@10.0.0.2 < node_init.sh
 ```
 
-各虚拟机的管理段（PXE/mgnt）IP目前只能在MAAS网页上查看，ctl段的IP可以在`fuel/mcp/deploy/images/pod_config.yml`中查看或在任意虚拟机的`/etc/hosts`中查看。
+各虚拟机的IP可以在`fuel/mcp/deploy/images/pod_config.yml`中查看或在任意虚拟机的`/etc/hosts`中查看，登陆[http:/](http://docs.opnfv.org/)/<Proxy VIP>:8090页面也可查看各节点及相关服务的信息，`Proxy vip`与openstack的dashboard访问IP一致。
 
 ### 2.3 部署中出现的问题
 
