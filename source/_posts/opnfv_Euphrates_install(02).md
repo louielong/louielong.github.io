@@ -31,13 +31,15 @@ top:
 
 Fuel安装代码仓库：https://git.opnfv.org/fuel
 
+**Note**：部署时一定要选用最新的`stable/euphrates`稳定分支代码，该分支会持续修改部分部署BUG。
+
 ### 2.1 POD配置文件-PDF 
 
 官方给的参考POD文件是Fuel仓库里的LF(Linux Foundation)的pod1在`fuel/mcp/config/labs/local`目录下，接下来笔者以自己部署的baremetal POD来讲解PDF的内容。PDF采用Yaml格式，包含两部分文件，一部分是IDF用来描述~~部署工具节点也叫jumphost~~（这个地方的理解错误导致我出现了文末的[部署问题2](#jump1)）节点的网络描述，内容相对简单，**需要注意**的是网卡名应与**节点**的网卡名称一致，一般是enoX或enpXs0，如果使用了DPDK则需要正确填写busaddr信息；另一部分是描述整个OPNFV各节点的详细网络、硬件资源等配置信息内容相对多。不熟悉Yaml格式的可以先预习一下Yaml格式：http://www.ruanyifeng.com/blog/2016/07/yaml.html
 
 本次安装的PDF文件下载链接为：[idf-pod1.yaml](https://wiki.opnfv.org/download/attachments/10296292/idf-pod1.yaml?api=v2)，[pod1.yaml](https://wiki.opnfv.org/download/attachments/10296292/pod1.yaml?api=v2)
 
-`fuel/mcp/config/labs/bii/idf-pod1.yaml`的内容如下，网桥的配置与后续安装执行的命令相关，名字可以任取但是需要与安装时的命令一致。
+`fuel/mcp/config/labs/bii/idf-pod1.yaml`的内容如下，网桥的配置与后续安装执行的命令相关，网桥名字可以任取但是需要与安装时的命令参数保持一致。
 
 ```yaml
 ##############################################################################
@@ -88,11 +90,11 @@ idf:
 
 - *oob*指的的服务器的电源管理IP地址，Fuel安装过程中使用了Maas服务需要通过该地址去对服务器进行裸机管理，包括重启、开关机管理的，Maas是[ubuntu社区](https://docs.ubuntu.com/maas/2.1/en/)开发的裸机管理工具支持IPMI、虚拟机管理等，有兴趣的可以研究一下。这里也提一点这是NFV架构中针对PIM（Physical Infrastructure Management）物理基础设施的管理与Openstack的VIM(Virtual Infrastructure Management)虚拟设施管理相对。本次安装的服务器使用的是IPMI的2.0版本，这里有一个坑①是注意查看服务器的IPMI LAN 是否启用，对于DELL服务器在`iDRAC config->networking->IPMI config`，如果未开启安装时将会出现mas01节点无法连接其他节点（Ps. 这个坑我爬了三天才发现）；
 
-- *interface*参数指的的该段网络使用的是哪个网卡，与后面的网卡顺序以及mac地址匹配，但是oob的interface不受此参数控制；
+- *interface*参数指的的该段网络使用的是哪个网卡，与**idf-pod1.yaml**中的`interfaces`网卡顺序以及`busaddr`严格匹配，但是oob的interface不受此参数控制；
 
 - *vlan*标记该网络是否有vlan tag，如果没有则用'native'标记；
 
-- *remote_params*是前面提到的IPMI管理，填入相应的IP、用户名、密码、mac地址，实际安装中该项的mac地址并没有使用到，该项的另一个参数是AMT，是因特尔的远端管理方式；
+- *remote_params*是前面提到的IPMI管理，填入相应的IP、用户名、密码、mac地址，实际安装中该项的mac地址并没有使用到，该项的另一个参数是AMT，是英特尔的远端管理方式；
 
 - 网卡特征中支持的参数是sriov和dpdk，笔者使用的服务器较老因此没有这些特性就选择空着；
 
@@ -386,7 +388,9 @@ iface eth2 inet manual
 #iface eth3 inet manual
 
 auto br-pxe
-iface br-pxe inet manual
+iface br-pxe inet static
+address 10.20.0.1
+netmask 255.255.255.0
 bridge_ports eth0
 bridge_fd 0
 
@@ -404,7 +408,7 @@ br-ctl		8000.000c2948cc74	no		    eth2
 br-pxe		8000.000c2948cc60	no		    eth0
 ```
 
-*PS*：之前采用过在EXSI虚拟机之上安装ubuntu16.04作为jumphost然后进行部署，部署过程中出现过mas01的dhcp应答node节点无法收到的情况导致安装一直不成功，最后不得使用裸机安装ubuntu16.04然后在进行部署（这个坑爬了一个星期，因为一直怀疑是自己的网桥配置错误）。
+*PS*：之前采用过在EXSI虚拟机之上安装ubuntu16.04作为jumphost然后进行部署，部署过程中出现过mas01的dhcp应答node节点无法收到的情况导致安装一直不成功，最后不得使用裸机安装ubuntu16.04然后在进行部署（这个坑爬了一个星期，因为一直怀疑是自己的网桥配置错误），这里并不确认是否在虚拟机上一定无法部署成功只是写出来留意一下。
 
 #### 2.2.2 运行部署脚本
 
@@ -425,10 +429,14 @@ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /var/lib/opnf
 
 可以查看安装过程的状态，尤其是mas01的裸机管理，如果相应的配置没有设置好需要在这里排错，在mas01的`/var/lib/maas`目录下（若无该目录说明Maas服务未安装，需要等待一段时间），当Maas服务安装后可以使用`tail -f /var/log/maas/maas.log`查看各节点的安装状态，同时可以登录Maas的web界面查看各节点的状态。登录方式有**两种**：
 
-1) ~~jumphost中做NAT转发~~（此处配置有误未实现）
+1) jumphost中做NAT转发
+
+关于nat转发不熟悉的可以查看这篇[博客](http://xstarcd.github.io/wiki/Linux/iptables_forward_internetshare.html)，博客中关于ipatables讲解十分详细。本文中192.168.20.5为jumphost的public IP，既可以访问外网也可以与局域网其他主机访问，10.20.0.1/24为jumphost 部署OPNFV环境的PXE网桥地址，仅限OPNFV环境的各节点访问。
 
 ```shell
-iptables -t nat -A PREROUTING -d 192.168.20.5 -p tcp --dport 8000 -j DNAT --to-destination 10.20.0.3:80
+iptables -t nat -A PREROUTING -d 192.168.20.5 -p tcp --dport 80 -j DNAT --to 10.20.0.3:80
+iptables -A FORWARD -d 10.20.0.3 -p tcp --dport 80 -j ACCEPT
+iptables -t nat -A POSTROUTING -d 10.20.0.3 -p tcp --dport 80 -j SNAT --to 10.20.0.1
 ```
 
 在本机上访问http://192.168.20.5:8000/MAAS
@@ -542,7 +550,7 @@ change_root_passwd
 ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /var/lib/opnfv/mcp.rsa ubuntu@10.0.0.2 < node_init.sh
 ```
 
-各虚拟机的IP可以在`fuel/mcp/deploy/images/pod_config.yml`中查看或在任意虚拟机的`/etc/hosts`中查看，登陆[http:/](http://docs.opnfv.org/)/<Proxy VIP>:8090页面也可查看各节点及相关服务的信息，`Proxy vip`与openstack的dashboard访问IP一致。
+各虚拟机的IP可以在`fuel/mcp/deploy/images/pod_config.yml`中查看或在任意虚拟机的`/etc/hosts`中查看，登陆http://<Proxy VIP>:8090页面也可查看各节点及相关服务的信息，`Proxy vip`与openstack的dashboard访问IP一致。
 
 ### 2.3 部署中出现的问题
 
@@ -560,6 +568,8 @@ Dec 13 09:27:00 mas01 maas.node: [error] kvm01: Marking node failed: Node operat
 
 可以修改`mcp/patches/0010-maas-region-allow-timeout-override.patch`文件第46行适当延长deploy时间，如果延长时间仍然有问题这需要依据maas.log再次排查错误了。
 
+*2018年1月20日更新*：官方已经将此处的部署时间做了适当延长，`git show f25c19f7a3f90`查看。
+
 2)<span id="jump1">节点网卡名配置</span>
 
 *2017年12月21日更新*
@@ -575,7 +585,7 @@ kvm03.baremetal-mcp-ocata-odl-ha.local:
     Minion did not return. [Not connected]
 ```
 
-登录到相应节点（需要注意的是节点的登录与mas01的登录一样是使用密钥登录的，不能通过密码直接登录，因此需要在节点安装系统时就尝试登录进去修改密码，否则一旦出现上述错误可能没法通过ssh登录只能在终端输入用户密码登录）查看网卡信息，本次出现的问题是节点在自动配置网络后没有PXE/admin的IP，打开`/etc/network/interfaces`发现其配置的网卡名为`ethX`而节点的网卡名为`enoX`，因此需要修改部署PDF中idf-pod1.yaml中的网卡名称，
+登录到相应节点（~~需要注意的是节点的登录与mas01的登录一样是使用密钥登录的，不能通过密码直接登录，因此需要在节点安装系统时就尝试登录进去修改密码，否则一旦出现上述错误可能没法通过ssh登录只能在终端输入用户密码登录~~，此时还可以通过在cfg01节点上用salt-stack的命令来查看各节点信息，如`salt -C "ctl* or cmp*" cmd.run "ifconfig -a"`）查看网卡信息，本次出现的问题是节点在自动配置网络后没有PXE/admin的IP，打开`/etc/network/interfaces`发现其配置的网卡名为`ethX`而节点的网卡名为`enoX`，因此需要修改部署PDF中idf-pod1.yaml中的网卡名称，
 
 3）openstack的dashboard无法访问
 
@@ -583,7 +593,9 @@ kvm03.baremetal-mcp-ocata-odl-ha.local:
 
 
 
-***未完待续***
+**安装完成就可以愉快的玩耍了，初次安装会有一些麻烦，一旦安装完成后续的重新部署就会简单许多。**
+
+
 
 [返回文首](#jump0)
 
