@@ -88,7 +88,7 @@ root@ubuntu:~# apt-get install -y apt-mirror
 
 2.2 配置apt-mirror
 
-本次安装的ubuntu为16.04，设置ubuntu源为清华源（可以根据网速设置自己常用或访问较快的源），由于只需要64位的安装软件，这里设置近下载64位的，同时也可以根据自己的需求修改源下载路径位置等参数。
+本次安装的ubuntu为**16.04**，设置ubuntu源为清华源（可以根据网速设置自己常用或访问较快的源），由于只需要64位的安装软件，这里设置近下载64位的，同时也可以根据自己的需求修改源下载路径位置等参数。
 
 ```shell
 root@ubuntu:~# cat /etc/apt/mirror.list 
@@ -158,12 +158,11 @@ Processing tranlation indexes: [TTTT]
 配置本机源文件
 
 ```shell
- root@ubuntu:~# cat /etc/apt/sources.list
-deb [arch=amd64] file:///var/spool/apt-mirror/mirror/mirrors.tuna.tsinghua.edu.cn/ubuntu trusty main restricted universe multiverse
-deb [arch=amd64] file:///var/spool/apt-mirror/mirror/mirrors.tuna.tsinghua.edu.cn/ubuntu trusty-security main restricted universe multiverse
-deb [arch=amd64] file:///var/spool/apt-mirror/mirror/mirrors.tuna.tsinghua.edu.cn/ubuntu trusty-updates main restricted universe multiverse
-deb [arch=amd64] file:///var/spool/apt-mirror/mirror/mirrors.tuna.tsinghua.edu.cn/ubuntu trusty-proposed main restricted universe multiverse
-deb [arch=amd64] file:///var/spool/apt-mirror/mirror/mirrors.tuna.tsinghua.edu.cn/ubuntu trusty-backports main restricted universe multiverse
+root@ubuntu:~# cat /etc/apt/sources.list
+deb [arch=amd64] file:///var/spool/apt-mirror/mirror/mirrors.tuna.tsinghua.edu.cn/ubuntu xenial main restricted universe multiverse
+deb [arch=amd64] file:///var/spool/apt-mirror/mirror/mirrors.tuna.tsinghua.edu.cn/ubuntu xenial-updates main restricted universe multiverse
+deb [arch=amd64] file:///var/spool/apt-mirror/mirror/mirrors.tuna.tsinghua.edu.cn/ubuntu xenial-backports main restricted universe multiverse
+deb [arch=amd64] file:///var/spool/apt-mirror/mirror/mirrors.tuna.tsinghua.edu.cn/ubuntu xenial-security main restricted universe multiverse
 ```
 
 2.4 局域网源配置
@@ -187,12 +186,11 @@ deb [arch=amd64] file:///var/spool/apt-mirror/mirror/mirrors.tuna.tsinghua.edu.c
 修改局域网内主机的ubuntu源，同时指定源为64位
 
 ```shell
- root@ubuntu:~# cat /etc/apt/sources.list
-deb [arch=amd64] http://192.168.4.170/ubuntu trusty main restricted universe multiverse
-deb [arch=amd64] http://192.168.4.170/ubuntu trusty-security main restricted universe multiverse
-deb [arch=amd64] http://192.168.4.170/ubuntu trusty-updates main restricted universe multiverse
-deb [arch=amd64] http://192.168.4.170/ubuntu trusty-proposed main restricted universe multiverse
-deb [arch=amd64] http://192.168.4.170/ubuntu trusty-backports main restricted universe multiverse
+root@ubuntu:~# cat /etc/apt/sources.list
+deb [arch=amd64] http://192.168.4.170/ubuntu/ xenial main restricted universe multiverse
+deb [arch=amd64] http://192.168.4.170/ubuntu/ xenial-updates main restricted universe multiverse
+deb [arch=amd64] http://192.168.4.170/ubuntu/ xenial-backports main restricted universe multiverse
+deb [arch=amd64] http://192.168.4.170/ubuntu/ xenial-security main restricted universe multiverse
 ```
 
 
