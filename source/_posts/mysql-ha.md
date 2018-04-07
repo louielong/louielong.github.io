@@ -1,5 +1,5 @@
 ---
-title: MariaDB双主复制 + keepalived故障转移实现
+title: MySQL双主复制 + keepalived故障转移实现
 tags:
   - mysql
   - keepalived
