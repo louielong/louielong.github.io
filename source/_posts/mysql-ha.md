@@ -101,7 +101,23 @@ sed -i "/^\[mysqld\]/a\default-time-zone = \'+8:00\'" /etc/mysql/mysql.conf.d/my
 
 1）修改MySQL-HA-1服务器数据库配置
 
-这里将原配置文件的注释屏蔽掉
+主要修改的地方如下
+
+```shell
+bind-address		= ::    # 指定允许数据库访问的IP，"::"表明允许v4和v6访问
+
+server-id		= 1                     # 指定mysql的编号 该编号作为数据库集群的识别号因此不能冲突
+log_bin			= /var/log/mysql/mysql-bin.log   # 开启二进制log文件
+binlog_format           = mixed
+relay-log               = relay-bin
+relay-log-index         = slave-relay-bin.index
+auto-increment-offset   = 2     # 设置自增长偏移，这里有两个数据库因此每次增长为2
+auto-increment-increment = 1    # 设置自增长起始
+binlog_do_db            = test  # 设置需要同步的数据库名称
+binlog_do_db            = test1
+```
+
+完整的配置文件如下，这里将原配置文件的注释屏蔽掉
 
 
 ```shell
@@ -121,7 +137,7 @@ datadir		= /var/lib/mysql
 tmpdir		= /tmp
 lc-messages-dir	= /usr/share/mysql
 skip-external-locking
-bind-address		= 0.0.0.0  # 指定允许数据库访问的IP
+bind-address		= ::
 key_buffer_size		= 16M
 max_allowed_packet	= 16M
 thread_stack		= 192K
@@ -129,19 +145,19 @@ thread_cache_size       = 8
 myisam-recover-options  = BACKUP
 query_cache_limit	= 1M
 query_cache_size        = 16M
-general_log_file        = /var/log/mysql/mysql.log # 指定生成log文件位置
+general_log_file        = /var/log/mysql/mysql.log
 general_log             = 1
 log_error = /var/log/mysql/error.log
-server-id		= 1                     # 指定mysql的编号 该编号作为数据库集群的识别号因此不能冲突
-log_bin			= /var/log/mysql/mysql-bin.log   # 开启二进制log文件
+server-id		= 1
+log_bin			= /var/log/mysql/mysql-bin.log
 binlog_format           = mixed
 expire_logs_days        = 10
 max_binlog_size         = 100M
 relay-log               = relay-bin
 relay-log-index         = slave-relay-bin.index
-auto-increment-offset   = 2     # 设置自增长偏移，这里有两个数据库因此每次增长为2
-auto-increment-increment = 1    # 设置自增长起始
-binlog_do_db            = test  # 设置需要同步的数据库名称
+auto-increment-offset   = 2
+auto-increment-increment = 1
+binlog_do_db            = test
 binlog_do_db            = test1
 ```
 
@@ -168,7 +184,7 @@ datadir		= /var/lib/mysql
 tmpdir		= /tmp
 lc-messages-dir	= /usr/share/mysql
 skip-external-locking
-bind-address		= 0.0.0.0
+bind-address		= ::
 key_buffer_size		= 16M
 max_allowed_packet	= 16M
 thread_stack		= 192K
@@ -179,7 +195,7 @@ query_cache_size        = 16M
 general_log_file        = /var/log/mysql/mysql.log
 general_log             = 1
 log_error = /var/log/mysql/error.log
-server-id		= 2
+server-id		= 2            # server id设置为2
 log_bin			= /var/log/mysql/mysql-bin.log
 binlog_format           = mixed
 expire_logs_days        = 10
@@ -187,12 +203,12 @@ max_binlog_size         = 100M
 relay-log               = relay-bin
 relay-log-index         = slave-relay-bin.index
 auto-increment-offset   = 2
-auto-increment-increment = 2
+auto-increment-increment = 2    # 增长起始设置为2
 binlog_do_db            = test
 binlog_do_db            = test1
 ```
 
-修改完成后两个节点的数据库都需要重启
+修改完成后**两个节点**的数据库都需要重启
 
 ```shell
 service mysql restart
@@ -692,7 +708,9 @@ mysql> show variables like 'server_id';
 
 说明在客户端访问VIP地址，由HA-2主机提供响应的，当前状态下HA-2充当主服务器。
 
+【Note】
 
+经过测试在纯IPv6的环境下上述HA依然可以正常运行。
 
 
 
