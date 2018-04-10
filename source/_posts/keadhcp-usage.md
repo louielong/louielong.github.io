@@ -84,7 +84,7 @@ kea的配置文件是json格式，配置完kea可以先使用[json在线解析](
     "interfaces-config": {
         // 1. 指定服务器要监听哪张网卡的DHCP消息，可以指定多张网卡。
         // 2.允许使用*，如："interfaces": ["*"]，表示监听所有网卡
-        "interfaces": ["eth0"],
+        "interfaces": ["eth1/2001:db8:1::2"],
         // 默认raw，表示处理所有报文
         // udp：处理udp报文
         "dhcp-socket-type": "udp"，
@@ -214,6 +214,8 @@ kea_verbose=no
 root@ubuntu:~# keactrl start
 ```
 
+首次运行时可能出现kea库找不到的错误，执行`ldconfig`命令即可。
+
 若需要指定重启v6或v4则需要添加相应参数
 
 ```shell
@@ -221,6 +223,29 @@ root@ubuntu:~# keactrl start -s dhcpv6
 ```
 
 关于如何配置KEA的钩子模式可以查看：[传送门](https://github.com/zorun/kea-hook-runscript)
+
+测试
+
+使用kea自带的perfdhcp性能测试工具，可以进行dhcp客户端模拟的测试
+
+1. 查看每秒能处理多少个discover(v4)或者solicit(v6)消息 
+2. 查看每秒能处理处理4-way packet exchanges(v4 - DORA, v6 - SARR)(即一个完成的请求动态ip的过程)
+
+
+```shell
+root@ubuntu:~# perfdhcp -l eth1 -6 -R 100
+```
+
+使用上述命令申请100个v6地址。
+
+| 参数  | 含义             |
+| ----- | ---------------- |
+| -l    | 指定申请IP接口   |
+| -4/-6 | 指定申请的IP类型 |
+| -R    | 模拟客户端数量   |
+
+
+
 
 ## 4 其他
 
