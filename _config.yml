@@ -95,6 +95,13 @@ symbols_count_time:
   total_symbols: true
   total_time: true
 
+# Algolia search
+algolia:
+  applicationID: 'SBFCV05R39'
+  apiKey: '90cf6dcc0478b56b8278a21230864064'
+  indexName: 'my hexo search'
+  chunkSize: 5000
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
