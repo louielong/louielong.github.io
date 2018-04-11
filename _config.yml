@@ -52,6 +52,19 @@ index_generator:
   per_page: 10
   order_by: -date
   
+
+ndex_generator:
+  per_page: 10
+
+archive_generator:
+  per_page: 20
+  yearly: true
+  monthly: true
+
+tag_generator:
+  per_page: 10
+
+
 # Category & Tag
 default_category: uncategorized
 category_map:
