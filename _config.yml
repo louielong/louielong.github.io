@@ -7,7 +7,7 @@ title: Louie's Blog
 subtitle: O ever youthful, O ever powerful.
 description: 一只会说666的程序媛鼓励师
 author: Louie Long
-language: zh-Hans
+language: zh-CN
 timezone: Asia/Shanghai
 
 # URL
@@ -87,6 +87,13 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 #theme: landscape
 theme: next
+
+# word count
+symbols_count_time:
+  symbols: true
+  time: true
+  total_symbols: true
+  total_time: true
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
