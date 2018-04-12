@@ -2,6 +2,15 @@
 # Theme Core Configuration Settings
 # ---------------------------------------------------------------
 
+
+# ---------------------------------------------------------------
+# louie customed stye
+# 文章末尾的主题样式
+passage_end_tag:
+  enabled: true
+
+# ---------------------------------------------------------------
+
 # If false, merge configs from `_data/next.yml` into default configuration (rewrite).
 # If true, will fully override default configuration by options from `_data/next.yml` (override). Only for NexT settings.
 # And if true, all config from default NexT `_config.yml` must be copied into `next.yml`. Use if you know what you are doing.
