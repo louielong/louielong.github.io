@@ -7,7 +7,7 @@ title: Louie's Blog
 subtitle: O ever youthful, O ever powerful.
 description: 一只会说666的程序媛鼓励师
 author: Louie Long
-language: zh-Hans
+language: zh-CN
 timezone: Asia/Shanghai
 
 # URL
@@ -42,6 +42,28 @@ highlight:
   line_number: true
   auto_detect: false
   tab_replace:
+  
+# Home page setting
+# path: Root path for your blogs index page. (default = '')
+# per_page: Posts displayed per page. (0 = disable pagination)
+# order_by: Posts order. (Order by date descending by default)
+index_generator:
+  path: ''
+  per_page: 10
+  order_by: -date
+  
+
+ndex_generator:
+  per_page: 10
+
+archive_generator:
+  per_page: 20
+  yearly: true
+  monthly: true
+
+tag_generator:
+  per_page: 10
+
 
 # Category & Tag
 default_category: uncategorized
@@ -65,7 +87,20 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 #theme: landscape
 theme: next
-#theme: indigo
+
+# word count
+symbols_count_time:
+  symbols: true
+  time: true
+  total_symbols: true
+  total_time: true
+
+# Algolia search
+algolia:
+  applicationID: 'SBFCV05R39'
+  apiKey: '90cf6dcc0478b56b8278a21230864064'
+  indexName: 'my hexo search'
+  chunkSize: 5000
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -73,5 +108,4 @@ deploy:
     type: git
     repo: https://github.com/louielong/louielong.github.io.git
     branch: master       #这里填写分支
-    message: 新增kea测试方法 #自定义提交信息 (默认为 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }})
-
+    message: #自定义提交信息 (默认为 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }})

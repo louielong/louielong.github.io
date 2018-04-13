@@ -1,20 +1,74 @@
-<div class="copyright" >
-  {% set current = date(Date.now(), "YYYY") %}
-  &copy; {% if theme.since and theme.since != current %} {{ theme.since }} - {% endif %}
-  <span itemprop="copyrightYear">{{ current }}</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
+<div class="copyright">{#
+#}{% set current = date(Date.now(), "YYYY") %}{#
+#}&copy; {% if theme.footer.since and theme.footer.since != current %}{{ theme.footer.since }} &mdash; {% endif %}{#
+#}<span itemprop="copyrightYear">{{ current }}</span>
+  <span class="with-love" id="animate"> 
+    <i class="fa fa-{{ theme.footer.icon.name }}"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">{{ config.author }}</span>
+  <span class="author" itemprop="copyrightHolder">{{ theme.footer.copyright || config.author }}</span>
+
+  {% if config.symbols_count_time.total_symbols %}
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    {% if theme.symbols_count_time.item_text_total %}
+      <span class="post-meta-item-text">{{ __('post.total_symbols')  + __('symbol.colon') }}</span>
+    {% endif %}
+    <span title="{{ __('post.total_symbols') }}">{#
+    #}{{ symbolsCountTotal(site) }}{#
+  #}</span>
+  {% endif %}
+
+  {% if config.symbols_count_time.total_time %}
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    {% if theme.symbols_count_time.item_text_total %}
+      <span class="post-meta-item-text">{{ __('post.total_time')  + __('symbol.colon') }}</span>
+    {% endif %}
+    <span title="{{ __('post.total_time') }}">{#
+    #}{{ symbolsTimeTotal(site, theme.symbols_count_time.awl, theme.symbols_count_time.wpm) }}{#
+  #}</span>
+  {% endif %}
+
+  {# 此位置插入以下代码 #}
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <span id="busuanzi_container_site_pv">
+  | 本站总访问量<span style="color:#FA8072" id="busuanzi_value_site_pv"></span>次
+  </span>
+  <span id="busuanzi_container_site_uv">
+  | 本站访客数<span style="color:#FA8072" id="busuanzi_value_site_uv"></span>人次
+  </span>
 </div>
 
-<div class="powered-by">
-  {{ __('footer.powered', '<a rel="external nofollow" class="theme-link" href="https://hexo.io">Hexo</a>') }}
-</div>
+{% if theme.seo %}
+  {% set nofollow = ' rel="external nofollow"' %}
+{% endif %}
 
-<div class="theme-info">
-  {{ __('footer.theme') }} -
-  <a rel="external nofollow" class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.{{ theme.scheme }}
-  </a>
-</div>
+{% if theme.footer.powered %}
+  <div class="powered-by">{#
+  #}{{ __('footer.powered', '<a class="theme-link" target="_blank"' + nofollow + ' href="https://hexo.io">Hexo</a>') }}{#
+#}</div>
+{% endif %}
+
+{% if theme.footer.powered and theme.footer.theme.enable %}
+  <span class="post-meta-divider">|</span>
+{% endif %}
+
+{% if theme.footer.theme.enable %}
+  <div class="theme-info">{#
+  #}{{ __('footer.theme') }} &mdash; {#
+  #}<a class="theme-link" target="_blank"{{ nofollow }} href="https://github.com/theme-next/hexo-theme-next">{#
+    #}NexT.{{ theme.scheme }}{#
+  #}</a>{% if theme.footer.theme.version %} v{{ theme.version }}{% endif %}{#
+#}</div>
+{% endif %}
+
+{% if theme.footer.custom_text %}
+  <div class="footer-custom">{#
+  #}{{ theme.footer.custom_text }}{#
+#}</div>
+{% endif %}
