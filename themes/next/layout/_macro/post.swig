@@ -261,6 +261,12 @@
             </div>
           {% endif %}
 
+          {% if post.summary_img  %}
+            <div class="out-img-topic">
+             <img src={{ post.summary_img }} class="img-topic">
+            </div>
+          {% endif %}
+
           {% if post.description and (not theme.excerpt_description or not is_index) %}
               <div class="post-description">{#
                 #}{{ post.description }}{#
