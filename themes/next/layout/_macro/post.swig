@@ -342,17 +342,11 @@
     {% endif %}
 
     {# louie add 2018-04-12 #}
-    <div>
-        {% if not is_index %}
-        {% include 'passage-end-tag.swig' %}
-        {% endif %}
-    </div>
-
-    <div>
-      {% if not is_index %}
-      {% include 'custome-cc.swig' %}
-      {% endif %}
-    </div>
+    {% if not is_index %}
+        <div>
+            {% include 'passage-end-tag.swig' %}
+        </div>
+    {% endif %}
     {# louie add 2018-04-12 #}
 
     {#####################}
@@ -370,6 +364,12 @@
         {% include 'reward.swig' %}
       </div>
     {% endif %}
+
+      {% if not is_index %}
+        <div>
+            {% include 'custome-cc.swig' %}
+        </div>
+      {% endif %}
 
     {% if theme.post_copyright.enable and not is_index %}
       <div>
