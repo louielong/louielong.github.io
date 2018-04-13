@@ -341,6 +341,20 @@
       {% include 'post-related.swig' with { post: post } %}
     {% endif %}
 
+    {# louie add 2018-04-12 #}
+    <div>
+        {% if not is_index %}
+        {% include 'passage-end-tag.swig' %}
+        {% endif %}
+    </div>
+
+    <div>
+      {% if not is_index %}
+      {% include 'custome-cc.swig' %}
+      {% endif %}
+    </div>
+    {# louie add 2018-04-12 #}
+
     {#####################}
     {### END POST BODY ###}
     {#####################}
@@ -362,20 +376,6 @@
         {% include 'post-copyright.swig' with { post: post } %}
       </div>
     {% endif %}
-
-    {# louie add 2018-04-12 #}
-    <div>
-        {% if not is_index %}
-        {% include 'passage-end-tag.swig' %}
-        {% endif %}
-    </div>
-
-    <div>
-      {% if not is_index %}
-      {% include 'custome-cc.swig' %}
-      {% endif %}
-    </div>
-    {# louie add 2018-04-12 #}
 
     <footer class="post-footer">
       {% if post.tags and post.tags.length and not is_index %}
