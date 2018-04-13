@@ -369,6 +369,12 @@
         {% include 'passage-end-tag.swig' %}
         {% endif %}
     </div>
+
+    <div>
+      {% if not is_index %}
+      {% include 'custome-cc.swig' %}
+      {% endif %}
+    </div>
     {# louie add 2018-04-12 #}
 
     <footer class="post-footer">
