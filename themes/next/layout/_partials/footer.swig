@@ -32,6 +32,16 @@
     #}{{ symbolsTimeTotal(site, theme.symbols_count_time.awl, theme.symbols_count_time.wpm) }}{#
   #}</span>
   {% endif %}
+
+  {# 此位置插入以下代码 #}
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <span id="busuanzi_container_site_pv">
+  | 本站总访问量<span style="color:#FA8072" id="busuanzi_value_site_pv"></span>次
+  </span>
+  <span id="busuanzi_container_site_uv">
+  | 本站访客数<span style="color:#FA8072" id="busuanzi_value_site_uv"></span>人次
+  </span>
 </div>
 
 {% if theme.seo %}
