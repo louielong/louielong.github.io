@@ -108,4 +108,4 @@ deploy:
     type: git
     repo: https://github.com/louielong/louielong.github.io.git
     branch: master       #这里填写分支
-    message: #自定义提交信息 (默认为 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }})
+    message: upgrade my hexo to 1.0 #(默认为 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }})
