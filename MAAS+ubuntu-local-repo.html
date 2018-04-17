@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/favicon-48x48.ico?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon-32x32.ico?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon-16x16.ico?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/uploads/favicon-48x48.ico?v=6.1.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: 'SBFCV05R39',
+      apiKey: '90cf6dcc0478b56b8278a21230864064',
+      indexName: 'my hexo search',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="MAAS安装使用以及ubuntu私有源环境搭建">
+<meta name="keywords" content="MAAS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MAAS+ubuntu私有源环境搭建">
+<meta property="og:url" content="https://louielong.github.io/MAAS+ubuntu-local-repo.html">
+<meta property="og:site_name" content="Louie&#39;s Blog">
+<meta property="og:description" content="MAAS安装使用以及ubuntu私有源环境搭建">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://assets.ubuntu.com/v1/33b96a7f-maas-logo.svg">
+<meta property="og:image" content="https://i.imgur.com/mB3EK4K.jpg">
+<meta property="og:image" content="https://i.imgur.com/tXMsQWz.jpg">
+<meta property="og:image" content="https://i.imgur.com/gcsXtgW.jpg">
+<meta property="og:image" content="https://i.imgur.com/0pPmBOZ.jpg">
+<meta property="og:image" content="https://i.imgur.com/C2nozbq.jpg">
+<meta property="og:updated_time" content="2018-04-13T09:32:24.579Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MAAS+ubuntu私有源环境搭建">
+<meta name="twitter:description" content="MAAS安装使用以及ubuntu私有源环境搭建">
+<meta name="twitter:image" content="https://assets.ubuntu.com/v1/33b96a7f-maas-logo.svg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Louie's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="https://louielong.github.io/MAAS+ubuntu-local-repo.html"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>MAAS+ubuntu私有源环境搭建 | Louie's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Louie's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">O ever youthful, O ever powerful.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-commonweal">
+    <a href="/404/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />公益 404</a>
+</li>
+
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+    
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
+
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://louielong.github.io/MAAS+ubuntu-local-repo.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Louie Long">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/shadian.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Louie's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MAAS+ubuntu私有源环境搭建</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-27T13:56:18+08:00">2018-03-27</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ubuntu/" itemprop="url" rel="index"><span itemprop="name">ubuntu</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/MAAS+ubuntu-local-repo.html" class="leancloud_visitors" data-flag-title="MAAS+ubuntu私有源环境搭建">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+                 <span>℃</span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计：</span>
+                
+                <span title="字数统计">5k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长&asymp;</span>
+                
+                <span title="阅读时长">0:05</span>
+              
+            </div>
+          
+
+          
+
+          
+              <div class="post-description">MAAS安装使用以及ubuntu私有源环境搭建</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近做一个集成项目需要部署多台裸机服务器，考虑到服务器众多采用PXE的方式给服务器安装系统是最便捷的同时考虑到网络速度的因素，建立一个ubuntu私有源镜像服务器安装软件包无疑会更快更便捷。</p>
+<p>本文将分两部分讲解环境搭建：1)MAAS环境搭建，2)ubuntu私有源环境搭建。首先是MAAS环境的搭建。</p>
+<h2 id="1-MAAS环境搭建"><a href="#1-MAAS环境搭建" class="headerlink" title="1 MAAS环境搭建"></a>1 MAAS环境搭建</h2><h3 id="1-1-MAAS介绍"><a href="#1-1-MAAS介绍" class="headerlink" title="1.1 MAAS介绍"></a>1.1 MAAS介绍</h3><p><img src="https://assets.ubuntu.com/v1/33b96a7f-maas-logo.svg" alt=""></p>
+<p>MAAS[1]是ubuntu社区开发的开源裸机部署工具，能够从云端下载镜像引导本地主机从PXE启动并安装指定的系统，搭配诸如IPAM等同时兼具裸机状态管理功能。</p>
+<h3 id="1-2-MAAS安装"><a href="#1-2-MAAS安装" class="headerlink" title="1.2 MAAS安装"></a>1.2 MAAS安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~# apt install maas -y</span><br></pre></td></tr></table></figure>
+<h3 id="1-3-创建MAAS用户"><a href="#1-3-创建MAAS用户" class="headerlink" title="1.3 创建MAAS用户"></a>1.3 创建MAAS用户</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~# maas createadmin --username=admin --email=MYEMAIL@EXAMPLE.COM</span><br></pre></td></tr></table></figure>
+<p>随后登录MAAS web页面 <code>http://&lt;your.maas.ip&gt;/MAAS/</code>，然后配置相关参数</p>
+<ul>
+<li>Region name (MAAS name)</li>
+<li>Ubuntu archive, Ubuntu extra architectures</li>
+<li>Ubuntu images</li>
+<li>SSH keys (for currently logged in user)</li>
+</ul>
+<p><img src="https://i.imgur.com/mB3EK4K.jpg" alt="MAAS界面"></p>
+<h3 id="1-4-系统Images设置"><a href="#1-4-系统Images设置" class="headerlink" title="1.4 系统Images设置"></a>1.4 系统Images设置</h3><p>在<code>Images</code>界面设置需要安装的系统版本，本次部署需要是64位的ubuntu 16.04，配置完成后MAAS会自动同步镜像</p>
+<p><img src="https://i.imgur.com/tXMsQWz.jpg" alt="MAAS Inages设置"></p>
+<p>在<code>setting</code>界面配置系统PXE启动时装载的最小镜像供MAAS进行服务器的硬件信息等解析</p>
+<p><img src="https://i.imgur.com/gcsXtgW.jpg" alt="MAAS 最小镜像配置"></p>
+<h3 id="1-4-DHCP配置"><a href="#1-4-DHCP配置" class="headerlink" title="1.4  DHCP配置"></a>1.4  DHCP配置</h3><p>点击<code>Subnets</code>选择一个网络点击<code>VLAN</code>选择右上的<code>take action</code>选项框，选择<code>Provid DHCP</code>，然后配置dhcp范围</p>
+<p><img src="https://i.imgur.com/0pPmBOZ.jpg" alt="MAAS DHCP配置"></p>
+<p>【Note】</p>
+<p>1)检查需要安装系统的服务器PXE启动，配置服务器启动项中PXE为首选；</p>
+<p>2)配置服务器的IPMI，便于MAAS完全接管服务器，包括服务器的启动、关机、重启等。</p>
+<p>启动待装系统的服务器，可以看到MAAS检测到服务器上线</p>
+<p><img src="https://i.imgur.com/C2nozbq.jpg" alt="MAAS硬件检测"></p>
+<p>更多MAAS配置及设置参见官网<a href="https://docs.maas.io/2.3/en/" target="_blank" rel="noopener">用户手册</a></p>
+<h2 id="2-ubuntu私有源环境搭建"><a href="#2-ubuntu私有源环境搭建" class="headerlink" title="2 ubuntu私有源环境搭建"></a>2 ubuntu私有源环境搭建</h2><p>私有源环境搭建主要是应对公司网络限制，如访问过慢或限制网络连接的情况，也可以应对需要大量现场装机部署等情况加快部署进度。</p>
+<p>2.1 安装apt-mirror工具</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~# apt-get install -y apt-mirror</span><br></pre></td></tr></table></figure>
+<p>2.2 配置apt-mirror</p>
+<p>本次安装的ubuntu为<strong>16.04</strong>，设置ubuntu源为清华源（可以根据网速设置自己常用或访问较快的源），由于只需要64位的安装软件，这里设置近下载64位的，同时也可以根据自己的需求修改源下载路径位置等参数。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~# cat /etc/apt/mirror.list </span><br><span class="line"><span class="meta">#</span>############ config ##################</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span> set base_path    /var/spool/apt-mirror</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span> set mirror_path  $base_path/mirror</span><br><span class="line"><span class="meta">#</span> set skel_path    $base_path/skel</span><br><span class="line"><span class="meta">#</span> set var_path     $base_path/var</span><br><span class="line"><span class="meta">#</span> set cleanscript $var_path/clean.sh</span><br><span class="line"><span class="meta">#</span> set defaultarch  &lt;running host architecture&gt;</span><br><span class="line">set defaultarch  amd64</span><br><span class="line"><span class="meta">#</span> set postmirror_script $var_path/postmirror.sh</span><br><span class="line"><span class="meta">#</span> set run_postmirror 0</span><br><span class="line">set nthreads     20</span><br><span class="line">set _tilde 0</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span>############ end config ##############</span><br><span class="line"><span class="meta">#</span> louie add qinghua source 20180326</span><br><span class="line">deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial main restricted universe multiverse</span><br><span class="line"><span class="meta">#</span> deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial main restricted universe multiverse</span><br><span class="line">deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse</span><br><span class="line"><span class="meta">#</span> deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-updates main restricted universe multiverse</span><br><span class="line">deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse</span><br><span class="line"><span class="meta">#</span> deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse</span><br><span class="line">deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security main restricted universe multiverse</span><br><span class="line"><span class="meta">#</span> deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security main restricted universe multiverse</span><br><span class="line"></span><br><span class="line">clean http://mirrors.tuna.tsinghua.edu.cn/ubuntu</span><br></pre></td></tr></table></figure>
+<p>随后运行apt-mirror下载源</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~# apt-mirror </span><br><span class="line">Downloading 152 index files using 20 threads...</span><br><span class="line">Begin time: Mon Mar 26 10:38:17 2018</span><br><span class="line">[20]... [19]... [18]... [17]... [16]... [15]... [14]... [13]... [12]... [11]... [10]... [9]... [8]... [7]... [6]... [5]... [4]... [3]... [2]... [1]... [0]... </span><br><span class="line">End time: Mon Mar 26 10:38:29 2018</span><br><span class="line"></span><br><span class="line">Processing tranlation indexes: [TTTT]</span><br><span class="line">.......</span><br></pre></td></tr></table></figure>
+<p>随后等待文件下载完成，等待时间视网络状况，本次源仓库共有113.3 GiB。(ps：在更新了三个小时多后终于更新完成了)</p>
+<p><strong><em>【Note】</em></strong></p>
+<p>1)当某些软件包在服务器端进行了升级，或者服务器端不再需要这些软件包时，我们使用了 <code>apt-mirror</code>与服务器同步后，会在本地的<code>$var_path/</code>下生成一个<code>clean.sh</code>的脚本，列出了遗留在本地的旧版本和无用的软件包，可以手动运行这个脚本来删除遗留在本地的且不需要用的软件包<br><code>clean http://mirrors.tuna.tsinghua.edu.cn/ubuntu</code></p>
+<p>2)如果用amd64位架构下的包，可以加上deb-amd64的标记如果什么都不加，直接使用deb http…..这种格式，则在同步时，只同步当前系统所使用的架构下的软件包。比如一个64位系统，直接deb http….只同步64位的软件 包。如果还嫌麻烦，直接去改<code>set defaultarch   &lt;running hostarchitecture&gt;</code>这个参数就好，比如改成set defaultarch i386，这样你使用debhttp…..这种格式，则在同步时，只同步i386的软件包了。</p>
+<p>如果你还想要源码，可以把源码也加到mirror.list里面同步过来，比如加上deb-src这样的标记。想要其他的东西也可以追加相应的标记来完成。</p>
+<p>3）同步完成后，我们可以利用clean.sh清理无用软件包：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~# /var/spool/apt-mirror/var/clean.sh</span><br></pre></td></tr></table></figure>
+<p>2.3 作为本机源配置</p>
+<p>源路径为</p>
+<p>配置本机源文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~# cat /etc/apt/sources.list</span><br><span class="line">deb [arch=amd64] file:///var/spool/apt-mirror/mirror/mirrors.tuna.tsinghua.edu.cn/ubuntu xenial main restricted universe multiverse</span><br><span class="line">deb [arch=amd64] file:///var/spool/apt-mirror/mirror/mirrors.tuna.tsinghua.edu.cn/ubuntu xenial-updates main restricted universe multiverse</span><br><span class="line">deb [arch=amd64] file:///var/spool/apt-mirror/mirror/mirrors.tuna.tsinghua.edu.cn/ubuntu xenial-backports main restricted universe multiverse</span><br><span class="line">deb [arch=amd64] file:///var/spool/apt-mirror/mirror/mirrors.tuna.tsinghua.edu.cn/ubuntu xenial-security main restricted universe multiverse</span><br></pre></td></tr></table></figure>
+<p>2.4 局域网源配置</p>
+<p>2.4.1 首先需要安装apache2服务器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~# apt-get install apache2</span><br></pre></td></tr></table></figure>
+<p>将镜像目录链接到apache2的根目录(/var/www/html/)下 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~# sudo ln -s /var/spool/apt-mirror/mirror/mirrors.tuna.tsinghua.edu.cn/ubuntu /var/www/html/ubuntu</span><br></pre></td></tr></table></figure>
+<p>打开浏览器<code>http://&lt;HOST IP&gt;/ubuntu</code> 即可查看</p>
+<p>2.4.2 修改局域网ubuntu源</p>
+<p>修改局域网内主机的ubuntu源，同时指定源为64位</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~# cat /etc/apt/sources.list</span><br><span class="line">deb [arch=amd64] http://192.168.4.170/ubuntu/ xenial main restricted universe multiverse</span><br><span class="line">deb [arch=amd64] http://192.168.4.170/ubuntu/ xenial-updates main restricted universe multiverse</span><br><span class="line">deb [arch=amd64] http://192.168.4.170/ubuntu/ xenial-backports main restricted universe multiverse</span><br><span class="line">deb [arch=amd64] http://192.168.4.170/ubuntu/ xenial-security main restricted universe multiverse</span><br></pre></td></tr></table></figure>
+<p>【参考链接】</p>
+<p>1)<a href="https://maas.io/install" target="_blank" rel="noopener">MAAS安装指导</a></p>
+<p>2)<a href="https://blog.csdn.net/wenwenxiong/article/details/50908002" target="_blank" rel="noopener">ubuntu私有源搭建</a></p>
+<p>3)<a href="https://www.linuxidc.com/Linux/2014-08/105415.htm" target="_blank" rel="noopener">私有源配置</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+        <div>
+            
+    <div blockquote class="blockquote-center" style="color: #32CD32;font-size:18px;">
+    -------------本文结束<i class="fa fa-heartbeat"></i>感谢您的阅读-------------
+    </div>
+
+
+        </div>
+    
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.jpg" alt="Louie Long 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+      
+        <div>
+            
+<br/>
+<div style="border: 1px solid black">
+<div style="margin-left:10px">
+<span style="font-weight:blod">版权声明</span>
+<img src="/uploads/cc.png" >
+<br/>
+<p style="font-size: 10px;line-height: 30px"><a href="http://ylong.net.cn" style="color:#258FC6">Louie's Blog</a> by <a href="http://ylong.net.cn" style="color:#258FC6">louie long</a> is licensed under a <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" style="color:#258FC6">Creative Commons BY-NC-ND 4.0 International License</a>.<br/>
+由<a href="http://ylong.net.cn" style="color:#258FC6">龙雨</a>创作并维护的<a href="ylong.net.cn" style="color:#258FC6">Louie's Blog</a>博客采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" style="color:#258FC6">创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。<br/>
+本文首发于<a href="http://ylong.net.cn" style="color:#258FC6">Louie's Blog</a> 博客（ <a href="http://ylong.net.cn" style="color:#258FC6">http://ylong.net.cn</a> ），版权所有，侵权必究。
+<br/>
+转载请注明作者和链接地址<a href="http://ylong.net.cn" style="color:#258FC6">http://ylong.net.cn</a>, 如对文章内容有疑问请联系邮箱（ <a style="color:#258FC6">longyu805@163.com</a> ）。</p>
+</div>
+</div>
+
+
+        </div>
+      
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/source/tags/ubuntu/" rel="tag"><i class="fa fa-tag"></i> ubuntu</a>
+          
+            <a href="/source/tags/MAAS/" rel="tag"><i class="fa fa-tag"></i> MAAS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/opnfv-Euphrates-install-03.html" rel="next" title="OPNFV Euphrates 安装（三）">
+                <i class="fa fa-chevron-left"></i> OPNFV Euphrates 安装（三）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/IPAM_install.html" rel="prev" title="IP地址管理(IPAM)">
+                IP地址管理(IPAM) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/shadian.png"
+                alt="Louie Long" />
+            
+              <p class="site-author-name" itemprop="name">Louie Long</p>
+              <p class="site-description motion-element" itemprop="description">一只会说666的程序媛鼓励师</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/louielong" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:longyu805@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/_long__" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-MAAS环境搭建"><span class="nav-number">2.</span> <span class="nav-text">1 MAAS环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-MAAS介绍"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 MAAS介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-MAAS安装"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 MAAS安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-创建MAAS用户"><span class="nav-number">2.3.</span> <span class="nav-text">1.3 创建MAAS用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-系统Images设置"><span class="nav-number">2.4.</span> <span class="nav-text">1.4 系统Images设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-DHCP配置"><span class="nav-number">2.5.</span> <span class="nav-text">1.4  DHCP配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-ubuntu私有源环境搭建"><span class="nav-number">3.</span> <span class="nav-text">2 ubuntu私有源环境搭建</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate"> 
+    <i class="fa fa-ravelry"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Louie</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">84k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点总阅读时长">1:24</span>
+  
+
+  
+  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <span id="busuanzi_container_site_pv">
+  | 本站总访问量<span style="color:#FA8072" id="busuanzi_value_site_pv"></span>次
+  </span>
+  <span id="busuanzi_container_site_uv">
+  | 本站访客数<span style="color:#FA8072" id="busuanzi_value_site_uv"></span>人次
+  </span>
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Mist</a> v6.1.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=6.1.0"></script>
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("M8d5yPXQ5l0kwFz1bO6cF7b3-gzGzoHsz", "QEarlHm5c8XcuF22TbFD3Bqn");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.get('time'));
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
