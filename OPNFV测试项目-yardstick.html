@@ -663,7 +663,7 @@
 <p>启动 influxdb 的 docker 环境</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name influxdb -p 8083:8083 -p 8086:8086 --expose 8090 --expose 8099 tutum/influxdb</span><br><span class="line">docker exec -it influxdb bash  #进入 influxdb 的 docker 环境</span><br></pre></td></tr></table></figure>
 <p>配置 influxdb 数据库，增加 yardstick 表，便于后续存储 yardstick 测试结果</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">influx</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">CREATE USER root WITH PASSWORD <span class="string">'root'</span> WITH ALL PRIVILEGES</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">CREATE DATABASE yardstick;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">use yardstick;</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">show MEASUREMENTS;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">influx</span><br><span class="line"><span class="meta">&gt;</span>CREATE USER root WITH PASSWORD 'root' WITH ALL PRIVILEGES</span><br><span class="line"><span class="meta">&gt;</span>CREATE DATABASE yardstick;</span><br><span class="line"><span class="meta">&gt;</span>use yardstick;</span><br><span class="line"><span class="meta">&gt;</span>show MEASUREMENTS;</span><br></pre></td></tr></table></figure>
 <p>在 Yardstick 的docker容器中使用如下命令测试 influxdb 数据库是否可用</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -i -X POST  http://192.168.20.14:8086/query --data-urlencode "q=CREATE DATABASE mydb"</span><br></pre></td></tr></table></figure>
 <p><code>192.168.20.14</code>为 influxdb 运行所在的宿主机 IP 地址，上述命令的功能是使用 influxdb 的 http API 在数据库中创建一个数据库</p>
@@ -767,9 +767,9 @@
           
             <a href="/source/tags/OPNFV/" rel="tag"><i class="fa fa-tag"></i> OPNFV</a>
           
-            <a href="/source/tags/Openstack/" rel="tag"><i class="fa fa-tag"></i> Openstack</a>
-          
             <a href="/source/tags/Yardstick/" rel="tag"><i class="fa fa-tag"></i> Yardstick</a>
+          
+            <a href="/source/tags/Openstack/" rel="tag"><i class="fa fa-tag"></i> Openstack</a>
           
         </div>
       
@@ -782,18 +782,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/hexo_blog_build.html" rel="next" title="如何搭建 hexo 博客">
-                <i class="fa fa-chevron-left"></i> 如何搭建 hexo 博客
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/OPNFV测试项目-Dovetail.html" rel="prev" title="CVP 项目说明">
-                CVP 项目说明 <i class="fa fa-chevron-right"></i>
+              <a href="/hexo_blog_build.html" rel="prev" title="如何搭建 hexo 博客">
+                如何搭建 hexo 博客 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -1032,7 +1028,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">84k</span>
+    <span title="站点总字数">86k</span>
   
 
   
@@ -1041,7 +1037,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点总阅读时长">1:24</span>
+    <span title="站点总阅读时长">1:26</span>
   
 
   
