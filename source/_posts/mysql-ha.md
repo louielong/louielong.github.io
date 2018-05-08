@@ -214,6 +214,17 @@ binlog_do_db            = test1
 service mysql restart
 ```
 
+【Note】
+
+为了提升数据库的写入性能，可以适当修改同步数据间隔，加入以下参数[4]
+
+```
+innodb_flush_log_at_trx_commit=2
+sync_binlog=1000 
+```
+
+有关两个参数的含义可以查看链接：[传送门](http://blog.itpub.net/22664653/viewspace-1063134/)
+
 ### 3.3 设置主从数据库
 
 1)将HA-1设置为HA-2的主数据库
@@ -246,10 +257,10 @@ mysql> show master status;
 mysql> change master to master_host='192.168.10.101',master_user='sync',master_password='sync',master_log_file='mysql-bin.000001',master_log_pos=465;
 ```
 
-随后重启HA-2节点的数据库
+随后在HA-2节点开启从机同步即可
 
 ```shell
-root@HA-2:~# service mysql restart
+mysql> start slave
 ```
 
 然后在HA-2节点查看mysql的slave信息，确保下述两个值为yes
@@ -311,10 +322,10 @@ mysql> show master status;
 mysql> change master to master_host='192.168.10.102',master_user='sync',master_password='sync',master_log_file='mysql-bin.000001',master_log_pos=465;
 ```
 
-随后重启HA-1节点的数据库
+随后开启HA-1的从机同步
 
 ```shell
-root@HA-1:~# service mysql restart
+mysql> start slave
 ```
 
 然后在HA-1节点查看mysql的slave信息，确保下述两个值为yes
@@ -343,6 +354,47 @@ mysql> show slave status\G;
        Replicate_Ignore_Table:
       Replicate_Wild_Do_Table:
 ```
+
+【Note】:
+
+若因为输入错误或网络变动等其他原因导致同步出错需要先停止同步
+
+```shell
+mysql> stop slave
+```
+
+然后重置从机同步
+
+```shell
+mysql> reset slave
+```
+
+再重复上述的主从同步配置，但需要注意的是主从同步并不会同步原来的数据，只会同步从当前时刻起始的binlog的数据库操作记录，如果同步中断后仍有数据写入会导致两个数据库的数据起始内容不一致，这时需要先停止数据库写入
+
+```mysql
+mysql> LOCK TABLES;
+mysql> FLUSH TABLES;
+```
+
+然后备份出数据库
+
+```shell
+mysqldump -uroot -p<passwd> <table> > mysql_table_bak.sql
+```
+
+先`drop table <tablename>`再将数据导入到另一台数据库服务器中
+
+```shell
+mysql -uroot -p<passwd> <table> < mysql_table_bak.sql
+```
+
+在配置完主从同步后解锁表
+
+```mysql
+mysql> UNLOCK TABLES
+```
+
+
 
 ### 3.4 测试数据库同步
 
@@ -459,6 +511,7 @@ vrrp_instance VI_MYSQL {
     advert_int 1
     virtual_ipaddress {
         192.168.10.103      # 虚拟IP地址
+        240C::1234/64       # 支持IPv6
     }
     notify /etc/keepalived/bin/kpad_notify.sh     # keep状态传入脚本，通过该脚本可得知当前keep运行状态
     track_script {
@@ -625,6 +678,7 @@ vrrp_instance VI_MYSQL {
     advert_int 1
     virtual_ipaddress {
         192.168.10.103      # 虚拟IP地址
+        240C::1234
     }
     notify /etc/keepalived/bin/kpad_notify.sh     # keep状态传入脚本，通过该脚本可得知当前keep运行状态
     track_script {
