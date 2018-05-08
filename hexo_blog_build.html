@@ -658,7 +658,7 @@ GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWdD6xhMNLGVpbP2M5SN6bnxn2kSE
 需要关注的是post-receive的钩子，当push操作完成之后这个钩子就会被调用。
 </code></pre><p>进入到hooks目录</p>
 <p>建立<code>post-receive</code>文件，输入</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/sh</span><br><span class="line">git --work-tree=/web/blog/hexo --git-dir=/web/blog/hexo.git checkout -f</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">git --work-tree=/web/blog/hexo --git-dir=/web/blog/hexo.git checkout -f</span><br></pre></td></tr></table></figure>
 <p>赋予可执行权限：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x post-receive</span><br></pre></td></tr></table></figure>
 <p><img src="http://i.imgur.com/0UwN6HX.jpg" alt="git hooks"></p>
@@ -701,8 +701,8 @@ GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWdD6xhMNLGVpbP2M5SN6bnxn2kSE
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/uploads/wechatpay.jpg" alt="Louie Long 微信支付"/>
-        <p>微信支付</p>
+        <img id="wechat_qr" src="/uploads/wechatpay.jpg" alt="Louie Long 赞助louie买书看"/>
+        <p>赞助louie买书看</p>
       </div>
     
 
