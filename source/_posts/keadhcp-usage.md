@@ -224,26 +224,85 @@ root@ubuntu:~# keactrl start -s dhcpv6
 
 关于如何配置KEA的钩子模式可以查看：[传送门](https://github.com/zorun/kea-hook-runscript)
 
-测试
+### 3.1 性能测试
 
 使用kea自带的perfdhcp性能测试工具，可以进行dhcp客户端模拟的测试
 
-1. 查看每秒能处理多少个discover(v4)或者solicit(v6)消息 
-2. 查看每秒能处理处理4-way packet exchanges(v4 - DORA, v6 - SARR)(即一个完成的请求动态ip的过程)
+1. 查看每秒能处理多少个discover(v4)或者solicit(v6)消息 ；
+2. 查看每秒能处理处理4-way packet exchanges(v4 - DORA, v6 - SARR)(即一个完成的请求动态ip的过程)，即LPS（Lease per Second，每秒分配租约数）。
 
 
 ```shell
-root@ubuntu:~# perfdhcp -l eth1 -6 -R 100
+root@ubuntu:~# perfdhcp -l eth1 -6 -b mac=00:01:02:03:04:05 -R 999999 -r 100000  -p 30
 ```
 
-使用上述命令申请100个v6地址。
+使用上述命令请求v6地址，部分参数解释如下，官方文档可以查看[perfdhcp man手册](https://www.systutorials.com/docs/linux/man/8-perfdhcp/)
 
-| 参数  | 含义             |
-| ----- | ---------------- |
-| -l    | 指定申请IP接口   |
-| -4/-6 | 指定申请的IP类型 |
-| -R    | 模拟客户端数量   |
+| 参数  | 含义                                                         |
+| ----- | ------------------------------------------------------------ |
+| -l    | 指定申请IP接口                                               |
+| -4/-6 | 指定申请的IP类型                                             |
+| -R    | 模拟客户端数量，实际指的是请求DHCP的用户池，perfdhcp会从该池内挑选用户，默认为1 |
+| -r    | 期望的DHCP请求速率，即 LPS速率                               |
+| -p    | 测试持续时间                                                 |
+| -b    | 模拟用户mac地址起始，也可以使用uuid替代                      |
 
+【Note】
+
+1）理论分配的用户数量为期望速率X持续时间，超过这个数目的请求实际为租约的更新操作。
+
+2）官方给出KEA测试结果：[传送门](https://kea.isc.org/wiki/SharedLeaseStorageStats)
+
+摘录如下所示
+
+V4 Performance with and without insert trigger:
+
+```
+    Memfile with persistence set to false (as a baseline):
+        Running: perfdhcp -4 -r 10000 -R 9999999 -p 20 178.0.0.1
+        Rate: 6689.37 4-way exchanges/second, expected rate: 10000
+
+    MySQL without trigger installed:
+        Running: perfdhcp -4 -r 200 -R 9999999 -p 20 178.0.0.1
+        Rate: 189.079 4-way exchanges/second, expected rate: 200
+
+    MySQL with trigger installed:
+        Running: perfdhcp -4 -r 200 -R 9999999 -p 20 178.0.0.1
+        Rate: 188.752 4-way exchanges/second, expected rate: 200
+
+    Postgresql without trigger installed:
+        Running: perfdhcp -4 -r 600 -R 9999999 -p 20 178.0.0.1
+        Rate: 551.868 4-way exchanges/second, expected rate: 600
+
+    Postgresql with trigger installed:
+        Running: perfdhcp -4 -r 600 -R 9999999 -p 20 178.0.0.1
+        Rate: 556.182 4-way exchanges/second, expected rate: 600
+```
+
+V6 Performance with and without insert triggers:
+
+```
+    MEMFILE persistence = false:
+        Running: perfdhcp -6 -r 10000 -R 9999999 -p 20 -l enp0s10
+        Rate: 6890.85 4-way exchanges/second, expected rate: 10000
+
+    MySQL without trigger installed
+        Running: perfdhcp -6 -r 200 -R 9999999 -p 20 -l enp0s10
+        Rate: 188.239 4-way exchanges/second, expected rate: 200
+
+    MySQL with trigger installed
+        Running: perfdhcp -6 -r 200 -R 9999999 -p 20 -l enp0s10
+        Rate: 188.813 4-way exchanges/second, expected rate: 200
+
+    Postgresql without trigger installed
+        Running: perfdhcp -6 -r 400 -R 9999999 -p 20 -l enp0s10
+        Rate: 361.503 4-way exchanges/second, expected rate: 400
+
+    Postgresql with trigger installed
+        Running: perfdhcp -6 -r 400 -R 9999999 -p 20 -l enp0s10
+        Rate: 361.421 4-way exchanges/second, expected rate: 400
+```
+3）另有其他讨论称kea在memryfile 内存模式下能够达到8000-10000的性能，基本上数据库模式下LPS在1000左右，[传送门](http://www.data.proidea.org.pl/plnog/10edycja/materialy/prezentacje/The_newest_mechanisms_in_DHCP_Tomasz_Mrugalski.pdf)。mysql模式下调优参见邮件讨论[mysql 调优](http://www.data.proidea.org.pl/plnog/10edycja/materialy/prezentacje/The_newest_mechanisms_in_DHCP_Tomasz_Mrugalski.pdf)
 
 
 
