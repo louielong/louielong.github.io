@@ -1,4 +1,4 @@
-/*! algoliasearch 3.26.0 | © 2014, 2015 Algolia SAS | github.com/algolia/algoliasearch-client-js */
+/*! algoliasearch 3.27.1 | © 2014, 2015 Algolia SAS | github.com/algolia/algoliasearch-client-js */
 (function(f){var g;if(typeof window!=='undefined'){g=window}else if(typeof self!=='undefined'){g=self}g.ALGOLIA_MIGRATION_LAYER=f()})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 
 module.exports = function load (src, opts, cb) {
@@ -2980,7 +2980,7 @@ AlgoliaSearch.prototype.addUserKey = deprecate(function(acls, params, callback) 
  *   content: the server answer with the added API key
  * @return {Promise|undefined} Returns a promise if no callback given
  * @example
- * client.addUserKey(['search'], {
+ * client.addApiKey(['search'], {
  *   validity: 300,
  *   maxQueriesPerIPPerHour: 2000,
  *   maxHitsPerQuery: 3,
@@ -3986,6 +3986,70 @@ AlgoliaSearchCore.prototype.search = function(queries, opts, callback) {
 };
 
 /**
+* Search for facet values
+* https://www.algolia.com/doc/rest-api/search#search-for-facet-values
+* This is the top-level API for SFFV.
+*
+* @param {object[]} queries An array of queries to run.
+* @param {string} queries[].indexName Index name, name of the index to search.
+* @param {object} queries[].params Query parameters.
+* @param {string} queries[].params.facetName Facet name, name of the attribute to search for values in.
+* Must be declared as a facet
+* @param {string} queries[].params.facetQuery Query for the facet search
+* @param {string} [queries[].params.*] Any search parameter of Algolia,
+* see https://www.algolia.com/doc/api-client/javascript/search#search-parameters
+* Pagination is not supported. The page and hitsPerPage parameters will be ignored.
+*/
+AlgoliaSearchCore.prototype.searchForFacetValues = function(queries) {
+  var isArray = require(8);
+  var map = require(29);
+
+  var usage = 'Usage: client.searchForFacetValues([{indexName, params: {facetName, facetQuery, ...params}}, ...queries])'; // eslint-disable-line max-len
+
+  if (!isArray(queries)) {
+    throw new Error(usage);
+  }
+
+  var client = this;
+
+  return client._promise.all(map(queries, function performQuery(query) {
+    if (
+      !query ||
+      query.indexName === undefined ||
+      query.params.facetName === undefined ||
+      query.params.facetQuery === undefined
+    ) {
+      throw new Error(usage);
+    }
+
+    var clone = require(24);
+    var omit = require(31);
+
+    var indexName = query.indexName;
+    var params = query.params;
+
+    var facetName = params.facetName;
+    var filteredParams = omit(clone(params), function(keyName) {
+      return keyName === 'facetName';
+    });
+    var searchParameters = client._getSearchParams(filteredParams, '');
+
+    return client._jsonRequest({
+      cache: client.cache,
+      method: 'POST',
+      url:
+        '/1/indexes/' +
+        encodeURIComponent(indexName) +
+        '/facets/' +
+        encodeURIComponent(facetName) +
+        '/query',
+      hostType: 'read',
+      body: {params: searchParameters}
+    });
+  }));
+};
+
+/**
  * Set the extra security tagFilters header
  * @param {string|array} tags The list of tags defining the current security filters
  */
@@ -4205,7 +4269,7 @@ function removeCredentials(headers) {
 }
 
 }).call(this,require(12))
-},{"1":1,"12":12,"18":18,"24":24,"27":27,"28":28,"29":29,"33":33,"5":5,"8":8}],16:[function(require,module,exports){
+},{"1":1,"12":12,"18":18,"24":24,"27":27,"28":28,"29":29,"31":31,"33":33,"5":5,"8":8}],16:[function(require,module,exports){
 var inherits = require(7);
 var IndexCore = require(18);
 var deprecate = require(25);
@@ -5007,6 +5071,7 @@ Index.prototype.searchRules = function(params, callback) {
  * Retrieve all the query rules in an index
  * @param [number=100] hitsPerPage The amount of query rules to retrieve per batch
  * @param [function] callback will be called after all query rules are retrieved
+ *  error: null or Error('message')
  */
 Index.prototype.exportRules = function(hitsPerPage, callback) {
   return exportData(this.searchRules.bind(this), hitsPerPage, callback);
@@ -5018,6 +5083,10 @@ Index.prototype.saveRule = function(rule, opts, callback) {
     opts = {};
   } else if (opts === undefined) {
     opts = {};
+  }
+
+  if (!rule.objectID) {
+    throw new errors.AlgoliaSearchError('Missing or empty objectID field for rule');
   }
 
   var forwardToReplicas = opts.forwardToReplicas === true ? 'true' : 'false';
@@ -5192,11 +5261,11 @@ Index.prototype.setSettings = function(settings, opts, callback) {
 };
 
 /*
- @deprecated see index.listApiKeys
- */
+* @deprecated see client.listApiKeys()
+*/
 Index.prototype.listUserKeys = deprecate(function(callback) {
   return this.listApiKeys(callback);
-}, deprecatedMessage('index.listUserKeys()', 'index.listApiKeys()'));
+}, deprecatedMessage('index.listUserKeys()', 'client.listApiKeys()'));
 
 /*
 * List all existing API keys to this index
@@ -5204,8 +5273,10 @@ Index.prototype.listUserKeys = deprecate(function(callback) {
 * @param callback the result callback called with two arguments
 *  error: null or Error('message')
 *  content: the server answer with API keys belonging to the index
+*
+* @deprecated see client.listApiKeys()
 */
-Index.prototype.listApiKeys = function(callback) {
+Index.prototype.listApiKeys = deprecate(function(callback) {
   var indexObj = this;
   return this.as._jsonRequest({
     method: 'GET',
@@ -5213,14 +5284,14 @@ Index.prototype.listApiKeys = function(callback) {
     hostType: 'read',
     callback: callback
   });
-};
+}, deprecatedMessage('index.listApiKeys()', 'client.listApiKeys()'));
 
 /*
- @deprecated see index.getApiKey
- */
+* @deprecated see client.getApiKey()
+*/
 Index.prototype.getUserKeyACL = deprecate(function(key, callback) {
   return this.getApiKey(key, callback);
-}, deprecatedMessage('index.getUserKeyACL()', 'index.getApiKey()'));
+}, deprecatedMessage('index.getUserKeyACL()', 'client.getApiKey()'));
 
 
 /*
@@ -5230,8 +5301,10 @@ Index.prototype.getUserKeyACL = deprecate(function(key, callback) {
 * @param callback the result callback called with two arguments
 *  error: null or Error('message')
 *  content: the server answer with the right API key
+*
+* @deprecated see client.getApiKey()
 */
-Index.prototype.getApiKey = function(key, callback) {
+Index.prototype.getApiKey = deprecate(function(key, callback) {
   var indexObj = this;
   return this.as._jsonRequest({
     method: 'GET',
@@ -5239,14 +5312,14 @@ Index.prototype.getApiKey = function(key, callback) {
     hostType: 'read',
     callback: callback
   });
-};
+}, deprecatedMessage('index.getApiKey()', 'client.getApiKey()'));
 
 /*
- @deprecated see index.deleteApiKey
- */
+* @deprecated see client.deleteApiKey()
+*/
 Index.prototype.deleteUserKey = deprecate(function(key, callback) {
   return this.deleteApiKey(key, callback);
-}, deprecatedMessage('index.deleteUserKey()', 'index.deleteApiKey()'));
+}, deprecatedMessage('index.deleteUserKey()', 'client.deleteApiKey()'));
 
 /*
 * Delete an existing API key associated to this index
@@ -5255,8 +5328,10 @@ Index.prototype.deleteUserKey = deprecate(function(key, callback) {
 * @param callback the result callback called with two arguments
 *  error: null or Error('message')
 *  content: the server answer with the deletion date
+*
+* @deprecated see client.deleteApiKey()
 */
-Index.prototype.deleteApiKey = function(key, callback) {
+Index.prototype.deleteApiKey = deprecate(function(key, callback) {
   var indexObj = this;
   return this.as._jsonRequest({
     method: 'DELETE',
@@ -5264,14 +5339,14 @@ Index.prototype.deleteApiKey = function(key, callback) {
     hostType: 'write',
     callback: callback
   });
-};
+}, deprecatedMessage('index.deleteApiKey()', 'client.deleteApiKey()'));
 
 /*
- @deprecated see index.addApiKey
- */
+* @deprecated see client.addApiKey()
+*/
 Index.prototype.addUserKey = deprecate(function(acls, params, callback) {
   return this.addApiKey(acls, params, callback);
-}, deprecatedMessage('index.addUserKey()', 'index.addApiKey()'));
+}, deprecatedMessage('index.addUserKey()', 'client.addApiKey()'));
 
 /*
 * Add a new API key to this index
@@ -5308,8 +5383,10 @@ Index.prototype.addUserKey = deprecate(function(acls, params, callback) {
 *   }
 * })
 * @see {@link https://www.algolia.com/doc/rest_api#AddIndexKey|Algolia REST API Documentation}
+*
+* @deprecated see client.addApiKey()
 */
-Index.prototype.addApiKey = function(acls, params, callback) {
+Index.prototype.addApiKey = deprecate(function(acls, params, callback) {
   var isArray = require(8);
   var usage = 'Usage: index.addApiKey(arrayOfAcls[, params, callback])';
 
@@ -5346,21 +5423,21 @@ Index.prototype.addApiKey = function(acls, params, callback) {
     hostType: 'write',
     callback: callback
   });
-};
+}, deprecatedMessage('index.addApiKey()', 'client.addApiKey()'));
 
 /**
-* @deprecated use index.addApiKey()
+* @deprecated use client.addApiKey()
 */
 Index.prototype.addUserKeyWithValidity = deprecate(function deprecatedAddUserKeyWithValidity(acls, params, callback) {
   return this.addApiKey(acls, params, callback);
-}, deprecatedMessage('index.addUserKeyWithValidity()', 'index.addApiKey()'));
+}, deprecatedMessage('index.addUserKeyWithValidity()', 'client.addApiKey()'));
 
 /*
- @deprecated see index.updateApiKey
- */
+* @deprecated see client.updateApiKey()
+*/
 Index.prototype.updateUserKey = deprecate(function(key, acls, params, callback) {
   return this.updateApiKey(key, acls, params, callback);
-}, deprecatedMessage('index.updateUserKey()', 'index.updateApiKey()'));
+}, deprecatedMessage('index.updateUserKey()', 'client.updateApiKey()'));
 
 /**
 * Update an existing API key of this index
@@ -5397,8 +5474,10 @@ Index.prototype.updateUserKey = deprecate(function(key, acls, params, callback) 
 *   }
 * })
 * @see {@link https://www.algolia.com/doc/rest_api#UpdateIndexKey|Algolia REST API Documentation}
+*
+* @deprecated see client.updateApiKey()
 */
-Index.prototype.updateApiKey = function(key, acls, params, callback) {
+Index.prototype.updateApiKey = deprecate(function(key, acls, params, callback) {
   var isArray = require(8);
   var usage = 'Usage: index.updateApiKey(key, arrayOfAcls[, params, callback])';
 
@@ -5435,7 +5514,7 @@ Index.prototype.updateApiKey = function(key, acls, params, callback) {
     hostType: 'write',
     callback: callback
   });
-};
+}, deprecatedMessage('index.updateApiKey()', 'client.updateApiKey()'));
 
 },{"17":17,"18":18,"24":24,"25":25,"26":26,"27":27,"28":28,"29":29,"30":30,"7":7,"8":8}],17:[function(require,module,exports){
 'use strict';
@@ -6081,6 +6160,9 @@ module.exports = function createAlgoliasearch(AlgoliaSearch, uaSuffix) {
       return new Promise(function resolveOnTimeout(resolve/* , reject*/) {
         setTimeout(resolve, ms);
       });
+    },
+    all: function all(promises) {
+      return Promise.all(promises);
     }
   };
 
@@ -6601,7 +6683,7 @@ function cleanup() {
 },{"1":1}],34:[function(require,module,exports){
 'use strict';
 
-module.exports = '3.26.0';
+module.exports = '3.27.1';
 
 },{}]},{},[19])(19)
 });
