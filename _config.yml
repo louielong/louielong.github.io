@@ -98,7 +98,6 @@ symbols_count_time:
 # Algolia search
 algolia:
   applicationID: 'SBFCV05R39'
-  apiKey: '90cf6dcc0478b56b8278a21230864064'
   indexName: 'my hexo search'
   chunkSize: 5000
 
@@ -108,4 +107,4 @@ deploy:
     type: git
     repo: https://github.com/louielong/louielong.github.io.git
     branch: master       #这里填写分支
-    message: Add performance  test for kea_dhcp-usage #(默认为 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }})
+    message: Change code highlight theme #(默认为 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }})
