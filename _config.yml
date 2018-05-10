@@ -107,4 +107,4 @@ deploy:
     type: git
     repo: https://github.com/louielong/louielong.github.io.git
     branch: master       #这里填写分支
-    message: Add post KVM instll windows #(默认为 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }})
+    message: Add post NTP server install #(默认为 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }})
