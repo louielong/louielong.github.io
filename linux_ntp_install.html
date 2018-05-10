@@ -144,18 +144,18 @@
 
 
 
-  <meta name="description" content="OPNFV Dovetail 使用">
-<meta name="keywords" content="OPNFV CVP">
+  <meta name="description" content="NTP 服务器安装">
+<meta name="keywords" content="NTP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CVP 项目说明">
-<meta property="og:url" content="https://louielong.github.io/OPNFV测试项目-Dovetail.html">
+<meta property="og:title" content="ubuntu下安装配置NTP服务器">
+<meta property="og:url" content="https://louielong.github.io/linux_ntp_install.html">
 <meta property="og:site_name" content="Louie&#39;s Blog">
-<meta property="og:description" content="OPNFV Dovetail 使用">
+<meta property="og:description" content="NTP 服务器安装">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-13T09:32:24.579Z">
+<meta property="og:updated_time" content="2018-05-10T06:50:06.724Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CVP 项目说明">
-<meta name="twitter:description" content="OPNFV Dovetail 使用">
+<meta name="twitter:title" content="ubuntu下安装配置NTP服务器">
+<meta name="twitter:description" content="NTP 服务器安装">
 
 
 
@@ -164,7 +164,7 @@
 
 
 
-  <link rel="canonical" href="https://louielong.github.io/OPNFV测试项目-Dovetail.html"/>
+  <link rel="canonical" href="https://louielong.github.io/linux_ntp_install.html"/>
 
 
 
@@ -174,7 +174,7 @@
   };
 </script>
 
-  <title>CVP 项目说明 | Louie's Blog</title>
+  <title>ubuntu下安装配置NTP服务器 | Louie's Blog</title>
   
 
 
@@ -419,7 +419,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://louielong.github.io/OPNFV测试项目-Dovetail.html">
+    <link itemprop="mainEntityOfPage" href="https://louielong.github.io/linux_ntp_install.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Louie Long">
@@ -436,7 +436,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CVP 项目说明</h1>
+          <h1 class="post-title" itemprop="name headline">ubuntu下安装配置NTP服务器</h1>
         
 
         <div class="post-meta">
@@ -448,7 +448,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-27T17:10:13+08:00">2017-09-27</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-10T14:35:22+08:00">2018-05-10</time>
             
 
             
@@ -469,7 +469,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OPNFV/" itemprop="url" rel="index"><span itemprop="name">OPNFV</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Ubuntu/" itemprop="url" rel="index"><span itemprop="name">Ubuntu</span></a></span>
 
                 
                 
@@ -483,7 +483,7 @@
 
           
           
-             <span id="/OPNFV测试项目-Dovetail.html" class="leancloud_visitors" data-flag-title="CVP 项目说明">
+             <span id="/linux_ntp_install.html" class="leancloud_visitors" data-flag-title="ubuntu下安装配置NTP服务器">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -509,7 +509,7 @@
                 
                   <span class="post-meta-item-text">字数统计：</span>
                 
-                <span title="字数统计">4.6k</span>
+                <span title="字数统计">6.5k</span>
               
 
               
@@ -523,7 +523,7 @@
                 
                   <span class="post-meta-item-text">阅读时长&asymp;</span>
                 
-                <span title="阅读时长">0:05</span>
+                <span title="阅读时长">0:07</span>
               
             </div>
           
@@ -531,7 +531,7 @@
           
 
           
-              <div class="post-description">OPNFV Dovetail 使用</div>
+              <div class="post-description">NTP 服务器安装</div>
           
 
         </div>
@@ -547,58 +547,110 @@
       
 
       
-        <p><strong><em>NOTE</em></strong>：本文以 CVP  dovetail的0.6版本为例来讲解dovetail项目的使用，随着dovetail版本的升级使用的命令和配置会有所改变。（2017年9月8日）</p>
-<p>修改1：0.6版本升级到0.9，部分内容作出更新（2017年11月13日）</p>
-<p><strong>摘要</strong>:本文主要介绍如何使用OPNFV的Dovetail项目进行NFV基础设施NFVI&amp;VIM的测试。</p>
-<a id="more"></a>
-<p>OPNFV的CVP（Compliance Verification Program）一致性认证项目</p>
-<h2 id="1-Dovetail-安装"><a href="#1-Dovetail-安装" class="headerlink" title="1.Dovetail 安装"></a>1.Dovetail 安装</h2><p>dovetail 可以运行在实体机(bare metal)，可以运行在虚拟机中。dovetail可以使用源码来安装也可以使用docker环境，建议使用docker来安装。为了环境部署方便以及更快的熟悉该项目，本文采用 docker 环境来安装和使用 dovetail 。</p>
-<h3 id="1-1-准备相应的测试代码"><a href="#1-1-准备相应的测试代码" class="headerlink" title="1.1 准备相应的测试代码"></a>1.1 准备相应的测试代码</h3><p>由于dovetail测试项目需要使用OPNFV中的其他测试项目代码，因此还需要functest、yardstick等项目。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker pull opnfv/dovetail:cvp.0.6.0</span><br><span class="line">docker pull opnfv/functest:cvp.0.5.0</span><br><span class="line">docker pull opnfv/yardstick:danube.3.2</span><br><span class="line">docker pull opnfv/bottlenecks:cvp.0.4.0</span><br><span class="line">wget -nc http://artifacts.opnfv.org/sdnvpn/ubuntu-16.04-server-cloudimg-amd64-disk1.img -P .</span><br><span class="line">wget -nc http://download.cirros-cloud.net/0.3.5/cirros-0.3.5-x86_64-disk.img -P .</span><br></pre></td></tr></table></figure>
-<p>dovetail可以在离线环境下进行测试，前提是需要先保存以上的docker镜像。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker save -o dovetail.tar opnfv/dovetail:cvp.0.6.0 opnfv/functest:cvp.0.5.0 \</span><br><span class="line">opnfv/yardstick:danube.3.2 opnfv/bottlenecks:cvp.0.4.0</span><br></pre></td></tr></table></figure>
-<h3 id="1-2-配置-dovetail-运行环境"><a href="#1-2-配置-dovetail-运行环境" class="headerlink" title="1.2 配置 dovetail 运行环境"></a>1.2 配置 dovetail 运行环境</h3><p>首先创建一个dovetail的相关文件存放的目录<code>${DOVETAIL_HOME}/pre_config</code>，这里以<code>/root/dovetail</code>为例</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export DOVETAIL_HOME=/home/dovetail</span><br></pre></td></tr></table></figure>
-<p>将之前的镜像文件保存在<code>pre_config</code>目录下，并在该目录下创建<code>env_config.sh</code>文件，并填入一下内容。需要指出的是dovetail CVP中不在需要<code>INSTALL_IP</code>之类的参数，相关警告可以忽略，详见</p>
-<p><a href="https://jira.opnfv.org/browse/DOVETAIL-371" target="_blank" rel="noopener">https://jira.opnfv.org/browse/DOVETAIL-371</a></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> Project-level authentication scope (name or ID), recommend admin project.</span><br><span class="line">export OS_PROJECT_NAME=admin</span><br><span class="line"><span class="meta">#</span> Authentication username, belongs to the project above, recommend admin user.</span><br><span class="line">export OS_USERNAME=admin</span><br><span class="line"><span class="meta">#</span> Authentication password. Use your own password</span><br><span class="line">export OS_PASSWORD=admin</span><br><span class="line"><span class="meta">#</span> Authentication URL, one of the endpoints of keystone service. If this is v3 version,</span><br><span class="line"><span class="meta">#</span> there need some extra variables as follows.</span><br><span class="line">export OS_AUTH_URL='http://192.168.20.11:5000/'</span><br><span class="line"><span class="meta">#</span> Default is 2.0. If use keystone v3 API, this should be set as 3.</span><br><span class="line">export OS_IDENTITY_API_VERSION=3</span><br><span class="line"><span class="meta">#</span> Domain name or ID containing the user above.</span><br><span class="line"><span class="meta">#</span> Command to check the domain: openstack user show &lt;OS_USERNAME&gt;</span><br><span class="line">export OS_USER_DOMAIN_NAME=default</span><br><span class="line"><span class="meta">#</span> Domain name or ID containing the project above.</span><br><span class="line"><span class="meta">#</span> Command to check the domain: openstack project show &lt;OS_PROJECT_NAME&gt;</span><br><span class="line">export OS_PROJECT_DOMAIN_NAME=default</span><br><span class="line"><span class="meta">#</span> Home directory for dovetail</span><br><span class="line">export DOVETAIL_HOME=/root/dovetail</span><br></pre></td></tr></table></figure>
-<p>导入该环境变量</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source env_config.sh</span><br></pre></td></tr></table></figure>
-<h3 id="1-3-运行-dovetail-容器"><a href="#1-3-运行-dovetail-容器" class="headerlink" title="1.3 运行 dovetail 容器"></a>1.3 运行 dovetail 容器</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker run --privileged=true -it \</span><br><span class="line">             -e DOVETAIL_HOME=$DOVETAIL_HOME \</span><br><span class="line">             -v $DOVETAIL_HOME:$DOVETAIL_HOME \</span><br><span class="line">             -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">             --name dovetail opnfv/dovetail:cvp.0.6.0 /bin/bash</span><br></pre></td></tr></table></figure>
-<p>上述命令中<code>-v $DOVETAIL_HOME:$DOVETAIL_HOME</code>是指明host与container之间目录映射，此处不一致会导致后续的测试结果存储出现问题。在后续拍错时可以使用<code>docker inspect dovetail</code>命令检查容器的相关配置。运行完成后会直接进入到dovetail容器中.</p>
-<p>为了方便的看清目录和文件，增加一些配置</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alias l='ls -CF'</span><br><span class="line">alias la='ls -A'</span><br><span class="line">alias ll='ls -alF'</span><br><span class="line">alias ls='ls --color=auto'</span><br></pre></td></tr></table></figure>
-<h2 id="2-执行测试"><a href="#2-执行测试" class="headerlink" title="2. 执行测试"></a>2. 执行测试</h2><h3 id="2-1-简单用例测试"><a href="#2-1-简单用例测试" class="headerlink" title="2.1 简单用例测试"></a>2.1 简单用例测试</h3><p>使用命令查看有哪些dovetail测试例</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dovetail list</span><br></pre></td></tr></table></figure>
-<p>运行 dovetail 测试</p>
-<p>当dovetail正式版本发布时使用下列命令执行整个测试</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dovetail run --testsuite CVP_1_0_0 --testarea ipv6 --debug | tee test.txt</span><br></pre></td></tr></table></figure>
-<p>目前dovetail测试版本使用下列命令执行测试</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dovetail run -d --testsuite proposed_tests --testarea ha --offline | tee $DOVETAIL_HOME/test.txt-20170912_0954-HA</span><br></pre></td></tr></table></figure>
-<p><code>testarea</code>指明测试域，在dovetail容器的<code>conf</code>目录中<code>dovetail.yml</code>可以查看相关测试域</p>
-<blockquote>
-<p>testarea_supported:</p>
+        <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1 前言"></a>1 前言</h2><p>在建立Linux主机集群时，为了避免集群主机时间不同以及长时间运行下所导致的时间偏差，需要进行时间同步(synchronize)。Linux系统下，一般使用ntp服务来同步不同机器的时间。NTP（Network Time Protocol）即网络时间协议，就是通过网络协议使计算机之间的时间同步化。</p>
+<p><strong>时间同步方式</strong></p>
+<p>NTP在linux下有两种时钟同步方式，分别为直接同步和平滑同步[1]：</p>
 <ul>
-<li>defcore</li>
-<li>example</li>
-<li>ha</li>
-<li>ipv6</li>
-<li>sdnvpn</li>
-<li>vping</li>
-<li>resiliency</li>
-<li>tempest</li>
+<li>直接同步</li>
 </ul>
-</blockquote>
-<p>或者使用<code>dovetail list proposed_tests</code>命令来查看有哪些<code>testarea</code>和具体的<code>testarea</code>下包含的测试例是什么。</p>
-<h3 id="2-2-其他测试配置文件"><a href="#2-2-其他测试配置文件" class="headerlink" title="2.2 其他测试配置文件"></a>2.2 其他测试配置文件</h3><h3 id="2-2-1-HA测试配置"><a href="#2-2-1-HA测试配置" class="headerlink" title="2.2.1 HA测试配置"></a>2.2.1 HA测试配置</h3><p>HA测试的配置文件为<code>${DOVETAIL_HOME}/pre_config/pod.yaml</code>，可以参考<code>dovetail/userconfig/pod.yaml.sample</code>配置内容如下,只需要列出HA的控制节点</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">nodes:</span><br><span class="line">-</span><br><span class="line">    # This can not be changed and must be node1.</span><br><span class="line">    name: node1</span><br><span class="line"></span><br><span class="line">    # This must be controller.</span><br><span class="line">    role: Controller</span><br><span class="line"></span><br><span class="line">    # This is the install IP of a controller node.</span><br><span class="line">    ip: xx.xx.xx.xx</span><br><span class="line"></span><br><span class="line">    # User name of this node. This user must have sudo privileges.</span><br><span class="line">    user: root</span><br><span class="line"></span><br><span class="line">    # Password of the user.</span><br><span class="line">    password: root</span><br><span class="line">    </span><br><span class="line">    # Private key of this node. It must be /root/.ssh/id_rsa</span><br><span class="line">    # Dovetail will move the key file from $DOVETAIL_HOME/pre_config/id_rsa</span><br><span class="line">    # to /root/.ssh/id_rsa of Yardstick container</span><br><span class="line">    key_filename: /root/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
-<p>需要注意的是节点的名字必须是<code>node1</code>、<code>node2</code>格式，主要是该项测试调用了functest的相关测试，而functest做了相关配置要求，IP地址为<strong>测试机</strong>能够访问节点的IP，HA测试会需要ssh登录到节点中关闭/重启openstack的nova、glance等相应服务，也需要提供能够访问其他节点的密匙文件。</p>
-<h4 id="2-2-2-tempest测试配置"><a href="#2-2-2-tempest测试配置" class="headerlink" title="2.2.2 tempest测试配置"></a>2.2.2 tempest测试配置</h4><p>配置文件需要存放在<code>$DOVETAIL_HOME/pre_config/tempest_conf.yaml</code>,依据待测环境配置相应的信息。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">validation:</span><br><span class="line">    image_ssh_user: cirros</span><br><span class="line">    ssh_timeout: 300</span><br><span class="line"></span><br><span class="line">compute:</span><br><span class="line">    min_compute_nodes: 2</span><br><span class="line"><span class="meta">#</span>    volume_device_name: vdb</span><br></pre></td></tr></table></figure>
-<p>测试过程中使用的是cirros的镜像，cirros的初始账户为：cirros，设置登录超时时间，设置计算节点个数，对于compass的环境新添加的系统云盘名称为vdb因此需要指定（默认为vdc）。</p>
-<h2 id="3-测试结果"><a href="#3-测试结果" class="headerlink" title="3. 测试结果"></a>3. 测试结果</h2><p>dovetail的测试结果存放在<code>$DOVETAIL_HOME/results</code>目录下，具体的每个测试域也有对应的详细存储结果目录。如IPv6测试详细结果存放在<code>ipv6_logs/dovetail.ipv6.tcXXX.log</code>，可以查看执行失败的原因。</p>
-<p><strong>参考链接</strong></p>
-<p>1）<a href="http://artifacts.opnfv.org/dovetail/docs/testing_user_userguide/index.html" target="_blank" rel="noopener">dovetail 用户手册</a></p>
+<p>使用ntpdate命令进行同步，直接进行时间变更。如果服务器上存在一个12点运行的任务，当前服务器时间是13点，但标准时间时11点，使用此命令可能会造成任务重复执行。因此使用ntpdate同步可能会引发风险，因此该命令也多用于配置时钟同步服务时第一次同步时间时使用，如：系统重启时。</p>
+<ul>
+<li>平滑同步</li>
+</ul>
+<p>使用ntpd进行时钟同步，可以保证一个时间不经历两次，它每次同步时间的偏移量不会太陡，是慢慢来的，这正因为这样，ntpd平滑同步可能耗费的时间比较长。对ntp时间同步修正原理感兴趣的可以查看官方文档：<a href="https://www.eecis.udel.edu/~mills/ntp/html/warp.html" target="_blank" rel="noopener">How NTP Works</a></p>
+<p>时钟的跃变，对于某些程序会导致很严重的问题。许多应用程序依赖连续的时钟，取得的时间是线性的，一些操作，例如数据库事务，通常会地依赖这样的事实：时间不会往回跳跃。不幸的是，ntpdate调整时间的方式就是我们所说的”跃变“：在获得一个时间之后，ntpdate使用settimeofday(2)设置系统时间，这有几个非常明显的问题[2]：</p>
+<p>第一，这样做不安全。ntpdate的设置依赖于ntp服务器的安全性，攻击者可以利用一些软件设计上的缺陷，拿下ntp服务器并令与其同步的服务器执行某些消耗性的任务。由于ntpdate采用的方式是跳变，跟随它的服务器无法知道是否发生了异常（时间不一样的时候，唯一的办法是以服务器为准）。</p>
+<p>第二，这样做不精确。一旦ntp服务器宕机，跟随它的服务器也就会无法同步时间。与此不同，ntpd不仅能够校准计算机的时间，而且能够校准计算机的时钟。</p>
+<p>第三，这样做不够优雅。由于是跳变，而不是使时间变快或变慢，依赖时序的程序会出错（例如，如果ntpdate发现你的时间快了，则可能会经历两个相同的时刻，对某些应用而言，这是致命的）。因而，唯一一个可以令时间发生跳变的点，是计算机刚刚启动，但还没有启动很多服务的那个时候。其余的时候，理想的做法是使用ntpd来校准时钟，而不是调整计算机时钟上的时间。</p>
+<p>NTPD 在和时间服务器的同步过程中，会把 BIOS 计时器的振荡频率偏差——或者说 Local Clock 的自然漂移(drift)——记录下来。这样即使网络有问题，本机仍然能维持一个相当精确的走时。</p>
+<h2 id="2-安装ntp"><a href="#2-安装ntp" class="headerlink" title="2 安装ntp"></a>2 安装ntp</h2><p>ntp的安装是服务器和客户端集成在一起的，在ubuntu或centos下安装ntp服务器都非常简单，这里以ubuntu为例，使用NTP命令即可：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install -y ntp</span><br></pre></td></tr></table></figure>
+<p>如果需要ntpdate工具则需要额外安装ntpdate</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install -y ntpdate</span><br></pre></td></tr></table></figure>
+<h2 id="3-配置ntp服务器或server"><a href="#3-配置ntp服务器或server" class="headerlink" title="3 配置ntp服务器或server"></a>3 配置ntp服务器或server</h2><p>ntp的配置文件存放在<code>/etc/ntp.conf</code>，打开文件并进行修改，部分参数说明如下</p>
+<h3 id="3-1-使用server命令设定上层NTP服务器"><a href="#3-1-使用server命令设定上层NTP服务器" class="headerlink" title="3.1 使用server命令设定上层NTP服务器"></a>3.1 使用server命令设定上层NTP服务器</h3><p>设定方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">server [address] [options...]</span><br></pre></td></tr></table></figure>
+<p>在server后面填写服务器地址（可以使IP或主机名），之后是命令参数主要包括autokey，brust，ibrust，key，minpoll ，maxpoll。这里最长使用的是ibrust和prefer。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>brust</td>
+<td>当时间服务器不可达时，将发送间隔为2秒的连续八个包</td>
+</tr>
+<tr>
+<td>ibrust</td>
+<td>当时间服务器不可达时，将发送间隔为2秒的连续八个包</td>
+</tr>
+<tr>
+<td>prefer</td>
+<td>当其他数据相同时该节点将作为首选时间同步</td>
+</tr>
+</tbody>
+</table>
+<p>其它参数的详细说明可参考NTP的帮助文档（<code>man 5 ntp.conf</code>）。</p>
+<h3 id="3-2-使用restrict命令管理权限控制"><a href="#3-2-使用restrict命令管理权限控制" class="headerlink" title="3.2 使用restrict命令管理权限控制"></a>3.2 使用restrict命令管理权限控制</h3><p>设定方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">restrict [address] mask [mask] [parameter]</span><br></pre></td></tr></table></figure>
+<p>其中parameter的参数主要有以下这些：</p>
+<ul>
+<li>ignore: 拒绝所有类型的NTP联机；</li>
+<li>nomodify: 客户端不能使用ntpc与ntpq这两个程序来修改服务器的时间参数，但客户端仍可透过这个主机来进行网络校时；</li>
+<li>noquery: 客户端不能使用ntpq，ntpc等指令来查询时间服务器，等于不提供NTP的网络校时；</li>
+<li>notrap: 不提供trap这个远程事件登录(remote event logging)的功能；</li>
+<li>notrust: 拒绝没有认证的客户端；</li>
+</ul>
+<p>如果你没有在 parameter 的地方加上任何参数的话，这表示该 IP 或网段不受任何限制。</p>
+<h3 id="3-3-使用driftfile记录时间差异"><a href="#3-3-使用driftfile记录时间差异" class="headerlink" title="3.3 使用driftfile记录时间差异"></a>3.3 使用driftfile记录时间差异</h3><p>设定方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">driftfile [可以被ntpd写入的目录与档案]</span><br></pre></td></tr></table></figure>
+<p>因为预设的 NTP Server 本身的时间计算是依据 BIOS 的芯片震荡周期频率来计算的，但是这个数值与上层 Time Server 不见得会一致啊！所以 NTP 这个 daemon (ntpd) 会自动的去计算我们自己主机的频率与上层 Time server 的频率，并且将两个频率的误差记录下来，记录下来的档案就是在 driftfile 后面接的完整档名当中了！关于档名你必须要知道：</p>
+<ul>
+<li>driftfile 后面接的档案需要使用完整路径文件名；</li>
+<li>该档案不能是连结档；</li>
+<li>该档案需要设定成 ntpd 这个 daemon 可以写入的权限；</li>
+<li>该档案所记录的数值单位为：百万分之一秒 (ppm)；</li>
+</ul>
+<p>driftfile 后面接的档案会被 ntpd 自动更新，所以他的权限一定要能够让 ntpd 写入才行。</p>
+<h3 id="3-4-使用statsdir和filegen开启统计分析"><a href="#3-4-使用statsdir和filegen开启统计分析" class="headerlink" title="3.4 使用statsdir和filegen开启统计分析"></a>3.4 使用statsdir和filegen开启统计分析</h3><p>设定方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">statsdir directory_path</span><br><span class="line">filegen name file filename [type type] [link | nolink] [enable | disable]</span><br></pre></td></tr></table></figure>
+<p>当打开统计分析是会在directory_path目录下产生filegen中所设定的统计文件。</p>
+<h3 id="3-5-指定接口"><a href="#3-5-指定接口" class="headerlink" title="3.5 指定接口"></a>3.5 指定接口</h3><p>ntp服务开启时默认监听所有的接口，如果想指定ip段或者接口则按照一下方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">interface [listen | ignore | drop] [all | ipv4 | ipv6 | wildcard | name | address[/prefixlen]]</span><br></pre></td></tr></table></figure>
+<p>listen指定监听接口，ignore忽略该接口，drop丢弃接口的请求数据包，接口类型可以指定为v4、v6或接口名。</p>
+<h3 id="3-6-配置文件示例"><a href="#3-6-配置文件示例" class="headerlink" title="3.6 配置文件示例"></a>3.6 配置文件示例</h3><p>为了支持IPv6这里添加清华源的NTP服务器，清华源官方链接：<a href="https://tuna.moe/help/ntp/" target="_blank" rel="noopener">传送门</a></p>
+<p>配置文件完整示例如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"># /etc/ntp.conf, configuration for ntpd; see ntp.conf(5) for help</span><br><span class="line"># 时间差异文件</span><br><span class="line">driftfile /var/lib/ntp/ntp.drift</span><br><span class="line"></span><br><span class="line"># 接口设置</span><br><span class="line">interface listen eth0</span><br><span class="line">interface ignore ipv4</span><br><span class="line"></span><br><span class="line"># 分析统计信息</span><br><span class="line">#statsdir /var/log/ntpstats/</span><br><span class="line"></span><br><span class="line">statistics loopstats peerstats clockstats</span><br><span class="line">filegen loopstats file loopstats type day enable</span><br><span class="line">filegen peerstats file peerstats type day enable</span><br><span class="line">filegen clockstats file clockstats type day enable</span><br><span class="line"></span><br><span class="line"># 上层ntp server.</span><br><span class="line">pool ntp1.aliyun.com iburst</span><br><span class="line">pool ntp2.aliyun.com iburst</span><br><span class="line">pool ntp3.aliyun.com iburst</span><br><span class="line">pool ntp4.aliyun.com iburst</span><br><span class="line"># 清华源提供IPv4和IPv6双栈</span><br><span class="line">pool ntp.tuna.tsinghua.edu.cn iburst perfer</span><br><span class="line"></span><br><span class="line"># Use Ubuntu&apos;s ntp server as a fallback.</span><br><span class="line">pool ntp.ubuntu.com</span><br><span class="line"></span><br><span class="line"># 不允许来自公网上ipv4和ipv6客户端的访问</span><br><span class="line">restrict -4 default kod notrap nomodify nopeer noquery limited</span><br><span class="line">restrict -6 default kod notrap nomodify nopeer noquery limited</span><br><span class="line"># 准许以下网络的ntp请求</span><br><span class="line">restrict -6 240c:6100:ffff:: netmask 64 nomodify</span><br><span class="line">restrict 172.16.0.1 netmask 20 nomodify</span><br><span class="line"></span><br><span class="line"># 让NTP Server和其自身保持同步，如果在/etc/ntp.conf中定义的server都不可用时，将使用local时间作为ntp服务提供给ntp客户端.</span><br><span class="line">restrict 127.0.0.1</span><br><span class="line">restrict ::1</span><br><span class="line"></span><br><span class="line"># Needed for adding pool entries</span><br><span class="line">restrict source notrap nomodify noquery</span><br><span class="line"></span><br><span class="line"># If you want to provide time to your local subnet, change the next line.</span><br><span class="line"># (Again, the address is an example only.)</span><br><span class="line">#broadcast 192.168.123.255</span><br><span class="line"></span><br><span class="line"># If you want to listen to time broadcasts on your local subnet, de-comment the</span><br><span class="line"># next lines.  Please do this only if you trust everybody on the network!</span><br><span class="line">#disable auth</span><br><span class="line">#broadcastclient</span><br><span class="line"></span><br><span class="line">#Changes recquired to use pps synchonisation as explained in documentation:</span><br><span class="line">#http://www.ntp.org/ntpfaq/NTP-s-config-adv.htm#AEN3918</span><br><span class="line"></span><br><span class="line">#server 127.127.8.1 mode 135 prefer    # Meinberg GPS167 with PPS</span><br><span class="line">#fudge 127.127.8.1 time1 0.0042        # relative to PPS for my hardware</span><br><span class="line"></span><br><span class="line">#server 127.127.22.1                   # ATOM(PPS)</span><br><span class="line">#fudge 127.127.22.1 flag3 1            # enable PPS API</span><br></pre></td></tr></table></figure></p>
+<h2 id="4-启动ntp服务"><a href="#4-启动ntp服务" class="headerlink" title="4 启动ntp服务"></a>4 启动ntp服务</h2><p>启动ntp服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service ntp restart</span><br></pre></td></tr></table></figure>
+<p>通过ntpq命令查看ntp同步状态</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">watch ntpq -p</span><br><span class="line">Every 2.0s: ntpq -p                                                                                                                                 </span><br><span class="line"></span><br><span class="line">     remote           refid      st t when poll reach   delay   offset  jitter</span><br><span class="line">==============================================================================</span><br><span class="line"> ntp1.aliyun.com .POOL.          16 p    -   64    0    0.000    0.000   0.000</span><br><span class="line"> ntp2.aliyun.com .POOL.          16 p    -   64    0    0.000    0.000   0.000</span><br><span class="line"> ntp3.aliyun.com .POOL.          16 p    -   64    0    0.000    0.000   0.000</span><br><span class="line"> ntp4.aliyun.com .POOL.          16 p    -   64    0    0.000    0.000   0.000</span><br><span class="line"> ntp.ubuntu.com  .POOL.          16 p    -   64    0    0.000    0.000   0.000</span><br><span class="line">+2001:67c:1560:8 192.53.103.108   2 u  411  512  377  401.548  -19.089   4.396</span><br><span class="line">*2001:67c:1560:8 17.253.34.125    2 u  512  512  377  379.682    0.776  18.600</span><br></pre></td></tr></table></figure>
+<p>上述字段的含义如下：</p>
+<ul>
+<li>remote: 指的就是本地机器所连接的远程NTP服务器；</li>
+<li>refid: 指的是给远程服务器提供时间同步的服务器；</li>
+<li>st: 远程服务器的层级别（stratum）. 由于NTP是层型结构,有顶端的服务器,多层的Relay Server再到客户端。所以服务器从高到低级别可以设定为1-16. 为了减缓负荷和网络堵塞,原则上应该避免直接连接到级别为1的服务器的；</li>
+<li>when: 几秒钟前曾经做过时间同步化更新的动作；</li>
+<li>poll: 本地机和远程服务器多少时间进行一次同步(单位为秒).<br>在一开始运行NTP的时候这个poll值会比较小,那样和服务器同步的频率也就增加了,可以尽快调整到正确的时间范围.之后poll值会逐渐增大,同步的频率也就会相应减小；</li>
+<li>reach: 已经向上层 NTP 服务器要求更新的次数；</li>
+<li>delay: 网络传输过程当中延迟的时间，单位为 10^(-6) 秒；</li>
+<li>offset: 时间补偿的结果，单位与 10^(-3) 秒；</li>
+<li>jitter: Linux 系统时间与 BIOS 硬件时间的差异时间， 单位为 10^(-6) 秒。简单地说这个数值的绝对值越小我们和服务器的时间就越精确；</li>
+<li>*: 它告诉我们远端的服务器已经被确认为我们的主NTP Server,我们系统的时间将由这台机器所提供；</li>
+<li>+: 它将作为辅助的NTP Server和带有<em>号的服务器一起为我们提供同步服务. 当</em>号服务器不可用时它就可以接管；</li>
+<li>-: 远程服务器被clustering algorithm认为是不合格的NTP Server；</li>
+<li>x: 远程服务器不可用；</li>
+</ul>
+<p><strong>ntpdate 强制同步时间</strong></p>
+<p>如果本机与时间同步服务器时间间隔太大可以通过ntpdate命令来进行同步，需要指出的是ntpdate使用前需要停止ntpd的进程。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ntpdate ntp1.ailiyun.com</span><br></pre></td></tr></table></figure>
+<p>【Note】</p>
+<p>ntp监听的是123端口，部分操作系统或防火墙等可能限制123端口因此需要放开端口限制。</p>
+<p>【参考链接】</p>
+<p>1)<a href="https://www.linuxidc.com/Linux/2015-11/124911.htm" target="_blank" rel="noopener">centos 7 ntp 同步说明</a></p>
+<p>2)<a href="https://www.cnblogs.com/kerrycode/archive/2015/08/20/4744804.html" target="_blank" rel="noopener">NTP 安装与配置</a></p>
 
       
     </div>
@@ -677,13 +729,9 @@
       
         <div class="post-tags">
           
-            <a href="/source/tags/Dovetail/" rel="tag"><i class="fa fa-tag"></i> Dovetail</a>
+            <a href="/source/tags/Ubuntu/" rel="tag"><i class="fa fa-tag"></i> Ubuntu</a>
           
-            <a href="/source/tags/OPNFV/" rel="tag"><i class="fa fa-tag"></i> OPNFV</a>
-          
-            <a href="/source/tags/NFV/" rel="tag"><i class="fa fa-tag"></i> NFV</a>
-          
-            <a href="/source/tags/CVP/" rel="tag"><i class="fa fa-tag"></i> CVP</a>
+            <a href="/source/tags/NTP/" rel="tag"><i class="fa fa-tag"></i> NTP</a>
           
         </div>
       
@@ -696,8 +744,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/hexo_blog_build.html" rel="next" title="如何搭建 hexo 博客">
-                <i class="fa fa-chevron-left"></i> 如何搭建 hexo 博客
+              <a href="/KVM_install_windows.html" rel="next" title="KVM安装windows">
+                <i class="fa fa-chevron-left"></i> KVM安装windows
               </a>
             
           </div>
@@ -705,10 +753,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/opnfv_Euphrates_install-01.html" rel="prev" title="OPNFV Euphrates 安装（一）">
-                OPNFV Euphrates 安装（一） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -922,7 +966,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Dovetail-安装"><span class="nav-number">1.</span> <span class="nav-text">1.Dovetail 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-准备相应的测试代码"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 准备相应的测试代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-配置-dovetail-运行环境"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 配置 dovetail 运行环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-运行-dovetail-容器"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 运行 dovetail 容器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-执行测试"><span class="nav-number">2.</span> <span class="nav-text">2. 执行测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-简单用例测试"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 简单用例测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-其他测试配置文件"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 其他测试配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-HA测试配置"><span class="nav-number">2.3.</span> <span class="nav-text">2.2.1 HA测试配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-tempest测试配置"><span class="nav-number">2.3.1.</span> <span class="nav-text">2.2.2 tempest测试配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-测试结果"><span class="nav-number">3.</span> <span class="nav-text">3. 测试结果</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-前言"><span class="nav-number">1.</span> <span class="nav-text">1 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-安装ntp"><span class="nav-number">2.</span> <span class="nav-text">2 安装ntp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-配置ntp服务器或server"><span class="nav-number">3.</span> <span class="nav-text">3 配置ntp服务器或server</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-使用server命令设定上层NTP服务器"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 使用server命令设定上层NTP服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-使用restrict命令管理权限控制"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 使用restrict命令管理权限控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-使用driftfile记录时间差异"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 使用driftfile记录时间差异</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-使用statsdir和filegen开启统计分析"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 使用statsdir和filegen开启统计分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-指定接口"><span class="nav-number">3.5.</span> <span class="nav-text">3.5 指定接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-配置文件示例"><span class="nav-number">3.6.</span> <span class="nav-text">3.6 配置文件示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-启动ntp服务"><span class="nav-number">4.</span> <span class="nav-text">4 启动ntp服务</span></a></li></ol></div>
             
 
           </div>
