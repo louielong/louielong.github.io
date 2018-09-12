@@ -201,7 +201,7 @@ body {
     padding-right: 0 !important;
   }
 }
-@media (min-width: 1600px) {
+@media (min-width: 1200px) {
   body {
     font-size: 16px;
   }
@@ -447,6 +447,11 @@ body {
   padding: 100px 0 70px;
   width: 700px;
 }
+@media (min-width: 1200px) {
+  .container .header-inner {
+    width: 800px;
+  }
+}
 @media (min-width: 1600px) {
   .container .header-inner {
     width: 900px;
@@ -458,6 +463,11 @@ body {
 .main-inner {
   margin: 0 auto;
   width: 700px;
+}
+@media (min-width: 1200px) {
+  .container .main-inner {
+    width: 800px;
+  }
 }
 @media (min-width: 1600px) {
   .container .main-inner {
@@ -476,6 +486,11 @@ body {
   margin: 20px auto;
   width: 700px;
 }
+@media (min-width: 1200px) {
+  .container .footer-inner {
+    width: 800px;
+  }
+}
 @media (min-width: 1600px) {
   .container .footer-inner {
     width: 900px;
@@ -487,8 +502,8 @@ pre,
   margin: 20px 0;
   padding: 0;
   font-size: 14px;
-  color: #ccc;
-  background: #2d2d2d;
+  color: #4d4d4c;
+  background: #f7f7f7;
   line-height: 1.6;
 }
 pre,
@@ -508,7 +523,7 @@ pre {
 }
 pre code {
   padding: 0;
-  color: #ccc;
+  color: #4d4d4c;
   background: none;
   text-shadow: none;
 }
@@ -531,7 +546,7 @@ pre code {
 }
 .highlight figcaption {
   font-size: 1em;
-  color: #ccc;
+  color: #4d4d4c;
   line-height: 1em;
   margin-bottom: 1em;
   margin: 0em;
@@ -549,23 +564,23 @@ pre code {
 }
 .highlight figcaption a {
   float: right;
-  color: #ccc;
+  color: #4d4d4c;
 }
 .highlight figcaption a:hover {
-  border-bottom-color: #ccc;
+  border-bottom-color: #4d4d4c;
 }
 .highlight .gutter pre {
   padding-left: 10px;
   padding-right: 10px;
-  color: #999;
+  color: #869194;
   text-align: right;
-  background-color: #1b1b1b;
+  background-color: #eff2f3;
 }
 .highlight .code pre {
   width: 100%;
   padding-left: 10px;
   padding-right: 10px;
-  background-color: #2d2d2d;
+  background-color: #f7f7f7;
 }
 .highlight .line {
   height: 20px;
@@ -583,16 +598,16 @@ pre code {
   border: none;
 }
 pre .deletion {
-  background: #008000;
+  background: #fdd;
 }
 pre .addition {
-  background: #800000;
+  background: #dfd;
 }
 pre .meta {
-  color: #c9c;
+  color: #8959a8;
 }
 pre .comment {
-  color: #999;
+  color: #8e908c;
 }
 pre .variable,
 pre .attribute,
@@ -606,7 +621,7 @@ pre .html .doctype,
 pre .css .id,
 pre .css .class,
 pre .css .pseudo {
-  color: #f2777a;
+  color: #c82829;
 }
 pre .number,
 pre .preprocessor,
@@ -615,7 +630,7 @@ pre .literal,
 pre .params,
 pre .constant,
 pre .command {
-  color: #f99157;
+  color: #f5871f;
 }
 pre .ruby .class .title,
 pre .css .rules .attribute,
@@ -628,11 +643,11 @@ pre .xml .cdata,
 pre .special,
 pre .number,
 pre .formula {
-  color: #9c9;
+  color: #718c00;
 }
 pre .title,
 pre .css .hexcolor {
-  color: #6cc;
+  color: #3e999f;
 }
 pre .function,
 pre .python .decorator,
@@ -642,17 +657,14 @@ pre .ruby .title .keyword,
 pre .perl .sub,
 pre .javascript .title,
 pre .coffeescript .title {
-  color: #69c;
+  color: #4271ae;
 }
 pre .keyword,
 pre .javascript .function {
-  color: #c9c;
+  color: #8959a8;
 }
-.full-image.full-image.full-image.full-image {
+.posts-expand .post-body img.full-image {
   border: none;
-  max-width: 100%;
-  width: auto;
-  margin: 20px auto 25px;
 }
 .blockquote-center,
 .page-home .post-type-quote blockquote,
@@ -1515,6 +1527,10 @@ pre .javascript .function {
   font-size: 14px;
   margin-top: 2px;
 }
+.posts-expand .post-meta time {
+  border-bottom: 1px dashed #999;
+  cursor: help;
+}
 .post-meta-divider {
   margin: 0 0.5em;
 }
@@ -1679,20 +1695,10 @@ pre .javascript .function {
   display: inline-block;
   margin: 0.8em 2em 0 2em;
 }
-#wechat:hover p {
+#QR > div:hover p {
   animation: roll 3s infinite linear;
   -webkit-animation: roll 3s infinite linear;
   -moz-animation: roll 3s infinite linear;
-}
-#alipay:hover p {
-  animation: roll 0.1s infinite linear;
-  -webkit-animation: roll 0.1s infinite linear;
-  -moz-animation: roll 0.1s infinite linear;
-}
-#bitcoin:hover p {
-  animation: roll 0.1s infinite linear;
-  -webkit-animation: roll 0.1s infinite linear;
-  -moz-animation: roll 0.1s infinite linear;
 }
 @-moz-keyframes roll {
   from {
@@ -1860,6 +1866,7 @@ pre .javascript .function {
   max-width: 96px;
   height: auto;
   border: 2px solid #333;
+  opacity: 1;
 }
 .site-author-name {
   margin: 5px 0 0;
@@ -1943,7 +1950,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff54ff;
+  background: #00ff6e;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2218,31 +2225,8 @@ pre .javascript .function {
     transform: scale(1.1);
   }
 }
-.post-spread {
-  margin-top: 20px;
-  text-align: center;
-}
-.jiathis_style {
-  display: inline-block;
-}
-.jiathis_style a {
-  border: none;
-}
 .fa {
   font-family: FontAwesome !important;
-}
-.post-spread {
-  margin-top: 20px;
-  text-align: center;
-}
-.bdshare-slide-button-box a {
-  border: none;
-}
-.bdsharebuttonbox {
-  display: inline-block;
-}
-.bdsharebuttonbox a {
-  border: none;
 }
 .local-search-pop-overlay {
   position: fixed;
@@ -2958,7 +2942,7 @@ hr {
     font-size: 22px;
   }
 }
-@media (min-width: 1600px) {
+@media (min-width: 1200px) {
   .posts-expand .post-title {
     font-size: 26px;
   }
@@ -3005,7 +2989,7 @@ hr {
     font-size: 12px;
   }
 }
-@media (min-width: 1600px) {
+@media (min-width: 1200px) {
   .post-button a {
     font-size: 16px;
   }
