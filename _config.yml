@@ -88,6 +88,14 @@ pagination_dir: page
 #theme: landscape
 theme: next
 
+
+leancloud_counter_security:
+  enable_sync: true
+  app_id: M8d5yPXQ5l0kwFz1bO6cF7b3-gzGzoHsz
+  app_key: QEarlHm5c8XcuF22TbFD3Bqn
+  username: louie
+  password:
+
 # word count
 symbols_count_time:
   symbols: true
@@ -104,7 +112,9 @@ algolia:
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-    type: git
+  # other deployer
+  - type: leancloud_counter_security_sync
+  - type: git
     repo: https://github.com/louielong/louielong.github.io.git
     branch: master       #这里填写分支
-    message: Fix site author display #(默认为 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }})
+    message: Fix post analyze error #(默认为 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }})
