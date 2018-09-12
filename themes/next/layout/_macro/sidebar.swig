@@ -34,7 +34,7 @@
                 src="{{ url_for( theme.avatar.url | default(theme.images + '/avatar.gif') ) }}"
                 alt="{{ author }}" />
             {% endif %}
-              <p class="site-author-name" itemprop="name">{{ author }}</p>
+              <p class="site-author-name" itemprop="name">Louie Long</p>
               <p class="site-description motion-element" itemprop="description">{#
               #}{{ description }}{#
             #}</p>
