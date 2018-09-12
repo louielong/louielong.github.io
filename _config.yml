@@ -107,4 +107,4 @@ deploy:
     type: git
     repo: https://github.com/louielong/louielong.github.io.git
     branch: master       #这里填写分支
-    message: Update Next from 6.1 to 6.4.1 #(默认为 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }})
+    message: Update DPDK logo image #(默认为 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }})

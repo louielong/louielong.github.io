@@ -12,7 +12,7 @@ categories:
 description:
   - OPNFV Euphrates DPDK scenario deploy
 summary_img:
-  - http://dpdk.org/logos/dpdk.png
+  - https://i.imgur.com/mxSHEI5.png
 top:
 ---
 
