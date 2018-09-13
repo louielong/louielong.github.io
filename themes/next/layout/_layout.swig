@@ -117,5 +117,11 @@
   {% include '_third-party/exturl.swig' %}
   {% include '_third-party/bookmark.swig' %}
   {% include '_third-party/copy-code.swig' %}
+
+  {# louie add 2018-09-11 #}
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/clicklove.js"></script>
+  {# louie add 2018-09-11 #}
+
 </body>
 </html>
