@@ -33,8 +33,8 @@
   #}</span>
   {% endif %}
 
-  {# louie add 2018-09-11 #}
-  <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+  {# louie add 2018-10-26 #}
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
   </script>
   <span id="busuanzi_container_site_pv">
   | 本站总访问量<span style="color:#FA8072" id="busuanzi_value_site_pv"></span>次
