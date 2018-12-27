@@ -82,7 +82,7 @@ RFC处理过程：一个RFC文件在成为官方标准前一般至少要经历�
 
 **[NOTE]**Only the first two, proposed and full, are standards within the IETF. A good summary of this can be found in the aptly titled [[RFC 1796](https://datatracker.ietf.org/doc/rfc1796)], "Not All RFCs Are Standards".
 
-**[备注]**只有前面两种标准（建议的标准和完全标准）属于IETF内的标准。在题为《并非所有RFC都是标准》[[RFC1796\]](http://www6.ietf.org/tao-translated-zh.html#RFC1796)的文档中可找到相关摘要。
+**[备注]**只有前面两种标准（建议的标准和完全标准）属于IETF内的标准。在题为《并非所有RFC都是标准》[RFC 1796](http://www6.ietf.org/tao-translated-zh.html#RFC1796)的文档中可找到相关摘要。
 
 ### 2.3 如何粗暴的撰写一篇IETF Internet Draft
 
@@ -92,7 +92,7 @@ RFC处理过程：一个RFC文件在成为官方标准前一般至少要经历�
 
 #### 2.3.1 xml格式套用
 
-选择一份RFC draft的xml格式作为模板将写好的文档套用进去，如使用https://www.ietf.org/id/draft-wang-nfvrg-network-slice-diverse-standards-00.xml，将其保存在本地，推荐使用`notepad++`或者`sublime txt`打开，当然如果你熟练使用`记事本`也没问题，关于xml格式的官方说明见[RFC7749](http://xml2rfc.tools.ietf.org/rfc7749.html)，下面做简要说明。
+选择一份RFC draft的xml格式作为模板将写好的文档套用进去，如使用[draft-wang-nfvrg-network-slice-diverse-standards-00.xml](https://www.ietf.org/id/draft-wang-nfvrg-network-slice-diverse-standards-00.xml)，将其保存在本地，推荐使用`notepad++`或者`sublime txt`打开，当然如果你熟练使用`记事本`也没问题，关于xml格式的官方说明见[RFC7749](http://xml2rfc.tools.ietf.org/rfc7749.html)，下面做简要说明。
 
 ##### 2.3.1.1 xml模板头
 
@@ -325,14 +325,14 @@ Draft的命名遵循如下的格式
 **转义符**，文章中出现的如下字符必须转义，否则在转换过程中或出错，注意字符后的`;`也是需要的
 
 |转义后字符          | 转义前字符  |
-|------------------|------------|
-|`&amp;` 或 `&#38;`|&           |
-|`&lt;` 或 `&#60;` |<           |
-|`&gt;` 或 `&#62;` |>           |
-|`&quot;`          |"           |
-|`&nbsp;`          |空格         |
-|`&copy;`          |版权符 &copy;|
-|`&reg;`           |注册符 &reg; |
+|--------------------|-------------|
+|`&amp;` 或 `&#38;`  |&            |
+|`&lt;` 或 `&#60;`   |<            |
+|`&gt;` 或 `&#62;`   |>            |
+|`&quot;`            |"            |
+|`&nbsp;`            |空格         |
+|`&copy;`            |版权符 &copy;|
+|`&reg;`             |注册符 &reg; |
 **【Note】**其中&lt;和&gt;最常用，对于I-D内容中包含的xml元素时，需要对<和>进行转义。
 
 **还有最重要的是务必不要出现中文字符，在后续检测中报错的很大一部分问题出在未知的中文标点符号中。**
