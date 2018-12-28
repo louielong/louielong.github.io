@@ -108,9 +108,9 @@
       <category term="Ubuntu" scheme="https://louielong.github.io/categories/Ubuntu/"/>
     
     
-      <category term="NTP" scheme="https://louielong.github.io/source/tags/NTP/"/>
-    
       <category term="Ubuntu" scheme="https://louielong.github.io/source/tags/Ubuntu/"/>
+    
+      <category term="NTP" scheme="https://louielong.github.io/source/tags/NTP/"/>
     
   </entry>
   
@@ -132,9 +132,9 @@
       <category term="ubuntu" scheme="https://louielong.github.io/categories/ubuntu/"/>
     
     
-      <category term="Ubuntu" scheme="https://louielong.github.io/source/tags/Ubuntu/"/>
-    
       <category term="KVM" scheme="https://louielong.github.io/source/tags/KVM/"/>
+    
+      <category term="Ubuntu" scheme="https://louielong.github.io/source/tags/Ubuntu/"/>
     
   </entry>
   
