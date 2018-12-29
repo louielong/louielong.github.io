@@ -9,7 +9,7 @@
 
 
 {% if theme.google_site_verification %}
-  <meta name="google-site-verification" content="v2-SGz9T4gJIpOQ2lLxr1Bl94gxOQ17jHfhHeSgno0Q" />
+  <meta name="google-site-verification" content="{{ theme.google_site_verification }}" />
 {% endif %}
 
 
