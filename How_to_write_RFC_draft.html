@@ -158,12 +158,11 @@
   <meta name="description" content="RFC Internet Draft 撰写">
 <meta name="keywords" content="RFC,Internet Draft">
 <meta property="og:type" content="article">
-<meta property="og:title" content="IETF及RFC介绍">
-<meta property="og:url" content="https://louielong.github.io/Introduce_of_IETF&RFC.html">
+<meta property="og:title" content="IETF介绍及RFC Draft撰写">
+<meta property="og:url" content="https://louielong.github.io/How_to_write_RFC_draft.html">
 <meta property="og:site_name" content="Louie&#39;s Blog">
 <meta property="og:description" content="RFC Internet Draft 撰写">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://www.ietf.org/lib/dt/6.89.2/ietf/images/ietflogo.png">
 <meta property="og:image" content="https://i.imgur.com/UTjMKtQ.jpg">
 <meta property="og:image" content="https://i.imgur.com/W1fXOks.png">
 <meta property="og:image" content="https://i.imgur.com/Ty92Cp4.png">
@@ -174,11 +173,11 @@
 <meta property="og:image" content="https://i.imgur.com/F1yEJkc.png">
 <meta property="og:image" content="https://i.imgur.com/0ZBvLkX.png">
 <meta property="og:image" content="https://i.imgur.com/4yiaq9L.png">
-<meta property="og:updated_time" content="2018-12-27T10:02:35.056Z">
+<meta property="og:updated_time" content="2018-12-29T06:05:42.658Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="IETF及RFC介绍">
+<meta name="twitter:title" content="IETF介绍及RFC Draft撰写">
 <meta name="twitter:description" content="RFC Internet Draft 撰写">
-<meta name="twitter:image" content="https://www.ietf.org/lib/dt/6.89.2/ietf/images/ietflogo.png">
+<meta name="twitter:image" content="https://i.imgur.com/UTjMKtQ.jpg">
 
 
 
@@ -187,7 +186,7 @@
 
 
 
-  <link rel="canonical" href="https://louielong.github.io/Introduce_of_IETF&RFC.html"/>
+  <link rel="canonical" href="https://louielong.github.io/How_to_write_RFC_draft.html"/>
 
 
 
@@ -197,7 +196,7 @@
   };
 </script>
 
-  <title>IETF及RFC介绍 | Louie's Blog</title>
+  <title>IETF介绍及RFC Draft撰写 | Louie's Blog</title>
   
 
 
@@ -413,7 +412,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://louielong.github.io/Introduce_of_IETF&RFC.html">
+    <link itemprop="mainEntityOfPage" href="https://louielong.github.io/How_to_write_RFC_draft.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Author">
@@ -430,7 +429,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">IETF及RFC介绍
+          <h1 class="post-title" itemprop="name headline">IETF介绍及RFC Draft撰写
               
             
           </h1>
@@ -455,12 +454,24 @@
                 
               
 
-              <time title="创建时间：2018-12-27 17:15:34 / 修改时间：18:02:35" itemprop="dateCreated datePublished" datetime="2018-12-27T17:15:34+08:00">2018-12-27</time>
+              <time title="创建时间：2018-12-27 17:15:34" itemprop="dateCreated datePublished" datetime="2018-12-27T17:15:34+08:00">2018-12-27</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-29 14:05:42" itemprop="dateModified" datetime="2018-12-29T14:05:42+08:00">2018-12-29</time>
               
             
           </span>
@@ -491,7 +502,7 @@
 
           
           
-             <span id="/Introduce_of_IETF&RFC.html" class="leancloud_visitors" data-flag-title="IETF及RFC介绍">
+             <span id="/How_to_write_RFC_draft.html" class="leancloud_visitors" data-flag-title="IETF介绍及RFC Draft撰写">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -566,7 +577,6 @@
         <h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>最近由于工作需要，要写一篇RFC draft，谨以此文记录一下过程中查到的资料以及相关工作。</p>
 <p>在通信和计算机行业一谈到标准提到最多的就是RFC，没接触RFC之前一直不明白RFC到底是什么。RFC的英文是“Request for Comments”，即“请求建议”，当某家机构或团体开发出了一套标准或提出对某种标准的设想，想要征询外界的意见时，就会在Internet上发放一份RFC，对这一问题感兴趣的人可以阅读该RFC并提出自己的意见；绝大部分网络标准的指定都是以RFC的形式开始，经过大量的论证和修改过程，由主要的标准化组织所指定的，但在RFC中所收录的文件并不都是正在使用或为大家所公认的，也有很大一部分只在某个局部领域被使用或并没有被采用，一份RFC具体处于什么状态都在文件中作了明确的标识。</p>
 <p><strong>IETF</strong>互联网工程任务小组（<strong>英语：Internet Engineering Task Force</strong>）负责互联网标准的开发和推动。它的组织形式主要是大量负责特定议题的工作组，每个都有一个指定主席（或者若干副主席）。工作组再用主题组织为<strong>领域</strong>（area）；每个领域都有一个<strong>领域指导</strong>（area director，AD），大多数领域还有两个副AD；AD任命工作组主席。AD和IETF主席构成<strong>Internet Engineering Steering Group</strong>（IESG），负责IETF的整体运作。[1]</p>
-<p><img src="https://www.ietf.org/lib/dt/6.89.2/ietf/images/ietflogo.png" alt="ietflogo"></p>
 <p>关于IETF的更多详细介绍可以查看《IETF之道》[2][3]，里面详细介绍了IETF的运作及相关组织架构。下面摘录一下专业术语如下：</p>
 <table>
 <thead>

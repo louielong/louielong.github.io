@@ -2,9 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://louielong.github.io/Introduce_of_IETF&RFC.html</loc>
+    <loc>https://louielong.github.io/How_to_write_RFC_draft.html</loc>
     
-    <lastmod>2018-12-27T10:02:35.056Z</lastmod>
+    <lastmod>2018-12-29T06:05:42.658Z</lastmod>
     
   </url>
   
@@ -23,7 +23,7 @@
   </url>
   
   <url>
-    <loc>https://louielong.github.io/linux_ntp_install.html</loc>
+    <loc>https://louielong.github.io/OPNFV%E6%B5%8B%E8%AF%95%E9%A1%B9%E7%9B%AE-Dovetail.html</loc>
     
     <lastmod>2018-09-12T09:51:08.845Z</lastmod>
     
@@ -37,7 +37,7 @@
   </url>
   
   <url>
-    <loc>https://louielong.github.io/OPNFV%E6%B5%8B%E8%AF%95%E9%A1%B9%E7%9B%AE-Dovetail.html</loc>
+    <loc>https://louielong.github.io/OPNFV%E6%B5%8B%E8%AF%95%E9%A1%B9%E7%9B%AE-yardstick.html</loc>
     
     <lastmod>2018-09-12T09:51:08.845Z</lastmod>
     
@@ -58,7 +58,7 @@
   </url>
   
   <url>
-    <loc>https://louielong.github.io/tags/index.html</loc>
+    <loc>https://louielong.github.io/linux_ntp_install.html</loc>
     
     <lastmod>2018-09-12T09:51:08.845Z</lastmod>
     
@@ -79,14 +79,7 @@
   </url>
   
   <url>
-    <loc>https://louielong.github.io/mysql-ha.html</loc>
-    
-    <lastmod>2018-09-12T09:51:08.845Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://louielong.github.io/OPNFV%E6%B5%8B%E8%AF%95%E9%A1%B9%E7%9B%AE-yardstick.html</loc>
+    <loc>https://louielong.github.io/tags/index.html</loc>
     
     <lastmod>2018-09-12T09:51:08.845Z</lastmod>
     
@@ -94,6 +87,13 @@
   
   <url>
     <loc>https://louielong.github.io/opnfv_Euphrates_install-01.html</loc>
+    
+    <lastmod>2018-09-12T09:51:08.845Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://louielong.github.io/mysql-ha.html</loc>
     
     <lastmod>2018-09-12T09:51:08.845Z</lastmod>
     
