@@ -326,9 +326,9 @@
       <category term="OPNFV" scheme="https://louielong.github.io/categories/OPNFV/"/>
     
     
-      <category term="Dovetail" scheme="https://louielong.github.io/source/tags/Dovetail/"/>
-    
       <category term="OPNFV" scheme="https://louielong.github.io/source/tags/OPNFV/"/>
+    
+      <category term="Dovetail" scheme="https://louielong.github.io/source/tags/Dovetail/"/>
     
       <category term="NFV" scheme="https://louielong.github.io/source/tags/NFV/"/>
     
@@ -378,9 +378,9 @@
       <category term="OPNFV" scheme="https://louielong.github.io/categories/OPNFV/"/>
     
     
-      <category term="OPNFV" scheme="https://louielong.github.io/source/tags/OPNFV/"/>
-    
       <category term="Yardstick" scheme="https://louielong.github.io/source/tags/Yardstick/"/>
+    
+      <category term="OPNFV" scheme="https://louielong.github.io/source/tags/OPNFV/"/>
     
       <category term="Openstack" scheme="https://louielong.github.io/source/tags/Openstack/"/>
     
