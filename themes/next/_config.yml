@@ -133,6 +133,10 @@ menu:
   #sitemap: /sitemap.xml || sitemap
   commonweal: /404/ || heartbeat
 
+# Sitemap
+sitemap:
+  path: sitemap.xml
+
 # Enable/Disable menu icons / item badges.
 menu_settings:
   icons: true
