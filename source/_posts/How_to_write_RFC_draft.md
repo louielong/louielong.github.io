@@ -1,5 +1,5 @@
 ---
-title: IETF及RFC介绍
+title: IETF介绍及RFC Draft撰写
 date: 2018-12-27 17:15:34
 tags:
   - IETF
@@ -22,7 +22,6 @@ summary_img:
 
 **IETF**互联网工程任务小组（**英语：Internet Engineering Task Force**）负责互联网标准的开发和推动。它的组织形式主要是大量负责特定议题的工作组，每个都有一个指定主席（或者若干副主席）。工作组再用主题组织为**领域**（area）；每个领域都有一个**领域指导**（area director，AD），大多数领域还有两个副AD；AD任命工作组主席。AD和IETF主席构成**Internet Engineering Steering Group**（IESG），负责IETF的整体运作。[1]
 
-![ietflogo](https://www.ietf.org/lib/dt/6.89.2/ietf/images/ietflogo.png)
 
 关于IETF的更多详细介绍可以查看《IETF之道》[2][3]，里面详细介绍了IETF的运作及相关组织架构。下面摘录一下专业术语如下：
 
