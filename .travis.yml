@@ -1,7 +1,6 @@
 language: node_js
 
-node_js:
-  - "iojs"
+node_js: stable
 
 # E: Build LifeCycle
 branches:
@@ -23,6 +22,7 @@ install:
 before_script:
   - git config user.name "louie.long"
   - git config user.email "longyu805@163.com"
+  - pwd
   - sed -i "97s/^  password:.*/  password: $LEAN_PASSWD/" _config.yml
   - sed -i "s~https://github.com/louielong/louielong.github.io.git~https://${GITHUB_TOKEN}@github.com/louielong/louielong.github.io.git~" _config.yml
 
