@@ -6,12 +6,12 @@ branches:
   only:
     - hexo
 
+before_install:
+  - export TZ='Asia/Shanghai'
+
 # S: Build Lifecycle
 install:
   - npm install
-
-before_install:
-  - export TZ='Asia/Shanghai'
 
 before_script:
   - git config user.name "louie"
