@@ -25,7 +25,7 @@ before_script:
 
 # Deploy blog
 script:
-  - sed -i "97s/^  password:.*/  password: ${LEAN_PASSWD}/" _config.yml
+  - sed -i "s/LEANCLOUD_PASSWD/${LEAN_PASSWD}/" _config.yml
   - sed -i "s~https://github.com/louielong/louielong.github.io.git~https://${GITHUB_TOKEN}@github.com/louielong/louielong.github.io.git~" _config.yml
   - hexo g
   - hexo d

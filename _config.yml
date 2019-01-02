@@ -94,7 +94,7 @@ leancloud_counter_security:
   app_id: M8d5yPXQ5l0kwFz1bO6cF7b3-gzGzoHsz
   app_key: QEarlHm5c8XcuF22TbFD3Bqn
   username: louie
-  password:
+  password: LEANCLOUD_PASSWD
 
 # word count
 symbols_count_time:
