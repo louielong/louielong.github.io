@@ -16,7 +16,7 @@ summary_img:
 
 ## 1 前言
 
-需要在window的系统上安装相应的软件，而当前的服务器都只安装了linux系统，由于服务器安装的linux都是server版本，因此只能在linux主机上通过KVM的方式安装window server 2008。本文记录一下再无桌面的ubuntu server下使用KVM安装windows server的过程。
+需要在window的系统上安装相应的软件，而当前的服务器都只安装了linux系统，由于服务器安装的linux都是server版本，因此只能在linux主机上通过KVM的方式安装window server 2008。本文记录一下在无桌面的ubuntu server下使用KVM安装windows server的过程。
 
 环境说明：
 
@@ -28,7 +28,7 @@ windows：windows server 2008 R2
 
 ### 2.1 必要软件安装
 
-本次安装的linux系统为`ubuntu 16.04 server`版本，首先通过apt命令安装必要的软件，服务器都是命令行，没有安装 X 桌面，所以加入 `--no-install-recommends` 参数，否则会安装 `virt-viewer` 之类的包，而它们的依赖关系中又有 X11 和很多图形图像库，而这些都用不上。如果开启了桌面系统，那么可以不加该参数[1]。
+本次安装的linux系统为`ubuntu 16.04 server`版本，首先通过apt命令安装必要的软件，服务器都是命令行，没有安装 X 桌面，所以加入 `--no-install-recommends` 参数，否则会安装 `virt-viewer` 之类的包，在它们的依赖关系中有 X11 和很多图形图像库，而这些都用不上。如果开启了桌面系统，那么可以不加该参数[1]。
 
 ```shell
 louie@ubuntu:~$ sudo apt-get install -y --no-install-recommends qemu-kvm qemu-utils libvirt-bin virtinst cpu-checker
@@ -42,7 +42,7 @@ INFO: /dev/kvm exists
 KVM acceleration can be used
 ```
 
-KVM安装完成后会自动生成一个virbr0 的桥接网络，但是这个是一个 NAT 的网络，没有办法跟局域网内的其他主机进行通信，因为安装的windows需要跟其他机器通信，因此需要将KVM的网桥和物理网卡桥接在一起。
+KVM安装完成后会自动生成一个virbr0 的桥接网络，但是这个是一个 NAT 的网络，没有办法跟局域网内的其他主机直接进行通信，因为安装的windows需要跟其他机器通信，因此需要将KVM的网桥和物理网卡桥接在一起。
 
 配置`/etc/network/interfaces`文件，加入一下配置
 
@@ -83,7 +83,7 @@ virbr0		8000.5254006a9d3c	yes		virbr0-nic
 louie@ubuntu:~$ qemu-img create -f qcow2 WASU_AF.qcow2 50G
 ```
 
-在启动虚拟机之前要再下载virtio驱动，因为kvm安装windows采用的是virtio的形式，主要是磁盘和网卡驱动，下载地址：[传送门](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.126-2/)
+在启动虚拟机之前需要下载virtio驱动，因为kvm安装windows采用的是virtio的形式，主要是磁盘和网卡驱动，下载地址：[传送门](https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.126-2/)
 
 这里安装的是64位系统，选择`virtio-win-0.1.126_amd64.vfd `的virtio驱动[2]
 
@@ -126,7 +126,7 @@ Domain installation still in progress. Waiting for installation to complete.
 
 1）分配给虚拟机的vCPU个数由sockets、cores、threads三个参数的乘积来控制，sockets指代CPU插槽数目，cores指代每个插槽芯片的核心数，threads指代那个核心的超线程，如上所示创建的虚拟机共有8个逻辑cpu。
 
-2）`listen`指代的是虚拟机的VNC监听接口，默认是localhost，‘0:0:0:0’指带所有的IPv4接口，‘::’指代所有接口，包括IPv4和IPv6。
+2）`listen`指代的是虚拟机的VNC监听接口，默认是localhost，`0:0:0:0`指带所有的IPv4接口，`::`指代所有接口，包括IPv4和IPv6。
 
 
 
@@ -178,25 +178,25 @@ louie@ubuntu:~$ virsh list
 关机
 
 ```shell
-sudo virsh shutdown DELL_STORAGE  
+sudo virsh shutdown DELL_STORAGE
 ```
 
 开机
 
 ```shell
-sudo virsh start DELL_STORAGE  
+sudo virsh start DELL_STORAGE
 ```
 
 暂停（挂起）
 
 ```shell
-sudo virsh suspend DELL_STORAGE  
+sudo virsh suspend DELL_STORAGE
 ```
 
 删除
 
 ```shell
-sudo virsh destroy DELL_STORAGE  
+sudo virsh destroy DELL_STORAGE
 ```
 
 要想彻底删除一个虚拟机需要将其xml文件一并删除，即删除`/etc/libvirt/qemu/`下的同名xml文件，同时重启libvirt服务，`sudo service libvirt-bin restart `。
@@ -206,8 +206,8 @@ sudo virsh destroy DELL_STORAGE
 需要修改虚拟机的硬件配置需要修改虚拟机的配置文件，位于`/etc/libvirt/qemu/`目录下有一个同名的xml文件，但是不要直接修改它，使用如下命令进行编辑（编辑前先将虚拟机关机），首次编辑需要选择编辑器，这里选择vim
 
 ```shell
-louie@ubuntu:~$ sudo virsh shutdown DELL_STORAGE  
-louie@ubuntu:~$ sudo virsh edit DELL_STORAGE  
+louie@ubuntu:~$ sudo virsh shutdown DELL_STORAGE
+louie@ubuntu:~$ sudo virsh edit DELL_STORAGE
 [sudo] password for louie:
 
 Select an editor.  To change later, run 'select-editor'.
@@ -265,7 +265,7 @@ Choose 1-4 [2]: 3
   <clock offset='localtime'>   //虚拟机时钟
     <timer name='rtc' tickpolicy='catchup'/>
     <timer name='pit' tickpolicy='delay'/>
-    <timer name='hpet' present='no'/>                                                                                                                                    
+    <timer name='hpet' present='no'/>
     <timer name='hypervclock' present='yes'/>
   </clock>
   <on_poweroff>destroy</on_poweroff>
@@ -280,7 +280,7 @@ Choose 1-4 [2]: 3
     <disk type='file' device='disk'>   //虚拟机虚拟磁盘
       <driver name='qemu' type='qcow2'/>
       <source file='/opt/cfiec/6dnskvm/DELL_STORAGE  .qcow2'/>
-      <target dev='vda' bus='virtio'/> 
+      <target dev='vda' bus='virtio'/>
       <address type='pci' domain='0x0000' bus='0x00' slot='0x04' function='0x0'/>
     </disk>
     <controller type='usb' index='0' model='ich9-ehci1'>
