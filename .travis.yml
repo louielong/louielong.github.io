@@ -8,6 +8,11 @@ branches:
   only:
     - hexo
 
+cache:
+  apt: true
+  directories:
+    - node_modules
+
 before_install:
   - export TZ='Asia/Shanghai'
 
@@ -16,9 +21,9 @@ install:
   - npm install
 
 before_script:
-  - git config user.name "louie"
+  - git config user.name "louie.long"
   - git config user.email "longyu805@163.com"
-  - sed -i "97s/^  password:.*/  password: '($LEAN_PASSWD)'/" _config.yml
+  - sed -i "97s/^  password:.*/  password: $LEAN_PASSWD/" _config.yml
   - sed -i "s~https://github.com/louielong/louielong.github.io.git~https://${GITHUB_TOKEN}@github.com/louielong/louielong.github.io.git~" _config.yml
 
 # Deploy blog
