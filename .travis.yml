@@ -1,0 +1,31 @@
+#########################################################################
+# File Name: .travis.yml
+# Author: louie.long
+# Mail: ylong@biigroup.cn
+# Created Time: Wed 02 Jan 2019 11:52:08 AM CST
+# Description:
+#########################################################################
+
+language: node_js
+
+node_js: stable
+
+# E: Build LifeCycle
+branches:
+  only:
+    - hexo
+
+# S: Build Lifecycle
+install:
+  - npm install
+
+before_script:
+  - git config user.name "louie"
+  - git config user.email "longyu805@163.com"
+  - sed -i "97s/^  password:.*/  password: '($LEAN_PASSWD)'/" _config.yml
+  - sed -i "s~https://github.com/louielong/louielong.github.io.git~https://${GITHUB_TOKEN}@github.com/louielong/louielong.github.io.git~" _config.yml
+
+# Deploy blog
+script:
+  - hexo g
+  - hexo d
