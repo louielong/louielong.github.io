@@ -13,8 +13,6 @@ description:
 summary_img:
 ---
 
-<span id="jump0">开始</span>
-
 ## 1 前言
 
 本文主要讲解如何修改openstack中镜像的密码以及开启镜像的ssh登录。
@@ -105,11 +103,11 @@ sudo guestfish --rw -a xenial-server-cloudimg-amd64-disk1.img
 
 ![openstack-passwd3](https://i.imgur.com/RLL7eEI.jpg)
 
-最后，建议在`/etc/issue`中加入配置的密码，方便后续的人查看默认用户密码。根据参看链接[2]还可以修改`/etc/passwd`的第一行`root:x:...`为`root::...`达到使用root用户的VNC免密登录，但是如果是ssh登录的话，需要在`/etc/ssh/sshd_config`中将`PermitEmptyPasswords no`设置为`PermitEmptyPasswords yes`。
+最后，建议在`/etc/issue`中加入配置的密码，方便后续的人查看默认用户密码。根据参考链接[2]还可以修改`/etc/passwd`的第一行`root:x:...`为`root::...`达到使用root用户的VNC免密登录，但是如果是ssh登录的话，需要在`/etc/ssh/sshd_config`中将`PermitEmptyPasswords no`设置为`PermitEmptyPasswords yes`。
 
 ### 2.2.2 通过openstack用户数据修改密码
 
-如果不想修改镜像就可以使用openstack启动实例时导入用户数据的方式来修改密码，加入修改脚本如：
+如果不想修改镜像也可以在openstack启动实例时通过导入用户数据的方式来修改密码，加入修改脚本如下：
 
 ```shell
 #!/bin/sh
@@ -148,14 +146,4 @@ centos的镜像默认用户是"centos"，处理方式和ubuntu一样，可以通
 2）[密码修改](https://ask.openstack.org/en/question/5531/defining-default-user-password-for-ubuntu-cloud-image/)
 
 3）[openstack镜像密码修改](https://xiexianbin.cn/openstack/2017/03/23/OpenStack-image-password-modification)
-
-[返回文首](#jump0)
-
-
-
-
-
-
-
-
 
