@@ -1,5 +1,6 @@
 ---
 title: MySQL双主复制 + keepalived故障转移实现
+date: 2018-06-06 15:38:12
 tags:
   - mysql
   - keepalived
@@ -220,7 +221,7 @@ service mysql restart
 
 ```
 innodb_flush_log_at_trx_commit=2
-sync_binlog=1000 
+sync_binlog=1000
 ```
 
 有关两个参数的含义可以查看链接：[传送门](http://blog.itpub.net/22664653/viewspace-1063134/)
