@@ -117,4 +117,4 @@ deploy:
   - type: git
     repo: https://github.com/louielong/louielong.github.io.git
     branch: master       #这里填写分支
-    message: Add mysql-ha post time #(默认为 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }})
+    message: Add compass4nfv install opnfv post  #(默认为 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }})
