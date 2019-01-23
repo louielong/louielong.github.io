@@ -468,7 +468,7 @@ designate-dashboard heat keystone networking-odl neutron-fwaas neutron-vpnaas no
 - 网易镜像源<http://mirrors.163.com/ceph>
 - 中科大镜像源<http://mirrors.ustc.edu.cn/ceph>
 
-这里以中科大的源为例，各大源只有`rethat`系和`debian`系两种分类，这里的`ubuntu 16.04`使用的是`debian-luminous`的版本，查看`ctl`节点新增的apt源可以确认，后续随着安装使用的ubuntu版本升级会有所改变，需要灵活处理
+这里以阿里云的源为例，各大源只有`rethat`系和`debian`系两种分类，这里的`ubuntu 16.04`使用的是`debian-luminous`的版本，查看`ctl`节点新增的apt源可以确认，后续随着安装使用的ubuntu版本升级会有所改变，需要灵活处理
 
 ```shell
 root@ubuntu:~# ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@10.20.0.51
