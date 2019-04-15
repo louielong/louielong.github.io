@@ -1,7 +1,7 @@
 ---
 title: openstack中镜像的密码修改
 date: 2018-01-04 10:17:24
-tags: 
+tags:
    - Openstack
    - OPNFV
 keywords:
@@ -125,6 +125,24 @@ service ssh restart
 
 此外还有修改openstack的nova.conf和dashboard配置的方式来加入修改密码选项[3]，由于openstack的版本修改该种方式不一定可行，视具体版本处理。
 
+### 2.2.3 通过cloud-init方式修改密码
+
+cloud-init（简称ci）在AWS、Openstack和Cloudstack上都有使用，也算是事实上的云主机元数据管理标准。通过cloud-init能够对虚拟机实例进行初始化配置，当然也能修改镜像的密码。
+
+```shell
+#cloud-config
+chpasswd:
+  list: |
+      root:123456
+      ubuntu:123456
+  expire: false
+  ssh_pwauth: true
+```
+
+![cloud-init-set-passwd](https://raw.githubusercontent.com/louielong/blogPic/master/imgcloud-init-set-passwd.png)
+
+启动后的实例可以直接通过修改后的账号密码登录
+
 ## 2.3 centos镜像
 
 centos官方的镜像地址为：http://cloud.centos.org/centos/7/images/
@@ -146,4 +164,6 @@ centos的镜像默认用户是"centos"，处理方式和ubuntu一样，可以通
 2）[密码修改](https://ask.openstack.org/en/question/5531/defining-default-user-password-for-ubuntu-cloud-image/)
 
 3）[openstack镜像密码修改](https://xiexianbin.cn/openstack/2017/03/23/OpenStack-image-password-modification)
+
+4）[cloud-init介绍及源码解读(上)](https://zhuanlan.zhihu.com/p/27664869)
 
