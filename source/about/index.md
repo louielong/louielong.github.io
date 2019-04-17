@@ -1,5 +1,5 @@
 ---
-title: about
+title: About
 date: 2017-09-27 19:02:04
 comments: false
 ---
@@ -15,6 +15,14 @@ Email：longyu805@163.com
 
 # 技能清单
 
+- 区块链研究
+
+  学习区块链知识，研究区块链应用场景与验证。
+
+- 云计算与容器相关研究
+
+  研究云计算、Docker、K8S相关技术，混迹于社区文档做各种实验验证，深陷各种填坑无法自拔。**开源社区真香！！！**
+
 - NFV研究
   目前致力于NFV领域的测试研究，混迹于OPNFV、ONAP社区学习，研究OPNFV的测试项目。
 
@@ -23,3 +31,9 @@ Email：longyu805@163.com
 
 - 编程语言
   C/C++，shell，python
+
+# 日常
+
+**日常踩坑与填坑中......**
+
+![](https://raw.githubusercontent.com/louielong/blogPic/master/imgFix_bug.gif)
