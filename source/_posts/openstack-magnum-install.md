@@ -47,9 +47,9 @@ summary_img:
 
 ## 二、安装Magnum
 
-我的openstack环境采用纯手工的方式按照官方指导文档进行安装，同样Magnum也是Manual的方式安装，系统版本为`Ubuntu-18.04 LTS`，因为Rocky版本的`deb`包只有18.04才有。
+我的openstack环境采用纯手工的方式按照官方指导文档进行安装，同样Magnum也是Manual的方式安装，系统版本为`Ubuntu-18.04 LTS`，因为Rocky版本的`deb`包只有18.04才有。Magnum-api 版本为`7.0.1-0ubuntu1~cloud0`。
 
-按照指导手册[3]，进行安装，安装和配置方式及其简单，**但是**官方的配置文档没有来的及更新，以及deb包更新不及时遇到了很多奇奇怪怪的bug，在查找原因时也很难确定关键词而无法搜索到正确的答案。
+按照指导手册[3]，进行安装，安装和配置方式极其简单，**但是**官方的配置文档没有来的及更新，以及deb包更新不及时遇到了很多奇奇怪怪的bug，在查找原因时也很难确定关键词而无法搜索到正确的答案。
 
 按照官方文档在安装完Magnum后通过`openstack coe service list`来查看是否安装成功，如果该命令执行失败通过查看`/var/log/magnum/magnum-api.log`来排查问题。**但是**，该命令执行成功也不代表这Magnum的服务能够正常使用，后续使用中主要查看的是Magnum调度的日志`/var/log/magnum/magnum-conductor.log`。
 
@@ -167,7 +167,7 @@ auth_type = password
 
 ### 2.4 swarm集群创建超时
 
-在处理完以上的magnu conductor问题后，开始创建swarm集群，但是出现创建超时(超时时长为60分钟)集群的stack启动失败的问题。原因是按照之前的官方文档创建所有服务的endpoint都是使用`http://ctl01:xxx`而此处创建的swarm集群需要与opensatck相关服务进行通信，无法识别`ctl01`域名，解析不到服务地址IP，因此需要将所有的endpiont 服务的public地址都是用公开的IP替换。
+在处理完以上的magnum conductor问题后，开始创建swarm集群，但是出现创建超时(超时时长为60分钟)集群的stack启动失败的问题。原因是按照之前的官方文档创建所有服务的endpoint都是使用`http://ctl01:xxx`而此处创建的swarm集群需要与opensatck相关服务进行通信，无法识别`ctl01`域名，解析不到服务地址IP，因此**需要将所有的endpiont服务的public地址都是用公开的IP替换**。
 
 >ERROR oslo_messaging.rpc.server [req-4a8e8e2d-cae0-4113-a49d-57bb91c03b8d - - - - -] Exception during message handling: EndpointNotFound: http://ctl01:9511/v1 endpoint for identity service not found
 >....
@@ -182,7 +182,7 @@ auth_type = password
 
 ### 2.5 swarm-cluster启动失败
 
-在解决完*2.4*的问题后又迎来了新的问题，swarm-cluster集群启动创建成功，但是服务报错。这是能够通过`floating ip`登录swarm master节点使用`fedora`用户以及密匙`mykey`登录。查看`cloud init`日志`/var/log/cloud-init-output.log`，会发现如下的报错：
+在解决完*2.4*的问题后又迎来了新的问题，swarm-cluster集群启动创建成功，但是服务报错。这是能够通过`floating ip`登录swarm master节点使用`fedora`用户以及密钥`mykey`登录。查看`cloud init`日志`/var/log/cloud-init-output.log`，会发现如下的报错：
 
 >/var/lib/cloud/instance/scripts/part-006: line 13: /etc/etcd/etcd.conf: No such file or directory
 >/var/lib/cloud/instance/scripts/part-006: line 26: /etc/etcd/etcd.conf: No such file or directory
@@ -198,7 +198,7 @@ auth_type = password
 >
 >Never got the "swarm" driver to work, you should use "swarm-mode" instead which uses native Docker clustering without etcd.
 
-**同时需要注意的是**，使用的`Fedora`镜像必须是`Fedora-Atomic-27-xx`，`Frdora 27`之后的镜像改变较大，`cloud init`脚本无法正常工作。还需添加必要的patch [swarm-mode] allow TCP port 2377 to swarm master node](https://review.openstack.org/#/c/598179/)，修改`magnum/drivers/swarm_fedora_atomic_v2/templates/swarmcluster.yaml`的Line 247，添加一下内容。
+**同时需要注意的是**，使用的`Fedora`镜像必须是`Fedora-Atomic-27-xx`，`Frdora 27`之后的镜像改变较大，`cloud init`脚本无法正常工作。还需添加必要的patch [swarm-mode allow TCP port 2377 to swarm master node](https://review.openstack.org/#/c/598179/)，修改`magnum/drivers/swarm_fedora_atomic_v2/templates/swarmcluster.yaml`的Line 247，添加一下内容。
 
 ```yaml
         - protocol: tcp
