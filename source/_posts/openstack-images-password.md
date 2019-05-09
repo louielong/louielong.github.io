@@ -127,19 +127,19 @@ service ssh restart
 
 ### 2.2.3 通过cloud-init方式修改密码
 
-cloud-init（简称ci）在AWS、Openstack和Cloudstack上都有使用，也算是事实上的云主机元数据管理标准。通过cloud-init能够对虚拟机实例进行初始化配置，当然也能修改镜像的密码。
+[cloud-init](https://cloudinit.readthedocs.io/en/latest/topics/modules.html#set-passwords)（简称ci）在AWS、Openstack和Cloudstack上都有使用，也算是事实上的云主机元数据管理标准。通过cloud-init能够对虚拟机实例进行初始化配置，当然也能修改镜像的密码。
 
 ```shell
 #cloud-config
+ssh_pwauth: yes
 chpasswd:
   list: |
       root:123456
       ubuntu:123456
   expire: false
-  ssh_pwauth: true
 ```
 
-![cloud-init-set-passwd](https://raw.githubusercontent.com/louielong/blogPic/master/imgcloud-init-set-passwd.png)
+![cloud-init-set-passwd](https://raw.githubusercontent.com/louielong/blogPic/master/img20190509153408.png)
 
 启动后的实例可以直接通过修改后的账号密码登录
 
