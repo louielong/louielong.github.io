@@ -9,7 +9,7 @@ keywords:
 categories:
   - ubuntu
 description:
-  - MAAS安装使用以及ubuntu私有源环境搭建
+  - MAAS安装使用本地源以及ubuntu私有源环境搭建
 summary_img:
 ---
 
@@ -46,23 +46,23 @@ root@ubuntu:~# maas createadmin --username=admin --email=MYEMAIL@EXAMPLE.COM
 - Ubuntu images
 - SSH keys (for currently logged in user)
 
-![MAAS界面](https://i.imgur.com/mB3EK4K.jpg)
+![MAAS界面](https://raw.githubusercontent.com/louielong/blogPic/master/imgmB3EK4K.jpg)
 
 ### 1.4 系统Images设置
 
 在`Images`界面设置需要安装的系统版本，本次部署需要是64位的ubuntu 16.04，配置完成后MAAS会自动同步镜像
 
-![MAAS Inages设置](https://i.imgur.com/tXMsQWz.jpg)
+![MAAS Inages设置](https://raw.githubusercontent.com/louielong/blogPic/master/imgtXMsQWz.jpg)
 
 在`setting`界面配置系统PXE启动时装载的最小镜像供MAAS进行服务器的硬件信息等解析
 
-![MAAS 最小镜像配置](https://i.imgur.com/gcsXtgW.jpg)
+![MAAS 最小镜像配置](https://raw.githubusercontent.com/louielong/blogPic/master/imggcsXtgW.jpg)
 
 ### 1.4  DHCP配置
 
 点击`Subnets`选择一个网络点击`VLAN`选择右上的`take action`选项框，选择`Provid DHCP`，然后配置dhcp范围
 
-![MAAS DHCP配置](https://i.imgur.com/0pPmBOZ.jpg)
+![MAAS DHCP配置](https://raw.githubusercontent.com/louielong/blogPic/master/img0pPmBOZ.jpg)
 
 【Note】
 
@@ -72,7 +72,71 @@ root@ubuntu:~# maas createadmin --username=admin --email=MYEMAIL@EXAMPLE.COM
 
 启动待装系统的服务器，可以看到MAAS检测到服务器上线
 
-![MAAS硬件检测](https://i.imgur.com/C2nozbq.jpg)
+![MAAS硬件检测](https://raw.githubusercontent.com/louielong/blogPic/master/imgC2nozbq.jpg)
+
+### 1.5 MAAS本地源
+
+在使用过程中有时会在离线环境下安装系统，这时需要做镜像的离线下载，根据官方[Local Image Mirror](https://docs.maas.io/2.5/en/installconfig-images-mirror)配置离线镜像，过程也很简单
+
+1）首先安装工具
+
+```shell
+sudo apt install -y simplestreams
+```
+
+2）随后配置变量以及默认镜像存储路径
+
+```shell
+KEYRING_FILE=/usr/share/keyrings/ubuntu-cloudimage-keyring.gpg
+IMAGE_SRC=https://images.maas.io/ephemeral-v3/daily/
+IMAGE_DIR=/var/www/html/maas/images/ephemeral-v3/daily   # 镜像在本地的存储路径
+```
+
+3）然后选择需要缓存的镜像类型
+
+如选择**ubuntu 14(trusty)**或者**ubuntu 16(xenial)**的镜像以及**bootloaders**
+
+```shell
+sudo sstream-mirror --keyring=$KEYRING_FILE $IMAGE_SRC $IMAGE_DIR \
+    'arch=amd64' 'release~(trusty|xenial)' --max=1 --progress
+sudo sstream-mirror --keyring=$KEYRING_FILE $IMAGE_SRC $IMAGE_DIR \
+    'os~(grub*|pxelinux)' --max=1 --progress
+```
+
+4）局域网镜像下载配置
+
+需要安装apache2服务器
+
+```shell
+ root@ubuntu:~# apt-get install apache2
+```
+
+查看apache的配置文件`/etc/apache2/sites-available/000-default.conf`是否使能了目录`/var/www/html/`
+
+```shell
+DocumentRoot /var/www/html
+```
+
+打开浏览器`http://<Mirros IP>/maas/images/ephemeral-v3/daily/`即可查看下载的镜像缓存
+
+5）MAAS中配置local mirror
+
+可以直接在MAAS界面设置本地源
+
+![MAAS 本地源设置](https://raw.githubusercontent.com/louielong/blogPic/master/img20190524175031.png)
+
+或者通过命令行的方式设置本地源
+
+```shell
+maas $PROFILE boot-sources create url=$URL keyring_filename=$KEYRING_FILE
+```
+
+其中：
+
+- URL=https://$MIRROR/maas/images/ephemeral-v3/daily/
+- KEYRING_FILE=/usr/share/keyrings/ubuntu-cloudimage-keyring.gpg
+
+
 
 更多MAAS配置及设置参见官网[用户手册](https://docs.maas.io/2.3/en/)
 
@@ -141,19 +205,17 @@ Processing tranlation indexes: [TTTT]
 1)当某些软件包在服务器端进行了升级，或者服务器端不再需要这些软件包时，我们使用了 `apt-mirror`与服务器同步后，会在本地的`$var_path/`下生成一个`clean.sh`的脚本，列出了遗留在本地的旧版本和无用的软件包，可以手动运行这个脚本来删除遗留在本地的且不需要用的软件包
 `clean http://mirrors.tuna.tsinghua.edu.cn/ubuntu`
 
-2)如果用amd64位架构下的包，可以加上deb-amd64的标记如果什么都不加，直接使用deb http.....这种格式，则在同步时，只同步当前系统所使用的架构下的软件包。比如一个64位系统，直接deb http....只同步64位的软件 包。如果还嫌麻烦，直接去改`set defaultarch   <running hostarchitecture>`这个参数就好，比如改成set defaultarch i386，这样你使用debhttp.....这种格式，则在同步时，只同步i386的软件包了。
+2)如果用amd64位架构下的包，可以加上deb-amd64的标记如果什么都不加，直接使用deb http.....这种格式，则在同步时，只同步当前系统所使用的架构下的软件包。比如一个64位系统，直接deb http....只同步64位的软件 包。如果还嫌麻烦，直接去改`set defaultarch   <running hostarchitecture>`这个参数就好，比如改成set defaultarch i386，这样你使用deb http.....这种格式，则在同步时，只同步i386的软件包了。
 
-如果你还想要源码，可以把源码也加到mirror.list里面同步过来，比如加上deb-src这样的标记。想要其他的东西也可以追加相应的标记来完成。
+如果你还想要源码，可以把源码也加到**mirror.list**里面同步过来，比如加上**deb-src**这样的标记。想要其他的东西也可以追加相应的标记来完成。
 
-3）同步完成后，我们可以利用clean.sh清理无用软件包：
+3）同步完成后，我们可以利用`clean.sh`清理无用软件包：
 
 ```shell
  root@ubuntu:~# /var/spool/apt-mirror/var/clean.sh 
 ```
 
-2.3 作为本机源配置
-
-源路径为
+2.3 设为本机源配置
 
 配置本机源文件
 
@@ -167,7 +229,7 @@ deb [arch=amd64] file:///var/spool/apt-mirror/mirror/mirrors.tuna.tsinghua.edu.c
 
 2.4 局域网源配置
 
-2.4.1 首先需要安装apache2服务器
+2.4.1 安装apache服务器
 
 ```shell
  root@ubuntu:~# apt-get install apache2 
