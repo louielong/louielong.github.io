@@ -128,7 +128,7 @@ DocumentRoot /var/www/html
 或者通过命令行的方式设置本地源
 
 ```shell
-maas $PROFILE boot-sources create url=$URL keyring_filename=$KEYRING_FILE
+maas admin boot-sources create url=$URL keyring_filename=$KEYRING_FILE
 ```
 
 其中：
