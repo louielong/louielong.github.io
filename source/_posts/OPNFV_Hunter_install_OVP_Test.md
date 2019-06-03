@@ -36,6 +36,22 @@ Fuel的Hunter部署和Euphrates以及Gambia没有太大的差别，完全可以�
 
 部署过程中遇到的最大的问题就是MAAS每次都会去重新获取最新的ubuntu镜像，常常因为镜像下载缓慢导致部署超时，这里可以参看[MAAS本地源设置](./MAAS+ubuntu-local-repo.html)，配置本地MAAS源以加快部署
 
+修改`mcp/reclass/classes/cluster/all-mcp-arch-common/infra/maas.yml.j2`
+
+```yaml
+      boot_sources:
+        resources_mirror:
+          #url: http://images.maas.io/ephemeral-v3/daily
+          url: http://<IMG mirror IP>/maas/images/ephemeral-v3/daily
+          keyring_file: /usr/share/keyrings/ubuntu-cloudimage-keyring.gpg
+      boot_sources_selections:
+        xenial:
+          #url: "http://images.maas.io/ephemeral-v3/daily"
+          url: "http://<IMG mirror IP>/maas/images/ephemeral-v3/daily"
+```
+
+
+
 ## 2.2  dashboard不可用
 
 本次安装在解决完MAAS本地源后安装十分顺利，但是安装完后无法使用dashboard，给社区提了一个jira [Fuel-408](https://jira.opnfv.org/browse/FUEL-408)看后续修复吧，尝试在本地解决了一些问题，使得访问**prx01/prx02**的的8078端口可以看到正常的页面，但是使用密码无法登录。
