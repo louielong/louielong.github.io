@@ -11,7 +11,7 @@ categories:
 description:
   - Openstack magnum 安装 -- 踩坑与填坑系列
 summary_img:
-  - https://www.openstack.org/software/images/mascots/magnum.png
+  - https://raw.githubusercontent.com/louielong/blogPic/master/imgmagnum.png 
 ---
 
 ## 前言
