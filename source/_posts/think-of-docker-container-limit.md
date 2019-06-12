@@ -21,7 +21,7 @@ summary_img:
 
 根据[my2cents](https://frightanic.com/computers/docker-default-container-names/)的`How does Docker generate default container names?`文章介绍，得知docker随机容器名的生成是分为左右值的，即拥有两个独立的数组。查看docker容器名生成的[源代码](https://github.com/moby/moby/blob/master/pkg/namesgenerator/names-generator.go)可以看到左值都是一些形容词，共计100个，右值都是一些`amazing man`，并且给出了wiki百科的介绍页面，共计235位。(统计截止到2019年3月7日)
 
-有意思的是代码的最后一行，当容器名为`boring_wozniak`时会重新生成，[Steve Wozniak](https://en.wikipedia.org/wiki/Steve_Wozniak)是Apple I和Apple II的发明人，看来码代码的人是分推崇Wozniak，加了专门的彩蛋。
+有意思的是代码的最后一行，当容器名为`boring_wozniak`时会重新生成，[Steve Wozniak](https://en.wikipedia.org/wiki/Steve_Wozniak)是Apple I和Apple II的发明人，看来码代码的人十分推崇Wozniak，加了专门的彩蛋。
 
 ```go
 if name == "boring_wozniak" /* Steve Wozniak is not boring */ {
@@ -83,11 +83,11 @@ nc -l -p 80 -e echo
 
 连续启动1023个容器预计耗费约8分钟，关闭1023个容器预计耗费约6分钟
 
-## 实验
+### 实验
 
 有文章做了一个实验来启动500个容器，感兴趣的可以查看[docker 启动500个容器测试](https://blog.csdn.net/warrior_0319/article/details/79730191)
 
-## 结论
+## 四、结论
 
 根据以上信息可以得知随机容器名的限制不会是容器创建上限的障碍，容器实例本身所消耗的资源如内存、网络等才是最关键的影响。
 
