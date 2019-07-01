@@ -33,7 +33,7 @@ npm install -g hexo-cli
 
 安装完成之后，使用`hexo --version`查看hexo是否正确安装。
 
-![hexo 安装](http://i.imgur.com/OsK3uSC.jpg)
+![hexo 安装](https://raw.githubusercontent.com/louielong/blogPic/master/imgOsK3uSC.jpg)
 
 【PS】目前npm官方源在国内访问并不稳定，如果无法直接安装，请更换国内npm源。执行以下命令更换淘宝npm源
 
@@ -61,11 +61,11 @@ hexo init louie_blog
 
 此命令用于执行站点的初始化。执行后，folder文件夹会成为一个Hexo站点文件夹，执行过程中涉及安装多个nodejs模块包以及git clone操作。
 
-![hexo初始化站点](http://i.imgur.com/zzPkjDZ.jpg)
+![hexo初始化站点](https://raw.githubusercontent.com/louielong/blogPic/master/imgzzPkjDZ.jpg)
 
 在初始化一个hexo站点文件夹之后，该文件夹的目录结构如下：
 
-![hexo目录结构](http://i.imgur.com/72R8bGc.jpg)
+![hexo目录结构](https://raw.githubusercontent.com/louielong/blogPic/master/img72R8bGc.jpg)
 
 详细说明如下：
 
@@ -102,7 +102,7 @@ hexo主题星级排名[https://www.zhihu.com/question/24422335](https://www.zhih
 
 推荐n4l.pw使用的Hexo主题：Next，功能极其强大，是目前github上star第一的Hexo主题：[https://github.com/iissnan/hexo-theme-next](https://github.com/iissnan/hexo-theme-next)。官方文档讲解非常详细，鉴于篇幅，这里只提一个小技巧，在文章中加入`<!--more-->`标签，主题会自动将标签之前的内容截取作为文章摘要输出在首页。（可见下图效果，点击放大）。
 
-![hexo_theme](http://i.imgur.com/uvNNid6.jpg)
+![hexo_theme](https://raw.githubusercontent.com/louielong/blogPic/master/imguvNNid6.jpg)
 
 
 ### 3.3 写作
@@ -140,7 +140,7 @@ PS：这两个选项的值都是一个清单，注意缩进。
 
 编辑模板文件home/scaffolds/post.md，加入categories:，如图所示：
 
-![hexo format](http://i.imgur.com/AHaOcCJ.jpg)
+![hexo format](https://raw.githubusercontent.com/louielong/blogPic/master/imgAHaOcCJ.jpg)
 
 然后执行：
 
@@ -149,7 +149,7 @@ hexo new page categories
 hexo new page tags
 ```
 
-![hexo format 设置](http://i.imgur.com/bUOdTY8.jpg)
+![hexo format 设置](https://raw.githubusercontent.com/louielong/blogPic/master/imgbUOdTY8.jpg)
 
 创建标签和分类页面，如果你的主题支持，它们不需要填充任何内容，主题会自动生成这两个页面的内容，你只需要将它们加入菜单栏即可。（这并不意味着不用生成这两个页面）
 默认主题菜单栏修改方法如下：
@@ -177,7 +177,7 @@ comment: false
 
 执行`hexo generate`生成静态文件，执行`hexo server`，本地开启服务器，然后浏览器访问`http://localhost:4000`即可看到预览效果了。
 
-![](http://i.imgur.com/AvHMXXg.jpg)
+![](https://raw.githubusercontent.com/louielong/blogPic/master/imgAvHMXXg.jpg)
 
 ## 4 部署
 
@@ -216,7 +216,7 @@ comment: false
 
 执行`sudo nginx -V`测试是否安装成功。
 
-![nginx 版本](http://i.imgur.com/lEEJxHH.jpg)
+![nginx 版本](![](https://raw.githubusercontent.com/louielong/blogPic/master/imglEEJxHH.jpg))
 
 4.1.2 配置Git仓库
 
@@ -245,7 +245,7 @@ mkdir -p /web/blog/hexo_blog.git #实际存储网站文件目录
 git init --bare hexo_blog.git
 ```
 
-![hexo_blog git仓库初始化](http://i.imgur.com/E9XzzzZ.jpg)
+![hexo_blog git仓库初始化](https://raw.githubusercontent.com/louielong/blogPic/master/imgE9XzzzZ.jpg)
 
 然后进入该仓库，配置`post-receive hooks`。
 
@@ -267,7 +267,7 @@ git --work-tree=/web/blog/hexo --git-dir=/web/blog/hexo.git checkout -f
 chmod +x post-receive
 ```
 
-![git hooks](http://i.imgur.com/0UwN6HX.jpg)
+![git hooks](https://raw.githubusercontent.com/louielong/blogPic/master/img0UwN6HX.jpg)
 
 本文使用的是自己搭建的Gitolite，已经添加了无密码登陆权限。
 

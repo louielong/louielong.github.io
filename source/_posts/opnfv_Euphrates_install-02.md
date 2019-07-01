@@ -11,7 +11,7 @@ categories:
 description:
   - OPNFV Euphrates on baremetal
 summary_img:
-  - https://i.imgur.com/yNc6FFv.jpg
+  - https://raw.githubusercontent.com/louielong/blogPic/master/imgyNc6FFv.jpg
 top:
 ---
 
@@ -19,7 +19,7 @@ top:
 
 本文详细介绍使用OPNFV 的 Fuel部署工具部署Euphrates版本。OPNFV社区从E版本开始全面采用XCI跨社区集成[1]方式，能够最快的获取并集成上游社区项目的最新代码同时可以减少等待BUG修复的时间，2017年10月Euphrates版本首发时还是基于Openstak的Ocata版本，而Ocata是在2017年2月份发布，但是到2017年8月底最新的Pike版本也发布了，由于OPNFV的版本发布周期与Openstack版本的发布周期不一致，也就意味着OPNFV的新版本永远是基于Openstack的上一个版本，OPNFV社区的测试项目将会一直滞后于Openstack的版本，在OPNFV社区引入XCI后我们看到在17年的11月份OPNFV已经支持Pike版本的虚拟POD安装。
 
-![OPNFV XCI](https://i.imgur.com/QEuXwvy.png)
+![OPNFV XCI](https://raw.githubusercontent.com/louielong/blogPic/master/imgQEuXwvy.png)
 
 在Danube版本时Fuel还是可视化的界面安装对于新接触OPNFV的新手或多或少还能慢慢学习研究。但是E版本的Fuel完全使用脚本命令的方式，无疑是加大了新手的入门难度以及学习难度，在研究Fuel的安装过程中遇到了许多坑也确实也学到了许多东西。
 
@@ -340,7 +340,7 @@ nodes:
 
 *坑①*：如下图所示：
 
-![IPMI设置](https://i.imgur.com/CCTp99A.jpg)
+![IPMI设置](https://raw.githubusercontent.com/louielong/blogPic/master/imgCCTp99A.jpg)
 
 需要开启IPMI的LAN，另外还有一点关于密钥的，我的某一台服务器的不是`0000000000000000000000000000000000000000`，出现过maas无法连接节点的情况。
 
@@ -447,13 +447,13 @@ iptables -t nat -A POSTROUTING -d 10.20.0.3 -p tcp --dport 80 -j SNAT --to 10.20
 
 该方式如上一篇虚拟安装中讲解到，添加一个本机的80端口到mas01的80端口映射即可。访问本机的http://localhost/MAAS/
 
-![Maas端口映射](https://i.imgur.com/jBeEhzU.jpg)
+![Maas端口映射](https://raw.githubusercontent.com/louielong/blogPic/master/imgjBeEhzU.jpg)
 
 
 
 MAAS的dashboard会显示安装过程以及各节点的信息。
 
-![安装过程](https://i.imgur.com/5U7FW5X.jpg)
+![安装过程](https://raw.githubusercontent.com/louielong/blogPic/master/img5U7FW5X.jpg)
 
 #### 2.2.3 修改虚拟机登录密码
 
@@ -556,7 +556,7 @@ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /var/lib/opnf
 
 部署过程中如果发现不太正常的情况可以对比一下OPNFV官方[Jeklins](https://build.opnfv.org/ci/view/fuel/job/fuel-deploy-baremetal-daily-euphrates/)的构建历史日志，便于确认问题所在。
 
-![](https://i.imgur.com/pzsiLmn.jpg)
+![](https://raw.githubusercontent.com/louielong/blogPic/master/imgpzsiLmn.jpg)
 
 1)部署超时
 

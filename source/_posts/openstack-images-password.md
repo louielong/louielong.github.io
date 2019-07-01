@@ -55,7 +55,7 @@ password:gocubsgo
 
 不同版本的cirros的镜像密码可能不同，但是在控制台日志中都会显示，同时该镜像也默认开启了ssh登录，可以使用账号密码登录。如无法登录记得查看镜像使用的安全组是否开始ssh访问权限
 
-![openstak-SR-ssh](https://i.imgur.com/5P14D7V.jpg)
+![openstak-SR-ssh](https://raw.githubusercontent.com/louielong/blogPic/master/img5P14D7V.jpg)
 
 登录之后使用`sudo su`切换成root用户，若想直接使用root用户登录，需要拷贝密钥或者修改root用户密码，拷贝密钥的命令为：
 
@@ -87,7 +87,7 @@ sudo guestfish --rw -a xenial-server-cloudimg-amd64-disk1.img
 
 挂载文件系统等操作如下图所示：
 
-![guestfish change passwd](https://i.imgur.com/TVe8pr4.jpg)
+![guestfish change passwd](https://raw.githubusercontent.com/louielong/blogPic/master/imgTVe8pr4.jpg)
 
 打开`/etc/cloud/cloud.cfg`后修改一下内容：
 
@@ -95,13 +95,13 @@ sudo guestfish --rw -a xenial-server-cloudimg-amd64-disk1.img
 
 将`disable_root`的值设为`false`即可允许root登录，增加`ssh_pwauth: true`即可允许ssh密码登录。
 
-![openstack-passwd2](https://i.imgur.com/Rzj5T7u.jpg)
+![openstack-passwd2](https://raw.githubusercontent.com/louielong/blogPic/master/imgRzj5T7u.jpg)
 
 2）增加默认用户ubuntu的密码
 
 将`lock_passwd`设为`false`允许VNC终端密码登录，同时添加`plain_text_passwd: "ubuntu"`将默认用户的密码设为`ubuntu`。
 
-![openstack-passwd3](https://i.imgur.com/RLL7eEI.jpg)
+![openstack-passwd3](https://raw.githubusercontent.com/louielong/blogPic/master/imgRLL7eEI.jpg)
 
 最后，建议在`/etc/issue`中加入配置的密码，方便后续的人查看默认用户密码。根据参考链接[2]还可以修改`/etc/passwd`的第一行`root:x:...`为`root::...`达到使用root用户的VNC免密登录，但是如果是ssh登录的话，需要在`/etc/ssh/sshd_config`中将`PermitEmptyPasswords no`设置为`PermitEmptyPasswords yes`。
 
@@ -121,7 +121,7 @@ service ssh restart
 
 如下图所示加入上述脚本，不同的openstack版本此处有所不同，依具体版本操作。
 
-![openstack userdata](https://i.imgur.com/wQ0HrVd.jpg)
+![openstack userdata](https://raw.githubusercontent.com/louielong/blogPic/master/imgwQ0HrVd.jpg)
 
 此外还有修改openstack的nova.conf和dashboard配置的方式来加入修改密码选项[3]，由于openstack的版本修改该种方式不一定可行，视具体版本处理。
 
@@ -151,9 +151,9 @@ centos的镜像默认用户是"centos"，处理方式和ubuntu一样，可以通
 
 同样是使用guetsfish打开镜像然后修改`/etc/cloud/cloud.cfg`文件，如下图所示：
 
-![](https://i.imgur.com/mdfElHS.jpg)
+![](https://raw.githubusercontent.com/louielong/blogPic/master/imgmdfElHS.jpg)
 
-![](https://i.imgur.com/Hmlwt2w.jpg)
+![](https://raw.githubusercontent.com/louielong/blogPic/master/imgHmlwt2w.jpg)
 
 
 

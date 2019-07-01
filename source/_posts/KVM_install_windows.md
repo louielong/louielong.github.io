@@ -138,27 +138,27 @@ vnc://[2402:6100::5]:5910
 
 输入密码后即可进入windows server安装界面，安装过程会出现看不见磁盘的情况，是因为没有加载virtio驱动的原因，这时候就轮到`virtio-win-0.1.126_amd64.vfd`起作用啦，virtio驱动是以软盘的形式加载的，这样可以避免虚拟机启动时找不到系统盘镜像。
 
-![windows server 2008 安装1](https://i.imgur.com/e7vl8hp.jpg)
+![windows server 2008 安装1](https://raw.githubusercontent.com/louielong/blogPic/master/imge7vl8hp.jpg)
 
 选择“加载驱动”，“浏览”，找到“软盘驱动器”，点开后选择 “server 2008R2”确定，会发现有两个驱动，一个是Ethernet网卡，一个SCSI磁盘，操作两次驱动加载完成后，磁盘就出现了，继续安装即可。
 
-![windows server 2008 安装2](https://i.imgur.com/MtpwzJ2.png)
+![windows server 2008 安装2](https://raw.githubusercontent.com/louielong/blogPic/master/img20190701133441.png)
 
 
 
-![windows server 2008 安装3](https://i.imgur.com/mLlBzac.png)
+![windows server 2008 安装3](https://raw.githubusercontent.com/louielong/blogPic/master/imgmLlBzac.png)
 
 
 
-![windows server 2008 安装4](https://i.imgur.com/Judghe7.png)
+![windows server 2008 安装4](https://raw.githubusercontent.com/louielong/blogPic/master/imgJudghe7.png)
 
 
 
-![windows server 2008 安装5](https://i.imgur.com/9XH65CW.png)
+![windows server 2008 安装5](https://raw.githubusercontent.com/louielong/blogPic/master/img9XH65CW.png)
 
 等待安装完成，创建新密码即安装完成。
 
-![windows server 2008 安装6](https://i.imgur.com/5g93bMV.png)
+![windows server 2008 安装6](https://raw.githubusercontent.com/louielong/blogPic/master/img5g93bMV.png)
 
 在ubuntu上使用virsh命令即可查看虚拟机状态，进行虚拟机的关机、暂停操作等。
 
@@ -396,13 +396,11 @@ root@ubuntu:~# virsh edit WASU_AF
 
 添加后即可在虚拟机里查看磁盘，进入到`设备管理器`—>`磁盘管理`，可以看到磁盘，本次分配的磁盘为2T，容量较大，在选择磁盘引导时选用`GPT`引导，随后选中磁盘进行格式化
 
-![windows server 2008 安装9](https://i.imgur.com/X2EIeM6.jpg)
+![windows server 2008 安装9](https://raw.githubusercontent.com/louielong/blogPic/master/imgX2EIeM6.jpg)
 
 格式化之后磁盘就可以直接使用了
 
-![windows server 2008 安装10](https://i.imgur.com/UggHcoM.png)
-
-
+![windows server 2008 安装10](https://raw.githubusercontent.com/louielong/blogPic/master/imgUggHcoM.png)
 
 
 
@@ -412,7 +410,7 @@ root@ubuntu:~# virsh edit WASU_AF
 
 点击左下角的`开始`，在搜索框中输入`tubiao`，选择`显示或隐藏桌面上的通用图标`，选择想要添加的图标即可
 
-![windows server 2008 安装7](https://i.imgur.com/UcFBEV9.png)
+![windows server 2008 安装7](https://raw.githubusercontent.com/louielong/blogPic/master/imgUcFBEV9.png)
 
 
 
@@ -420,7 +418,7 @@ root@ubuntu:~# virsh edit WASU_AF
 
 点击左下角的`开始`，选择右边的`控制面板`，选择`系统和安全`，点击`系统`中的`允许远程访问`，选择`允许允许....`点击确定，随后点击`应用`即可通过windows的远程桌面来访问。
 
-![windows 2008 安装8](https://i.imgur.com/QsDs8gP.png)
+![windows 2008 安装8](https://raw.githubusercontent.com/louielong/blogPic/master/imgQsDs8gP.png)
 
 
 

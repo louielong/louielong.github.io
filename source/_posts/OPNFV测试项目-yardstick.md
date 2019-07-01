@@ -83,7 +83,7 @@ nova flavor-create yardstick-flavor 100 512 3 1
 |  3   | 磁盘大小 (G) |
 |  1   |  CPU数量   |
 
-![](http://i.imgur.com/EhW1nuk.jpg)
+![](https://raw.githubusercontent.com/louielong/blogPic/master/imgEhW1nuk.jpg)
 
 ### 2.2创建用于 Yardstick 测试的访客镜像
 
@@ -182,10 +182,10 @@ export EXTERNAL_NETWORK=admin_floating_net       #外网的网络名
 cd ~/repos/yardstick
 vim samples/ping.yaml
 ```
-![](http://i.imgur.com/rvEEYJv.jpg)
+![](https://raw.githubusercontent.com/louielong/blogPic/master/imgrvEEYJv.jpg)
 
 主要关注下图中绿色框内容，*image* 为测试的镜像名称，*flavor* 为生成的虚拟机配置，*user* 为虚拟机系统的登录用户名(cirros 镜像默认的用户名和密码为"user:cirros  pass:cubswin:)"，ubuntu 镜像用户名默认为"ubuntu")，测试用的vm实例创建后会使用创建时的密匙登录，因此也是不需要密码的，但是系统用户名必须一致。*network* 指生成的虚拟机所在的网段，即内网的网络。
-![ping 配置文件](http://i.imgur.com/ataU1pE.jpg)
+![ping 配置文件](https://raw.githubusercontent.com/louielong/blogPic/master/imgataU1pE.jpg)
 
 配置完 `ping.ymal`文件后，使用命令启动测试
 
@@ -250,7 +250,7 @@ docker run -d --name grafana -p 3000:3000 grafana/grafana
 之后就可以在 http://host_ip:3000 (admin/admin) 查看
 
 如下图所示为三个环境容器都已经启动，因8888端口冲突所以将 Yardstick 的宿主机端口改为45678
-![](http://i.imgur.com/OKtO9SO.jpg)
+![](https://raw.githubusercontent.com/louielong/blogPic/master/imgOKtO9SO.jpg)
 
 4.3配置 Yardstick 测试结果输出到 influxdb 数据库
 
@@ -266,7 +266,7 @@ docker exec -it yardstick bash
 cp yardstick/etc/yardstick/yardstick.conf.sample /etc/yardstick/yardstick.conf
 vim /etc/yardstick/yardstick.conf
 ```
-![](http://i.imgur.com/13WSHjN.jpg)
+![](https://raw.githubusercontent.com/louielong/blogPic/master/img13WSHjN.jpg)
 
 
 修改*dispatcher*为*influxdb*，同时修改*influxdb*的IP地址，数据库名已经账号密码皆为4.1节所创建的。
@@ -279,7 +279,7 @@ vim /etc/yardstick/yardstick.conf
 
 点击左上角图标配置 data source，随后创建 dashboard 查看数据即可。
 
-![](http://i.imgur.com/teplLiT.jpg)
+![](https://raw.githubusercontent.com/louielong/blogPic/master/imgteplLiT.jpg)
 
 
 

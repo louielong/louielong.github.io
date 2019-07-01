@@ -10,7 +10,7 @@ categories:
 description:
   - k8s集群部署与安装
 summary_img:
-  - https://i.imgur.com/pQ6BiOT.png
+  - https://raw.githubusercontent.com/louielong/blogPic/master/imgpQ6BiOT.png
 ---
 
 
@@ -471,7 +471,7 @@ kubernetes-dashboard   NodePort   10.97.229.208   <none>        443:31090/TCP   
 
 可以看到k8s将集群内部的`10.97.229.208:443`端口映射到`31090`端口，通过浏览器访问`https://<Mater IP>:31090`
 
-![dashboard login](https://i.imgur.com/HmVNgrV.png)
+![dashboard login](https://raw.githubusercontent.com/louielong/blogPic/master/imgHmVNgrV.png)
 
 #### 3）配置admin
 
@@ -571,7 +571,7 @@ vim Kubeconfig
 
 内容如下：
 
-![Kubeconfig file](https://i.imgur.com/qp8kCvV.png)
+![Kubeconfig file](https://raw.githubusercontent.com/louielong/blogPic/master/imgqp8kCvV.png)
 
 
 
@@ -593,7 +593,7 @@ xdnsadmin@k8smaster:~/workplace/k8s/dashboard$ kubectl -n kube-system describe s
 
 当前`heapster`已经被废弃，但是还有维护，这里也仍然可以使用。
 
-![Kubeconfig file](https://pic3.zhimg.com/80/v2-6a949839753806ca26da14a552f12f76_hd.jpg)
+![heapster](https://raw.githubusercontent.com/louielong/blogPic/master/img26da14a552f12f76_hd.jpg)
 
 #### 1）安装 heapster
 
@@ -666,7 +666,7 @@ kubectl create -f .
 
 效果如下：
 
-![dashboard1](https://i.imgur.com/xwKiU9e.png)
+![dashboard1](https://raw.githubusercontent.com/louielong/blogPic/master/imgxwKiU9e.png)
 
 ## 四、测试应用部署
 
@@ -698,7 +698,7 @@ user           1/1     1            1           137m
 user-db        1/1     1            1           137m
 ```
 
-![sockshop1](https://i.imgur.com/bmCoQw9.png)
+![sockshop1](https://raw.githubusercontent.com/louielong/blogPic/master/imgbmCoQw9.png)
 
 官方已将其端口做了映射，不需要修改即可直接访问。如果未做端口映射手动修改即可
 
@@ -717,7 +717,7 @@ status:
 
 如果加购物车功能够跑通，就说明集群搭建成功
 
-![sockshop](https://i.imgur.com/Z1mXBQQ.png)
+![sockshop](https://raw.githubusercontent.com/louielong/blogPic/master/imgZ1mXBQQ.png)
 
 卸载 socks shop: `kubectl delete namespace sock-shop`
 

@@ -11,7 +11,7 @@ categories:
 description:
   - OPNFV Euphrates
 summary_img:
-  - https://i.imgur.com/yNc6FFv.jpg
+  - https://raw.githubusercontent.com/louielong/blogPic/master/imgyNc6FFv.jpg
 top:
 ---
 
@@ -50,7 +50,7 @@ OPNFV社区于2017年10月24发布的第五个版本Euphrates（幼发拉底河�
 
 本次安装使用的是在ESXI上安装的虚拟机，需要开启CPU的KVM虚拟化支持
 
-![](https://i.imgur.com/Xo9eSSj.jpg)
+![](![http://vps.ylong.co:8686/file/Xo9eSSj.jpg](http://vps.ylong.co:8686/file/Xo9eSSj.jpg))
 
 #### 2.1.2 虚拟机管理工具virsh
 
@@ -119,7 +119,7 @@ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /var/lib/opnf
 
 首先需要找到控制节点的IP通过登录到配置节点cfg01查找其他节点，使用`arp -a`命令可以看到其他节点的IP。
 
-![其它节点IP](https://i.imgur.com/t09x2yW.jpg)
+![其它节点IP](https://raw.githubusercontent.com/louielong/blogPic/master/imgt09x2yW.jpg)
 
 登录到ctl01节点上查看文件`/etc/apache2/conf-available/openstack-dashboard.conf`可以得知dashboard页面的监听端口为8078。
 
@@ -131,7 +131,7 @@ ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i /var/lib/opnf
 
 打开终端的配置页面增加隧道条目，如图所示将本机的8000端口映射到控制节点的8078端口
 
-![隧道配置](https://i.imgur.com/D1CDnUI.jpg)
+![隧道配置](https://raw.githubusercontent.com/louielong/blogPic/master/imgD1CDnUI.jpg)
 
 随后在本机的浏览器输入`127.0.0.1:8000`即可访问dashboard，**账户/密码：admin/opnfv_secret**。密码存放在控制节点的`/etc/keystone/keystone.conf`文件中，为`admin_token`参数的值。
 

@@ -11,7 +11,7 @@ categories:
 description:
   - 使用compass4nfv安装opnfv Gambia版本
 summary_img:
-  - https://i.imgur.com/ToX4rXC.png
+  - https://raw.githubusercontent.com/louielong/blogPic/master/imgToX4rXC.png
 ---
 
 ## 一 前言
@@ -20,7 +20,7 @@ OPNFV社区保持着每半年发布一个大版本的劲头，在2018年11月发
 
 Ps：compass4nfv的部署真的是一波N多折，修复一个问题又出现另一个问题，时不时的网络下载失败让人崩溃至极。
 
-![fix bug](https://i.imgur.com/YVQ8tVG.gif)
+![fix bug](https://raw.githubusercontent.com/louielong/blogPic/master/imgFix_bug.gif)
 
 ## 二 软件准备
 
@@ -58,7 +58,7 @@ export TAR_URL=file:///home/opnfv/opnfv-2018-11-19_08-25-04.tar.gz
 
 ## 三 安装部署
 
-![水滴特效](https://i.imgur.com/GhF8HQE.gif)
+![水滴特效](https://raw.githubusercontent.com/louielong/blogPic/master/imgGhF8HQE.gif)
 
 不同于Fuel的MAAS和saltstack部署，Compass使用的是cobbler和ansible部署，不了解[cobbler](http://cobbler.github.io/)的可以查阅下相关资料。不同版本的安装可能会稍有不同，请以官方指导手册为准。
 
@@ -281,7 +281,7 @@ export COMPASS_USER_PASSWORD="admin"
 
 访问安装节点的5050端口即可打开页面查看部署节点信息
 
-![compass登录界面](https://i.imgur.com/VEG8XIG.jpg)
+![compass登录界面](https://raw.githubusercontent.com/louielong/blogPic/master/imgVEG8XIG.jpg)
 
 2）docker镜像配置
 
@@ -357,7 +357,7 @@ root@cmp001:~#
 
 我在安装过程中一直被ubuntu安装时的“setting up the clock”卡住，无法自动跳过，只能手动跳过，这个是ubuntu 16.04的一个bug，可能是跟配置网络的其他ntp服务器有关。
 
-![setting_time_check](https://i.imgur.com/9CJUyM5.png)
+![setting_time_check](https://raw.githubusercontent.com/louielong/blogPic/master/img9CJUyM5.png)
 
 根据[2]修改系统安装时的prseed文件，屏蔽掉系统安装时的ntp检查，修改`compass4nfv/deploy/adapters/cobbler/kickstarts`下的`default16.seed`文件中的
 
@@ -661,7 +661,7 @@ DNS2=8.8.8.8
 
 又是一个网络引起的部署错误，每次部署都会去下载最新的`ubuntu lxc`镜像，由于网络原因，有时能够下载成功，有时下载失败，如图所示的小水管，虽然只有70M，但是也会出现无法在限定时间300s内下载完成
 
-![lxc镜像下载](https://i.imgur.com/Hk9mbqz.png)
+![lxc镜像下载](https://raw.githubusercontent.com/louielong/blogPic/master/imgHk9mbqz.png)
 
 这里使用[清华源的lxc镜像](https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/ubuntu/xenial/amd64/default/)，其会自动同步LXC官方镜像，并保持相同的链接格式(对链接格式感兴趣的可以看3.3.10.1小节)，镜像地址在`compass-tasks`镜像的`/etc/ansible/roles/lxc_hosts/defaults/main.yml`第160行。
 
@@ -680,7 +680,7 @@ docker exec compass-tasks bash -c \
 
 修改后的测试，如图所示，直接从80K/s飙到了9.4M/s
 
-![清华源LXC镜像下载](https://i.imgur.com/qgny2Yv.png)
+![清华源LXC镜像下载](https://raw.githubusercontent.com/louielong/blogPic/master/imgqgny2Yv.png)
 
 ```shell
 aria2c --max-connection-per-server=4 --allow-overwrite=true --dir=/tmp/test --out=rootfs.tar.xz --check-certificate=true https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/ubuntu/xenial/amd64/default/20190106_07:43/rootfs.tar.xz
@@ -690,7 +690,7 @@ aria2c --max-connection-per-server=4 --allow-overwrite=true --dir=/tmp/test --ou
 
 由于LXC官方会更新最新的镜像，因此下载的链接会稍有不同，LXC镜像链接：[Linux Containers - Image server](https://us.images.linuxcontainers.org/)
 
-![LXC ubuntu镜像列表](https://i.imgur.com/kNMLCVd.png)
+![LXC ubuntu镜像列表](https://raw.githubusercontent.com/louielong/blogPic/master/imgkNMLCVd.png)
 
 以`ubuntu;xenial;amd64;default;20190106_07:43;`为例，其下载链接组成为`ubuntu/xenial/amd64/default/20190106_07:43`，完整的下载地址为：
 

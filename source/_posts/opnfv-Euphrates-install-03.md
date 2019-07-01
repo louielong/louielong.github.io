@@ -12,7 +12,7 @@ categories:
 description:
   - OPNFV Euphrates DPDK scenario deploy
 summary_img:
-  - https://i.imgur.com/mxSHEI5.png
+  - https://raw.githubusercontent.com/louielong/blogPic/master/imgmxSHEI5.png
 top:
 ---
 
@@ -225,7 +225,7 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 
 重启网络失败，通过`journalctl -xe`查看错误原因
 
-![重启网络失败](https://i.imgur.com/QfUS2Rr.jpg)
+![重启网络失败](https://raw.githubusercontent.com/louielong/blogPic/master/imgQfUS2Rr.jpg)
 
 先将`/etc/network/if-up.d/route-br-ex`中的路由配置注释，然后使用`ip addr flush dev br-ctl`和`ip addr flush dev br-ex`（注意若使用的是`mgmt`网络访问会导致终端连接断开，在清除`br-ctl`的网址时请使用`pxe`网络的地址连接计算节点），随后使用`service networking restart`重启网络。
 

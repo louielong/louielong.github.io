@@ -10,7 +10,7 @@ categories:
 description:
   - Docker容器创建上限的思考
 summary_img:
-  - https://i.imgur.com/gV5VmE3.png
+  - https://raw.githubusercontent.com/louielong/blogPic/master/imggV5VmE3.png
 ---
 
 ## 一、前言

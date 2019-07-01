@@ -183,7 +183,7 @@ npm install hexo-symbols-count-time --save
 >   total_symbols: true
 >   total_time: true
 
-![hexo word count](https://i.imgur.com/CA9U4yU.jpg)
+![hexo word count](https://raw.githubusercontent.com/louielong/blogPic/master/imgCA9U4yU.jpg)
 
 
 
@@ -234,7 +234,7 @@ $ hexo algolia
 
 如图所示的效果，看起来很酷炫
 
-![文章阅读统计](https://i.imgur.com/QjU61uL.jpg)
+![文章阅读统计](https://raw.githubusercontent.com/louielong/blogPic/master/imgQjU61uL.jpg)
 
 参考[leanclond next配置指南](https://github.com/theme-next/hexo-leancloud-counter-security)，首先安装`leanclound`插件
 
@@ -251,11 +251,11 @@ npm install hexo-leancloud-counter-security --save
 
 将统计结果修改为热度，修改`themes/next/languages/zh-CN.yml`文件中`post`段中`view`中文翻译为`热度`。
 
-![view字段](https://i.imgur.com/bABWCvv.jpg)
+![view字段](https://raw.githubusercontent.com/louielong/blogPic/master/imgbABWCvv.jpg)
 
 打开`themes/next/layout/_macro/post.swig`搜索`leancloud-visitors-count`字段，添加`<span>sheshid</span>`
 
-![摄氏度符号添加](https://i.imgur.com/TBcABwW.jpg)
+![摄氏度符号添加](https://raw.githubusercontent.com/louielong/blogPic/master/imgTBcABwW.jpg)
 
 后续还有一些关于Leanclound的设置，为节省篇幅，请直接访问：[传送门](https://leaferx.online/2018/02/11/lc-security/)
 
@@ -278,7 +278,7 @@ npm install hexo-leancloud-counter-security --save
 
 ### 3.7 修改文章底部的那个带#号的标签
 
-![](https://i.imgur.com/5cleWRI.jpg)
+![标签](https://raw.githubusercontent.com/louielong/blogPic/master/img5cleWRI.jpg)
 
 修改文件`themes/next/layout/_macro/post.swig`，找到`rel="tag">#`，将`#`替换为`<i class="fa fa-tag"></i>`即可。
 
@@ -288,7 +288,7 @@ npm install hexo-leancloud-counter-security --save
 
 效果图：
 
-![](https://i.imgur.com/wIS1EFZ.jpg)
+![致谢](https://raw.githubusercontent.com/louielong/blogPic/master/imgwIS1EFZ.jpg)
 
 创建文件`themes/next/layout/_macro/passage-end-tag.swig`，填入一下内容
 
@@ -313,7 +313,7 @@ npm install hexo-leancloud-counter-security --save
 
 效果如下
 
-![](https://i.imgur.com/h2tADWv.jpg)
+![版权声明](https://raw.githubusercontent.com/louielong/blogPic/master/imgh2tADWv.jpg)
 
 在`themes/next/layout/_macro/`生成一个`custome-cc.swig`文件，填入一下内容
 
@@ -337,7 +337,7 @@ npm install hexo-leancloud-counter-security --save
 
 需要在`source/uploads`下上传图片如下
 
-![cc image](https://i.imgur.com/ARwLVLp.png)
+![cc image](https://raw.githubusercontent.com/louielong/blogPic/master/imgARwLVLp.png)
 
 同样修改`themes/next/layout/_macro/post.swig`，在`post-footer`之前添加
 
@@ -518,7 +518,7 @@ npm install --save hexo-generator-feed
 
 本来想添加SEO加速搜索的，但是登录到**百毒**上一看需要这么多信息，果断放弃了，顺带给一个鄙视的眼神。
 
-![百度SEO注册](https://i.imgur.com/Vq98g8w.jpg)
+![百度SEO注册](https://raw.githubusercontent.com/louielong/blogPic/master/imgVq98g8w.jpg)
 
 ### 3.16 自定义默认生成文章头部模板
 
@@ -538,7 +538,7 @@ summary_img:
 
 使用`hexo new test`创建文章时则会自动填充相应信息，如下图所示
 
-![文章模板](https://i.imgur.com/NSYFNAp.jpg)
+![文章模板](https://raw.githubusercontent.com/louielong/blogPic/master/imgNSYFNAp.jpg)
 
 若想在主页显示文章的总结图片，在`themes/next/layout/_macro/post.swig `中的`post.description`前加入如下内容
 
@@ -593,7 +593,7 @@ Next的Mist主题默认隐藏了副标题的显示，通过修改`themes/next/so
 <script type="text/javascript" src="/js/src/clicklove.js"></script>
 ```
 
-![点击爱心](https://i.imgur.com/7hCt0FX.jpg)
+![点击爱心](https://raw.githubusercontent.com/louielong/blogPic/master/img7hCt0FX.jpg)
 
 ### 3.21 博客背景图片
 

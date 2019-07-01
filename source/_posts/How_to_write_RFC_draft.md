@@ -62,7 +62,7 @@ RFC处理过程：一个RFC文件在成为官方标准前一般至少要经历�
 
 流程图如下：
 
-![RFC处理流程](https://i.imgur.com/UTjMKtQ.jpg)
+![RFC处理流程](https://raw.githubusercontent.com/louielong/blogPic/master/imgUTjMKtQ.jpg)
 
 
 
@@ -120,7 +120,7 @@ RFC处理过程：一个RFC文件在成为官方标准前一般至少要经历�
      ipr="trust200902">
 ```
 
-![IETF Draft xml template](https://i.imgur.com/W1fXOks.png)
+![IETF Draft xml template](https://raw.githubusercontent.com/louielong/blogPic/master/imgW1fXOks.png)
 
 ##### 2.3.1.2 Draft文档命名
 
@@ -156,7 +156,7 @@ Draft的命名遵循如下的格式
 
 效果图
 
-![作者信息](https://i.imgur.com/Ty92Cp4.png)
+![作者信息](https://raw.githubusercontent.com/louielong/blogPic/master/imgTy92Cp4.png)
 
 ##### 2.3.1.4 文档信息
 
@@ -201,7 +201,7 @@ Draft的命名遵循如下的格式
 
 效果图
 
-![ETSI NFV architecture](https://i.imgur.com/tUEFgvZ.png)
+![ETSI NFV architecture](https://raw.githubusercontent.com/louielong/blogPic/master/imgtUEFgvZ.png)
 
 对于列表的格式使用`style`标签，可选参数有
 
@@ -256,7 +256,7 @@ Draft的命名遵循如下的格式
 
 效果图
 
-![图例](https://i.imgur.com/DBCpFP1.png)
+![图例](https://raw.githubusercontent.com/louielong/blogPic/master/imgDBCpFP1.png)
 
 2.3.1.8 表格格式
 
@@ -275,7 +275,7 @@ Draft的命名遵循如下的格式
 
 效果图
 
-![表格](https://i.imgur.com/yhiLozn.png)
+![表格](https://raw.githubusercontent.com/louielong/blogPic/master/imgyhiLozn.png)
 
 ##### 2.3.1.7 引用
 
@@ -285,7 +285,7 @@ Draft的命名遵循如下的格式
 
 如果是标准的RFC文献可以使用[官方参考](https://www.rfc-editor.org/rfc-index2.html)直接导出。
 
-![IETF Ref 示例](https://i.imgur.com/VNPjSPy.png)
+![IETF Ref 示例](https://raw.githubusercontent.com/louielong/blogPic/master/imgVNPjSPy.png)
 
 格式如下
 
@@ -295,7 +295,7 @@ Draft的命名遵循如下的格式
 
 效果图
 
-![RFC 8174 引用效果图](https://i.imgur.com/F1yEJkc.png)
+![RFC 8174 引用效果图](https://raw.githubusercontent.com/louielong/blogPic/master/imgF1yEJkc.png)
 
 2）非RFC文档引用
 
@@ -315,7 +315,7 @@ Draft的命名遵循如下的格式
 
 效果图
 
-![非RFC文档引用](https://i.imgur.com/0ZBvLkX.png)
+![非RFC文档引用](https://raw.githubusercontent.com/louielong/blogPic/master/img0ZBvLkX.png)
 
 
 
@@ -340,7 +340,7 @@ Draft的命名遵循如下的格式
 
 在完成以上步骤后，需要进行xml转rfc检测，检测过后的xml格式才能提交，简单点的是使用线上的[xml2rfc](http://xml2rfc.tools.ietf.org/)工具进行debug测试
 
-![xml2rfc debug](https://i.imgur.com/4yiaq9L.png)
+![xml2rfc debug](https://raw.githubusercontent.com/louielong/blogPic/master/img4yiaq9L.png)
 
 如果出现问题就看debug信息，最基本的错误是tag没有闭合，中文字符，引用错误等。
 
