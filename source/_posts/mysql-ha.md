@@ -429,7 +429,7 @@ mysql> show databases;
 
 ### 4.1 keepalived介绍
 
-![keepalived](http://www.keepalived.org/images/ka-header.png)
+![keepalived](https://www.keepalived.org/images/ka-header-new.png)
 
 Keepalived软件起初是专为LVS负载均衡软件设计的，用来管理并监控LVS集群系统中各个服务节点的状态，后来又加入了可以实现高可用的VRRP功能。因此，Keepalived除了能够管理LVS软件外，还可以作为其他服务（例如：Nginx、Haproxy、MySQL等）的高可用解决方案软件。
 
@@ -439,7 +439,7 @@ Keepalived软件主要是通过VRRP协议实现高可用功能的。VRRP是Virtu
 
 这里借用博客[4]的有关keepalived的集群工作原理示意图
 
-![keepalived状态切换示意图](https://i.imgur.com/iZyFaCC.png)
+![keepalived状态切换示意图](https://raw.githubusercontent.com/louielong/blogPic/master/imgiZyFaCC.png)
 
 Keepalived高可用对之间是通过 VRRP进行通信的， VRRP是遑过竞选机制来确定主备的，主的优先级高于备，因此，工作时主会优先获得所有的资源，备节点处于等待状态，当主挂了的时候，备节点就会接管主节点的资源，然后顶替主节点对外提供服务。
 
