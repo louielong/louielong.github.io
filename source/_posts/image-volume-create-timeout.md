@@ -2,12 +2,12 @@
 title: Openstack虚拟机磁盘创建超时
 date: 2019-05-09 15:39:03
 tags:
-  - openstack
+  - Openstack
   - cinder
 keywords:
   - cinder
 categories:
-  - openstack
+  - Openstack
 description:
   - VM磁盘连接超时
 summary_img:
