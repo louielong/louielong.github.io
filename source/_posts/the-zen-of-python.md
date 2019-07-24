@@ -21,7 +21,7 @@ summary_img:
 
 ## 二、python禅道
 
-看到很对提及此事的文章中都提到了python禅道出自PEP8，这里也顺带介绍一下PEP[1]
+看到很对提及此事的文章中都提到了python禅道出自PEP20，这里也顺带介绍一下PEP[1]
 
 ### 2.1 什么是PEP
 
@@ -37,7 +37,7 @@ Tim Peter 回答过什么是好的Python代码？
 
 地址：[pep-0008][https://www.python.org/dev/peps/pep-0008/]
 
-### 2.3 the zen of python
+### 2.3 PEP20 - the zen of python
 
 打开终端输入`python`，`import this`即可看到Tim Peters的**Then Zen of Python**
 
