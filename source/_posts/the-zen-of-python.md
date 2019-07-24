@@ -13,13 +13,31 @@ summary_img:
   - https://raw.githubusercontent.com/louielong/blogPic/master/img0BVyYQ1sS8U8GkC920F3.png
 ---
 
-一、前言
+## 一、前言
 
 看到“GitHubDaily”公众号推送一个关于[Python-100-Days](https://github.com/jackfrued/Python-100-Days)的一个项目，觉得里面的东西蛮有意思，之前由于工作需要也玩过一段时间的python，但是没有很系统的学习，所以打算花上一段时间根据这个项目进行较为系统的学习。
 
 在教程的第一节就是关于python之禅的介绍，搜索了一下网上的翻译，觉得很有意思这里也转载记录一下。
 
-二、python禅道
+## 二、python禅道
+
+看到很对提及此事的文章中都提到了python禅道出自PEP8，这里也顺带介绍一下PEP[1]
+
+### 2.1 什么是PEP
+
+PEP 是 Python 增强提案(Python Enhancement Proposal)的缩写。社区通过PEP来给 Python 语言建言献策，每个版本你所看到的新特性和一些变化都是通过PEP提案经过社区决策层讨论、投票决议，最终才有我们看到的功能。
+
+### 2.2 PEP8
+
+如果你还不知道PEP8是什么，可能还算不上一位合格的Python程序员，PEP8是每个Python程序员必读的提案，Python虽然以语法简洁著称，但并不意味着你就一定能写出简洁优雅的代码，PEP8风格指南定义了编写  Python  代码的规范和应该遵守的编码原则，大家都应该按照此规范约束代码，多读几遍此规范，做到了然于心。网上有各种版本的中译版，可选择性参考阅读。
+
+Tim Peter 回答过什么是好的Python代码？
+
+> 有个通用的约定应该是可维护的、清晰可懂的、满足一致性的，同时也应该是好的编程习惯的基础。它不会违背你的意愿来强制要求你遵循那些规则。这就是Python!" 
+
+地址：[pep-0008][https://www.python.org/dev/peps/pep-0008/]
+
+### 2.3 the zen of python
 
 打开终端输入`python`，`import this`即可看到Tim Peters的**Then Zen of Python**
 
@@ -177,3 +195,9 @@ print("".join([d.get(c, c) for c in s]))
 加油↖(^ω^)↗
 
 ![加油](https://raw.githubusercontent.com/louielong/blogPic/master/img1355839526-2935297530.jpg)
+
+
+
+【参考资料】
+
+1）[Python中10个必读的PEP提案](https://foofish.net/python-pep.html)
