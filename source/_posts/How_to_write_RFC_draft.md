@@ -12,7 +12,7 @@ categories:
 description:
   - RFC Internet Draft 撰写
 summary_img:
-  - https://www.ietf.org/lib/dt/6.89.2/ietf/images/ietflogo.png
+ - https://raw.githubusercontent.com/louielong/blogPic/master/imgietf-logo.e4b6ca0dd271.gif
 ---
 ## 一、前言
 
