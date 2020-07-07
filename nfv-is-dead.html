@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="SgcsMbvcduiAp6Ck7yLI77kPJXONXRYQnbXir7oefRs">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/favicon-48x48.ico?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon-32x32.ico?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon-16x16.ico?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/uploads/favicon-48x48.ico?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: 'SBFCV05R39',
+      apiKey: '',
+      indexName: 'my hexo search',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"请输入关键词","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="NFV已死">
+<meta name="keywords" content="NFV,SASE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NFV已死-云杀死的">
+<meta property="og:url" content="https://louielong.github.io/nfv-is-dead.html">
+<meta property="og:site_name" content="Louie&#39;s Blog">
+<meta property="og:description" content="NFV已死">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-11-04T03:36:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NFV已死-云杀死的">
+<meta name="twitter:description" content="NFV已死">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Louie's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://louielong.github.io/nfv-is-dead.html">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>NFV已死-云杀死的 | Louie's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Louie's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">O ever youthful, O ever powerful.</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+    <a href="/404/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://louielong.github.io/nfv-is-dead.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Author">
+      <meta itemprop="description" content="一只会说666的程序媛鼓励师">
+      <meta itemprop="image" content="/uploads/shadian.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Louie's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">NFV已死-云杀死的
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-04 11:23:48 / 修改时间：11:36:05" itemprop="dateCreated datePublished" datetime="2019-11-04T11:23:48+08:00">2019-11-04</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/NFV/" itemprop="url" rel="index"><span itemprop="name">NFV</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/nfv-is-dead.html" class="leancloud_visitors" data-flag-title="NFV已死-云杀死的">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+                 
+                 <span>℃</span>
+                 
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">12k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">0:10</span>
+              
+            </div>
+          
+
+          
+          
+            <div class="out-img-topic">
+             <img src="https://raw.githubusercontent.com/louielong/blogPic/master/img20191104112635.png" class="img-topic">
+            </div>
+          
+          
+
+          
+              <div class="post-description">NFV已死</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文翻译自<a href="https://www.lightreading.com/cloud/gartner-nfv-is-dead-andndash-the-cloud-killed-it-/d/d-id/754790?utm_source=linkedin&utm_medium=social_organic&utm_content=2f9905b7-b5d4-4bf4-bf4d-b7e846075d39&utm_campaign=GFMC_global_Big_Ideas_Blog_20180101" target="_blank" rel="noopener">Gartner: NFV Is Dead– the Cloud Killed It</a>，可能存在翻译不准确的地方。</p>
+<p>Enterprises are demanding a new generation of cloud-based wide-area networking services that’s swallowing up SD-WAN, killing network functions virtualization (NFV) and challenging existing telco business and technology models, according to Gartner analysts. </p>
+<p>根据Gartner的分析师，企业需要新一代的基于云的广域网服务，这些服务将吞噬SD-WAN，杀死网络功能虚拟化（NFV）并挑战现有的电信业务和技术模型。</p>
+<p>Gartner has given the new network delivery business model a name, and it’s an ugly one: SASE, pronounced “sassy,” which stands for the “Secure Access Service Edge.” And if Gartner is right, the effect on service providers’ business is going to be ugly too. </p>
+<p>Gartner给新的网络交付业务模型起了一个名字，一个非常丑陋的名字：SASE，发音为“ sassy”，代表“安全访问服务边缘”(Secure Access Service Edge)。 如果Gartner是正确的，那么对服务提供商业务的影响也将是丑陋的。</p>
+<p>The SASE transformation has been building for years. Five years ago, almost all enterprise applications and data lived in the data center, Gartner analyst Joe Skorupa tells Light Reading. Branch office networking connected to the data center, as did remote workers. Whatever cloud access was necessary then went to the data center first, then out to the public Internet. </p>
+<p>SASE转型已经进行了多年。 Gartner分析师Joe Skorupa告诉Light Reading，五年前，几乎所有企业应用程序和数据都存在于数据中心。 分支机构网络连接到数据中心，远程工作者也是如此。 无论需要什么云访问权限，然后都首先访问数据中心，然后再访问公共Internet。</p>
+<p>“Now, applications are pretty much everywhere,” Skorupa says. Some are in the data center, some are outside of it. Mission-critical applications live in the cloud, including Workday, Microsoft Office 365, and custom applications written for Microsoft Azure and Amazon Web Services. “The data center is no longer the center of the universe,” he says. </p>
+<p>“现在，到处都有应用程序，” Skorupa说。 有些在数据中心内，有些在数据中心外。 关键任务应用程序存在于云中，包括Workday，Microsoft Office 365和为Microsoft Azure和Amazon Web Services编写的自定义应用程序。 他说：“数据中心不再是宇宙的中心。”</p>
+<p>Skorupa adds, “We have gone from having a ‘data center’ to having ‘centers of data,’ and they are all over the place.”</p>
+<p>Skorupa补充说：“我们已经从拥有“数据中心”变为拥有“中心的数据”，并且它们遍布各处。”</p>
+<p>Likewise, consumers of data aren’t just branch offices. Endpoints are mobile. “They’re a sales executive sitting in a car with a cup of coffee and an iPad,” Skorupa says. “They’re not funneling through the data center. It’s a hub and spoke. But the hub is the individual, which could be a person, could be an IoT device, and could be software.”</p>
+<p>同样，数据的使用者不仅仅是分支机构。 端点是移动的。 Skorupa说：“他们是一名销售主管，坐在汽车上喝着咖啡和iPad。” “他们并没有通过数据中心进行传输。它是一个枢纽。但是枢纽是个体，可以是人，可以是IoT设备，也可以是软件。”</p>
+<p>The new network architecture requires different technologies to suit different needs, Skorupa says. For example, a home worker doesn’t need SD-WAN because they’re not balancing multiple links, but that worker does need quality-of-service guarantees to make video calls. On the other hand, a branch office requires SD-WAN for security and path selection. </p>
+<p>Skorupa说，新的网络架构需要不同的技术来满足不同的需求。 例如，家庭工作者不需要SD-WAN，因为他们没有多个链接需要平衡，但是该工作者确实需要服务质量保证才能进行视频通话。 另一方面，分支机构需要SD-WAN进行安全性和路径选择。</p>
+<p>The changing nature of business requires changing security policies and technology as well, Skorupa says. “If it’s a contractor using an untrusted laptop logging in from Southeast Asia at two o’clock Sunday morning directly into Salesforce, trying to get at the entire client database, you want to apply a lot of security policy against that,” Skorupa says. </p>
+<p>Skorupa说，业务性质的变化也需要安全策略和技术的变化。 Skorupa说：“如果承包商使用的是不受信任的笔记本电脑，则需要在周日凌晨两点从东南亚直接登录到Salesforce，以获取整个客户数据库，那么您将对此应用大量的安全策略。”</p>
+<p>Additionally, enterprise locations need intrusion detection and prevention services (IDS/IPS), data loss prevention (DLP), anti-spam, anti-malware, whitelisting, blacklisting and so on. “The overhead of trying to keep that stuff patched is a nightmare. You’re always out of date. You’re not going to put seven boxes stacked up – and duct them to the back of my iPad when I’m traveling,” Skorupa says. Cloud delivery is the only model that makes sense. </p>
+<p>此外，企业场所需要入侵检测和预防服务（IDS / IPS），数据丢失预防（DLP），反垃圾邮件，反恶意软件，白名单，黑名单等。 “试图修补这些东西的开销是一场噩梦。您总是错过最佳防护时机。您不会愿意在旅行时将他们七个盒子叠在一起并放在iPad的背面， ” Skorupa说。 云交付是唯一有意义的模型。</p>
+<p>He adds, “The only way to apply policy anywhere and everywhere, scaling up and scaling down as needed, delivering a set of functions you need on demand, is to deliver it primarily cloud-based.”</p>
+<p>他补充说：“在任何地方和任何地方应用策略，按需扩展和按比例缩小，提供按需提供的功能集的唯一方法是基于云来提供它。”</p>
+<p><strong>R.I.P. CPE</strong><br> That means on-premises equipment needs to go from being the standard way of delivering enterprise services to a specialized case, says the Gartner man. </p>
+<p>Gartner负责人说，这意味着本地设备需要从提供企业服务的标准方式转变为特殊情况。</p>
+<p>“The model says on-prem only when you must, cloud-delivered whenever you can,” Skorupa says.</p>
+<p>Skorupa说：“该模型仅在必要时才在企业内部显示，并在可能的情况下通过云交付。”</p>
+<p>This “represents an existential threat to NFV” because NFV depends on selling expensive boxes that happen to be x86-based. The cost benefits promised initially for NFV failed to materialize because vendors simply refused to lower their prices by a lot, Skorupa says.</p>
+<p>这“代表对NFV的生存威胁”，因为NFV依赖出售恰好基于x86的昂贵盒子。 Skorupa说，最初承诺为NFV提供的成本收益未能实现，因为供应商只是拒绝大幅降低价格。 </p>
+<p>NFV proved “incredibly complicated,” and while the telco industry struggled to make it work, “application consumption patterns changed and the branch was no longer the center of the universe, and a solution that was non-scalable and hard to maintain and expensive and complex winds up being obsoleted by something that is elastic and easy to maintain and it’s cloud delivered,” Skorupa says. </p>
+<p>事实证明NFV“异常复杂”，而电信业正努力使之运转，“应用程序消费模式发生了变化，分支机构不再是整个领域的中心， 一个不可扩展、难以维护且价格昂贵的解决方案，将被弹性、易于维护的东西淘汰了，并且使用了云交付，” Skorupa说。</p>
+<p>There are cases where NFV makes sense. “But by and large the days of NFV have already come and gone. It’s basically stillborn,” Skorupa says. </p>
+<p>在某些情况下，NFV是有意义的。 “但是总的来说，NFV的时代已经过去了。它基本上已经死了，” Skorupa说。</p>
+<p>In a July note, Gartner recommends several steps for technology and service providers to succeed in the new market. They need to transform offerings to a cloud-native architecture, transform business models to “cloud-native-as-a service,” deliver “a clear vision” to the market, fill out their “portfolio organically, with the fewest acquisitions possible to minimize integration challenges and inconsistencies across services,” and invest in distributed real estate, such as PoPs and colocation facilities, to place service as close to the access point as required. </p>
+<p>在7月的一份报告中，Gartner建议技术和服务提供商在新市场上取得成功的几个步骤。 他们需要将产品转变为云原生架构，将业务模型转变为“云原生即服务”，向市场提供“清晰的愿景”，通过最少的收购来有机地组合产品组合，以最大程度地减少集成挑战和服务之间的不一致，并投资于分布式资产（例如PoP和托管设施），以根据需要将服务放置在靠近接入点的位置。</p>
+<p>Gartner names several vendors as already network-security focused, including Cato Networks, Fortinet, Forcepoint, Juniper and Versa Networks. Other SD-WAN vendors without cloud-delivered security are partnering with Zscaler, Palo Alto Networks and others. </p>
+<p>Gartner列出了多家已经关注网络安全的供应商，包括Cato Networks，Fortinet，Forcepoint，Juniper和Versa Networks。 其他没有云交付安全性的SD-WAN供应商正在与Zscaler，Palo Alto Networks等合作。</p>
+<p>Of course, the industry being what it is, these vendors are going into paroxysms of joy by merely being mentioned by Gartner. Versa and Cato Networks put out press releases and statements on their websites, and zScaler devoted some discussion to the subject on an earnings call.</p>
+<p>当然，无论是什么行业，这些供应商都只是被Gartner提及而陷入欢乐的阵营。 Versa和Cato Networks在其网站上发布了新闻稿和声明，而zScaler在财报电话会议上对该主题进行了一些讨论。</p>
+<p><strong>Telcos behind the eight-ball</strong></p>
+<p><strong>电信公司陷入困境</strong><br> Cato Networks, for one, sees the shift to SASE as a competitive advantage. “Telcos are behind the eight-ball,” Yishah Yovel, Cato CMO and chief strategist, tells Light Reading. Telco networks are based on appliances, and they’re two years behind catching up on the cloud networking model. </p>
+<p>例如，Cato Networks将向SASE的转变视为一种竞争优势。 Cato首席营销官兼首席策略师Yishah Yovel对Light Reading表示：“电信公司陷入困境。” 电信网络是基于设备的，比追赶云网络模型落后了两年。</p>
+<p>Telcos are disadvantaged because they don’t own the code. “If I’m a Palo Alto or Zscaler, I have my own code. I already have some percentage of the SASE platform. Telcos don’t operate this way. They integrate other people’s code. That’s very dangerous for them, unless they become more of a software player.”</p>
+<p>电信公司处于不利地位，因为它们不拥有代码。 “如果我是Palo Alto或Zscaler，我有我自己的代码。我已经拥有一定比例的SASE平台。电信公司无法以这种方式运行。它们会集成其他人的代码。这对他们来说非常危险，除非他们变得 更多的软件播放器。”</p>
+<p>Looked at one way, Gartner’s SASE pitch is nothing new. Indeed, when a Cato Networks spokesman brought it to my attention a few weeks ago, I initially scoffed.</p>
+<p>从一种角度看，Gartner的SASE呼声渐涨并不是什么新鲜事物。 确实，几周前，当Cato Networks的一位发言人提请我注意时，我开始嘲笑它。 </p>
+<p>Normally I would have been more polite, but I was in a bad mood on account of being still jet-lagged and sleep deprived from a trip to Dallas, to Light Reading’s Network Virtualization &amp; Software Defined Networking conference, which was all about the trends Gartner had apparently just discovered. And it wasn’t the first year we’ve done that conference; far from it. So my first reaction to the tip was, “<a href="https://knowyourmeme.com/memes/captain-obvious" target="_blank" rel="noopener">Thank you, Captain Obvious!</a>“</p>
+<p>通常，我本来会比较有礼貌，但是由于刚到达拉斯的时差，无法参加Light Reading的网络虚拟化和软件定义网络会议，所以我心情很不好，这也与Gartner刚刚发现的趋势有关。 这不是我们召开会议的第一年。所以我对小费的第一反应是：“谢谢，上尉船长！”</p>
+<p>The software-defined networking (SDN) movement, launched at the beginning of the decade, was all about moving network intelligence into software for increased agility; the reason we don’t hear much about that anymore is because the philosophy has become mainstream.</p>
+<p>十年之初发起的软件定义网络（SDN）运动就是将网络智能转移到软件中以提高敏捷性。 我们之所以不再听到太多的原因是因为该哲学已成为主流。</p>
+<p>More recently, AT&amp;T, Orange and startup Rakuten are aggressively moving their networks to cloud architectures. Just last week, <a href="https://www.lightreading.com/nfv/nfv-elements/colt-brings-virtual-networks-to-enterprise-premises/d/d-id/754763" target="_blank" rel="noopener">Colt launched</a> a new line of universal CPE (uCPE) equipment, providing SD-WAN, firewall and other services to enterprises, based on NFV.</p>
+<p>最近，AT＆T，Orange和创业公司Rakuten正在积极地将其网络迁移到云架构。 就在上周，Colt推出了新的通用CPE（uCPE）设备系列，为基于NFV的企业提供SD-WAN，防火墙和其他服务。</p>
+<p>Still, NFV has attracted skeptics almost since its founding in 2012, and at about the same time Gartner issued its SASE note, we <a href="https://www.lightreading.com/nfv/nfv-strategies/smokey-and-the-nfv-bandit/a/d-id/753939" target="_blank" rel="noopener">reported</a> that critics were saying the technology is too rigid and monolithic for the cloud era, (though Prayson Pate, CTO, Edge Cloud, ADVA Optical Networking <a href="https://www.lightreading.com/nfv/nfv-strategies/smokey-and-the-nfv-bandit/a/d-id/753939" target="_blank" rel="noopener">took issue with our report</a>). </p>
+<p>尽管如此，NFV几乎自2012年成立以来就一直引起怀疑论者的关注，并且大约在同一时间，Gartner发布了SASE说明，据我们报道，批评者称该技术对于云时代而言过于僵化和整体化（尽管 Prayson Pate (ADVA光网络公司Edge Cloud 的CTO)对我们的报告对提出了质疑）。</p>
+<p>However, my initial dismissal was misplaced. Gartner does a good job of weaving together and articulating several long-term trends shaping the service provider business and networks. Gartner deserves credit for stepping back and summarizing a decade of trends in a few pages. </p>
+<p>但是，我最初的解雇是错误的。 Gartner很好地组织并阐明了影响服务提供商业务和网络的几种长期趋势。 Gartner值得一提的是在几页中后退并总结了十年的趋势。</p>
+<p>Also, Gartner is influential, particularly among enterprises who are service provider customers. Gartner’s SASE coinage means ideas about wide-area network virtualization and cloudification have gone mainstream. Telcos are going to start hearing demand for SASE, and need to be prepared to meet it. </p>
+<p>此外，Gartner很有影响力，特别是在服务提供商客户企业中。 Gartner的SASE概念意味着有关广域网虚拟化和云化的想法已成为主流。 电信公司将开始听到对SASE的需求，并且需要做好准备以满足它。</p>
+<p>For more about how AT&amp;T, Orange, Rakuten and other service providers already cloudifying and virtualizing their networks, see these articles:</p>
+<ul>
+<li><a href="https://www.lightreading.com/nfv/nfv-elements/colt-brings-virtual-networks-to-enterprise-premises/d/d-id/754763" target="_blank" rel="noopener">Colt Brings Virtual Networks to      Enterprise Premises</a></li>
+<li><a href="https://www.lightreading.com/automation/atandts-wheelus-from-mechanization-to-automation/d/d-id/754688" target="_blank" rel="noopener">AT&amp;T’s Wheelus: From Mechanization      to Automation</a></li>
+<li><a href="https://www.lightreading.com/mobile/4g-lte/alaskas-rakuten-preps-for-4g-launch/d/d-id/754538" target="_blank" rel="noopener">Alaska’s Rakuten Preps for 4G Launch</a></li>
+<li><a href="https://www.lightreading.com/optical-ip/why-atandts-latest-open-source-contribution-matters/d/d-id/754484" target="_blank" rel="noopener">Why AT&amp;T’s Latest Open Source      Contribution Matters</a></li>
+<li><a href="https://www.lightreading.com/nfv/nfv-specs-open-source/common-nfvi-telco-taskforce-(cntt)-boasts-reference-milestone/d/d-id/754308" target="_blank" rel="noopener">Common NFVI Telco Taskforce (CNTT)      Boasts Reference Milestone</a></li>
+<li><a href="https://www.lightreading.com/carrier-sdn/sdn-technology/atandt-on-track-for-100--core-network-virtualization-next-year/d/d-id/754104" target="_blank" rel="noopener">AT&amp;T on Track for 100% Core      Network Virtualization Next Year</a></li>
+<li><a href="https://www.lightreading.com/mobile/5g/rakuten-delays-launch-of-cloud-native-network-/d/d-id/753940" target="_blank" rel="noopener">Rakuten Delays Launch of Cloud-Native      Network </a></li>
+<li><a href="https://www.lightreading.com/cloud/applications/its-groundhog-day!-explaining-atandts-microsoft-and-ibm-deals/a/d-id/753001" target="_blank" rel="noopener">It’s Groundhog Day! Explaining      AT&amp;T’s Microsoft &amp; IBM Deals</a></li>
+<li><a href="https://www.lightreading.com/cloud/iot-and-edge/atandt-and-microsoft-ink-extensive-deal-for-cloud-5g-ai-and-edge/d/d-id/752852" target="_blank" rel="noopener">AT&amp;T &amp; Microsoft Ink      ‘Extensive’ Deal for Cloud, 5G, AI &amp; Edge</a></li>
+<li><a href="https://www.lightreading.com/nfv/nfv-strategies/is-x-by-orange-showing-us-the-ott-future-for-telcos/d/d-id/746400" target="_blank" rel="noopener">Is X by Orange Showing Us the OTT      Future for Telcos?</a></li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+        <div>
+            
+    <div blockquote class="blockquote-center" style="color: #32CD32;font-size:18px;">
+    -------------本文结束<i class="fa fa-heartbeat"></i>感谢您的阅读-------------
+    </div>
+
+
+        </div>
+    
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.jpeg" alt="Author 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      
+        <div>
+            
+<br>
+<div style="border: 1px solid black">
+<div style="margin-left:10px">
+<span style="font-weight:blod">版权声明</span>
+<img src="/uploads/cc.png">
+<br>
+<p style="font-size: 10px;line-height: 30px"><a href="http://ylong.net.cn" style="color:#258FC6">Louie's Blog</a> by <a href="http://ylong.net.cn" style="color:#258FC6">louie long</a> is licensed under a <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" style="color:#258FC6">Creative Commons BY-NC-ND 4.0 International License</a>.<br>
+由<a href="http://ylong.net.cn" style="color:#258FC6">Louie Long</a>创作并维护的<a href="ylong.net.cn" style="color:#258FC6">Louie's Blog</a>博客采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" style="color:#258FC6">创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。<br>
+本文首发于<a href="http://ylong.net.cn" style="color:#258FC6">Louie's Blog</a> 博客（ <a href="http://ylong.net.cn" style="color:#258FC6">http://ylong.net.cn</a> ），版权所有，侵权必究。
+<br>
+转载请注明作者和链接地址<a href="http://ylong.net.cn" style="color:#258FC6">http://ylong.net.cn</a>, 如对文章内容有疑问请联系邮箱（ <a style="color:#258FC6">longyu805@163.com</a> ）。</p>
+</div>
+</div>
+
+
+        </div>
+      
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/source/tags/NFV/" rel="tag"><i class="fa fa-tag"></i> NFV</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/the-zen-of-python.html" rel="next" title="the_zen_of_python">
+                <i class="fa fa-chevron-left"></i> the_zen_of_python
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/NFV-thinking.html" rel="prev" title="NFV的一些思考">
+                NFV的一些思考 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/shadian.png" alt="Author">
+            
+              <p class="site-author-name" itemprop="name">Louie Long</p>
+              <p class="site-description motion-element" itemprop="description">一只会说666的程序媛鼓励师</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">29</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/louielong" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:longyu805@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/_long__" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-ravelry"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Louie</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">246k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">3:43</span>
+  
+
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <span id="busuanzi_container_site_pv">
+  | 本站总访问量<span style="color:#FA8072" id="busuanzi_value_site_pv"></span>次
+  </span>
+  <span id="busuanzi_container_site_uv">
+  | 本站访客数<span style="color:#FA8072" id="busuanzi_value_site_uv"></span>人次
+  </span>
+  
+
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=6.4.1"></script>
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "M8d5yPXQ5l0kwFz1bO6cF7b3-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "M8d5yPXQ5l0kwFz1bO6cF7b3-gzGzoHsz",
+                'X-LC-Key': "QEarlHm5c8XcuF22TbFD3Bqn",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/clicklove.js"></script>
+  
+
+</body>
+</html>

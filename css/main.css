@@ -1952,7 +1952,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #8bed67;
+  background: #ff119c;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2748,7 +2748,7 @@ hr {
   margin-top: 80px;
 }
 .header {
-  background: #f5f5f5;
+  background: transparent;
 }
 .header-inner {
   padding: 25px 0 20px;

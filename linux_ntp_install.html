@@ -15,7 +15,7 @@
 
 
 <html class="theme-next mist use-motion" lang="zh-CN">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -163,7 +163,7 @@
 <meta property="og:site_name" content="Louie&#39;s Blog">
 <meta property="og:description" content="NTP 服务器安装">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-12T09:51:08.845Z">
+<meta property="og:updated_time" content="2018-09-12T09:51:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ubuntu下安装配置NTP服务器">
 <meta name="twitter:description" content="NTP 服务器安装">
@@ -225,7 +225,7 @@
 
 </head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
@@ -235,7 +235,7 @@
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
@@ -396,20 +396,20 @@
 
   
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://louielong.github.io/linux_ntp_install.html">
 
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Author">
       <meta itemprop="description" content="一只会说666的程序媛鼓励师">
       <meta itemprop="image" content="/uploads/shadian.png">
     </span>
 
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="Louie's Blog">
     </span>
 
@@ -477,7 +477,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/Ubuntu/" itemprop="url" rel="index"><span itemprop="name">Ubuntu</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Ubuntu/" itemprop="url" rel="index"><span itemprop="name">Ubuntu</span></a></span>
 
                 
                 
@@ -519,7 +519,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">6.5k</span>
+                <span title="本文字数">6.6k</span>
               
 
               
@@ -577,11 +577,14 @@
 <p>NTPD 在和时间服务器的同步过程中，会把 BIOS 计时器的振荡频率偏差——或者说 Local Clock 的自然漂移(drift)——记录下来。这样即使网络有问题，本机仍然能维持一个相当精确的走时。</p>
 <h2 id="2-安装ntp"><a href="#2-安装ntp" class="headerlink" title="2 安装ntp"></a>2 安装ntp</h2><p>ntp的安装是服务器和客户端集成在一起的，在ubuntu或centos下安装ntp服务器都非常简单，这里以ubuntu为例，使用NTP命令即可：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install -y ntp</span><br></pre></td></tr></table></figure>
+
 <p>如果需要ntpdate工具则需要额外安装ntpdate</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install -y ntpdate</span><br></pre></td></tr></table></figure>
+
 <h2 id="3-配置ntp服务器或server"><a href="#3-配置ntp服务器或server" class="headerlink" title="3 配置ntp服务器或server"></a>3 配置ntp服务器或server</h2><p>ntp的配置文件存放在<code>/etc/ntp.conf</code>，打开文件并进行修改，部分参数说明如下</p>
 <h3 id="3-1-使用server命令设定上层NTP服务器"><a href="#3-1-使用server命令设定上层NTP服务器" class="headerlink" title="3.1 使用server命令设定上层NTP服务器"></a>3.1 使用server命令设定上层NTP服务器</h3><p>设定方式：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">server [address] [options...]</span><br></pre></td></tr></table></figure>
+
 <p>在server后面填写服务器地址（可以使IP或主机名），之后是命令参数主要包括autokey，brust，ibrust，key，minpoll ，maxpoll。这里最长使用的是ibrust和prefer。</p>
 <table>
 <thead>
@@ -590,8 +593,7 @@
 <th>含义</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>brust</td>
 <td>当时间服务器不可达时，将发送间隔为2秒的连续八个包</td>
 </tr>
@@ -603,11 +605,11 @@
 <td>prefer</td>
 <td>当其他数据相同时该节点将作为首选时间同步</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>其它参数的详细说明可参考NTP的帮助文档（<code>man 5 ntp.conf</code>）。</p>
 <h3 id="3-2-使用restrict命令管理权限控制"><a href="#3-2-使用restrict命令管理权限控制" class="headerlink" title="3.2 使用restrict命令管理权限控制"></a>3.2 使用restrict命令管理权限控制</h3><p>设定方式：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">restrict [address] mask [mask] [parameter]</span><br></pre></td></tr></table></figure>
+
 <p>其中parameter的参数主要有以下这些：</p>
 <ul>
 <li>ignore: 拒绝所有类型的NTP联机；</li>
@@ -619,6 +621,7 @@
 <p>如果你没有在 parameter 的地方加上任何参数的话，这表示该 IP 或网段不受任何限制。</p>
 <h3 id="3-3-使用driftfile记录时间差异"><a href="#3-3-使用driftfile记录时间差异" class="headerlink" title="3.3 使用driftfile记录时间差异"></a>3.3 使用driftfile记录时间差异</h3><p>设定方式：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">driftfile [可以被ntpd写入的目录与档案]</span><br></pre></td></tr></table></figure>
+
 <p>因为预设的 NTP Server 本身的时间计算是依据 BIOS 的芯片震荡周期频率来计算的，但是这个数值与上层 Time Server 不见得会一致啊！所以 NTP 这个 daemon (ntpd) 会自动的去计算我们自己主机的频率与上层 Time server 的频率，并且将两个频率的误差记录下来，记录下来的档案就是在 driftfile 后面接的完整档名当中了！关于档名你必须要知道：</p>
 <ul>
 <li>driftfile 后面接的档案需要使用完整路径文件名；</li>
@@ -629,16 +632,22 @@
 <p>driftfile 后面接的档案会被 ntpd 自动更新，所以他的权限一定要能够让 ntpd 写入才行。</p>
 <h3 id="3-4-使用statsdir和filegen开启统计分析"><a href="#3-4-使用statsdir和filegen开启统计分析" class="headerlink" title="3.4 使用statsdir和filegen开启统计分析"></a>3.4 使用statsdir和filegen开启统计分析</h3><p>设定方式：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">statsdir directory_path</span><br><span class="line">filegen name file filename [type type] [link | nolink] [enable | disable]</span><br></pre></td></tr></table></figure>
+
 <p>当打开统计分析是会在directory_path目录下产生filegen中所设定的统计文件。</p>
 <h3 id="3-5-指定接口"><a href="#3-5-指定接口" class="headerlink" title="3.5 指定接口"></a>3.5 指定接口</h3><p>ntp服务开启时默认监听所有的接口，如果想指定ip段或者接口则按照一下方式</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">interface [listen | ignore | drop] [all | ipv4 | ipv6 | wildcard | name | address[/prefixlen]]</span><br></pre></td></tr></table></figure>
+
 <p>listen指定监听接口，ignore忽略该接口，drop丢弃接口的请求数据包，接口类型可以指定为v4、v6或接口名。</p>
 <h3 id="3-6-配置文件示例"><a href="#3-6-配置文件示例" class="headerlink" title="3.6 配置文件示例"></a>3.6 配置文件示例</h3><p>为了支持IPv6这里添加清华源的NTP服务器，清华源官方链接：<a href="https://tuna.moe/help/ntp/" target="_blank" rel="noopener">传送门</a></p>
-<p>配置文件完整示例如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"># /etc/ntp.conf, configuration for ntpd; see ntp.conf(5) for help</span><br><span class="line"># 时间差异文件</span><br><span class="line">driftfile /var/lib/ntp/ntp.drift</span><br><span class="line"></span><br><span class="line"># 接口设置</span><br><span class="line">interface listen eth0</span><br><span class="line">interface ignore ipv4</span><br><span class="line"></span><br><span class="line"># 分析统计信息</span><br><span class="line">#statsdir /var/log/ntpstats/</span><br><span class="line"></span><br><span class="line">statistics loopstats peerstats clockstats</span><br><span class="line">filegen loopstats file loopstats type day enable</span><br><span class="line">filegen peerstats file peerstats type day enable</span><br><span class="line">filegen clockstats file clockstats type day enable</span><br><span class="line"></span><br><span class="line"># 上层ntp server.</span><br><span class="line">pool ntp1.aliyun.com iburst</span><br><span class="line">pool ntp2.aliyun.com iburst</span><br><span class="line">pool ntp3.aliyun.com iburst</span><br><span class="line">pool ntp4.aliyun.com iburst</span><br><span class="line"># 清华源提供IPv4和IPv6双栈</span><br><span class="line">pool ntp.tuna.tsinghua.edu.cn iburst perfer</span><br><span class="line"></span><br><span class="line"># Use Ubuntu&apos;s ntp server as a fallback.</span><br><span class="line">pool ntp.ubuntu.com</span><br><span class="line"></span><br><span class="line"># 不允许来自公网上ipv4和ipv6客户端的访问</span><br><span class="line">restrict -4 default kod notrap nomodify nopeer noquery limited</span><br><span class="line">restrict -6 default kod notrap nomodify nopeer noquery limited</span><br><span class="line"># 准许以下网络的ntp请求</span><br><span class="line">restrict -6 240c:6100:ffff:: netmask 64 nomodify</span><br><span class="line">restrict 172.16.0.1 netmask 20 nomodify</span><br><span class="line"></span><br><span class="line"># 让NTP Server和其自身保持同步，如果在/etc/ntp.conf中定义的server都不可用时，将使用local时间作为ntp服务提供给ntp客户端.</span><br><span class="line">restrict 127.0.0.1</span><br><span class="line">restrict ::1</span><br><span class="line"></span><br><span class="line"># Needed for adding pool entries</span><br><span class="line">restrict source notrap nomodify noquery</span><br><span class="line"></span><br><span class="line"># If you want to provide time to your local subnet, change the next line.</span><br><span class="line"># (Again, the address is an example only.)</span><br><span class="line">#broadcast 192.168.123.255</span><br><span class="line"></span><br><span class="line"># If you want to listen to time broadcasts on your local subnet, de-comment the</span><br><span class="line"># next lines.  Please do this only if you trust everybody on the network!</span><br><span class="line">#disable auth</span><br><span class="line">#broadcastclient</span><br><span class="line"></span><br><span class="line">#Changes recquired to use pps synchonisation as explained in documentation:</span><br><span class="line">#http://www.ntp.org/ntpfaq/NTP-s-config-adv.htm#AEN3918</span><br><span class="line"></span><br><span class="line">#server 127.127.8.1 mode 135 prefer    # Meinberg GPS167 with PPS</span><br><span class="line">#fudge 127.127.8.1 time1 0.0042        # relative to PPS for my hardware</span><br><span class="line"></span><br><span class="line">#server 127.127.22.1                   # ATOM(PPS)</span><br><span class="line">#fudge 127.127.22.1 flag3 1            # enable PPS API</span><br></pre></td></tr></table></figure></p>
+<p>配置文件完整示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"># /etc/ntp.conf, configuration for ntpd; see ntp.conf(5) for help</span><br><span class="line"># 时间差异文件</span><br><span class="line">driftfile /var/lib/ntp/ntp.drift</span><br><span class="line"></span><br><span class="line"># 接口设置</span><br><span class="line">interface listen eth0</span><br><span class="line">interface ignore ipv4</span><br><span class="line"></span><br><span class="line"># 分析统计信息</span><br><span class="line">#statsdir /var/log/ntpstats/</span><br><span class="line"></span><br><span class="line">statistics loopstats peerstats clockstats</span><br><span class="line">filegen loopstats file loopstats type day enable</span><br><span class="line">filegen peerstats file peerstats type day enable</span><br><span class="line">filegen clockstats file clockstats type day enable</span><br><span class="line"></span><br><span class="line"># 上层ntp server.</span><br><span class="line">pool ntp1.aliyun.com iburst</span><br><span class="line">pool ntp2.aliyun.com iburst</span><br><span class="line">pool ntp3.aliyun.com iburst</span><br><span class="line">pool ntp4.aliyun.com iburst</span><br><span class="line"># 清华源提供IPv4和IPv6双栈</span><br><span class="line">pool ntp.tuna.tsinghua.edu.cn iburst perfer</span><br><span class="line"></span><br><span class="line"># Use Ubuntu&apos;s ntp server as a fallback.</span><br><span class="line">pool ntp.ubuntu.com</span><br><span class="line"></span><br><span class="line"># 不允许来自公网上ipv4和ipv6客户端的访问</span><br><span class="line">restrict -4 default kod notrap nomodify nopeer noquery limited</span><br><span class="line">restrict -6 default kod notrap nomodify nopeer noquery limited</span><br><span class="line"># 准许以下网络的ntp请求</span><br><span class="line">restrict -6 240c:6100:ffff:: netmask 64 nomodify</span><br><span class="line">restrict 172.16.0.1 netmask 20 nomodify</span><br><span class="line"></span><br><span class="line"># 让NTP Server和其自身保持同步，如果在/etc/ntp.conf中定义的server都不可用时，将使用local时间作为ntp服务提供给ntp客户端.</span><br><span class="line">restrict 127.0.0.1</span><br><span class="line">restrict ::1</span><br><span class="line"></span><br><span class="line"># Needed for adding pool entries</span><br><span class="line">restrict source notrap nomodify noquery</span><br><span class="line"></span><br><span class="line"># If you want to provide time to your local subnet, change the next line.</span><br><span class="line"># (Again, the address is an example only.)</span><br><span class="line">#broadcast 192.168.123.255</span><br><span class="line"></span><br><span class="line"># If you want to listen to time broadcasts on your local subnet, de-comment the</span><br><span class="line"># next lines.  Please do this only if you trust everybody on the network!</span><br><span class="line">#disable auth</span><br><span class="line">#broadcastclient</span><br><span class="line"></span><br><span class="line">#Changes recquired to use pps synchonisation as explained in documentation:</span><br><span class="line">#http://www.ntp.org/ntpfaq/NTP-s-config-adv.htm#AEN3918</span><br><span class="line"></span><br><span class="line">#server 127.127.8.1 mode 135 prefer    # Meinberg GPS167 with PPS</span><br><span class="line">#fudge 127.127.8.1 time1 0.0042        # relative to PPS for my hardware</span><br><span class="line"></span><br><span class="line">#server 127.127.22.1                   # ATOM(PPS)</span><br><span class="line">#fudge 127.127.22.1 flag3 1            # enable PPS API</span><br></pre></td></tr></table></figure>
+
 <h2 id="4-启动ntp服务"><a href="#4-启动ntp服务" class="headerlink" title="4 启动ntp服务"></a>4 启动ntp服务</h2><p>启动ntp服务</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service ntp restart</span><br></pre></td></tr></table></figure>
+
 <p>通过ntpq命令查看ntp同步状态</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">watch ntpq -p</span><br><span class="line">Every 2.0s: ntpq -p                                                                                                                                 </span><br><span class="line"></span><br><span class="line">     remote           refid      st t when poll reach   delay   offset  jitter</span><br><span class="line">==============================================================================</span><br><span class="line"> ntp1.aliyun.com .POOL.          16 p    -   64    0    0.000    0.000   0.000</span><br><span class="line"> ntp2.aliyun.com .POOL.          16 p    -   64    0    0.000    0.000   0.000</span><br><span class="line"> ntp3.aliyun.com .POOL.          16 p    -   64    0    0.000    0.000   0.000</span><br><span class="line"> ntp4.aliyun.com .POOL.          16 p    -   64    0    0.000    0.000   0.000</span><br><span class="line"> ntp.ubuntu.com  .POOL.          16 p    -   64    0    0.000    0.000   0.000</span><br><span class="line">+2001:67c:1560:8 192.53.103.108   2 u  411  512  377  401.548  -19.089   4.396</span><br><span class="line">*2001:67c:1560:8 17.253.34.125    2 u  512  512  377  379.682    0.776  18.600</span><br></pre></td></tr></table></figure>
+
 <p>上述字段的含义如下：</p>
 <ul>
 <li>remote: 指的就是本地机器所连接的远程NTP服务器；</li>
@@ -658,6 +667,7 @@
 <p><strong>ntpdate 强制同步时间</strong></p>
 <p>如果本机与时间同步服务器时间间隔太大可以通过ntpdate命令来进行同步，需要指出的是ntpdate使用前需要停止ntpd的进程。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ntpdate ntp1.ailiyun.com</span><br></pre></td></tr></table></figure>
+
 <p>【Note】</p>
 <p>ntp监听的是123端口，部分操作系统或防火墙等可能限制123端口因此需要放开端口限制。</p>
 <p>【参考链接】</p>
@@ -673,7 +683,7 @@
     
         <div>
             
-    <div blockquote="" class="blockquote-center" style="color: #32CD32;font-size:18px;">
+    <div blockquote class="blockquote-center" style="color: #32CD32;font-size:18px;">
     -------------本文结束<i class="fa fa-heartbeat"></i>感谢您的阅读-------------
     </div>
 
@@ -725,7 +735,7 @@
 <img src="/uploads/cc.png">
 <br>
 <p style="font-size: 10px;line-height: 30px"><a href="http://ylong.net.cn" style="color:#258FC6">Louie's Blog</a> by <a href="http://ylong.net.cn" style="color:#258FC6">louie long</a> is licensed under a <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" style="color:#258FC6">Creative Commons BY-NC-ND 4.0 International License</a>.<br>
-由<a href="http://ylong.net.cn" style="color:#258FC6">龙雨</a>创作并维护的<a href="ylong.net.cn" style="color:#258FC6">Louie's Blog</a>博客采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" style="color:#258FC6">创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。<br>
+由<a href="http://ylong.net.cn" style="color:#258FC6">Louie Long</a>创作并维护的<a href="ylong.net.cn" style="color:#258FC6">Louie's Blog</a>博客采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" style="color:#258FC6">创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。<br>
 本文首发于<a href="http://ylong.net.cn" style="color:#258FC6">Louie's Blog</a> 博客（ <a href="http://ylong.net.cn" style="color:#258FC6">http://ylong.net.cn</a> ），版权所有，侵权必究。
 <br>
 转载请注明作者和链接地址<a href="http://ylong.net.cn" style="color:#258FC6">http://ylong.net.cn</a>, 如对文章内容有疑问请联系邮箱（ <a style="color:#258FC6">longyu805@163.com</a> ）。</p>
@@ -827,7 +837,7 @@
 
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <img class="site-author-image" itemprop="image" src="/uploads/shadian.png" alt="Author">
             
@@ -842,7 +852,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-count">29</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -869,7 +879,21 @@
                     
                       
                     
-                    <span class="site-state-item-count">7</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -928,7 +952,27 @@
                     
                       
                     
-                    <span class="site-state-item-count">23</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">33</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1010,7 +1054,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-ravelry"></i>
   </span>
@@ -1022,7 +1066,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">127k</span>
+    <span title="站点总字数">246k</span>
   
 
   
@@ -1031,7 +1075,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">1:56</span>
+    <span title="站点阅读时长">3:43</span>
   
 
   
@@ -1050,7 +1094,7 @@
 
 
 
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.8.0</div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.9.0</div>
 
 
 

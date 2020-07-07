@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="SgcsMbvcduiAp6Ck7yLI77kPJXONXRYQnbXir7oefRs">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/favicon-48x48.ico?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon-32x32.ico?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon-16x16.ico?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/uploads/favicon-48x48.ico?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: 'SBFCV05R39',
+      apiKey: '',
+      indexName: 'my hexo search',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"请输入关键词","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="使用compass4nfv安装opnfv Gambia版本">
+<meta name="keywords" content="compass4nfv">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Compass4nfv 安装 OPNFV Gambia">
+<meta property="og:url" content="https://louielong.github.io/using-compass4nfv-install-opnfv.html">
+<meta property="og:site_name" content="Louie&#39;s Blog">
+<meta property="og:description" content="使用compass4nfv安装opnfv Gambia版本">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/louielong/blogPic/master/imgFix_bug.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/louielong/blogPic/master/imgGhF8HQE.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/louielong/blogPic/master/imgVEG8XIG.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/louielong/blogPic/master/img9CJUyM5.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/louielong/blogPic/master/imgHk9mbqz.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/louielong/blogPic/master/imgqgny2Yv.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/louielong/blogPic/master/imgkNMLCVd.png">
+<meta property="og:updated_time" content="2019-07-01T03:56:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Compass4nfv 安装 OPNFV Gambia">
+<meta name="twitter:description" content="使用compass4nfv安装opnfv Gambia版本">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/louielong/blogPic/master/imgFix_bug.gif">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Louie's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://louielong.github.io/using-compass4nfv-install-opnfv.html">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Compass4nfv 安装 OPNFV Gambia | Louie's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Louie's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">O ever youthful, O ever powerful.</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+    <a href="/404/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://louielong.github.io/using-compass4nfv-install-opnfv.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Author">
+      <meta itemprop="description" content="一只会说666的程序媛鼓励师">
+      <meta itemprop="image" content="/uploads/shadian.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Louie's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Compass4nfv 安装 OPNFV Gambia
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-23 15:00:29" itemprop="dateCreated datePublished" datetime="2019-01-23T15:00:29+08:00">2019-01-23</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-01 11:56:04" itemprop="dateModified" datetime="2019-07-01T11:56:04+08:00">2019-07-01</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OPNFV/" itemprop="url" rel="index"><span itemprop="name">OPNFV</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/using-compass4nfv-install-opnfv.html" class="leancloud_visitors" data-flag-title="Compass4nfv 安装 OPNFV Gambia">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+                 
+                 <span>℃</span>
+                 
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">22k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">0:20</span>
+              
+            </div>
+          
+
+          
+          
+            <div class="out-img-topic">
+             <img src="https://raw.githubusercontent.com/louielong/blogPic/master/imgToX4rXC.png" class="img-topic">
+            </div>
+          
+          
+
+          
+              <div class="post-description">使用compass4nfv安装opnfv Gambia版本</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一-前言"><a href="#一-前言" class="headerlink" title="一 前言"></a>一 前言</h2><p>OPNFV社区保持着每半年发布一个大版本的劲头，在2018年11月发布了第7个版本 Gambia，在观察社区中各个安装软件后，由于compass项目会支持较多的部署策略及新特性[1]，如k8s等。此外，compass也是少有的<em>支持最少一个计算节点和一个控制节点</em>的OPNFV部署工具。本次尝试使用compass4nfv来部署OPNFV的Gambia版本。在部署过程中也遇到了很多的坑，同样的官方的部署指导文档总会在很自然的忽略掉一些很关键的点，这里选择记录一下部署安装以及排错的过程。</p>
+<p>Ps：compass4nfv的部署真的是一波N多折，修复一个问题又出现另一个问题，时不时的网络下载失败让人崩溃至极。</p>
+<p><img src="https://raw.githubusercontent.com/louielong/blogPic/master/imgFix_bug.gif" alt="fix bug"></p>
+<h2 id="二-软件准备"><a href="#二-软件准备" class="headerlink" title="二 软件准备"></a>二 软件准备</h2><h3 id="2-1-克隆代码"><a href="#2-1-克隆代码" class="headerlink" title="2.1 克隆代码"></a>2.1 克隆代码</h3><p>首先需要克隆compass4nfv的代码，链接地址如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://gerrit.opnfv.org/gerrit/compass4nfv</span><br></pre></td></tr></table></figure>
+
+<p>随后切换到Gambia的稳定分支版本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b stable/gambia</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-离线部署软件镜像准备"><a href="#2-2-离线部署软件镜像准备" class="headerlink" title="2.2 离线部署软件镜像准备"></a>2.2 离线部署软件镜像准备</h3><p>Compass4nfv支持离线部署模式，离线部署需要预先下载以下镜像系统，链接为：<a href="https://artifacts.opnfv.org/compass4nfv.html" target="_blank" rel="noopener">https://artifacts.opnfv.org/compass4nfv.html</a></p>
+<p>然后选定相应的版本镜像即可，这里选择<a href="https://artifacts.opnfv.org/compass4nfv/gambia/opnfv-2018-11-19_08-25-04.tar.gz" target="_blank" rel="noopener">compass4nfv/gambia/opnfv-2018-11-19_08-25-04.tar.gz</a></p>
+<p>准备好以上安装文件后，修改部署配置文件</p>
+<p>1) 部署脚本配置</p>
+<p><code>compass4nfv/deploy.sh</code>中指明镜像路径</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export TAR_URL=file:///home/opnfv/opnfv-2018-11-19_08-25-04.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>接下来就要进行相应网络及节点的配置。</p>
+<h2 id="三-安装部署"><a href="#三-安装部署" class="headerlink" title="三 安装部署"></a>三 安装部署</h2><p><img src="https://raw.githubusercontent.com/louielong/blogPic/master/imgGhF8HQE.gif" alt="水滴特效"></p>
+<p>不同于Fuel的MAAS和saltstack部署，Compass使用的是cobbler和ansible部署，不了解<a href="http://cobbler.github.io/" target="_blank" rel="noopener">cobbler</a>的可以查阅下相关资料。不同版本的安装可能会稍有不同，请以官方指导手册为准。</p>
+<h3 id="3-1-节点配置"><a href="#3-1-节点配置" class="headerlink" title="3.1 节点配置"></a>3.1 节点配置</h3><p>部署中可以参考代码仓库中默认的其他节点网络及相应配置<code>compass4nfv/deploy/conf/hardware_environment</code></p>
+<p>下面分别详细介绍网络配置<code>network.yml</code>和部署策略<code>os-nosdn-nofeature-ha.yml</code></p>
+<h4 id="3-1-1-网络配置文件"><a href="#3-1-1-网络配置文件" class="headerlink" title="3.1.1  网络配置文件"></a>3.1.1  网络配置文件</h4><p>部署中的节点网络配置都在此文件进行描述，实际的硬件网络拓扑可以参看先前的Fuel部署，依旧是第一块网卡作为PXE，第二块网卡作为External网络，第三块网卡作为私有网络通信，承载存储、管理、虚机间通信等，需要注意的是以上的所有的网卡都可以合一，即最少一块网卡也能部署。下面的网络配置字面意思也很好理解，这里不做过多介绍了，详细介绍参考官方<a href="https://opnfv-compass4nfv.readthedocs.io/en/stable-gambia/release/installation/configure-network.html" target="_blank" rel="noopener">Configure network</a>，PXE网络设置为<code>10.20.0.0/24</code>（后续安装中发现管理网络也在这个网段），外网设置为<code>192.168.20.0/24</code>，需要额外指明的是租户网络和存储网络配置的有vlan_tag，必须在交换机上配置好。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line">opnfv@ubuntu:~/compass4nfv/deploy/conf/hardware_environment/bii-pod1$ cat network.yml</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">nic_mappings: []</span><br><span class="line">bond_mappings: []</span><br><span class="line"></span><br><span class="line">provider_net_mappings:</span><br><span class="line">  - name: br-provider #必须为此名否则后续安装ovs配置网桥会报错</span><br><span class="line">    network: physnet</span><br><span class="line">    interface: eth1</span><br><span class="line">    type: ovs</span><br><span class="line">    role:</span><br><span class="line">      - controller</span><br><span class="line"></span><br><span class="line">sys_intf_mappings:</span><br><span class="line"><span class="meta">  #</span><span class="bash"> PXE Network</span></span><br><span class="line">  - name: mgmt</span><br><span class="line">    interface: eth0</span><br><span class="line">    type: normal</span><br><span class="line">    vlan_tag: None</span><br><span class="line">    role:</span><br><span class="line">      - controller</span><br><span class="line">      - compute</span><br><span class="line"></span><br><span class="line">  - name: tenant</span><br><span class="line">    interface: eth2</span><br><span class="line">    type: normal</span><br><span class="line">    vlan_tag: 101</span><br><span class="line">    role:</span><br><span class="line">      - controller</span><br><span class="line">      - compute</span><br><span class="line"></span><br><span class="line">  - name: storage</span><br><span class="line">    interface: eth2</span><br><span class="line">    type: normal</span><br><span class="line">    vlan_tag: 102</span><br><span class="line">    role:</span><br><span class="line">      - controller</span><br><span class="line">      - compute</span><br><span class="line"></span><br><span class="line">  - name: external</span><br><span class="line">    interface: eth1</span><br><span class="line">    type: normal</span><br><span class="line">    vlan_tag: None</span><br><span class="line">    role:</span><br><span class="line">      - controller</span><br><span class="line">      - compute</span><br><span class="line"></span><br><span class="line">ip_settings:</span><br><span class="line">  - name: mgmt</span><br><span class="line">    ip_ranges:</span><br><span class="line">      - - "10.20.0.50"</span><br><span class="line">        - "10.20.0.100"</span><br><span class="line">    dhcp_ranges:</span><br><span class="line">      - - "10.20.0.10"</span><br><span class="line">        - "10.20.0.49"</span><br><span class="line">    cidr: "10.20.0.0/24"</span><br><span class="line">    gw: "10.20.0.1"</span><br><span class="line">    role:</span><br><span class="line">      - controller</span><br><span class="line">      - compute</span><br><span class="line"></span><br><span class="line">  - name: tenant</span><br><span class="line">    ip_ranges:</span><br><span class="line">      - - "192.168.102.1"</span><br><span class="line">        - "192.168.102.50"</span><br><span class="line">    cidr: "192.168.102.0/24"</span><br><span class="line">    role:</span><br><span class="line">      - controller</span><br><span class="line">      - compute</span><br><span class="line"></span><br><span class="line">  - name: storage</span><br><span class="line">    ip_ranges:</span><br><span class="line">      - - "192.168.103.1"</span><br><span class="line">        - "192.168.103.50"</span><br><span class="line">    cidr: "192.168.103.0/24"</span><br><span class="line">    role:</span><br><span class="line">      - controller</span><br><span class="line">      - compute</span><br><span class="line"></span><br><span class="line">  - name: external</span><br><span class="line">    ip_ranges:</span><br><span class="line">      - - "192.168.20.10"</span><br><span class="line">        - "192.168.20.50"</span><br><span class="line">    cidr: "192.168.20.0/24"</span><br><span class="line">    gw: "192.168.20.1"</span><br><span class="line">    role:</span><br><span class="line">      - controller</span><br><span class="line">      - compute</span><br><span class="line"></span><br><span class="line">internal_vip:</span><br><span class="line">  ip: 10.20.0.100</span><br><span class="line">  netmask: "24"</span><br><span class="line">  interface: mgmt</span><br><span class="line"></span><br><span class="line">public_vip:</span><br><span class="line">  ip: 192.168.20.103</span><br><span class="line">  netmask: "24"</span><br><span class="line">  interface: external</span><br><span class="line"></span><br><span class="line">onos_nic: eth2</span><br><span class="line">tenant_net_info:</span><br><span class="line">  type: vxlan</span><br><span class="line">  range: "1000:1050"</span><br><span class="line">  provider_network: None</span><br><span class="line"></span><br><span class="line">public_net_info:</span><br><span class="line">  enable: "True"</span><br><span class="line">  network: ext-net</span><br><span class="line">  type: flat</span><br><span class="line">  segment_id: 50</span><br><span class="line">  subnet: ext-subnet</span><br><span class="line">  provider_network: physnet</span><br><span class="line">  router: router-ext</span><br><span class="line">  enable_dhcp: "False"</span><br><span class="line">  no_gateway: "False"</span><br><span class="line">  external_gw: "192.168.20.1"</span><br><span class="line">  floating_ip_cidr: "192.168.20.0/24"</span><br><span class="line">  floating_ip_start: "192.168.20.105"</span><br><span class="line">  floating_ip_end: "192.168.20.200"</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-1-2-策略配置文件"><a href="#3-1-2-策略配置文件" class="headerlink" title="3.1.2 策略配置文件"></a>3.1.2 策略配置文件</h4><p>该文件主要是电源管理以及针对各个节点的角色分配，详细介绍见官方<a href="https://opnfv-compass4nfv.readthedocs.io/en/stable-gambia/release/installation/bmdeploy.html" target="_blank" rel="noopener">Nodes Configuration (Bare Metal Deployment)</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">opnfv@ubuntu:~/compass4nfv/deploy/conf/hardware_environment/bii-pod1$ cat os-nosdn-nofeature-ha.yml</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">TYPE: baremetal</span><br><span class="line">FLAVOR: cluster</span><br><span class="line">POWER_TOOL: ipmitool   #电源管理工具</span><br><span class="line"></span><br><span class="line">ipmiUser: root</span><br><span class="line">ipmiVer: '2.0'</span><br><span class="line"></span><br><span class="line">hosts:</span><br><span class="line">  - name: ctl01</span><br><span class="line">    mac: '44:A8:42:1A:49:A5'</span><br><span class="line">    interfaces:</span><br><span class="line">      - eth0: '44:a8:42:14:cd:0d'</span><br><span class="line">    ipmiIp: 192.168.20.203</span><br><span class="line">    ipmiPass: admin</span><br><span class="line">    roles:</span><br><span class="line">      - controller</span><br><span class="line">      - ha</span><br><span class="line">      - ceph-adm</span><br><span class="line">      - ceph-mon</span><br><span class="line"></span><br><span class="line">  - name: ctl02</span><br><span class="line">    mac: '44:A8:42:1A:76:2C'</span><br><span class="line">    interfaces:</span><br><span class="line">      - eth0: '44:a8:42:15:1b:e6'</span><br><span class="line">    ipmiIp: 192.168.20.204</span><br><span class="line">    ipmiPass: admin</span><br><span class="line">    roles:</span><br><span class="line">      - controller</span><br><span class="line">      - ha</span><br><span class="line">      - ceph-mon</span><br><span class="line"></span><br><span class="line">  - name: ctl03</span><br><span class="line">    mac: '44:A8:42:13:D5:1B'</span><br><span class="line">    interfaces:</span><br><span class="line">      - eth0: '44:a8:42:14:fc:1a'</span><br><span class="line">    ipmiIp: 192.168.20.205</span><br><span class="line">    ipmiPass: admin</span><br><span class="line">    roles:</span><br><span class="line">      - controller</span><br><span class="line">      - ha</span><br><span class="line">      - ceph-mon</span><br><span class="line"></span><br><span class="line">  - name: cmp001</span><br><span class="line">    mac: '44:A8:42:1A:70:BE'</span><br><span class="line">    interfaces:</span><br><span class="line">      - eth0: '44:a8:42:14:ee:64'</span><br><span class="line">    ipmiIp: 192.168.20.201</span><br><span class="line">    ipmiPass: admin</span><br><span class="line">    roles:</span><br><span class="line">      - compute</span><br><span class="line">      - ceph-osd</span><br><span class="line"></span><br><span class="line">  - name: cmp002</span><br><span class="line">    mac: '44:A8:42:1A:76:26'</span><br><span class="line">    interfaces:</span><br><span class="line">      - eth0: '44:a8:42:14:cb:31'</span><br><span class="line">    ipmiIp: 192.168.20.202</span><br><span class="line">    ipmiPass: admin</span><br><span class="line">    roles:</span><br><span class="line">      - compute</span><br><span class="line">      - ceph-osd</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-1-3-其他配置"><a href="#3-1-3-其他配置" class="headerlink" title="3.1.3 其他配置"></a>3.1.3 其他配置</h4><p>1) DNS及时区设置</p>
+<p>考虑到网络等原因可以自定义DNS和时区，修改配置文件<code>compass4nfv/deploy/conf/compass.conf</code>中的DNS和时区，同时在这里我们也可以看到compass的web界面的账号和密码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export COMPASS_DECK_PORT="5050"</span><br><span class="line"></span><br><span class="line">export COMPASS_USER_EMAIL="admin@huawei.com"</span><br><span class="line">export COMPASS_USER_PASSWORD="admin"</span><br></pre></td></tr></table></figure>
+
+<p>访问安装节点的5050端口即可打开页面查看部署节点信息</p>
+<p><img src="https://raw.githubusercontent.com/louielong/blogPic/master/imgVEG8XIG.jpg" alt="compass登录界面"></p>
+<p>2）docker镜像配置</p>
+<p>compass在部署过程中会安装docker并下载相应镜像，可以配置国内源加速镜像下载</p>
+<p>修改<code>compass4nfv/deploy/prepare.sh</code>中的docker配置部分，增加中科大的docker镜像源或者其他源均可。(采用离线部署时所需的docker镜像都打包下载了，所以是否修改不影响)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    sudo cat &lt;&lt; EOF &gt; /etc/docker/daemon.json</span><br><span class="line">&#123;</span><br><span class="line">  "registry-mirrors": ["https://docker.mirrors.ustc.edu.cn/"],</span><br><span class="line">  "storage-driver": "devicemapper"</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-部署脚本配置"><a href="#3-2-部署脚本配置" class="headerlink" title="3.2 部署脚本配置"></a>3.2 部署脚本配置</h3><p>部署脚本为<code>deploy.sh</code>文件，主要修改的地方节选如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Set OS version <span class="keyword">for</span> target hosts</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Ubuntu16.04 or CentOS7</span></span><br><span class="line">export OS_VERSION=xenial     #指定待部署节点的系统版本</span><br><span class="line"><span class="meta">#</span><span class="bash"> Set ISO image corresponding to your code</span></span><br><span class="line">export TAR_URL=file:///home/opnfv/download/opnfv-6.2-m.tar.gz   #指定下载的系统安装文件</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">export</span> DEPLOY_HARBOR=<span class="string">"true"</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">export</span> HABOR_VERSION=<span class="string">"1.5.0"</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Set hardware deploy jumpserver PXE NIC</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> You need to comment out it when virtual deploy.</span></span><br><span class="line">export INSTALL_NIC=eth0  #指定PXE网卡</span><br><span class="line"><span class="meta">#</span><span class="bash"> DHA is your dha.yml<span class="string">'s path</span></span></span><br><span class="line">export DHA=/home/opnfv/compass4nfv/deploy/conf/hardware_environment/bii-pod1/os-nosdn-nofeature-ha.yml  #指定部署策略模板</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> NETWORK is your network.yml<span class="string">'s path</span></span></span><br><span class="line">export NETWORK=/home/opnfv/compass4nfv/deploy/conf/hardware_environment/bii-pod1/network.yml     #指定待部署节点的网络配置</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">export</span> OPENSTACK_VERSION=<span class="variable">$&#123;OPENSTACK_VERSION:-ocata&#125;</span></span></span><br><span class="line">export OPENSTACK_VERSION=queens  #指定部署的Openstack版本</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-部署opnfv"><a href="#3-3-部署opnfv" class="headerlink" title="3.3 部署opnfv"></a>3.3 部署opnfv</h3><p>本节会分析并记录部署中出现的问题以及排查解决办法。</p>
+<p>进入节点的方法，首先进入到<code>compass-tasks</code>容器中，然后直接使用ssh登录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">opnfv@ubuntu:~$ docker exec -it compass-tasks bash</span><br><span class="line"></span><br><span class="line">[root@compass-tasks /]# ssh root@10.20.0.53</span><br><span class="line">Warning: Permanently added '10.20.0.53' (ECDSA) to the list of known hosts.</span><br><span class="line">Welcome to Ubuntu 16.04.3 LTS (GNU/Linux 4.4.0-87-generic x86_64)</span><br><span class="line"></span><br><span class="line"> * Documentation:  https://help.ubuntu.com</span><br><span class="line"> * Management:     https://landscape.canonical.com</span><br><span class="line"> * Support:        https://ubuntu.com/advantage</span><br><span class="line">Last login: Fri Nov 23 17:23:21 2018</span><br><span class="line"></span><br><span class="line">root@cmp001:~#</span><br></pre></td></tr></table></figure>
+
+<p>在后续的排错中也发现了节点可以使用密码登录，密码记录在<code>compass4nfv/deploy/adapters/cobbler/kickstarts/default16.seed</code>中的<code>root-password</code>一行，为<code>user/passwd：root/root</code>。</p>
+<p><strong>【Note】</strong></p>
+<p>在后续部署中出现错误可以查看对应的ansible任务<em>task</em>，首先在<code>compass4nfv/deploy/adapters/ansible</code>目录下查看对应的<code>task</code>详细执行命令，其次在<code>compass-tasks</code>的容器中的<code>/etc/ansible</code>目录下查看。</p>
+<h4 id="3-3-1-ubuntu安装无法自动跳过NTP检测"><a href="#3-3-1-ubuntu安装无法自动跳过NTP检测" class="headerlink" title="3.3.1 ubuntu安装无法自动跳过NTP检测"></a>3.3.1 ubuntu安装无法自动跳过NTP检测</h4><p>我在安装过程中一直被ubuntu安装时的“setting up the clock”卡住，无法自动跳过，只能手动跳过，这个是ubuntu 16.04的一个bug，可能是跟配置网络的其他ntp服务器有关。</p>
+<p><img src="https://raw.githubusercontent.com/louielong/blogPic/master/img9CJUyM5.png" alt="setting_time_check"></p>
+<p>根据[2]修改系统安装时的prseed文件，屏蔽掉系统安装时的ntp检查，修改<code>compass4nfv/deploy/adapters/cobbler/kickstarts</code>下的<code>default16.seed</code>文件中的</p>
+<blockquote>
+<p>d-i clock-setup/ntp boolean true</p>
+</blockquote>
+<p>改成</p>
+<blockquote>
+<p>d-i clock-setup/ntp boolean false</p>
+</blockquote>
+<p><strong>【Note】</strong></p>
+<p><em>Fuel</em>部署工具使用的是Debian系的MAAS来进行无人值守安装系统（免费版可以安装ubuntu，但是安装centos则需要付费），而<em>Compass4nfv</em>使用的是RedHat系的<em>kickstart</em>和<em>cobbler</em>来进行无人值守部署系统，深入阅读可以查看<a href="http://www.zyops.com/autoinstall-kickstart/" target="_blank" rel="noopener">KICKSTART无人值守安装</a><br>，<a href="https://www.jianshu.com/p/97ef50f06f05" target="_blank" rel="noopener">Ubuntu系统批量自动安装</a>或者其他相关资料。</p>
+<h4 id="3-3-2-本地ubuntu源配置"><a href="#3-3-2-本地ubuntu源配置" class="headerlink" title="3.3.2 本地ubuntu源配置"></a>3.3.2 本地ubuntu源配置</h4><p>由于ubuntu的本地源使用率较高，考虑到网络带宽以及资源复用的方面，可以在本地建立ubuntu源，ubuntu源的搭建可以参考我的之前文章<a href="http://ylong.net.cn/MAAS+ubuntu-local-repo.html" target="_blank" rel="noopener">MAAS+ubuntu私有源环境搭建</a>。这里为了加快安装后系统的ubuntu软件安装，使用本地源进行软件安装。</p>
+<p>主要修改的如下两个文件的仓库IP地址</p>
+<p>1）compass4nfv/deploy/adapters/ansible/roles/config-compute/vars/main.yml</p>
+<p>2）compass4nfv/deploy/adapters/ansible/roles/config-controller/vars/main.yml</p>
+<blockquote>
+<p>LOCAL_REPOSITORY_IP: “192.168.137.222”</p>
+</blockquote>
+<p>将IP地址修改为本地镜像仓库地址，Compass在部署过程中会去检测这个IP的连通性，若IP地址不通仍然使用ubuntu官方的镜像源地址，如文件<code>compass4nfv/deploy/adapters/ansible/roles/config-controller/templates/sources.list.official</code>所示。</p>
+<h4 id="3-3-3-ubuntu源更新禁用IPv6设置"><a href="#3-3-3-ubuntu源更新禁用IPv6设置" class="headerlink" title="3.3.3 ubuntu源更新禁用IPv6设置"></a><del>3.3.3 ubuntu源更新禁用IPv6设置</del></h4><p>我的网络是带有IPv6，ubuntu在源更新时会优先走IPv6，但是IPv6网络无法更新(部署执行中报错，但是我登陆节点直接执行<code>apt update</code>却能成功，目前原因未知)只能现行禁用apt源更新走IPv6[3].</p>
+<p>解决方法1：</p>
+<p>增加配置文<code>件99force-ipv4</code>，加入<code>Acquire::ForceIPv4 &quot;true&quot;;</code>，配置文件放置在<code>compass4nfv/deploy/adapters/ansible/roles/config-controller/files</code></p>
+<p>随后在<code>compass4nfv/deploy/adapters/ansible/roles/config-controller/vars/Ubuntu.yml</code>的任务中添加拷贝文件的命令</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">- name:</span> <span class="string">apt</span> <span class="string">force</span> <span class="string">IPv4</span></span><br><span class="line"><span class="attr">  copy:</span></span><br><span class="line"><span class="attr">    src:</span> <span class="number">99</span><span class="string">force-ipv4</span></span><br><span class="line"><span class="attr">    dst:</span> <span class="string">/etc/apt/apt.conf.d/99force-ipv4</span></span><br></pre></td></tr></table></figure>
+
+<p>解决办法2：</p>
+<p>使用alias在apt命令后增加<code>-o Acquire::ForceIPv4=true</code>选项，修改<code>compass4nfv/deploy/adapters/ansible/roles/config-controller/vars/Ubuntu.yml</code>，在<code>name: add apt.conf</code>前添加</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">- name:</span> <span class="string">add</span> <span class="string">apt-get</span> <span class="string">alias</span></span><br><span class="line"><span class="attr">  shell:</span> <span class="string">"echo "</span><span class="string">alias</span> <span class="string">apt-get='apt-get</span> <span class="bullet">-o</span> <span class="attr">Acquire::ForceIPv4=true'"</span> <span class="string">&gt;&gt;</span> <span class="string">/etc/bash.bashrc"</span></span><br><span class="line"></span><br><span class="line"><span class="attr">- name:</span> <span class="string">add</span> <span class="string">apt.conf</span></span><br><span class="line"><span class="attr">  copy:</span></span><br><span class="line"><span class="attr">    src:</span> <span class="string">apt.conf</span></span><br><span class="line"><span class="attr">    dest:</span> <span class="string">/etc/apt/apt.conf</span></span><br><span class="line"><span class="attr">  when:</span> <span class="string">offline_deployment</span> <span class="string">is</span> <span class="string">defined</span> <span class="string">and</span> <span class="string">offline_deployment</span> <span class="string">==</span> <span class="string">"Enable"</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>【NOTE】</strong></p>
+<p>同时也能注意到<code>compass/deploy/adapters/ansible/roles/config-compute/files/apt.conf</code>为了避免apt软件安装中出现<code>[y/N]</code>这样的交互，采用以下参数来配置apt安装，相关资料链接<a href="https://superuser.com/questions/164553/automatically-answer-yes-when-using-apt-get-install" target="_blank" rel="noopener">传送门</a></p>
+<blockquote>
+<p>APT::Get::Assume-Yes “true”;<br>APT::Get::force-yes “true”;</p>
+</blockquote>
+<h4 id="3-3-4-apt源更新时网络未连通"><a href="#3-3-4-apt源更新时网络未连通" class="headerlink" title="3.3.4 apt源更新时网络未连通"></a>3.3.4 apt源更新时网络未连通</h4><p>我在安装过程中出现无法ping通内网仓库IP的以及后续初始apt更新源失败的情况，原因是网卡重启后网络未连通导致，这里适当延长了网卡重启后的时间，修改<code>compass4nfv/deploy/adapters/ansible/roles/config-controller/tasks/Ubuntu.yml</code></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">- name:</span> <span class="string">check</span> <span class="string">apt</span> <span class="string">source</span></span><br><span class="line"><span class="attr">  shell:</span> <span class="string">"sleep 60 &amp;&amp; ping -c 2 <span class="template-variable">&#123;&#123; LOCAL_REPOSITORY_IP &#125;&#125;</span> &gt; /dev/null"</span></span><br><span class="line"><span class="attr">  register:</span> <span class="string">checkresult</span></span><br><span class="line"><span class="attr">  ignore_errors:</span> <span class="string">"true"</span></span><br></pre></td></tr></table></figure>
+
+<p>后续的安装中除了多次出现无法下载<em>Openstack<em>官方的</em>Git</em><a href="https://git.openstack.org/openstack" target="_blank" rel="noopener">仓库代码</a>而报错外，并未遇到什么大的问题，而对于这个问题我暂时也没有太好的解决办法，只能进入容器内部尝试查看具体的网络错误原因。</p>
+<p>compass4nfv在安装OPNFV采用的是lxc的容器安装的，会在每个节点生成对应服务的lxc容器，可以通过<code>lxc-attach --name  ctl02_repo_container-5df4d773</code> 进入到容器进行查看。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@ctl02:/openstack/ctl02_repo_container-5df4d773/repo/openstackgit# lxc-ls</span><br><span class="line">ctl02_aodh_container-95ac1216 ctl02_ceilometer_central_container-fe83768b ctl02_ceph-mon_container-6b5f3bdb ctl02_cinder_api_container-edae48f8</span><br><span class="line">ctl02_galera_container-4514e3cb  ctl02_glance_container-c8150d02 ctl02_gnocchi_container-add47e23 ctl02_heat_api_container-2a7289ca</span><br><span class="line">ctl02_horizon_container-c48e853e ctl02_keystone_container-b6189735   ctl02_memcached_container-33866197  ctl02_neutron_server_container-8638a6eb</span><br><span class="line">ctl02_nova_api_container-7221202a ctl02_rabbit_mq_container-e8f31a4e ctl02_repo_container-5df4d773 ctl02_rsyslog_container-97cbc806</span><br><span class="line">ctl02_tacker_container-84a1e0b9 ctl02_utility_container-d08003d6</span><br></pre></td></tr></table></figure>
+
+<p>同样的，会将openstack官方的稳定版代码下载到本地的<code>/openstack/ctl02_repo_container-5df4d773/repo/openstackgit</code>对应项目目录下，而对应容器内部则是在<code>/var/www/repo/opensatck</code>目录下。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root@ctl02-repo-container-5df4d773:/var/www/repo/openstackgit# ls</span><br><span class="line">aodh dragonflow heat-dashboard magnum-ui networking-sfc neutron-fwaas-dashboard nova octavia-dashboard spice-html5</span><br><span class="line">ceilometer glance horizon networking-bgpvpn neutron neutron-lbaas nova-lxd rally    tacker</span><br><span class="line">cinder gnocchi ironic-ui networking-calico neutron-dynamic-routing neutron-lbaas-dashboard nova-powervm requirements tempest</span><br><span class="line">designate-dashboard heat keystone networking-odl neutron-fwaas neutron-vpnaas novnc sahara-dashboard trove-dashboard</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-3-5-ceph安装错误"><a href="#3-3-5-ceph安装错误" class="headerlink" title="3.3.5 ceph安装错误"></a>3.3.5 ceph安装错误</h4><p>由于国内网络原因在ceph的安装过程中会由于网络不通或者下载过慢超时等出现ceph安装出错，这里修改ceph的源[4][5]，可以选择的国内源有：</p>
+<ul>
+<li>阿里镜像源<a href="http://mirrors.aliyun.com/ceph" target="_blank" rel="noopener">http://mirrors.aliyun.com/ceph</a></li>
+<li>网易镜像源<a href="http://mirrors.163.com/ceph" target="_blank" rel="noopener">http://mirrors.163.com/ceph</a></li>
+<li>中科大镜像源<a href="http://mirrors.ustc.edu.cn/ceph" target="_blank" rel="noopener">http://mirrors.ustc.edu.cn/ceph</a></li>
+</ul>
+<p>这里以阿里云的源为例，各大源只有<code>rethat</code>系和<code>debian</code>系两种分类，这里的<code>ubuntu 16.04</code>使用的是<code>debian-luminous</code>的版本，查看<code>ctl</code>节点新增的apt源可以确认，后续随着安装使用的ubuntu版本升级会有所改变，需要灵活处理</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~# ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@10.20.0.51</span><br><span class="line">...</span><br><span class="line">root@10.20.0.51's password:</span><br><span class="line">...</span><br><span class="line">You have new mail.</span><br><span class="line">Last login: Tue Dec 11 10:02:26 2018 from 10.20.0.1</span><br><span class="line">root@ctl02:~# lxc-attach --name ctl02_ceph-mon_container-2a24ec76</span><br><span class="line">root@ctl02-ceph-mon-container-2a24ec76:~# cat /etc/apt/sources.list.d/download_ceph_com_debian_luminous.list</span><br><span class="line"><span class="meta">#</span><span class="bash">deb http://download.ceph.com/debian-luminous xenial main</span></span><br><span class="line">deb http://mirrors.ustc.edu.cn/ceph/debian-luminous/ xenial main</span><br></pre></td></tr></table></figure>
+
+<p>安装的源码修改如下:</p>
+<p>由于这部分操作是在容器<code>compass-tasks</code>中操作的，可以在部署源码中添加修改，也可以在部署过程中直接在容器中修改</p>
+<p>方法一：</p>
+<p>1）新增文件</p>
+<p>   路径为<code>compass4nfv/util/docker-compose/roles/compass/files/debian_community_repository.yml</code></p>
+   <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">opnfv@ubuntu:~/compass4nfv/util/docker-compose/roles/compass/files$ cat debian_community_repository.yml</span><br><span class="line">---</span><br><span class="line">- name: configure debian ceph community repository stable key</span><br><span class="line">  apt_key:</span><br><span class="line">    url: http://mirrors.aliyun.com/ceph/keys/release.asc</span><br><span class="line">    state: present</span><br><span class="line"></span><br><span class="line">- name: configure debian ceph stable community repository</span><br><span class="line">  apt_repository:</span><br><span class="line">    repo: "deb http://mirrors.ustc.edu.cn/ceph/debian-luminous/ xenial main"</span><br><span class="line">    state: present</span><br><span class="line">    update_cache: yes</span><br><span class="line">  changed_when: false</span><br></pre></td></tr></table></figure>
+
+<p>2）增加ansible的task</p>
+<p>修改文件<code>compass4nfv/deploy/deploy_host.sh</code>，在<code>export AYNC_TIMEOUT=20</code>后增加以下内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker cp \</span><br><span class="line"><span class="meta">$</span><span class="bash">COMPASS_DIR/util/docker-compose/roles/compass/files/debian_community_repository.yml \</span></span><br><span class="line">compass-tasks:/etc/ansible/roles/ceph-ansible/roles/ceph-common/tasks/installs/debian_community_repository.yml</span><br></pre></td></tr></table></figure>
+
+<p>方法二：</p>
+<p>由于部署ceph在靠后的阶段，因此可以在容器<code>compass-tasks</code>起来后直接修改</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:/home/opnfv/compass4nfv/deploy# docker exec -it compass-tasks bash</span><br><span class="line">[root@compass-tasks /]# cat /etc/ansible/roles/ceph-ansible/roles/ceph-common/tasks/installs/debian_community_repository.yml</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">- name: configure debian ceph community repository stable key</span><br><span class="line">  apt_key:</span><br><span class="line">    url: "http://mirrors.aliyun.com/ceph/keys/release.asc"</span><br><span class="line">    state: present</span><br><span class="line"></span><br><span class="line">- name: configure debian ceph stable community repository</span><br><span class="line">  apt_repository:</span><br><span class="line">    repo: "deb http://mirrors.aliyun.com/ceph/debian-luminous/ xenial main"</span><br><span class="line">    state: present</span><br><span class="line">    update_cache: yes</span><br><span class="line">  changed_when: false</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-3-6-无法下载HaTop"><a href="#3-3-6-无法下载HaTop" class="headerlink" title="3.3.6 无法下载HaTop"></a>3.3.6 无法下载HaTop</h4><p>依然是网络原因导致节点无法下载Hatop安装文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fatal: [ctl02 -&gt; localhost]: FAILED! =&gt; &#123;"changed": false, "failed": true, "msg": "Failed to connect to storage.googleapis.com at port 443: [      Errno 99] Cannot assign requested address"&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以预选下载<a href="https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/hatop/hatop-0.7.7.tar.gz" target="_blank" rel="noopener">Hatop</a>放在本地的一个文件服务器上，直接修改<code>compass-tasks</code>中<code>/etc/ansible/roles/haproxy_server/defaults/main.yml</code>的<code>haproxy_hatop_download_url</code>为自定义的文件服务器。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~# docker exec -it compass-tasks bash</span><br><span class="line">[root@compass-tasks /]# vim /etc/ansible/roles/haproxy_server/defaults/main.yml</span><br><span class="line">...</span><br><span class="line">haproxy_hatop_download_url: "https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/hatop/hatop-0.7.7.tar.gz"</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>或者跟<code>3.3.5</code>节一样在文件<code>compass4nfv/deploy/deploy_host.sh</code>，在<code>export AYNC_TIMEOUT=20</code>后增加以下内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker exec compass-tasks bash -c \</span><br><span class="line">"sed -i 's/https:\/\/stor[^ ]*gz/http:\/\/192.168.6.231\/download\/hatop-0.7.7.tar.gz/' /etc/ansible/roles/haproxy_server/defaults/main.yml"</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-3-7-部署超时"><a href="#3-3-7-部署超时" class="headerlink" title="3.3.7 部署超时"></a>3.3.7 部署超时</h4><p>compass在部署时设定了超时时间为300分钟即5个小时，但是由于由内网络下载等原因会导致部署超时，出现如下错误</p>
+<blockquote>
+<p>Traceback (most recent call last):<br>File “/home/opnfv/compass4nfv/deploy/client.py”, line 1136, in <module><br> main()<br>File “/home/opnfv/compass4nfv/deploy/client.py”, line 1131, in main<br> deploy()<br>File “/home/opnfv/compass4nfv/deploy/client.py”, line 1086, in deploy<br> client.get_installing_progress(cluster_id, ansible_print)<br>File “/home/opnfv/compass4nfv/deploy/client.py”, line 1029, in get_installing_progress<br> _get_installing_progress()<br>File “/home/opnfv/compass4nfv/deploy/client.py”, line 1026, in _get_installing_progress<br> raise RuntimeError(“installation timeout”)<br>RuntimeError: installation timeout</module></p>
+</blockquote>
+<p>我在部署时其时长都会超过300分钟，因此这里加大部署超时时间，修改<code>compass4nfv/deploy/conf/baremetal.conf</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export DEPLOYMENT_TIMEOUT="1000"</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-3-8-openstack官方仓库clone失败"><a href="#3-3-8-openstack官方仓库clone失败" class="headerlink" title="3.3.8 openstack官方仓库clone失败"></a>3.3.8 openstack官方仓库clone失败</h4><p>compass部署过程中会从openstack的<a href="https://git.openstack.org/cgit" target="_blank" rel="noopener">官方仓库</a>下载稳定分支的代码用于部署，同样是国内网络的原因会出现clone失败的情况，如下所示当计数变为1时仍未下载完成就会部署失败。</p>
+<blockquote>
+<p>2018-12-20 06:49:01,341 p=33580 u=root |  FAILED - RETRYING: Wait for git clones to complete (1 retries left).<br>2018-12-20 06:49:06,574 p=33580 u=root |  FAILED - RETRYING: Wait for git clones to complete (1 retries left).<br>2018-12-20 06:49:11,796 p=33580 u=root |  FAILED - RETRYING: Wait for git clones to complete (1 retries left).</p>
+</blockquote>
+<p>上述错误并不是每次都会出现，为了简单解决我选择将下载成功的代码打包备份到Master部署节点，随后在安装过程中拷贝至控制节点解压，<del>需要等到控制节点上的<code>ctl02_repo_container-xxxx</code>容器（由于ctl02是默认的主控制节点，因此只用传给ctl02即可）创建成功后才行</del>，这里将拷贝和解压直接集成到部署代码中。</p>
+<p>压缩代码，将<code>repo</code>目录下的其他文件夹删除只留下openstackgit，随后将整个repo目录打包为<code>repo.tar.gz</code>压缩代码(800M起)。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root@ctl02:/openstack/ctl02_repo_container-10dffa61/repo# ls</span><br><span class="line">links  openstackgit  os-releases  pkg-cache  pools  repo_prepost_cmd.sh  venvs</span><br><span class="line">root@ctl02:/openstack/ctl02_repo_container-10dffa61# tar czf repo.tar.gz repo</span><br><span class="line">root@ctl02:/openstack/ctl02_repo_container-10dffa61# ls -ahl repo.tar.gz</span><br><span class="line">-rw-r--r-- 1 root root 831M Jan 16 14:56 /home/opnfv/repo.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>将<code>repo.tar.gz</code>上传至master节点待用，修改部署脚本，在部署中首先将<code>repo.tar.gz</code>拷贝到<code>compass-tasks</code>容器中，随后游部署脚本将其拷贝到ctl02_repo_container-xxxxx容器中解压到<code>/var/www</code>目录下</p>
+<p>1)首先创建ansible任务，</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:/home/opnfv/compass4nfv# cat deploy/adapters/ansible/customer/git_repo_pre.yml</span><br><span class="line"></span><br><span class="line">- name: scp repo.tar.gz</span><br><span class="line">  copy:</span><br><span class="line">    src: /opt/ansible_plugins/repo.tar.gz</span><br><span class="line">    dest: /root/repo.tar.gz</span><br><span class="line">    mode: 0644</span><br><span class="line">  ignore_errors: yes</span><br><span class="line"></span><br><span class="line">- name: ungzip repo.tar.gz</span><br><span class="line">  shell:</span><br><span class="line">    tar xf /root/repo.tar.gz -C /var/www/ --remove-files</span><br><span class="line">  ignore_errors: yes</span><br></pre></td></tr></table></figure>
+
+<p>2)修改部署脚本</p>
+<p>在文件<code>compass4nfv/deploy/deploy_host.sh</code>，在<code>export AYNC_TIMEOUT=20</code>后增加以下内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> git repo</span></span><br><span class="line">cp -a /home/opnfv/repo.tar.gz /home/opnfv/compass4nfv/work/deploy/docker/ansible_plugins</span><br><span class="line">docker cp \</span><br><span class="line"><span class="meta">$</span><span class="bash">COMPASS_DIR/deploy/adapters/ansible/customer/git_repo_pre.yml \</span></span><br><span class="line">compass-tasks:/etc/ansible/roles/repo_build/tasks/git_repo_pre.yml</span><br><span class="line">docker exec compass-tasks bash -c \</span><br><span class="line">"sed -i '/Create package directories/i\- include: git_repo_pre.yml' /etc/ansible/roles/repo_build/tasks/repo_build_prepare.yml"</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-3-9-修改节点external网络的DNS"><a href="#3-3-9-修改节点external网络的DNS" class="headerlink" title="3.3.9 修改节点external网络的DNS"></a>3.3.9 修改节点external网络的DNS</h4><p>打开文件<code>deploy/adapters/ansible/roles/config-compute/templates/ifcfg-br-external</code>，修改dns配置即可，比如使用国内阿里云的dns，同理修改控制节点文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DNS1=223.5.5.5</span><br><span class="line">DNS2=8.8.8.8</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-3-10-lxc镜像下载失败"><a href="#3-3-10-lxc镜像下载失败" class="headerlink" title="3.3.10 lxc镜像下载失败"></a>3.3.10 lxc镜像下载失败</h4><blockquote>
+<p>2018-12-21 02:46:31,836 p=4989 u=root |  FAILED - RETRYING: Ensure image has been pre-staged (1 retries left).<br>2018-12-21 02:46:36,923 p=4989 u=root |  FAILED - RETRYING: Ensure image has been pre-staged (1 retries left).<br>2018-12-21 02:46:37,015 p=4989 u=root |  FAILED - RETRYING: Ensure image has been pre-staged (1 retries left).<br>2018-12-21 02:46:37,017 p=4989 u=root |  FAILED - RETRYING: Ensure image has been pre-staged (1 retries left).</p>
+</blockquote>
+<p>又是一个网络引起的部署错误，每次部署都会去下载最新的<code>ubuntu lxc</code>镜像，由于网络原因，有时能够下载成功，有时下载失败，如图所示的小水管，虽然只有70M，但是也会出现无法在限定时间300s内下载完成</p>
+<p><img src="https://raw.githubusercontent.com/louielong/blogPic/master/imgHk9mbqz.png" alt="lxc镜像下载"></p>
+<p>这里使用<a href="https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/ubuntu/xenial/amd64/default/" target="_blank" rel="noopener">清华源的lxc镜像</a>，其会自动同步LXC官方镜像，并保持相同的链接格式(对链接格式感兴趣的可以看3.3.10.1小节)，镜像地址在<code>compass-tasks</code>镜像的<code>/etc/ansible/roles/lxc_hosts/defaults/main.yml</code>第160行。</p>
+<p>由于部署工具会依据官方的镜像列表筛选出符合要求的最新镜像，</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aria2c --max-connection-per-server=4 --allow-overwrite=true --dir=/tmp --out=index-system --check-certificate=true  https://mirrors.tuna.tsinghua.edu.cn/lxc-images/meta/1.0/index-system</span><br></pre></td></tr></table></figure>
+
+<p>这里在容器启动后修改，同样是修改文件<code>compass4nfv/deploy/deploy_host.sh</code>，在<code>export AYNC_TIMEOUT=20</code>后增加以下内容。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker exec compass-tasks bash -c \</span><br><span class="line">"sed -i 's/us.images.linuxcontainers.org/mirrors.tuna.tsinghua.edu.cn\/lxc-images/' /etc/ansible/roles/lxc_hosts/defaults/main.yml"</span><br></pre></td></tr></table></figure>
+
+<p>修改后的测试，如图所示，直接从80K/s飙到了9.4M/s</p>
+<p><img src="https://raw.githubusercontent.com/louielong/blogPic/master/imgqgny2Yv.png" alt="清华源LXC镜像下载"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aria2c --max-connection-per-server=4 --allow-overwrite=true --dir=/tmp/test --out=rootfs.tar.xz --check-certificate=true https://mirrors.tuna.tsinghua.edu.cn/lxc-images/images/ubuntu/xenial/amd64/default/20190106_07:43/rootfs.tar.xz</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-3-10-1-LXC官方镜像下载链接格式说明"><a href="#3-3-10-1-LXC官方镜像下载链接格式说明" class="headerlink" title="3.3.10.1 LXC官方镜像下载链接格式说明"></a>3.3.10.1 LXC官方镜像下载链接格式说明</h5><p>由于LXC官方会更新最新的镜像，因此下载的链接会稍有不同，LXC镜像链接：<a href="https://us.images.linuxcontainers.org/" target="_blank" rel="noopener">Linux Containers - Image server</a></p>
+<p><img src="https://raw.githubusercontent.com/louielong/blogPic/master/imgkNMLCVd.png" alt="LXC ubuntu镜像列表"></p>
+<p>以<code>ubuntu;xenial;amd64;default;20190106_07:43;</code>为例，其下载链接组成为<code>ubuntu/xenial/amd64/default/20190106_07:43</code>，完整的下载地址为：</p>
+<p><code>https://us.images.linuxcontainers.org/images/ubuntu/xenial/amd64/default/20190106_07:43/rootfs.tar.xz</code></p>
+<h4 id="3-3-11-lxc网桥断开连接"><a href="#3-3-11-lxc网桥断开连接" class="headerlink" title="3.3.11 lxc网桥断开连接"></a>3.3.11 lxc网桥断开连接</h4><p>在安装的后期阶段由于external网络从linux bridge切换到ovs会出现lxc容器无法连接网络而导致安装失败，这里采用lxc网络自检工具定时检测网络状态，在lxc容器创建完成后，分别在<strong>三个控制节点</strong>添加定时任务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@ctl02:~# crontab -e</span><br><span class="line"></span><br><span class="line">*/3 * * * * /bin/echo -n "$(date +"\%F \%T") " &gt;&gt; /tmp/lxc-veth-check;/usr/local/bin/lxc-veth-check &gt;&gt; /tmp/lxc-veth-check</span><br></pre></td></tr></table></figure>
+
+<p>亦可以修改部署脚本自动添加lxc veth网卡检查</p>
+<ul>
+<li>1）创建文件<code>compass4nfv/deploy/adapters/ansible/custome/lxc_veth_check.yml</code>，写入如下内容</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">- name:</span> <span class="string">Add</span> <span class="string">lxc</span> <span class="string">veth</span> <span class="string">check</span> <span class="string">cron</span> <span class="string">job</span></span><br><span class="line"><span class="attr">  cron:</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">check</span> <span class="string">lxc</span> <span class="string">veth</span></span><br><span class="line"><span class="attr">    minute:</span> <span class="string">"*/3"</span></span><br><span class="line"><span class="attr">    job:</span> <span class="string">'*/3 * * * * /bin/echo -n "$(date +"\%F \%T") " &gt;&gt; /tmp/lxc-veth-check;/usr/local/bin/lxc-veth-check &gt;&gt; /tmp/lxc-veth-check'</span></span><br><span class="line"><span class="attr">    state:</span> <span class="string">present</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>2）修改部署脚本拷贝<code>lxc_veth_check.yml</code>并增加ansible部署</li>
+</ul>
+<p>修改<code>compass4nfv/deploy/deploy_host.sh</code>，在<code>export AYNC_TIMEOUT=20</code>后增加以下内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> lxc veth check</span></span><br><span class="line">docker cp \</span><br><span class="line"><span class="meta">$</span><span class="bash">COMPASS_DIR/deploy/adapters/ansible/custome/lxc_veth_check.yml \</span></span><br><span class="line">compass-tasks:/etc/ansible/roles/lxc_container_create/tasks/lxc_veth_check.yml</span><br><span class="line">docker exec compass-tasks bash -c \</span><br><span class="line">"echo '- include: lxc_veth_check.yml' &gt;&gt; /etc/ansible/roles/lxc_container_create/tasks/main.yml"</span><br></pre></td></tr></table></figure>
+
+<h2 id="四-使用"><a href="#四-使用" class="headerlink" title="四 使用"></a>四 使用</h2><p>在费劲千辛万苦终于安装好OPNFV后下面要面对的就是如何使用，可以参考compass的使用手册[6]</p>
+<h3 id="4-1-Dashboard登录"><a href="#4-1-Dashboard登录" class="headerlink" title="4.1 Dashboard登录"></a>4.1 Dashboard登录</h3><p>根据之前<code>network.yml</code>中配置的<code>public_vip</code>地址进行访问即可，账号密码在控制节点的<code>openrc</code>文件中，选择一个控制节点即可看到，如果没有可以去容器<code>ctl02_utility_container-xxxx</code>中查看</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">root@ctl02:~# ls</span><br><span class="line">openrc</span><br><span class="line">root@ctl02:~# cat openrc</span><br><span class="line"><span class="meta">#</span><span class="bash"> Ansible managed</span></span><br><span class="line">export LC_ALL=C</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> COMMON CINDER ENVS</span></span><br><span class="line">export CINDER_ENDPOINT_TYPE=internalURL</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> COMMON NOVA ENVS</span></span><br><span class="line">export NOVA_ENDPOINT_TYPE=internalURL</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> COMMON OPENSTACK ENVS</span></span><br><span class="line">export OS_ENDPOINT_TYPE=internalURL</span><br><span class="line">export OS_INTERFACE=internalURL</span><br><span class="line">export OS_USERNAME=admin</span><br><span class="line">export OS_PASSWORD='292f46714fed1f472e885efbbbb8b8f0a459ccea'</span><br><span class="line">export OS_PROJECT_NAME=admin</span><br><span class="line">export OS_TENANT_NAME=admin</span><br><span class="line">export OS_AUTH_URL=http://10.20.0.100:5000/v3</span><br><span class="line">export OS_NO_CACHE=1</span><br><span class="line">export OS_USER_DOMAIN_NAME=Default</span><br><span class="line">export OS_PROJECT_DOMAIN_NAME=Default</span><br><span class="line">export OS_REGION_NAME=RegionOne</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> For openstackclient</span></span><br><span class="line">export OS_IDENTITY_API_VERSION=3</span><br><span class="line">export OS_AUTH_VERSION=3</span><br><span class="line"></span><br><span class="line">root@ctl02:~# lxc-ls</span><br><span class="line">ctl02_aodh_container-6124c4b3               ctl02_ceilometer_central_container-27019a4c ctl02_ceph-mon_container-85c1ae54           ctl02_cinder_api_container-be31235f</span><br><span class="line">ctl02_galera_container-88babcd8             ctl02_glance_container-babbb22f             ctl02_gnocchi_container-61f866d0            ctl02_heat_api_container-56ac3d29</span><br><span class="line">ctl02_horizon_container-68362989            ctl02_keystone_container-29eec14f           ctl02_memcached_container-9b21550c          ctl02_neutron_server_container-0e1ade82</span><br><span class="line">ctl02_nova_api_container-60be045b           ctl02_rabbit_mq_container-301a6ec0          ctl02_repo_container-0b096846               ctl02_rsyslog_container-aa15bf1b</span><br><span class="line">ctl02_tacker_container-2d6471ad             ctl02_utility_container-bd689ebc</span><br><span class="line">root@ctl02:~# lxc-attach --name  ctl02_utility_container-bd689ebc</span><br><span class="line">root@ctl02-utility-container-bd689ebc:~# ls</span><br><span class="line">openrc</span><br></pre></td></tr></table></figure>
+
+<p><strong>【未完待续】</strong></p>
+<h2 id="【参考链接】"><a href="#【参考链接】" class="headerlink" title="【参考链接】"></a>【参考链接】</h2><p>1）<a href="https://opnfv-compass4nfv.readthedocs.io/en/stable-gambia/release/installation/index.html#compass4nfv-installation" target="_blank" rel="noopener">Compass 介绍</a></p>
+<p>2）<a href="https://bugs.launchpad.net/ubuntu/+source/debian-installer/+bug/1558166" target="_blank" rel="noopener">ubuntu 时钟设置bug</a></p>
+<p>3）<a href="http://forum.ubuntu.org.cn/viewtopic.php?t=474276" target="_blank" rel="noopener">ubuntu apt禁用IPv6</a></p>
+<p>4）<a href="http://xiaoquqi.github.io/blog/2016/06/19/deploy-ceph-using-china-mirror/" target="_blank" rel="noopener">使用国内源部署ceph</a></p>
+<p>5）<a href="http://blog.51cto.com/opencloud/1948400" target="_blank" rel="noopener">ceph国内源</a></p>
+<p>6）<a href="https://wiki.opnfv.org/display/compass4nfv/Containerized+Compass" target="_blank" rel="noopener">compass部署opnfv使用手册</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+        <div>
+            
+    <div blockquote class="blockquote-center" style="color: #32CD32;font-size:18px;">
+    -------------本文结束<i class="fa fa-heartbeat"></i>感谢您的阅读-------------
+    </div>
+
+
+        </div>
+    
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.jpeg" alt="Author 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      
+        <div>
+            
+<br>
+<div style="border: 1px solid black">
+<div style="margin-left:10px">
+<span style="font-weight:blod">版权声明</span>
+<img src="/uploads/cc.png">
+<br>
+<p style="font-size: 10px;line-height: 30px"><a href="http://ylong.net.cn" style="color:#258FC6">Louie's Blog</a> by <a href="http://ylong.net.cn" style="color:#258FC6">louie long</a> is licensed under a <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" style="color:#258FC6">Creative Commons BY-NC-ND 4.0 International License</a>.<br>
+由<a href="http://ylong.net.cn" style="color:#258FC6">Louie Long</a>创作并维护的<a href="ylong.net.cn" style="color:#258FC6">Louie's Blog</a>博客采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" style="color:#258FC6">创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。<br>
+本文首发于<a href="http://ylong.net.cn" style="color:#258FC6">Louie's Blog</a> 博客（ <a href="http://ylong.net.cn" style="color:#258FC6">http://ylong.net.cn</a> ），版权所有，侵权必究。
+<br>
+转载请注明作者和链接地址<a href="http://ylong.net.cn" style="color:#258FC6">http://ylong.net.cn</a>, 如对文章内容有疑问请联系邮箱（ <a style="color:#258FC6">longyu805@163.com</a> ）。</p>
+</div>
+</div>
+
+
+        </div>
+      
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/source/tags/OPNFV/" rel="tag"><i class="fa fa-tag"></i> OPNFV</a>
+          
+            <a href="/source/tags/compass4nfv/" rel="tag"><i class="fa fa-tag"></i> compass4nfv</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/How_to_write_RFC_draft.html" rel="next" title="IETF介绍及RFC Draft撰写">
+                <i class="fa fa-chevron-left"></i> IETF介绍及RFC Draft撰写
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/k8s-cluster-deploy.html" rel="prev" title="k8s集群安装与部署">
+                k8s集群安装与部署 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/shadian.png" alt="Author">
+            
+              <p class="site-author-name" itemprop="name">Louie Long</p>
+              <p class="site-description motion-element" itemprop="description">一只会说666的程序媛鼓励师</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">29</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/louielong" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:longyu805@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/_long__" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-前言"><span class="nav-text">一 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-软件准备"><span class="nav-text">二 软件准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-克隆代码"><span class="nav-text">2.1 克隆代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-离线部署软件镜像准备"><span class="nav-text">2.2 离线部署软件镜像准备</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-安装部署"><span class="nav-text">三 安装部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-节点配置"><span class="nav-text">3.1 节点配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-1-网络配置文件"><span class="nav-text">3.1.1  网络配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-2-策略配置文件"><span class="nav-text">3.1.2 策略配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-3-其他配置"><span class="nav-text">3.1.3 其他配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-部署脚本配置"><span class="nav-text">3.2 部署脚本配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-部署opnfv"><span class="nav-text">3.3 部署opnfv</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-1-ubuntu安装无法自动跳过NTP检测"><span class="nav-text">3.3.1 ubuntu安装无法自动跳过NTP检测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-2-本地ubuntu源配置"><span class="nav-text">3.3.2 本地ubuntu源配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-3-ubuntu源更新禁用IPv6设置"><span class="nav-text">3.3.3 ubuntu源更新禁用IPv6设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-4-apt源更新时网络未连通"><span class="nav-text">3.3.4 apt源更新时网络未连通</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-5-ceph安装错误"><span class="nav-text">3.3.5 ceph安装错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-6-无法下载HaTop"><span class="nav-text">3.3.6 无法下载HaTop</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-7-部署超时"><span class="nav-text">3.3.7 部署超时</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-8-openstack官方仓库clone失败"><span class="nav-text">3.3.8 openstack官方仓库clone失败</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-9-修改节点external网络的DNS"><span class="nav-text">3.3.9 修改节点external网络的DNS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-10-lxc镜像下载失败"><span class="nav-text">3.3.10 lxc镜像下载失败</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-3-10-1-LXC官方镜像下载链接格式说明"><span class="nav-text">3.3.10.1 LXC官方镜像下载链接格式说明</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-11-lxc网桥断开连接"><span class="nav-text">3.3.11 lxc网桥断开连接</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-使用"><span class="nav-text">四 使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-Dashboard登录"><span class="nav-text">4.1 Dashboard登录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#【参考链接】"><span class="nav-text">【参考链接】</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-ravelry"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Louie</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">246k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">3:43</span>
+  
+
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <span id="busuanzi_container_site_pv">
+  | 本站总访问量<span style="color:#FA8072" id="busuanzi_value_site_pv"></span>次
+  </span>
+  <span id="busuanzi_container_site_uv">
+  | 本站访客数<span style="color:#FA8072" id="busuanzi_value_site_uv"></span>人次
+  </span>
+  
+
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=6.4.1"></script>
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "M8d5yPXQ5l0kwFz1bO6cF7b3-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "M8d5yPXQ5l0kwFz1bO6cF7b3-gzGzoHsz",
+                'X-LC-Key': "QEarlHm5c8XcuF22TbFD3Bqn",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/clicklove.js"></script>
+  
+
+</body>
+</html>

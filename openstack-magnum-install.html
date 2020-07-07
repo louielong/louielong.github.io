@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="SgcsMbvcduiAp6Ck7yLI77kPJXONXRYQnbXir7oefRs">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/favicon-48x48.ico?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon-32x32.ico?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon-16x16.ico?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/uploads/favicon-48x48.ico?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: 'SBFCV05R39',
+      apiKey: '',
+      indexName: 'my hexo search',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"请输入关键词","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Openstack magnum 安装 -- 踩坑与填坑系列">
+<meta name="keywords" content="Opensatck,Magnum">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenStack Magnum安装(Rocky)">
+<meta property="og:url" content="https://louielong.github.io/openstack-magnum-install.html">
+<meta property="og:site_name" content="Louie&#39;s Blog">
+<meta property="og:description" content="Openstack magnum 安装 -- 踩坑与填坑系列">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/louielong/blogPic/master/imgMagnum_depends.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/louielong/blogPic/master/imgcreate_swarm_cluster_template.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/louielong/blogPic/master/imgshow_swarm_cluster.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/louielong/blogPic/master/imgFix_bug.gif">
+<meta property="og:updated_time" content="2019-06-03T07:19:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OpenStack Magnum安装(Rocky)">
+<meta name="twitter:description" content="Openstack magnum 安装 -- 踩坑与填坑系列">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/louielong/blogPic/master/imgMagnum_depends.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Louie's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://louielong.github.io/openstack-magnum-install.html">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>OpenStack Magnum安装(Rocky) | Louie's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Louie's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">O ever youthful, O ever powerful.</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+    <a href="/404/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://louielong.github.io/openstack-magnum-install.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Author">
+      <meta itemprop="description" content="一只会说666的程序媛鼓励师">
+      <meta itemprop="image" content="/uploads/shadian.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Louie's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">OpenStack Magnum安装(Rocky)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-12 17:44:10" itemprop="dateCreated datePublished" datetime="2019-04-12T17:44:10+08:00">2019-04-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-03 15:19:48" itemprop="dateModified" datetime="2019-06-03T15:19:48+08:00">2019-06-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Openstack/" itemprop="url" rel="index"><span itemprop="name">Openstack</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/openstack-magnum-install.html" class="leancloud_visitors" data-flag-title="OpenStack Magnum安装(Rocky)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+                 
+                 <span>℃</span>
+                 
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">14k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">0:13</span>
+              
+            </div>
+          
+
+          
+          
+            <div class="out-img-topic">
+             <img src="https://raw.githubusercontent.com/louielong/blogPic/master/imgmagnum.png" class="img-topic">
+            </div>
+          
+          
+
+          
+              <div class="post-description">Openstack magnum 安装 -- 踩坑与填坑系列</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近在研究OpenStack和Kubernetes融合相关的方法，通过查阅[1]发现openstack与k8s融合无外乎两种方法：一是K8S部署在OpenStack平台之上，二是K8S和OpenStack组件集成。方案一的优点是k8s容器借用虚机的多租户具有很好的隔离性，但缺点也很明显K8S使用的是在虚机网络之上又嵌套的一层overlay网络，k8s的网络将难以精细化的管控。方案二将k8s与openstack的部分组件进行集成，是的K8S与openstack具备很好的融合性，从而实现1+1&gt;2的效果。openstack中的magnum是一个典型的解决方案，通过magnum可以镜像容器编排，同时可以快速部署一个Swarm、K8S、Mesos集群。</p>
+<p>本文仅介绍如何在openstack中安装部署magnum以及安装中遇到的问题。</p>
+<p>此外，<strong>我还想吐槽一句</strong>，<code>OpenStack</code>社区从<code>Pike</code>版本开始弃用了<code>auth_uri</code>以及keystone的<code>35357</code>端口全部改为公开的<code>5000</code>端口和使用<code>www_authenticate_uri</code>来进行keystone认证，社区的核心组件已经更换完成，但是非核心组件并未完全跟进，如<code>Magnum-api</code>、<code>Heat</code>安装时就出现过这类问题。</p>
+<h2 id="一、Magnum安装准备"><a href="#一、Magnum安装准备" class="headerlink" title="一、Magnum安装准备"></a>一、Magnum安装准备</h2><p>根据官方组件说明[2]，必须的组件有：</p>
+<ul>
+<li>Keystone-Identity service</li>
+<li>Glance-Image service</li>
+<li>Nova-Compute service</li>
+<li>Neutron-Networking service</li>
+<li>Heat-Orchestration service。</li>
+</ul>
+<p>可选组件有：</p>
+<ul>
+<li>Cinder-Block Storage service</li>
+<li>Octavia-<a href="http://docs.openstack.org/networking-guide/config-lbaas.html" target="_blank" rel="noopener">Load Balancer as a Service (LBaaS v2)</a></li>
+<li>Barbican-<a href="http://docs.openstack.org/project-install-guide/key-manager/draft/" target="_blank" rel="noopener">Key Manager service</a><br>以及</li>
+<li>Swift-<a href="http://docs.openstack.org/project-install-guide/object-storage/draft/" target="_blank" rel="noopener">Object Storage service</a></li>
+<li>Ironic-<a href="http://docs.openstack.org/project-install-guide/baremetal/draft/" target="_blank" rel="noopener">Bare Metal service</a></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/louielong/blogPic/master/imgMagnum_depends.png" alt="Magnum Depends on"></p>
+<p><strong>本次安装使用的Rocky版本，Neutron网络架构采用的是ovs+vxlan的方式</strong></p>
+<h2 id="二、安装Magnum"><a href="#二、安装Magnum" class="headerlink" title="二、安装Magnum"></a>二、安装Magnum</h2><p>我的openstack环境采用纯手工的方式按照官方指导文档进行安装，同样Magnum也是Manual的方式安装，系统版本为<code>Ubuntu-18.04 LTS</code>，因为Rocky版本的<code>deb</code>包只有18.04才有。Magnum-api 版本为<code>7.0.1-0ubuntu1~cloud0</code>。</p>
+<p>按照指导手册[3]，进行安装，安装和配置方式极其简单，<strong>但是</strong>官方的配置文档没有来的及更新，以及deb包更新不及时遇到了很多奇奇怪怪的bug，在查找原因时也很难确定关键词而无法搜索到正确的答案。</p>
+<p>按照官方文档在安装完Magnum后通过<code>openstack coe service list</code>来查看是否安装成功，如果该命令执行失败通过查看<code>/var/log/magnum/magnum-api.log</code>来排查问题。<strong>但是</strong>，该命令执行成功也不代表这Magnum的服务能够正常使用，后续使用中主要查看的是Magnum调度的日志<code>/var/log/magnum/magnum-conductor.log</code>。</p>
+<h3 id="2-1-magnum-api-报错"><a href="#2-1-magnum-api-报错" class="headerlink" title="2.1  magnum-api 报错"></a>2.1  magnum-api 报错</h3><p>Magnum API报错 ，如下所示，根据[4]，新的稳定版代码已修复但是安装的deb包并不是最新的代码</p>
+<blockquote>
+<p> File “/usr/lib/python2.7/dist-packages/magnum/common/keystone.py”, line 47, in auth_url<br>      return CONF[ksconf.CFG_LEGACY_GROUP].auth_uri.replace(‘v2.0’, ‘v3’)</p>
+<p> AttributeError: ‘NoneType’ object has no attribute ‘replace’</p>
+</blockquote>
+<p>解决方法如下如<a href="https://review.openstack.org/#/c/614082/" target="_blank" rel="noopener">Add support for www_authentication_uri</a>所示，添加如下patch</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/lib/python2.7/dist-packages/magnum/common/keystone.py +47</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="built_in">return</span> CONF[ksconf.CFG_LEGACY_GROUP].auth_uri.replace(<span class="string">'v2.0'</span>, <span class="string">'v3'</span>)</span></span><br><span class="line">conf = CONF[ksconf.CFG_LEGACY_GROUP]</span><br><span class="line">auth_uri = (getattr(conf, 'www_authenticate_uri', None) or</span><br><span class="line">            getattr(conf, 'auth_uri', None))</span><br><span class="line">if auth_uri:</span><br><span class="line">   auth_uri = auth_uri.replace('v2.0', 'v3')</span><br><span class="line">return auth_uri</span><br></pre></td></tr></table></figure>
+
+<p>修改完成后需要重启magnum服务，否则修改的代码不生效。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service magnum-* restart</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-指定swarm集群的volumed-size"><a href="#2-2-指定swarm集群的volumed-size" class="headerlink" title="2.2 指定swarm集群的volumed size"></a>2.2 指定swarm集群的volumed size</h3><p>按照文档创建一个集群模板时出现如下报错：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@ctl01:/home/xdnsadmin# openstack coe cluster template create swarm-cluster-template --image fedora-atomic-latest --external-network Provider --dns-nameserver 223.5.5.5 --master-flavorm1.small --flavor m1.small --coe swarm</span><br><span class="line">docker volume size None GB is not valid, expecting minimum value 3GB for devicemapper storage driver (HTTP 400) (Request-ID: req-392aaa81-d44c-48cc-8800-2e9697539a28)</span><br></pre></td></tr></table></figure>
+
+<p>解决办法是指定一个volume size，按照官方的说法没有cinder服务也可以使用magnum，<strong>这个我并未验证</strong>，我的集群安装的cinder服务。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openstack coe cluster template create swarm-cluster-template --image fedora-atomic-latest --external-network Provider --dns-nameserver 223.5.5.5 --master-flavor m1.small --flavor m1.small --coe swarm --docker-volume-size 10</span><br></pre></td></tr></table></figure>
+
+<p>同时这里仍有一个问题，查看<em>2.5</em></p>
+<h3 id="2-2-docker-volume-type"><a href="#2-2-docker-volume-type" class="headerlink" title="2.2 docker volume_type"></a>2.2 docker volume_type</h3><p>在安装过程出现无效的volumetype的错误，按照[5]需要设置volumetype同时进行相关配置</p>
+<blockquote>
+<p>ERROR heat.engine.resource     raise exception.ResourceFailure(message, self, action=self.action)<br>ERROR heat.engine.resource ResourceFailure: resources[0]: Property error: resources.docker_volume.properties.volume_type: Error validating value ‘’: The VolumeType () could not be found.</p>
+</blockquote>
+<p>1)Check if you have any volume types defined.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openstack volume type list</span><br></pre></td></tr></table></figure>
+
+<p>2)If there are none, create one:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openstack volume type create volType1 --description "Fix for Magnum" --public</span><br></pre></td></tr></table></figure>
+
+<p>3)Then in  /etc/magnum/magnum.conf add this line in the [cinder] section:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">default_docker_volume_type = volType1</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-Barbican服务未安装"><a href="#2-3-Barbican服务未安装" class="headerlink" title="2.3  Barbican服务未安装"></a>2.3  <code>Barbican</code>服务未安装</h3><p>按照文档在选择<code>[certificates]</code>时使用推荐的<code>barbican</code>来存储认证证书，而我的openstack集群并未安装<code>barbican</code>服务，因此收到了如下报错，但是我当时并未发现原因所在，我一直以为是keystone的<code>publicURL endpoint</code>无法访问。</p>
+<blockquote>
+<p>2019-04-09 18:42:26.505 32428 ERROR magnum.conductor.handlers.common.cert_manager [req-ffd4b077-80ee-4846-bdc0-84817aa699a5 - - - - -] Failed to generate certificates for Cluster: 03cd9a72-c980-4947-b273-d9bcb88a6913: AuthorizationFailure: unexpected keystone client error occurred: publicURL endpoint for key-manager service not found<br>……….<br>2019-04-09 18:42:26.505 32428 ERROR magnum.conductor.handlers.common.cert_manager     connection = get_admin_clients().barbican()<br>2019-04-09 18:42:26.505 32428 ERROR magnum.conductor.handlers.common.cert_manager   File “/usr/lib/python2.7/dist-packages/magnum/common/exception.py”, line 65, in wrapped<br>2019-04-09 18:42:26.505 32428 ERROR magnum.conductor.handlers.common.cert_manager     % sys.exc_info()[1])<br>2019-04-09 18:42:26.505 32428 ERROR magnum.conductor.handlers.common.cert_manager AuthorizationFailure: unexpected keystone client error occurred: publicURL endpoint for key-manager service not found</p>
+</blockquote>
+<p>该问题的解决方法很简单，安装<code>barbican</code> 服务，或者使用<code>x509keypair</code>或<code>local</code>方式存储证书</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[certificates]</span><br><span class="line">cert_manager_type = barbican # x509keypair or local</span><br><span class="line">storage_path = /var/lib/magnum/certificates/</span><br></pre></td></tr></table></figure>
+
+<p>若使用local方式，还需创建目录<code>/var/lib/magnum/certificates/</code>，并将其所属组改为magnum，<code>sudo chown -R magnum:magnum /var/lib/magnum/certificates/</code>，否则会出现如下报错：</p>
+<blockquote>
+<p>2019-04-10 15:40:50.675 20235 ERROR magnum.conductor.handlers.common.cert_manager [req-c31e7588-a486-4ea8-8adc-16ff8f37b284 - - - - -] Failed to generate certificates for Cluster: e579     0f96-e8c5-49c5-82f9-87faf8438585: CertificateStorageException: Could not store certificate: [Errno 2] No such file or directory: ‘/var/lib/magnum/certificates/5e8beb02-9378-4e8c-8b4d-1     cae933de665.crt’</p>
+</blockquote>
+<p>同时，在修复此问题的过程中查看到一个警告，该警告对于使用过程也造成了很大的影响<code>Auth plugin and its options for service user must be provided in [keystone_auth] section. Using values from [keystone_authtoken] section is deprecated.: MissingRequiredOptions: Auth plugin requires parameters which were not given: auth_url</code></p>
+<p>需要在<code>/etc/magnum/magnum.conf</code>中 添加<code>keystone_auth</code>项 ，此外，这里的还涉及到接下来的问题<em>2.4</em></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[keystone_auth]</span><br><span class="line">auth_version = v3</span><br><span class="line">auth_url = http://10.253.0.61:5000/v3</span><br><span class="line"><span class="meta">#</span><span class="bash">www_authenticate_uri = http://ctl01:5000/v3</span></span><br><span class="line">auth_uri = http://10.253.0.61:5000</span><br><span class="line">project_domain_id = default</span><br><span class="line">project_name = service</span><br><span class="line">user_domain_id = default</span><br><span class="line">password = magnum</span><br><span class="line">username = magnum</span><br><span class="line">auth_type = password</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-swarm集群创建超时"><a href="#2-4-swarm集群创建超时" class="headerlink" title="2.4 swarm集群创建超时"></a>2.4 swarm集群创建超时</h3><p>在处理完以上的magnum conductor问题后，开始创建swarm集群，但是出现创建超时(超时时长为60分钟)集群的stack启动失败的问题。原因是按照之前的官方文档创建所有服务的endpoint都是使用<code>http://ctl01:xxx</code>而此处创建的swarm集群需要与opensatck相关服务进行通信，无法识别<code>ctl01</code>域名，解析不到服务地址IP，因此<strong>需要将所有的endpiont服务的public地址都是用公开的IP替换</strong>。</p>
+<blockquote>
+<p>ERROR oslo_messaging.rpc.server [req-4a8e8e2d-cae0-4113-a49d-57bb91c03b8d - - - - -] Exception during message handling: EndpointNotFound: <a href="http://ctl01:9511/v1" target="_blank" rel="noopener">http://ctl01:9511/v1</a> endpoint for identity service not found<br>….<br>ERROR oslo_messaging.rpc.server   File “/usr/lib/python2.7/dist-packages/magnum/conductor/handlers/cluster_conductor.py”, line 68, in cluster_create<br>ERROR oslo_messaging.rpc.server     cluster_driver.create_cluster(context, cluster, create_timeout)<br>….<br>ERROR oslo_messaging.rpc.server   File “/usr/lib/python2.7/dist-packages/keystoneauth1/access/service_catalog.py”, line 464, in endpoint_data_for<br>ERROR oslo_messaging.rpc.server     raise exceptions.EndpointNotFound(msg)<br>ERROR oslo_messaging.rpc.server EndpointNotFound: <a href="http://ctl01:9511/v1" target="_blank" rel="noopener">http://ctl01:9511/v1</a> endpoint for identity service not found</p>
+</blockquote>
+<p>使用命令<code>openstack endpoint list | grep public</code>查看相关的endpoint。</p>
+<h3 id="2-5-swarm-cluster启动失败"><a href="#2-5-swarm-cluster启动失败" class="headerlink" title="2.5 swarm-cluster启动失败"></a>2.5 swarm-cluster启动失败</h3><p>在解决完<em>2.4</em>的问题后又迎来了新的问题，swarm-cluster集群启动创建成功，但是服务报错。这是能够通过<code>floating ip</code>登录swarm master节点使用<code>fedora</code>用户以及密钥<code>mykey</code>登录。查看<code>cloud init</code>日志<code>/var/log/cloud-init-output.log</code>，会发现如下的报错：</p>
+<blockquote>
+<p>/var/lib/cloud/instance/scripts/part-006: line 13: /etc/etcd/etcd.conf: No such file or directory<br>/var/lib/cloud/instance/scripts/part-006: line 26: /etc/etcd/etcd.conf: No such file or directory<br>/var/lib/cloud/instance/scripts/part-006: line 38: /etc/etcd/etcd.conf: No such file or directory</p>
+</blockquote>
+<p><code>etcd</code>初始失败从而导致<code>swarm-manager</code>启动失败，这个问题还是相当的严重的，因为很难排查原因，最终在opensatck的讨论邮件列表中找到的答案[6]，根本原因是<code>coe</code>使用错误，应该使用<code>swarm-mode</code>而不是安装手册里写的<code>swam</code>，这点实在是<strong>太坑人</strong>了。</p>
+<blockquote>
+<p>$openstack coe cluster template show docker-swarm</p>
+<p>| docker_storage_driver | devicemapper                         |<br>| network_driver             | docker                                     |<br>| coe                               | swarm-mode                           |</p>
+<p>Never got the “swarm” driver to work, you should use “swarm-mode” instead which uses native Docker clustering without etcd.</p>
+</blockquote>
+<p><strong>同时需要注意的是</strong>，使用的<code>Fedora</code>镜像必须是<code>Fedora-Atomic-27-xx</code>，<code>Frdora 27</code>之后的镜像改变较大，<code>cloud init</code>脚本无法正常工作。还需添加必要的patch <a href="https://review.openstack.org/#/c/598179/" target="_blank" rel="noopener">swarm-mode allow TCP port 2377 to swarm master node</a>，修改<code>magnum/drivers/swarm_fedora_atomic_v2/templates/swarmcluster.yaml</code>的Line 247，添加一下内容。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">- protocol:</span> <span class="string">tcp</span></span><br><span class="line"><span class="attr">  port_range_min:</span> <span class="number">2377</span></span><br><span class="line"><span class="attr">  port_range_max:</span> <span class="number">2377</span></span><br></pre></td></tr></table></figure>
+
+<p>随后，</p>
+<p>1）重新创建<code>swarm-cluster</code>模板</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@ctl01:/home/xdnsadmin/workplace/magnum/swarm/cluster# openstack coe cluster template create swarm-cluster-template --image fedora-atomic-latest --external-network Provider --dns-nameserver 223.5.5.5 --master-flavor m1.small --flavor m1.small --coe swarm-mode  --docker-volume-size 10</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/louielong/blogPic/master/imgcreate_swarm_cluster_template.png" alt="创建swarm-cluster集群模板"></p>
+<p>2）启动<code>swarm-cluster</code>实例</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@ctl01:/home/xdnsadmin/workplace/magnum/swarm/cluster# openstack coe cluster create swarm-cluster --cluster-template swarm-cluster-template --master-count 1 --node-count 1 --keypair mykey</span><br></pre></td></tr></table></figure>
+
+<p>等待集群实例创建完成</p>
+<p><img src="https://raw.githubusercontent.com/louielong/blogPic/master/imgshow_swarm_cluster.png" alt="show swarm_cluster"></p>
+<p>3）配置<code>swarm-cluster</code>访问</p>
+<p>首先，生成证书，然后导入环境变量即可访问swarm集群(<em>控制节点需要安装docker客户端</em>)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">root@ctl01:/home/xdnsadmin/workplace/magnum/swarm/cluster# $(openstack coe cluster config swarm-cluster --dir /home/xdnsadmin/workplace/magnum/swarm/cluster)</span><br><span class="line">root@ctl01:/home/xdnsadmin/workplace/magnum/swarm/cluster# export DOCKER_HOST=tcp://10.253.0.115:2375</span><br><span class="line">root@ctl01:/home/xdnsadmin/workplace/magnum/swarm/cluster# export DOCKER_CERT_PATH=/home/xdnsadmin/workplace/magnum/swarm/cluster</span><br><span class="line">root@ctl01:/home/xdnsadmin/workplace/magnum/swarm/cluster# export DOCKER_TLS_VERIFY=True</span><br><span class="line">root@ctl01:/home/xdnsadmin/workplace/magnum/swarm/cluster# docker info</span><br><span class="line">Containers: 0</span><br><span class="line">.....</span><br><span class="line">Images: 0</span><br><span class="line">Server Version: 1.13.1</span><br><span class="line">Storage Driver: devicemapper</span><br><span class="line"> Pool Name: docker-docker--pool</span><br><span class="line">.....</span><br><span class="line"> Backing Filesystem: xfs</span><br><span class="line"> Data file:</span><br><span class="line"> Metadata file:</span><br><span class="line"> ......</span><br><span class="line"> Library Version: 1.02.144 (2017-10-06)</span><br><span class="line">Logging Driver: journald</span><br><span class="line">Cgroup Driver: systemd</span><br><span class="line">Plugins:</span><br><span class="line"> Volume: local</span><br><span class="line"> Network: bridge host macvlan null overlay</span><br><span class="line"> Authorization: rhel-push-plugin</span><br><span class="line"> Log:</span><br><span class="line">Swarm: active</span><br><span class="line"> NodeID: jcsq6ms8717ougczpyhgdayic</span><br><span class="line"> Is Manager: true</span><br><span class="line"> ClusterID: jxzj1kr158cuqu5ph8k2nq8pu</span><br><span class="line"> Managers: 1</span><br><span class="line"> Nodes: 2</span><br><span class="line"> Orchestration:</span><br><span class="line">  Task History Retention Limit: 5</span><br><span class="line"> Raft:</span><br><span class="line">  Snapshot Interval: 10000</span><br><span class="line">  Number of Old Snapshots to Retain: 0</span><br><span class="line">  Heartbeat Tick: 1</span><br><span class="line">  Election Tick: 3</span><br><span class="line"> Dispatcher:</span><br><span class="line">  Heartbeat Period: 5 seconds</span><br><span class="line"> CA Configuration:</span><br><span class="line">  Expiry Duration: 3 months</span><br><span class="line">  Force Rotate: 0</span><br><span class="line"> Autolock Managers: false</span><br><span class="line"> Root Rotation In Progress: false</span><br><span class="line"> Node Address: 10.0.0.8</span><br><span class="line"> Manager Addresses:</span><br><span class="line">  10.0.0.8:2377</span><br><span class="line">Runtimes: oci runc</span><br><span class="line">Default Runtime: oci</span><br><span class="line">.........</span><br><span class="line">  Profile: /etc/docker/seccomp.json</span><br><span class="line"> selinux</span><br><span class="line">Kernel Version: 4.14.18-300.fc27.x86_64</span><br><span class="line">Operating System: Fedora 27 (Atomic Host)</span><br><span class="line">OSType: linux</span><br><span class="line">Architecture: x86_64</span><br><span class="line">CPUs: 1</span><br><span class="line">Total Memory: 1.946GiB</span><br><span class="line">Name: swarm-cluster-cgjrw2xrwylk-primary-master-0.novalocal</span><br><span class="line">ID: 27CS:YZSQ:WOQJ:PMHZ:ALTJ:WMB3:IIA7:FLUC:2RIW:4CKA:FZWV:4GZA</span><br><span class="line">Docker Root Dir: /var/lib/docker</span><br><span class="line">Debug Mode (client): false</span><br><span class="line">Debug Mode (server): false</span><br><span class="line">Registry: https://index.docker.io/v1/</span><br><span class="line">Experimental: false</span><br><span class="line">Insecure Registries:</span><br><span class="line"> 127.0.0.0/8</span><br><span class="line">Live Restore Enabled: false</span><br><span class="line"></span><br><span class="line">root@ctl01:/home/xdnsadmin/workplace/magnum/swarm/cluster# docker -H 10.253.0.115:2375 run busybox:latest echo 'Hello world!'</span><br><span class="line">Unable to find image 'busybox:latest' locally</span><br><span class="line">Trying to pull repository docker.io/library/busybox ...</span><br><span class="line">Trying to pull repository registry.fedoraproject.org/busybox ...</span><br><span class="line">Trying to pull repository registry.access.redhat.com/busybox ...</span><br><span class="line">Trying to pull repository docker.io/library/busybox ...</span><br><span class="line">sha256:954e1f01e80ce09d0887ff6ea10b13a812cb01932a0781d6b0cc23f743a874fd: Pulling from docker.io/library/busybox</span><br><span class="line">fc1a6b909f82: Pull complete</span><br><span class="line">Digest: sha256:954e1f01e80ce09d0887ff6ea10b13a812cb01932a0781d6b0cc23f743a874fd</span><br><span class="line">Status: Downloaded newer image for docker.io/busybox:latest</span><br><span class="line">Hello world!</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-6-standard-init-linux-go-178-exec-user-process-caused-“permission-denied”"><a href="#2-6-standard-init-linux-go-178-exec-user-process-caused-“permission-denied”" class="headerlink" title="2.6 standard_init_linux.go:178: exec user process caused “permission denied”"></a>2.6 standard_init_linux.go:178: exec user process caused “permission denied”</h3><p>该错误与swarm节点的存储格式有关，由于之前解决swarm无法启动而被带偏添加了<code>--docker-storage-driver overlay</code>参数在<code>swarm-cluster</code>模板中，导致容器无法启动，通过查看[7]得知与其支持的存储驱动有关</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">root@ctl01:/home/xdnsadmin/workplace/magnum/swarm/cluster# docker -H 10.253.0.111:2375 run busybox echo "Hello from Docker!"</span><br><span class="line">Unable to find image 'busybox:latest' locally</span><br><span class="line">Trying to pull repository docker.io/library/busybox ...</span><br><span class="line">Trying to pull repository registry.fedoraproject.org/busybox ...</span><br><span class="line">Trying to pull repository registry.access.redhat.com/busybox ...</span><br><span class="line">Trying to pull repository docker.io/library/busybox ...</span><br><span class="line">sha256:954e1f01e80ce09d0887ff6ea10b13a812cb01932a0781d6b0cc23f743a874fd: Pulling from docker.io/library/busybox</span><br><span class="line">fc1a6b909f82: Pull complete</span><br><span class="line">Digest: sha256:954e1f01e80ce09d0887ff6ea10b13a812cb01932a0781d6b0cc23f743a874fd</span><br><span class="line">Status: Downloaded newer image for docker.io/busybox:latest</span><br><span class="line">standard_init_linux.go:178: exec user process caused "permission denied"</span><br><span class="line">root@ctl01:/home/xdnsadmin/workplace/magnum/swarm/cluster# docker -H 10.253.0.111:2375 ps -a</span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS               NAMES</span><br><span class="line">f1a60f01625f        busybox             "echo 'Hello from Do…"   10 minutes ago      Exited (1) 10 minutes ago                       elastic_kirch</span><br><span class="line">root@ctl01:/home/xdnsadmin/workplace/magnum/swarm/cluster# docker -H 10.253.0.111:2375 logs f1a60f01625f</span><br><span class="line">standard_init_linux.go:178: exec user process caused "permission denied"</span><br></pre></td></tr></table></figure>
+
+<p>目前<code>Docker</code>支持如下几种storage driver：</p>
+<table>
+<thead>
+<tr>
+<th align="left">Technology</th>
+<th align="left">Storage driver name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">OverlayFS</td>
+<td align="left">overlay</td>
+</tr>
+<tr>
+<td align="left">AUFS</td>
+<td align="left">aufs</td>
+</tr>
+<tr>
+<td align="left">Btrfs</td>
+<td align="left">btrfs</td>
+</tr>
+<tr>
+<td align="left">Device Mapper</td>
+<td align="left">devicemapper</td>
+</tr>
+<tr>
+<td align="left">VFS</td>
+<td align="left">vfs</td>
+</tr>
+<tr>
+<td align="left">ZFS</td>
+<td align="left">zfs</td>
+</tr>
+</tbody></table>
+<p>详细的对比可以参看：<a href="https://blog.csdn.net/vchy_zhao/article/details/70238690" target="_blank" rel="noopener">Docker之几种storage-driver比较</a></p>
+<p>以上，就是Openstack Rocky版本Magnum安装与排坑的过程，不说啦，刚刚安装完Rocky版本，Stein版本就放出来了，我接着去踩雷啦 - -！<strong>开源真香</strong></p>
+<p><img src="https://raw.githubusercontent.com/louielong/blogPic/master/imgFix_bug.gif" alt="无限 Fix Bug"></p>
+<p>【参考链接】</p>
+<p>1）<a href="https://www.zhihu.com/question/63576896" target="_blank" rel="noopener">如何把OpenStack和Kubernetes结合在一起来构建容器云平台</a></p>
+<p>2）<a href="https://www.openstack.org/software/releases/rocky/components/magnum" target="_blank" rel="noopener">Magnum -Container Orchestration Engine Provisioning</a></p>
+<p>3）<a href="https://docs.openstack.org/magnum/rocky/install/install.html" target="_blank" rel="noopener">Magnum安装手册</a></p>
+<p>4）<a href="https://bugs.launchpad.net/ubuntu/+source/magnum/+bug/1793813" target="_blank" rel="noopener">magnum-api not working with www_authenticate_uri</a></p>
+<p>5）<a href="https://ask.openstack.org/en/question/110729/magnum-cluster-create-k8s-cluster-error-resourcefailure/" target="_blank" rel="noopener">magnum cluster create k8s cluster Error: ResourceFailure</a></p>
+<p>6）<a href="http://lists.openstack.org/pipermail/openstack-discuss/2018-December/000937.html" target="_blank" rel="noopener">Fwd: openstack queens magnum error</a></p>
+<p>7）<a href="https://github.com/moby/moby/issues/26495" target="_blank" rel="noopener">standard_init_linux.go:175: exec user process caused “permission denied”</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+        <div>
+            
+    <div blockquote class="blockquote-center" style="color: #32CD32;font-size:18px;">
+    -------------本文结束<i class="fa fa-heartbeat"></i>感谢您的阅读-------------
+    </div>
+
+
+        </div>
+    
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.jpeg" alt="Author 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      
+        <div>
+            
+<br>
+<div style="border: 1px solid black">
+<div style="margin-left:10px">
+<span style="font-weight:blod">版权声明</span>
+<img src="/uploads/cc.png">
+<br>
+<p style="font-size: 10px;line-height: 30px"><a href="http://ylong.net.cn" style="color:#258FC6">Louie's Blog</a> by <a href="http://ylong.net.cn" style="color:#258FC6">louie long</a> is licensed under a <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" style="color:#258FC6">Creative Commons BY-NC-ND 4.0 International License</a>.<br>
+由<a href="http://ylong.net.cn" style="color:#258FC6">Louie Long</a>创作并维护的<a href="ylong.net.cn" style="color:#258FC6">Louie's Blog</a>博客采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" style="color:#258FC6">创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。<br>
+本文首发于<a href="http://ylong.net.cn" style="color:#258FC6">Louie's Blog</a> 博客（ <a href="http://ylong.net.cn" style="color:#258FC6">http://ylong.net.cn</a> ），版权所有，侵权必究。
+<br>
+转载请注明作者和链接地址<a href="http://ylong.net.cn" style="color:#258FC6">http://ylong.net.cn</a>, 如对文章内容有疑问请联系邮箱（ <a style="color:#258FC6">longyu805@163.com</a> ）。</p>
+</div>
+</div>
+
+
+        </div>
+      
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/source/tags/Openstack/" rel="tag"><i class="fa fa-tag"></i> Openstack</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog-pic-missing.html" rel="next" title="博客图挂了 ( ˇˍˇ )">
+                <i class="fa fa-chevron-left"></i> 博客图挂了 ( ˇˍˇ )
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/image-volume-create-timeout.html" rel="prev" title="Openstack虚拟机磁盘创建超时">
+                Openstack虚拟机磁盘创建超时 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/shadian.png" alt="Author">
+            
+              <p class="site-author-name" itemprop="name">Louie Long</p>
+              <p class="site-description motion-element" itemprop="description">一只会说666的程序媛鼓励师</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">29</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/louielong" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:longyu805@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/_long__" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Magnum安装准备"><span class="nav-text">一、Magnum安装准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、安装Magnum"><span class="nav-text">二、安装Magnum</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-magnum-api-报错"><span class="nav-text">2.1  magnum-api 报错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-指定swarm集群的volumed-size"><span class="nav-text">2.2 指定swarm集群的volumed size</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-docker-volume-type"><span class="nav-text">2.2 docker volume_type</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Barbican服务未安装"><span class="nav-text">2.3  Barbican服务未安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-swarm集群创建超时"><span class="nav-text">2.4 swarm集群创建超时</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-swarm-cluster启动失败"><span class="nav-text">2.5 swarm-cluster启动失败</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-standard-init-linux-go-178-exec-user-process-caused-“permission-denied”"><span class="nav-text">2.6 standard_init_linux.go:178: exec user process caused “permission denied”</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-ravelry"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Louie</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">246k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">3:43</span>
+  
+
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <span id="busuanzi_container_site_pv">
+  | 本站总访问量<span style="color:#FA8072" id="busuanzi_value_site_pv"></span>次
+  </span>
+  <span id="busuanzi_container_site_uv">
+  | 本站访客数<span style="color:#FA8072" id="busuanzi_value_site_uv"></span>人次
+  </span>
+  
+
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=6.4.1"></script>
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "M8d5yPXQ5l0kwFz1bO6cF7b3-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "M8d5yPXQ5l0kwFz1bO6cF7b3-gzGzoHsz",
+                'X-LC-Key': "QEarlHm5c8XcuF22TbFD3Bqn",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/clicklove.js"></script>
+  
+
+</body>
+</html>

@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="SgcsMbvcduiAp6Ck7yLI77kPJXONXRYQnbXir7oefRs">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/favicon-48x48.ico?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon-32x32.ico?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon-16x16.ico?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/uploads/favicon-48x48.ico?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: 'SBFCV05R39',
+      apiKey: '',
+      indexName: 'my hexo search',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"请输入关键词","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="OPNFV Hunter版本安装以及OVP测试使用">
+<meta name="keywords" content="OPNFV,Dovetail">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OPNFV Hunter Fuel安装以及OVP测试使用">
+<meta property="og:url" content="https://louielong.github.io/OPNFV_Hunter_install_OVP_Test.html">
+<meta property="og:site_name" content="Louie&#39;s Blog">
+<meta property="og:description" content="OPNFV Hunter版本安装以及OVP测试使用">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-06-03T07:08:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OPNFV Hunter Fuel安装以及OVP测试使用">
+<meta name="twitter:description" content="OPNFV Hunter版本安装以及OVP测试使用">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Louie's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://louielong.github.io/OPNFV_Hunter_install_OVP_Test.html">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>OPNFV Hunter Fuel安装以及OVP测试使用 | Louie's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Louie's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">O ever youthful, O ever powerful.</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+    <a href="/404/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://louielong.github.io/OPNFV_Hunter_install_OVP_Test.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Author">
+      <meta itemprop="description" content="一只会说666的程序媛鼓励师">
+      <meta itemprop="image" content="/uploads/shadian.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Louie's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">OPNFV Hunter Fuel安装以及OVP测试使用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-27 13:49:55" itemprop="dateCreated datePublished" datetime="2019-05-27T13:49:55+08:00">2019-05-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-03 15:08:30" itemprop="dateModified" datetime="2019-06-03T15:08:30+08:00">2019-06-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OPNFV/" itemprop="url" rel="index"><span itemprop="name">OPNFV</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/OPNFV_Hunter_install_OVP_Test.html" class="leancloud_visitors" data-flag-title="OPNFV Hunter Fuel安装以及OVP测试使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+                 
+                 <span>℃</span>
+                 
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">11k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">0:10</span>
+              
+            </div>
+          
+
+          
+          
+            <div class="out-img-topic">
+             <img src="https://raw.githubusercontent.com/louielong/blogPic/master/imgOPNFV_Hunter_Assets_v1_WebBanner.png" class="img-topic">
+            </div>
+          
+          
+
+          
+              <div class="post-description">OPNFV Hunter版本安装以及OVP测试使用</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>OPNFV与5月发布了第八个版本Hunter，随即升级了实验室的环境，同时也测试一下即将发布的OVP 第三个版本。官方社区的安装工具也减少到只剩下<strong>MCP (Fuel)</strong>和<strong>TripleO</strong>两个了，Fuel的安装方式没有太多的改变，只是引入了<strong>Docker</strong>将原来的<em>fuel</em>和<em>MAAS</em>两个安装虚拟机换成了Docker容器。实际在部署过程中发现与先前的<a href="opnfv_Euphrates_install-02.html">OPNFV Euphrates部署 02</a>和<a href="opnfv_Euphrates_install-02.html">OPNFV Euphrates部署 03</a>没有区别，在配置好<strong>网络</strong>、<strong>PDF</strong>以及<strong>IDF</strong>后可以很顺利的安装。同时看到Fuel部署的文档写的更加详细了，参见：</p>
+<ul>
+<li><a href="https://docs.opnfv.org/en/stable-fraser/submodules/fuel/docs/release/installation/installation.instruction.html" target="_blank" rel="noopener">OPNFV Hunter Fuel安装指导</a></li>
+<li><a href="https://opnfv-fuel.readthedocs.io/en/stable-hunter/release/userguide/userguide.html" target="_blank" rel="noopener">OPNFV Fuel 用户手册</a></li>
+</ul>
+<p>OVP也将发布第三个版本OVP-2019.08增强测试内容，因此这里一并整理一下使用与问题排查办法。</p>
+<h2 id="二、Hunter-部署"><a href="#二、Hunter-部署" class="headerlink" title="二、Hunter 部署"></a>二、Hunter 部署</h2><p>Fuel的Hunter部署和Euphrates以及Gambia没有太大的差别，完全可以参考先前的<a href="opnfv_Euphrates_install-02.html">OPNFV Euphrates部署 02</a>和<a href="opnfv_Euphrates_install-02.html">OPNFV Euphrates部署 03</a>，这里主要介绍一下加快部署的办法。</p>
+<h2 id="2-1-MAAS-local-mirros"><a href="#2-1-MAAS-local-mirros" class="headerlink" title="2.1 MAAS local mirros"></a>2.1 MAAS local mirros</h2><p>部署过程中遇到的最大的问题就是MAAS每次都会去重新获取最新的ubuntu镜像，常常因为镜像下载缓慢导致部署超时，这里可以参看<a href="./MAAS+ubuntu-local-repo.html">MAAS本地源设置</a>，配置本地MAAS源以加快部署</p>
+<p>修改<code>mcp/reclass/classes/cluster/all-mcp-arch-common/infra/maas.yml.j2</code></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">boot_sources:</span></span><br><span class="line"><span class="attr">  resources_mirror:</span></span><br><span class="line">    <span class="comment">#url: http://images.maas.io/ephemeral-v3/daily</span></span><br><span class="line"><span class="attr">    url:</span> <span class="attr">http://&lt;IMG</span> <span class="string">mirror</span> <span class="string">IP&gt;/maas/images/ephemeral-v3/daily</span></span><br><span class="line"><span class="attr">    keyring_file:</span> <span class="string">/usr/share/keyrings/ubuntu-cloudimage-keyring.gpg</span></span><br><span class="line"><span class="attr">boot_sources_selections:</span></span><br><span class="line"><span class="attr">  xenial:</span></span><br><span class="line">    <span class="comment">#url: "http://images.maas.io/ephemeral-v3/daily"</span></span><br><span class="line"><span class="attr">    url:</span> <span class="string">"http://&lt;IMG mirror IP&gt;/maas/images/ephemeral-v3/daily"</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-dashboard不可用"><a href="#2-2-dashboard不可用" class="headerlink" title="2.2  dashboard不可用"></a>2.2  dashboard不可用</h2><p>本次安装在解决完MAAS本地源后安装十分顺利，但是安装完后无法使用dashboard，给社区提了一个jira <a href="https://jira.opnfv.org/browse/FUEL-408" target="_blank" rel="noopener">Fuel-408</a>看后续修复吧，尝试在本地解决了一些问题，使得访问<strong>prx01/prx02</strong>的的8078端口可以看到正常的页面，但是使用密码无法登录。</p>
+<h2 id="【Note】"><a href="#【Note】" class="headerlink" title="【Note】"></a>【Note】</h2><p>这里记录一下在无dashboard的情况下配置并测试openstack环境</p>
+<h3 id="1-上传镜像"><a href="#1-上传镜像" class="headerlink" title="1)上传镜像"></a>1)上传镜像</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openstack image create cirros --file cirros-0.3.5.qcow2 --container-format bare --public</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-创建external网络"><a href="#2-创建external网络" class="headerlink" title="2)创建external网络"></a>2)创建external网络</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openstack subnet create --network floating_net --allocation-pool start=192.168.20.100,end=192.168.20.200  --dns-nameserver 10.2.2.20 --gateway 192.168.20.1 --subnet-range 192.168.20.0/1 floating_subnet</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-创建内部虚拟网络"><a href="#3-创建内部虚拟网络" class="headerlink" title="3)创建内部虚拟网络"></a>3)创建内部虚拟网络</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">openstack network create test</span><br><span class="line">openstack subnet create worker_subnet --network worker_network --subnet-range 10.20.30.0/24</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-创建路由"><a href="#4-创建路由" class="headerlink" title="4)创建路由"></a>4)创建路由</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">openstack floating ip create floating_net</span><br><span class="line">openstack router create router</span><br><span class="line">openstack router set router --external-gateway floating_net</span><br><span class="line">openstack router add subnet router test_subnet</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-安全组配置"><a href="#5-安全组配置" class="headerlink" title="5)安全组配置"></a>5)安全组配置</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">openstack security group rule create &lt;default group id&gt; --protocol tcp --dst-port 22:22 --remote-ip 0.0.0.0/0</span><br><span class="line">openstack security group rule create --protocol icmp &lt;default group id&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-创建flavor"><a href="#6-创建flavor" class="headerlink" title="6)创建flavor"></a>6)创建flavor</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">openstack flavor create m1.tiny --ram 64 --disk 0 --vcpus 1 --public</span><br><span class="line">nova flavor-key &lt;ID&gt; set hw:mem_page_size=large  # 由于使用的dpdk需要配置大页内存</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-启动虚拟机"><a href="#7-启动虚拟机" class="headerlink" title="7)启动虚拟机"></a>7)启动虚拟机</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nova boot --flavor m1.tiny --image cirros --nic net-id=&lt;floating_net id&gt; test</span><br></pre></td></tr></table></figure>
+
+<h3 id="8-分配浮动IP"><a href="#8-分配浮动IP" class="headerlink" title="8)分配浮动IP"></a>8)分配浮动IP</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">openstack floating ip create floating_net</span><br><span class="line">openstack floating ip set --port &lt;port&gt; &lt;flaoting ip id&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、OVP测试使用"><a href="#三、OVP测试使用" class="headerlink" title="三、OVP测试使用"></a>三、OVP测试使用</h2><p>OVP测试使用参考：<a href="https://opnfv-dovetail.readthedocs.io/en/latest/testing/user/userguide/testing_guide.html" target="_blank" rel="noopener">OVP用户手册</a></p>
+<p>选择一台机器，安装配置好docker，并确保机器可以访问OPNFV环境的keystone API</p>
+<h3 id="3-1-测试环境配置"><a href="#3-1-测试环境配置" class="headerlink" title="3.1 测试环境配置"></a>3.1 测试环境配置</h3><h4 id="1）设置dovetial-home目录"><a href="#1）设置dovetial-home目录" class="headerlink" title="1）设置dovetial home目录"></a>1）设置dovetial home目录</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> mkdir -p $&#123;HOME&#125;/dovetail</span><br><span class="line"><span class="meta">$</span> export DOVETAIL_HOME=$&#123;HOME&#125;/dovetail</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-配置文件设置"><a href="#2-配置文件设置" class="headerlink" title="2)配置文件设置"></a>2)配置文件设置</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> mkdir -p $&#123;DOVETAIL_HOME&#125;/pre_config</span><br><span class="line"><span class="meta">$</span> mkdir -p $&#123;DOVETAIL_HOME&#125;/images</span><br></pre></td></tr></table></figure>
+
+<p>填写配置文件内容</p>
+<p>该文件的内容可以从控制节点<strong>ctl0x</strong>的<code>/root/keystonercv3</code>获取。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> cat $&#123;DOVETAIL_HOME&#125;/pre_config/env_config.sh</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> Project-level authentication scope (name or ID), recommend admin project.</span><br><span class="line">export OS_PROJECT_NAME=admin</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> For identity v2, it uses OS_TENANT_NAME rather than OS_PROJECT_NAME.</span><br><span class="line">export OS_TENANT_NAME=admin</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> Authentication username, belongs to the project above, recommend admin user.</span><br><span class="line">export OS_USERNAME=admin</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> Authentication password. Use your own password</span><br><span class="line">export OS_PASSWORD=opnfv_secret</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> Authentication URL, one of the endpoints of keystone service. If this is v3 version,</span><br><span class="line"><span class="meta">#</span> there need some extra variables as follows.</span><br><span class="line">export OS_AUTH_URL=http://xxxxxxxxxxxx:35357/v3</span><br><span class="line"></span><br><span class="line">export OS_IDENTITY_API_VERSION=3</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> Domain name or ID containing the user above.</span><br><span class="line"><span class="meta">#</span> Command to check the domain: openstack user show &lt;OS_USERNAME&gt;</span><br><span class="line">export OS_USER_DOMAIN_NAME=Default</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> Domain name or ID containing the project above.</span><br><span class="line"><span class="meta">#</span> Command to check the domain: openstack project show &lt;OS_PROJECT_NAME&gt;</span><br><span class="line">export OS_PROJECT_DOMAIN_NAME=Default</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> Special environment parameters for https.</span><br><span class="line"><span class="meta">#</span> If using https + cacert, the path of cacert file should be provided.</span><br><span class="line"><span class="meta">#</span> The cacert file should be put at $DOVETAIL_HOME/pre_config.</span><br><span class="line">export OS_CACERT=/path_to/pre_config/os_cacert</span><br><span class="line">export OS_INSECURE=false</span><br><span class="line"></span><br><span class="line">export OS_REGION_NAME=RegionOne</span><br><span class="line">export OS_INTERFACE=internal</span><br><span class="line">export OS_ENDPOINT_TYPE="internal"</span><br><span class="line">export INSTALLER_TYPE=fuel</span><br><span class="line">export EXTERNAL_NETWORK="floating_net"</span><br><span class="line"><span class="meta">#</span>export VOLUME_DEVICE_NAME=vdc</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> Set an existing role used to create project and user for vping test cases.</span><br><span class="line"><span class="meta">#</span> Otherwise, it will create a role 'Member' to do that.</span><br><span class="line">export NEW_USER_ROLE=xxx</span><br></pre></td></tr></table></figure>
+
+<p>配置<code>Tempest</code>所需的配置文件，编辑文件<code>$DOVETAIL_HOME/pre_config/tempest_conf.yaml</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">compute:</span><br><span class="line"><span class="meta">  #</span> The minimum number of compute nodes expected.</span><br><span class="line"><span class="meta">  #</span> This should be no less than 2 and no larger than the compute nodes the SUT actually has.</span><br><span class="line">  min_compute_nodes: 2</span><br><span class="line"></span><br><span class="line"><span class="meta">  #</span> Expected device name when a volume is attached to an instance.</span><br><span class="line">  volume_device_name: vdb</span><br></pre></td></tr></table></figure>
+
+<p>节点描述信息，dovetail在测试时会获取节点信息，同时在HA测试部分会重启节点也需要用到节点信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">nodes:</span><br><span class="line">-</span><br><span class="line">    # This can not be changed and must be node0.</span><br><span class="line">    name: node0</span><br><span class="line">    role: Jumpserver</span><br><span class="line">    ip: xx.xx.xx.xx</span><br><span class="line">    user: root</span><br><span class="line">    password: root</span><br><span class="line"></span><br><span class="line">-</span><br><span class="line">    # This can not be changed and must be node1.</span><br><span class="line">    name: node1</span><br><span class="line">    # This must be controller.</span><br><span class="line">    role: Controller</span><br><span class="line">    # This is the instance IP of a controller node, which is the haproxy primary node</span><br><span class="line">    ip: xx.xx.xx.xx</span><br><span class="line">    # User name of the user of this node. This user **must** have sudo privileges.</span><br><span class="line">    user: root</span><br><span class="line">    key_filename: /path_to/pre_config/id_rsa</span><br><span class="line"></span><br><span class="line">process_info:</span><br><span class="line">-</span><br><span class="line">    # The default attack process of yardstick.ha.rabbitmq is 'rabbitmq-server'.</span><br><span class="line">    # Here can be reset to 'rabbitmq'.</span><br><span class="line">    testcase_name: yardstick.ha.rabbitmq</span><br><span class="line">    attack_process: rabbitmq</span><br><span class="line"></span><br><span class="line">-</span><br><span class="line">    # The default attack host for all HA test cases is 'node1'.</span><br><span class="line">    # Here can be reset to any other node given in the section 'nodes'.</span><br><span class="line">    testcase_name: yardstick.ha.glance_api</span><br><span class="line">    attack_host: node2</span><br></pre></td></tr></table></figure>
+
+<p><em>process_info</em>表明在测试相应HA用例时yardstick重启哪些<strong>进程</strong>或<strong>节点</strong></p>
+<p>这里给出相应测试用例攻击的进程名</p>
+<table>
+<thead>
+<tr>
+<th>Test Case Name</th>
+<th>Attack Process Name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>yardstick.ha.cinder_api</td>
+<td>cinder-api</td>
+</tr>
+<tr>
+<td>yardstick.ha.database</td>
+<td>mysql</td>
+</tr>
+<tr>
+<td>yardstick.ha.glance_api</td>
+<td>glance-api</td>
+</tr>
+<tr>
+<td>yardstick.ha.haproxy</td>
+<td>haproxy</td>
+</tr>
+<tr>
+<td>yardstick.ha.keystone</td>
+<td>keystone</td>
+</tr>
+<tr>
+<td>yardstick.ha.neutron_l3_agent</td>
+<td>neutron-l3-agent</td>
+</tr>
+<tr>
+<td>yardstick.ha.neutron_server</td>
+<td>neutron-server</td>
+</tr>
+<tr>
+<td>yardstick.ha.nova_api</td>
+<td>nova-api</td>
+</tr>
+<tr>
+<td>yardstick.ha.rabbitmq</td>
+<td>rabbitmq-server</td>
+</tr>
+</tbody></table>
+<h3 id="3-2-镜像下载"><a href="#3-2-镜像下载" class="headerlink" title="3.2 镜像下载"></a>3.2 镜像下载</h3><p>这里仅以OVP-2.2为例</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> wget -nc http://download.cirros-cloud.net/0.4.0/cirros-0.4.0-x86_64-disk.img -P $&#123;DOVETAIL_HOME&#125;/images</span><br><span class="line"><span class="meta">$</span> wget -nc https://cloud-images.ubuntu.com/releases/14.04/release/ubuntu-14.04-server-cloudimg-amd64-disk1.img -P $&#123;DOVETAIL_HOME&#125;/images</span><br><span class="line"><span class="meta">$</span> wget -nc https://cloud-images.ubuntu.com/releases/16.04/release/ubuntu-16.04-server-cloudimg-amd64-disk1.img -P $&#123;DOVETAIL_HOME&#125;/images</span><br><span class="line"><span class="meta">$</span> wget -nc http://repository.cloudifysource.org/cloudify/4.0.1/sp-release/cloudify-manager-premium-4.0.1.qcow2 -P $&#123;DOVETAIL_HOME&#125;/images  </span><br><span class="line"></span><br><span class="line"><span class="meta">$</span> sudo docker pull opnfv/dovetail:ovp-2.2.0</span><br><span class="line">ovp-2.2.0: Pulling from opnfv/dovetail</span><br><span class="line">....</span><br><span class="line">Digest: sha256:7449601108ebc5c40f76a5cd9065ca5e18053be643a0eeac778f537719336c29</span><br><span class="line">Status: Downloaded newer image for opnfv/dovetail:ovp-2.2.0</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-启动dovetail容器"><a href="#3-3-启动dovetail容器" class="headerlink" title="3.3 启动dovetail容器"></a>3.3 启动dovetail容器</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> sudo docker run --privileged=true -it \</span><br><span class="line">          -e DOVETAIL_HOME=$DOVETAIL_HOME \</span><br><span class="line">          -v $DOVETAIL_HOME:$DOVETAIL_HOME \</span><br><span class="line">          -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">          --name dovetail \</span><br><span class="line">          opnfv/dovetail:&lt;tag&gt; /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<ul>
+<li><code>-e</code>指定DOVETAIL_HOME变量</li>
+<li><code>-v</code> 映射DOVETAIL_HOME目录</li>
+</ul>
+<h3 id="3-3-启动测试"><a href="#3-3-启动测试" class="headerlink" title="3.3 启动测试"></a>3.3 启动测试</h3><p>进入容器查看测试用例</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker exec -it dovetail bash</span><br><span class="line">root@f02275952f91:~# dovetail list</span><br><span class="line">.....</span><br></pre></td></tr></table></figure>
+
+<p>执行测试用例</p>
+<p>简单测试</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> dovetail run --offline --debug --testcase  functest.vping.userdata --deploy-scenario os-nosdn-ovs-ha --report</span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<ul>
+<li><strong>offline</strong>指明为离线测试</li>
+<li><strong>debug</strong>打开debug选项</li>
+<li><strong>testcase</strong>指明单项测试用例名</li>
+<li><strong>deploy-scenario</strong>指明所使用的部署策略，主要影响在于ovs策略中使用了DPDK则会在flavor中附加大页内存配置</li>
+<li><strong>report</strong>指明生成测试报告</li>
+</ul>
+<p>完整测试</p>
+<p>OVP认证测试内容分为<code>mandatory</code>和<code>optional</code>，可以单独执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> dovetail run --mandatory --report</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-4-测试结果"><a href="#3-4-测试结果" class="headerlink" title="3.4 测试结果"></a>3.4 测试结果</h3><p>执行完测试后在<code>$DOVETAIL_HOME/results</code>可以获得完整的测试记录，执行不通过的测试用例也可在相应的目录获得日志文件</p>
+<ul>
+<li>Log file: dovetail.log<ul>
+<li>Review the dovetail.log to see if all important information has been captured - in default mode without DEBUG.</li>
+<li>Review the results.json to see all results data including criteria for PASS or FAIL.</li>
+</ul>
+</li>
+<li>Tempest and security test cases<ul>
+<li>Can see the log details in <code>tempest_logs/functest.tempest.XXX.html</code> and <code>security_logs/functest.security.XXX.html</code> respectively, which has the passed, skipped and failed test cases results.</li>
+<li>This kind of files need to be opened with a web browser.</li>
+<li>The skipped test cases are accompanied with the reason tag for the users to see why these test cases skipped.</li>
+<li>The failed test cases have rich debug information for the users to see why these test cases failed.</li>
+</ul>
+</li>
+<li>Vping test cases<ul>
+<li>Its log is stored in <code>vping_logs/functest.vping.XXX.log</code>.</li>
+</ul>
+</li>
+<li>HA test cases<ul>
+<li>Its log is stored in <code>ha_logs/yardstick.ha.XXX.log</code>.</li>
+</ul>
+</li>
+<li>Stress test cases<ul>
+<li>Its log is stored in <code>stress_logs/bottlenecks.stress.XXX.log</code>.</li>
+</ul>
+</li>
+<li>Snaps test cases<ul>
+<li>Its log is stored in <code>snaps_logs/functest.snaps.smoke.log</code>.</li>
+</ul>
+</li>
+<li>VNF test cases<ul>
+<li>Its log is stored in <code>vnf_logs/functest.vnf.XXX.log</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-5-测试失败排查"><a href="#3-5-测试失败排查" class="headerlink" title="3.5 测试失败排查"></a>3.5 测试失败排查</h3><h4 id="1-无法获取节点信息"><a href="#1-无法获取节点信息" class="headerlink" title="1)无法获取节点信息"></a>1)无法获取节点信息</h4><p>节点信息获取失败并不影响测试执行，可以在dovetail容器中执行以下命令查找失败原因</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible all -m setup -i XX/results/inventory.ini --tree XX/results/sut_hardware_info</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-dpdk错误相关"><a href="#2-dpdk错误相关" class="headerlink" title="2)dpdk错误相关"></a>2)dpdk错误相关</h4><p>我的测试环境是<code>os-nosdn-ovs-ha</code>使用了DPDK网卡，有时由于变量传递的原因导致测试过程中，虚机的flavor没有设置<code>&#39;hw:mem_page_size&#39;:&#39;large&#39;</code>，因此导致虚拟创建后无法连接而报错，可以在测试过程中查看<code>openstack flavor list --debug</code>查看是否是此问题，如果是此类问题只能报告官方修复了。</p>
+<h4 id="3-其他测试用例失败"><a href="#3-其他测试用例失败" class="headerlink" title="3) 其他测试用例失败"></a>3) 其他测试用例失败</h4><p>通过dovetail的不清除选项保留测试过程中启动的容器，然后一步一步排查</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> dovetail run --offline --debug --testcase xxx -n</span><br></pre></td></tr></table></figure>
+
+<p>随后进入调用的容器，执行dovetail测试过程中调用的命令，如</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">container.Container - DEBUG - Executing command: 'sudo docker run -id --privileged=true  -e INSTALLER_TYPE=unknown -e DEPLOY_SCENARIO=os-nosdn-ovs-ha -e NODE_NAME=unknown -e TEST_DB_URL=file:///home/opnfv/functest/results/functest_results.txt -e CI_DEBUG=true -e BUILD_TAG=daily-master-7c89eac6-829e-11e9-85e8-0242ac140002-functest.tempest.vm_lifecycle       -v /nfs/NFV_TEST/dovetail/data/pre_config/env_config.sh:/home/opnfv/functest/conf/env_file   -v /nfs/NFV_TEST/dovetail/data/pre_config/os_cacert:/nfs/NFV_TEST/dovetail/data/pre_config/os_cacert   -v /nfs/NFV_TEST/dovetail/data:/home/opnfv/userconfig   -v /nfs/NFV_TEST/dovetail/data/results:/home/opnfv/functest/results  -v /nfs/NFV_TEST/dovetail/data/images:/home/opnfv/functest/images opnfv/functest-smoke:opnfv-7.1.0 /bin/bash'</span><br><span class="line">...........</span><br><span class="line">container.Container - DEBUG - Executing command: 'sudo docker exec 75cd8d85a13a /bin/bash -c "run_tests -t tempest_custom -r"'</span><br></pre></td></tr></table></figure>
+
+<p>可以进入到<code>75cd8d85a13a</code>容器中执行<code>run_tests -t tempest_custom -r</code>进一步排查，</p>
+<p>对于functest，其代码目录位于容器中的<code>/usr/lib/python2.7/site-packages/functest</code>，可以修改<code>/usr/lib/python2.7/site-packages/functest/ci/logging.ini</code>中的配置来打开相应组件的日志记录，进行更深层次的排查。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+        <div>
+            
+    <div blockquote class="blockquote-center" style="color: #32CD32;font-size:18px;">
+    -------------本文结束<i class="fa fa-heartbeat"></i>感谢您的阅读-------------
+    </div>
+
+
+        </div>
+    
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.jpeg" alt="Author 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      
+        <div>
+            
+<br>
+<div style="border: 1px solid black">
+<div style="margin-left:10px">
+<span style="font-weight:blod">版权声明</span>
+<img src="/uploads/cc.png">
+<br>
+<p style="font-size: 10px;line-height: 30px"><a href="http://ylong.net.cn" style="color:#258FC6">Louie's Blog</a> by <a href="http://ylong.net.cn" style="color:#258FC6">louie long</a> is licensed under a <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" style="color:#258FC6">Creative Commons BY-NC-ND 4.0 International License</a>.<br>
+由<a href="http://ylong.net.cn" style="color:#258FC6">Louie Long</a>创作并维护的<a href="ylong.net.cn" style="color:#258FC6">Louie's Blog</a>博客采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" style="color:#258FC6">创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。<br>
+本文首发于<a href="http://ylong.net.cn" style="color:#258FC6">Louie's Blog</a> 博客（ <a href="http://ylong.net.cn" style="color:#258FC6">http://ylong.net.cn</a> ），版权所有，侵权必究。
+<br>
+转载请注明作者和链接地址<a href="http://ylong.net.cn" style="color:#258FC6">http://ylong.net.cn</a>, 如对文章内容有疑问请联系邮箱（ <a style="color:#258FC6">longyu805@163.com</a> ）。</p>
+</div>
+</div>
+
+
+        </div>
+      
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/source/tags/OPNFV/" rel="tag"><i class="fa fa-tag"></i> OPNFV</a>
+          
+            <a href="/source/tags/OVP/" rel="tag"><i class="fa fa-tag"></i> OVP</a>
+          
+            <a href="/source/tags/Dovetail/" rel="tag"><i class="fa fa-tag"></i> Dovetail</a>
+          
+            <a href="/source/tags/Fuel/" rel="tag"><i class="fa fa-tag"></i> Fuel</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/chainsql.html" rel="next" title="区块链数据库Chainsql">
+                <i class="fa fa-chevron-left"></i> 区块链数据库Chainsql
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/openstack-server-resize.html" rel="prev" title="Openstack虚拟机Resize">
+                Openstack虚拟机Resize <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/shadian.png" alt="Author">
+            
+              <p class="site-author-name" itemprop="name">Louie Long</p>
+              <p class="site-description motion-element" itemprop="description">一只会说666的程序媛鼓励师</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">29</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/louielong" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:longyu805@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/_long__" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、前言"><span class="nav-text">一、前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Hunter-部署"><span class="nav-text">二、Hunter 部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-MAAS-local-mirros"><span class="nav-text">2.1 MAAS local mirros</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-dashboard不可用"><span class="nav-text">2.2  dashboard不可用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#【Note】"><span class="nav-text">【Note】</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-上传镜像"><span class="nav-text">1)上传镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-创建external网络"><span class="nav-text">2)创建external网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-创建内部虚拟网络"><span class="nav-text">3)创建内部虚拟网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-创建路由"><span class="nav-text">4)创建路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-安全组配置"><span class="nav-text">5)安全组配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-创建flavor"><span class="nav-text">6)创建flavor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-启动虚拟机"><span class="nav-text">7)启动虚拟机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-分配浮动IP"><span class="nav-text">8)分配浮动IP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、OVP测试使用"><span class="nav-text">三、OVP测试使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-测试环境配置"><span class="nav-text">3.1 测试环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1）设置dovetial-home目录"><span class="nav-text">1）设置dovetial home目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-配置文件设置"><span class="nav-text">2)配置文件设置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-镜像下载"><span class="nav-text">3.2 镜像下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-启动dovetail容器"><span class="nav-text">3.3 启动dovetail容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-启动测试"><span class="nav-text">3.3 启动测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-测试结果"><span class="nav-text">3.4 测试结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-测试失败排查"><span class="nav-text">3.5 测试失败排查</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-无法获取节点信息"><span class="nav-text">1)无法获取节点信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-dpdk错误相关"><span class="nav-text">2)dpdk错误相关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-其他测试用例失败"><span class="nav-text">3) 其他测试用例失败</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-ravelry"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Louie</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">246k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">3:43</span>
+  
+
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <span id="busuanzi_container_site_pv">
+  | 本站总访问量<span style="color:#FA8072" id="busuanzi_value_site_pv"></span>次
+  </span>
+  <span id="busuanzi_container_site_uv">
+  | 本站访客数<span style="color:#FA8072" id="busuanzi_value_site_uv"></span>人次
+  </span>
+  
+
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=6.4.1"></script>
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "M8d5yPXQ5l0kwFz1bO6cF7b3-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "M8d5yPXQ5l0kwFz1bO6cF7b3-gzGzoHsz",
+                'X-LC-Key': "QEarlHm5c8XcuF22TbFD3Bqn",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/clicklove.js"></script>
+  
+
+</body>
+</html>
