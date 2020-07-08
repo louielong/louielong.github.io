@@ -93,7 +93,7 @@ leancloud_counter_security:
   enable_sync: true
   app_id: M8d5yPXQ5l0kwFz1bO6cF7b3-gzGzoHsz
   app_key: QEarlHm5c8XcuF22TbFD3Bqn
-  #server_url: http://ylong.net.cn/
+  server_url: https://leancloud.cn
   username: louie
   password: LEANCLOUD_PASSWD
 
@@ -118,4 +118,4 @@ deploy:
   - type: git
     repo: https://github.com/louielong/louielong.github.io.git
     branch: master       #这里填写分支
-    message: modify post container security #(默认为 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }})
+    message: fix leancloud server url #(默认为 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }})
