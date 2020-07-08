@@ -118,4 +118,4 @@ deploy:
   - type: git
     repo: https://github.com/louielong/louielong.github.io.git
     branch: master       #这里填写分支
-    message: fix post container security #(默认为 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }})
+    message: change travis nodejs to lts #(默认为 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }})
