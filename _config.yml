@@ -118,4 +118,4 @@ deploy:
   - type: git
     repo: https://github.com/louielong/louielong.github.io.git
     branch: master       #这里填写分支
-    message: add post container-and-container-cloud #(默认为 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }})
+    message: add post k8s-cri #(默认为 Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }})
