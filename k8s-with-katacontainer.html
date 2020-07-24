@@ -662,7 +662,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">admin@k8smaster:~$ CRIO_VERSION=1.17   # 当前ubuntu只有1.17</span><br><span class="line">admin@k8smaster:~$ . /etc/os-release</span><br><span class="line">admin@k8smaster:~$ sudo sh -c "echo 'deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/x$&#123;NAME&#125;_$&#123;VERSION_ID&#125;/ /' &gt;/etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list"</span><br><span class="line">admin@k8smaster:~$ wget -nv https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable/x$&#123;NAME&#125;_$&#123;VERSION_ID&#125;/Release.key -O- | sudo apt-key add -</span><br><span class="line">admin@k8smaster:~$ sudo apt-get update -qq</span><br><span class="line">admin@k8smaster:~$ sudo apt-get install cri-o-$&#123;CRIO_VERSION&#125;</span><br></pre></td></tr></table></figure>
 
 <p>2）修改crio配置文件<code>/etc/crio/crio.conf</code>，增加kata runtime</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">admin@k8smaster:~$ sudo vim /etc/crio/crio.conf</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 设置kata-runtime为容器运行时</span><br><span class="line">[crio.runtime.runtimes.kata-runtime]</span><br><span class="line">runtime_path = "/usr/bin/kata-runtime"</span><br><span class="line">runtime_type = "oci"</span><br><span class="line">runtime_root = ""</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 由于k8s.gcr.io 无法访问的原因修改镜像源</span><br><span class="line">pause_image = "registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.2"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span> 设置crio镜像下载地址</span><br><span class="line">registries = ["docker.io"]</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">admin@k8smaster:~$ sudo vim /etc/crio/crio.conf</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置kata-runtime为容器运行时</span></span><br><span class="line">[crio.runtime.runtimes.kata-runtime]</span><br><span class="line">runtime_path = "/usr/bin/kata-runtime"</span><br><span class="line">runtime_type = "oci"</span><br><span class="line">runtime_root = ""</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 由于k8s.gcr.io 无法访问的原因修改镜像源</span></span><br><span class="line">pause_image = "registry.cn-hangzhou.aliyuncs.com/google_containers/pause:3.2"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置crio镜像下载地址</span></span><br><span class="line">registries = ["docker.io"]</span><br></pre></td></tr></table></figure>
 
 <p>3）修改crio systemd配置，设置自启动</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">admin@k8smaster:~$ sudo vim /usr/lib/systemd/system/crio.service</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">....</span><br><span class="line">Restart=on-failure</span><br><span class="line">RestartSec=5</span><br><span class="line"></span><br><span class="line">admin@k8smaster:~$ sudo systemctl daemon-reload</span><br><span class="line">admin@k8smaster:~$ sudo systemctl restart crio</span><br><span class="line">admin@k8smaster:~$ sudo service crio status</span><br><span class="line">[sudo] password for louie:</span><br><span class="line">● crio.service - Container Runtime Interface for OCI (CRI-O)</span><br><span class="line">   Loaded: loaded (/usr/lib/systemd/system/crio.service; enabled; vendor preset: enabled)</span><br><span class="line">   Active: active (running) since Thu 2020-07-23 02:13:39 UTC; 6h ago</span><br><span class="line">     Docs: https://github.com/cri-o/cri-o</span><br><span class="line"> Main PID: 1876 (crio)</span><br><span class="line">    Tasks: 21</span><br><span class="line">   CGroup: /system.slice/crio.service</span><br><span class="line">           └─1876 /usr/bin/crio</span><br></pre></td></tr></table></figure>
@@ -930,7 +930,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-count">31</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -971,9 +971,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -1054,9 +1052,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-count">34</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1150,7 +1146,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">278k</span>
+    <span title="站点总字数">277k</span>
   
 
   
@@ -1159,7 +1155,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">4:13</span>
+    <span title="站点阅读时长">4:12</span>
   
 
   
