@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="SgcsMbvcduiAp6Ck7yLI77kPJXONXRYQnbXir7oefRs">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/uploads/favicon-48x48.ico?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon-32x32.ico?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon-16x16.ico?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/uploads/favicon-48x48.ico?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.1',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: 'SBFCV05R39',
+      apiKey: '',
+      indexName: 'my hexo search',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"请输入关键词","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="扩展 Kubernetes 之 CRI">
+<meta name="keywords" content="k8s,CRI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【转载】扩展 Kubernetes 之 CRI">
+<meta property="og:url" content="https://louielong.github.io/k8s-cri.html">
+<meta property="og:site_name" content="Louie&#39;s Blog">
+<meta property="og:description" content="扩展 Kubernetes 之 CRI">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/louielong/blogPic/master/imgxlyb0th1c7.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/louielong/blogPic/master/imgrchsiecsii.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/louielong/blogPic/master/img00r84irf8c5.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/louielong/blogPic/master/imgcczv8nowa.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/louielong/blogPic/master/img7z2bq3l54g.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/louielong/blogPic/master/imgv9xrgk5bht.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/louielong/blogPic/master/imgztykbbu2la.png">
+<meta property="og:updated_time" content="2020-07-16T05:24:05.582Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【转载】扩展 Kubernetes 之 CRI">
+<meta name="twitter:description" content="扩展 Kubernetes 之 CRI">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/louielong/blogPic/master/imgxlyb0th1c7.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Louie's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://louielong.github.io/k8s-cri.html">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>【转载】扩展 Kubernetes 之 CRI | Louie's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Louie's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">O ever youthful, O ever powerful.</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+    <a href="/404/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>公益 404</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://louielong.github.io/k8s-cri.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Author">
+      <meta itemprop="description" content="一只会说666的程序媛鼓励师">
+      <meta itemprop="image" content="/uploads/shadian.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Louie's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【转载】扩展 Kubernetes 之 CRI
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-07-16 10:49:52 / 修改时间：13:24:05" itemprop="dateCreated datePublished" datetime="2020-07-16T10:49:52+08:00">2020-07-16</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/k8s-cri.html" class="leancloud_visitors" data-flag-title="【转载】扩展 Kubernetes 之 CRI">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+                 
+                 <span>℃</span>
+                 
+             </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">3.1k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">0:03</span>
+              
+            </div>
+          
+
+          
+          
+            <div class="out-img-topic">
+             <img src="https://raw.githubusercontent.com/louielong/blogPic/master/img20200716105458.png" class="img-topic">
+            </div>
+          
+          
+
+          
+              <div class="post-description">扩展 Kubernetes 之 CRI</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>【转载】本文转载自<a href="https://cloud.tencent.com/developer/article/1579900" target="_blank" rel="noopener">扩展 Kubernetes 之 CRI</a></p>
+<p>最近在研究k8s搭配kata container，对于其中的CRI很是困惑，借由这篇文章学习一下CRI及其相关概念。</p>
+<h2 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h2><h3 id="1-1-CRI-是什么"><a href="#1-1-CRI-是什么" class="headerlink" title="1.1 CRI 是什么"></a>1.1 CRI 是什么</h3><p>容器运行时插件（Container Runtime Interface，简称 CRI）是 Kubernetes v1.5 引入的容器运行时接口，它将 Kubelet 与容器运行时解耦，将原来完全面向 Pod 级别的内部接口拆分成面向 Sandbox 和 Container 的 gRPC 接口，并将镜像管理和容器管理分离到不同的服务。</p>
+<p>CRI 主要定义了两个 grpc interface.</p>
+<ul>
+<li><code>RuntimeService</code>：容器(container) 和 (Pod)Sandbox 运行时管理</li>
+<li><code>ImageService</code>：拉取、查看、和移除镜像</li>
+</ul>
+<p>OCI (开放容器标准): 定义了 ImageSpec（镜像格式, 比如文件夹结构，压缩方式）和 RuntimeSpec（如何运行，比如支持 create, start, stop, delete）。代表实现有：runC，Kata（以及它的前身 runV 和 Clear Containers），gVisor。</p>
+<p>CRI 区别于 OCI，CRI的定义比较简单直接，只是定义了一套协议（grpc 接口）。代表实现有 kubernetest 内置的 dockershim, CRI-containerd（或者 containerd with CRI plugin）, cri-o</p>
+<h3 id="1-2-CRI-位于什么位置"><a href="#1-2-CRI-位于什么位置" class="headerlink" title="1.2 CRI 位于什么位置"></a>1.2 CRI 位于什么位置</h3><p>在 kubernetes 中:</p>
+<p><img src="https://raw.githubusercontent.com/louielong/blogPic/master/imgxlyb0th1c7.png" alt="k8belet与CRI"></p>
+<p><img src="https://raw.githubusercontent.com/louielong/blogPic/master/imgrchsiecsii.png" alt="CRI组成"></p>
+<p>在和OCI，调度层的角度看:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">OrchestrationAPI --&gt; ContainerAPI-criRuntime</span><br><span class="line">ContainerAPI-criRuntime --&gt; KernelAPI-ociRuntime</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、CRI-CRI-Runtime"><a href="#二、CRI-CRI-Runtime" class="headerlink" title="二、CRI/CRI Runtime"></a>二、CRI/CRI Runtime</h2><h3 id="2-1-CRI-Runtime-的执行流程"><a href="#2-1-CRI-Runtime-的执行流程" class="headerlink" title="2.1 CRI Runtime 的执行流程"></a>2.1 CRI Runtime 的执行流程</h3><p>经典的 kubernetes runtime 执行流程</p>
+<p><img src="https://raw.githubusercontent.com/louielong/blogPic/master/img00r84irf8c5.png" alt="k8s runtime 流程"></p>
+<ul>
+<li>执行流程里面核心组件是 kubelet/KubeGenericRuntimeManager 他调用很多其他组件，比如 cm (ContainerManager/podContainerManager/cgroupManager/cpuManager/deviceManager, pod 级别的资源管理), RuntimeService (grpc 调用 CRI 的客户端) 共同完成 SyncPod 的操作。</li>
+</ul>
+<p>经典的 dockershim -&gt; containerd 的流程 (称为 docker cri)</p>
+<p><img src="https://raw.githubusercontent.com/louielong/blogPic/master/imgcczv8nowa.png" alt="k8s调用docker流程"></p>
+<ol>
+<li>Kubelet 通过 CRI 接口（gRPC）调用 dockershim，请求创建一个容器。CRI 即容器运行时接口（Container Runtime Interface），这一步中，Kubelet 可以视作一个简单的 CRI Client，而 dockershim 就是接收请求的 Server。目前 dockershim 的代码其实是内嵌在 Kubelet 中的，所以接收调用的凑巧就是 Kubelet 进程</li>
+<li>dockershim 收到请求后，转化成 Docker Daemon 能听懂的请求，发到 Docker Daemon 上请求创建一个容器。</li>
+<li>Docker Daemon 早在 1.12 版本中就已经将针对容器的操作移到另一个守护进程——containerd 中了，因此 Docker Daemon 仍然不能帮我们创建容器，而是要请求 containerd 创建一个容器；</li>
+<li>containerd 收到请求后，并不会自己直接去操作容器，而是创建一个叫做 containerd-shim 的进程，让 containerd-shim 去操作容器。这是因为容器进程需要一个父进程来做诸如收集状态，维持 stdin 等 fd 打开等工作。而假如这个父进程就是 containerd，那每次 containerd 挂掉或升级，整个宿主机上所有的容器都得退出了。而引入了 containerd-shim 就规避了这个问题（containerd 和 shim 并不是父子进程关系）；</li>
+<li>我们知道创建容器需要做一些设置 namespaces 和 cgroups，挂载 root filesystem 等等操作，而这些事该怎么做已经有了公开的规范了，那就是 OCI（Open Container Initiative，开放容器标准）。它的一个参考实现叫做 runC。于是，containerd-shim 在这一步需要调用 runC 这个命令行工具，来启动容器；</li>
+<li>runC 启动完容器后本身会直接退出，containerd-shim 则会成为容器进程的父进程，负责收集容器进程的状态，上报给 containerd，并在容器中 pid 为 1 的进程退出后接管容器中的子进程进行清理，确保不会出现僵尸进程。</li>
+</ol>
+<p>直接对接 cri-containerd/cri-o 的运行时</p>
+<p><img src="https://raw.githubusercontent.com/louielong/blogPic/master/img7z2bq3l54g.png" alt="k8s对接containerd"></p>
+<p><img src="https://raw.githubusercontent.com/louielong/blogPic/master/imgv9xrgk5bht.png" alt="k8s对接cri-o"></p>
+<p>使用 cri-containerd 的调用流程更为简洁, 省去了上面的调用流程的 1，2 两步</p>
+<p>常见 CRI runtime 实现</p>
+<table>
+<thead>
+<tr>
+<th>CRI容器运行时</th>
+<th>维护者</th>
+<th>主要特性</th>
+<th>容器引擎</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Dockershim</td>
+<td>Kubernetes</td>
+<td>内置实现、特性最新</td>
+<td>docker</td>
+</tr>
+<tr>
+<td>cri-o</td>
+<td>Kubernetes</td>
+<td>OCI标准</td>
+<td>OCI(runc、kaata、gVisor)</td>
+</tr>
+<tr>
+<td>cri-containerd</td>
+<td>Containerd</td>
+<td>基于containerd</td>
+<td>OCI(runc、kaata、gVisor)</td>
+</tr>
+<tr>
+<td>Frakti</td>
+<td>Kubernetes</td>
+<td>虚拟化容器</td>
+<td>hyperd、docker</td>
+</tr>
+<tr>
+<td>rktlet</td>
+<td>Kubernetes</td>
+<td>支持rkt</td>
+<td>rkt</td>
+</tr>
+<tr>
+<td>PouchContainer</td>
+<td>Alibaba</td>
+<td>富容器</td>
+<td>OCI(runc、kata)</td>
+</tr>
+<tr>
+<td>Virlet</td>
+<td>Mirantis</td>
+<td>虚拟机和QCOW2镜像</td>
+<td>Libvirt(KVM)</td>
+</tr>
+</tbody></table>
+<p>Cri-containerd</p>
+<p><img src="https://raw.githubusercontent.com/louielong/blogPic/master/imgztykbbu2la.png" alt="img"></p>
+<p>执行流程为:</p>
+<ol>
+<li>Kubelet 通过 CRI runtime service API 调用 cri plugin 创建 pod</li>
+<li>cri 通过 CNI 创建 pod 的网络配置和 namespace</li>
+<li>cri 使用 containerd 创建并启动 pause container (sandbox container) 并且把这个 container 置于 pod 的 cgroups/namespace</li>
+<li>Kubelet 接着通过 CRI image service API 调用 cri plugin, 获取容器镜像</li>
+<li>cri 通过 containerd 获取容器镜像</li>
+<li>Kubelet 通过 CRI runtime service API 调用 cri, 在 pod 的空间使用拉取的镜像启动容器</li>
+<li>cri 通过 containerd 创建/启动 应用容器, 并且把 container 置于 pod 的 cgroups/namespace. Pod 完成启动.</li>
+</ol>
+<h2 id="【参考文献】"><a href="#【参考文献】" class="headerlink" title="【参考文献】"></a>【参考文献】</h2><p>1）<a href="https://feisky.gitbooks.io/kubernetes/plugins/CRI.html" target="_blank" rel="noopener">CRI-feisky</a></p>
+<p>2）<a href="https://blog.csdn.net/u011563903/article/details/90743853" target="_blank" rel="noopener">K8S Runtime CRI OCI contained dockershim 理解</a></p>
+<p>3）<a href="https://github.com/kubernetes/cri-api/blob/master/pkg/apis/runtime/v1alpha2/api.proto" target="_blank" rel="noopener">CRI API 定义</a></p>
+<p>4）<a href="https://github.com/containerd/cri" target="_blank" rel="noopener">cri-containerd</a></p>
+<p>5）<a href="https://github.com/containerd/containerd" target="_blank" rel="noopener">containerd</a></p>
+<p>6）<a href="https://zhuanlan.zhihu.com/p/47012368" target="_blank" rel="noopener">K8S 容器运行时-feisky</a></p>
+<p>7）<a href="https://github.com/kubernetes-sigs/cri-tools" target="_blank" rel="noopener">critools</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+        <div>
+            
+    <div blockquote class="blockquote-center" style="color: #32CD32;font-size:18px;">
+    -------------本文结束<i class="fa fa-heartbeat"></i>感谢您的阅读-------------
+    </div>
+
+
+        </div>
+    
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.jpeg" alt="Author 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      
+        <div>
+            
+<br>
+<div style="border: 1px solid black">
+<div style="margin-left:10px">
+<span style="font-weight:blod">版权声明</span>
+<img src="/uploads/cc.png">
+<br>
+<p style="font-size: 10px;line-height: 30px"><a href="http://ylong.net.cn" style="color:#258FC6">Louie's Blog</a> by <a href="http://ylong.net.cn" style="color:#258FC6">louie long</a> is licensed under a <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" style="color:#258FC6">Creative Commons BY-NC-ND 4.0 International License</a>.<br>
+由<a href="http://ylong.net.cn" style="color:#258FC6">Louie Long</a>创作并维护的<a href="ylong.net.cn" style="color:#258FC6">Louie's Blog</a>博客采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" style="color:#258FC6">创作共用保留署名-非商业-禁止演绎4.0国际许可证</a>。<br>
+本文首发于<a href="http://ylong.net.cn" style="color:#258FC6">Louie's Blog</a> 博客（ <a href="http://ylong.net.cn" style="color:#258FC6">http://ylong.net.cn</a> ），版权所有，侵权必究。
+<br>
+转载请注明作者和链接地址<a href="http://ylong.net.cn" style="color:#258FC6">http://ylong.net.cn</a>, 如对文章内容有疑问请联系邮箱（ <a style="color:#258FC6">longyu805@163.com</a> ）。</p>
+</div>
+</div>
+
+
+        </div>
+      
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/source/tags/k8s/" rel="tag"><i class="fa fa-tag"></i> k8s</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/container-and-container-cloud.html" rel="next" title="【转载】容器、容器云和k8s技术">
+                <i class="fa fa-chevron-left"></i> 【转载】容器、容器云和k8s技术
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/k8s-with-katacontainer.html" rel="prev" title="K8S搭配Kata container">
+                K8S搭配Kata container <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/uploads/shadian.png" alt="Author">
+            
+              <p class="site-author-name" itemprop="name">Louie Long</p>
+              <p class="site-description motion-element" itemprop="description">一只会说666的程序媛鼓励师</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/louielong" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:longyu805@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/_long__" target="_blank" title="Twitter"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、简介"><span class="nav-text">一、简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-CRI-是什么"><span class="nav-text">1.1 CRI 是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-CRI-位于什么位置"><span class="nav-text">1.2 CRI 位于什么位置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、CRI-CRI-Runtime"><span class="nav-text">二、CRI/CRI Runtime</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-CRI-Runtime-的执行流程"><span class="nav-text">2.1 CRI Runtime 的执行流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#【参考文献】"><span class="nav-text">【参考文献】</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-ravelry"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Louie</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">278k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">4:13</span>
+  
+
+  
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <span id="busuanzi_container_site_pv">
+  | 本站总访问量<span style="color:#FA8072" id="busuanzi_value_site_pv"></span>次
+  </span>
+  <span id="busuanzi_container_site_uv">
+  | 本站访客数<span style="color:#FA8072" id="busuanzi_value_site_uv"></span>人次
+  </span>
+  
+
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.9.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=6.4.1"></script>
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "M8d5yPXQ5l0kwFz1bO6cF7b3-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "M8d5yPXQ5l0kwFz1bO6cF7b3-gzGzoHsz",
+                'X-LC-Key': "QEarlHm5c8XcuF22TbFD3Bqn",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/clicklove.js"></script>
+  
+
+</body>
+</html>
